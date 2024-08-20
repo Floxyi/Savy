@@ -11,8 +11,12 @@ import SwiftData
 @Model
 final class Challenge {
     var name: String
+    var date: Date
+    var notifications: Bool
     
-    init(name: String) {
+    init(name: String, date: Date, notifications: Bool) {
         self.name = name
+        self.date = date
+        self.notifications = notifications
     }
 }

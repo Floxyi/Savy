@@ -14,9 +14,9 @@ struct ChallengesView: View {
 
     @State private var showPopover = false
 
-    @State private var challengeName = ""
+    @State private var name = ""
     @State private var date = Date()
-    @State private var sendNotifications = false
+    @State private var notifications = false
 
     var body: some View {
         TabView {
@@ -39,7 +39,7 @@ struct ChallengesView: View {
                                     Text("New Challenge")
                                         .font(.system(size: 28).bold())
                                     Form {
-                                        TextField(text: $challengeName, prompt: Text("Challenge Name")) {
+                                        TextField(text: $name, prompt: Text("Challenge Name")) {
                                             Text("Challenge Name")
                                         }
                                         DatePicker(
@@ -47,7 +47,7 @@ struct ChallengesView: View {
                                             selection: $date,
                                             displayedComponents: [.date]
                                         )
-                                        Toggle("Send notifications", isOn: $sendNotifications)
+                                        Toggle("Send notifications", isOn: $notifications)
                                     }
 
                                     Spacer()
@@ -62,13 +62,14 @@ struct ChallengesView: View {
                                             showPopover = false
                                         }) {
                                             Text("Done")
-                                                .foregroundColor(challengeName.isEmpty ? .gray : .blue)
+                                                .foregroundColor(name.isEmpty ? .gray : .blue)
                                         }
-                                        .disabled(challengeName.isEmpty)
+                                        .disabled(name.isEmpty)
                                         .padding()
                                     }
                                     ToolbarItem(placement: .cancellationAction) {
                                         Button("Cancel") {
+                                            cancelCreation()
                                             showPopover = false
                                         }
                                         .font(.system(size: 16))
@@ -109,10 +110,18 @@ struct ChallengesView: View {
 
     private func addItem() {
         withAnimation {
-            let challenge = Challenge(name: challengeName.isEmpty ? Date().formatted() : challengeName)
+            let challenge = Challenge(name: name, date: date, notifications: notifications)
             modelContext.insert(challenge)
-            challengeName = ""
+            name = ""
+            date = Date()
+            notifications = false
         }
+    }
+    
+    private func cancelCreation() {
+        name = ""
+        date = Date()
+        notifications = false
     }
 
     private func deleteItems(offsets: IndexSet) {
