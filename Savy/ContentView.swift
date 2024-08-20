@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var challenges: [Challenge]
-    
+
     @State private var showPopover = false
     @State private var challengeName = ""
 
@@ -21,50 +21,45 @@ struct ContentView: View {
                 HStack {
                     Text("Challenges")
                         .font(.largeTitle.bold())
-                    
+
                     Spacer()
-                    
+
                     Button(action: {
                         showPopover = true
                     }) {
                         Image(systemName: "plus").font(.title)
                     }
                     .popover(isPresented: $showPopover) {
-                        VStack {
-                            Text("Enter Challenge Name")
-                                .font(.headline)
-                                .padding()
-                            
-                            TextField("Challenge Name", text: $challengeName)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding()
-                            
-                            HStack {
-                                Button("Cancel") {
-                                    showPopover = false
-                                }
-                                .padding()
-                                
+                        NavigationStack {
+                            VStack {
+                                TextField("Challenge Name", text: $challengeName)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding()
+
                                 Spacer()
-                                
-                                Button("Add") {
-                                    addItem()
-                                    showPopover = false
+                            }
+                            .padding()
+                            .navigationTitle("New Challenge")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button("Done") {
+                                        addItem()
+                                        showPopover = false
+                                    }
+                                    .font(.headline)
                                 }
-                                .padding()
                             }
                         }
-                        .padding()
-                        .frame(width: 300, height: 200)
                     }
                 }
-                
+
                 List {
                     ForEach(challenges) { challenge in
                         NavigationLink {
-                            Text("Challenge: \(challenge.name)")
+                            Text("Challenge \(challenge.name)")
                         } label: {
-                            Text("Challenge: \(challenge.name)")
+                            Text("Challenge \(challenge.name)")
                         }
                     }
                     .onDelete(perform: deleteItems)
@@ -76,7 +71,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let challenge = Challenge(name: challengeName.isEmpty ? "unnamed" : challengeName)
+            let challenge = Challenge(name: challengeName.isEmpty ? Date().formatted() : challengeName)
             modelContext.insert(challenge)
             challengeName = ""
         }
