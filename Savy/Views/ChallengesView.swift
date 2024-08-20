@@ -65,7 +65,6 @@ struct ChallengesView: View {
                                                 .foregroundColor(name.isEmpty ? .gray : .blue)
                                         }
                                         .disabled(name.isEmpty)
-                                        .padding()
                                     }
                                     ToolbarItem(placement: .cancellationAction) {
                                         Button("Cancel") {
@@ -82,15 +81,18 @@ struct ChallengesView: View {
                     List {
                         ForEach(challenges) { challenge in
                             NavigationLink {
-                                Text("Challenge \(challenge.name)")
+                                Text("Challenge: \(challenge.name)")
+                                Text("Date: \(challenge.date.formatted())")
+                                Text("Notifications: \(challenge.notifications)")
                             } label: {
-                                Text("Challenge \(challenge.name)")
+                                Text("Challenge: \(challenge.name)")
                             }
                         }
                         .onDelete(perform: deleteItems)
                     }
                 }
                 .padding(16)
+                .background(Color(.systemGroupedBackground))
             }
             .tabItem {
                 Label("Challenges", systemImage: "calendar")
@@ -105,6 +107,9 @@ struct ChallengesView: View {
                 .tabItem {
                     Label("Account", systemImage: "person.crop.circle")
                 }
+        }
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = .systemBackground
         }
     }
 

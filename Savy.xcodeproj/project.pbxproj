@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		172BFA652C750EB80057266F /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesView.swift */; };
+		172BFA672C7511C60057266F /* ChallengeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailView.swift */; };
 		17F40C182C74F56A00344DBF /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* AccountView.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardView.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		172BFA642C750EB80057266F /* ChallengesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
+		172BFA662C7511C60057266F /* ChallengeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailView.swift; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +54,7 @@
 				17F40C172C74F56A00344DBF /* AccountView.swift */,
 				172BFA642C750EB80057266F /* ChallengesView.swift */,
 				17F40C192C74F57F00344DBF /* LeaderboardView.swift */,
+				172BFA662C7511C60057266F /* ChallengeDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 			files = (
 				172BFA652C750EB80057266F /* ChallengesView.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardView.swift in Sources */,
+				172BFA672C7511C60057266F /* ChallengeDetailView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* AccountView.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
