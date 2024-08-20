@@ -13,7 +13,10 @@ struct ChallengesView: View {
     @Query private var challenges: [Challenge]
 
     @State private var showPopover = false
+
     @State private var challengeName = ""
+    @State private var date = Date()
+    @State private var sendNotifications = false
 
     var body: some View {
         TabView {
@@ -33,22 +36,42 @@ struct ChallengesView: View {
                         .popover(isPresented: $showPopover) {
                             NavigationStack {
                                 VStack {
-                                    TextField("Challenge Name", text: $challengeName)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .padding()
+                                    Text("New Challenge")
+                                        .font(.system(size: 28).bold())
+                                    Form {
+                                        TextField(text: $challengeName, prompt: Text("Challenge Name")) {
+                                            Text("Challenge Name")
+                                        }
+                                        DatePicker(
+                                            "End Date",
+                                            selection: $date,
+                                            displayedComponents: [.date]
+                                        )
+                                        Toggle("Send notifications", isOn: $sendNotifications)
+                                    }
 
                                     Spacer()
                                 }
                                 .padding()
-                                .navigationTitle("New Challenge")
+                                .background(Color(.systemGroupedBackground))
                                 .navigationBarTitleDisplayMode(.inline)
                                 .toolbar {
-                                    ToolbarItem(placement: .navigationBarTrailing) {
-                                        Button("Done") {
+                                    ToolbarItem(placement: .confirmationAction) {
+                                        Button(action: {
                                             addItem()
                                             showPopover = false
+                                        }) {
+                                            Text("Done")
+                                                .foregroundColor(challengeName.isEmpty ? .gray : .blue)
                                         }
-                                        .font(.headline)
+                                        .disabled(challengeName.isEmpty)
+                                        .padding()
+                                    }
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button("Cancel") {
+                                            showPopover = false
+                                        }
+                                        .font(.system(size: 16))
                                     }
                                 }
                             }
@@ -69,7 +92,7 @@ struct ChallengesView: View {
                 .padding(16)
             }
             .tabItem {
-                Label("Challenges", systemImage: "list.bullet")
+                Label("Challenges", systemImage: "calendar")
             }
 
             LeaderboardView()
