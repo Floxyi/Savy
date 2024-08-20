@@ -10,7 +10,10 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var challenges: [Challenge]
+    
+    @State private var showPopover = false
+    @State private var challengeName = ""
 
     var body: some View {
         NavigationView {
@@ -21,17 +24,47 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    Button(action: {
+                        showPopover = true
+                    }) {
+                        Image(systemName: "plus").font(.title)
                     }
-                    
+                    .popover(isPresented: $showPopover) {
+                        VStack {
+                            Text("Enter Challenge Name")
+                                .font(.headline)
+                                .padding()
+                            
+                            TextField("Challenge Name", text: $challengeName)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+                            
+                            HStack {
+                                Button("Cancel") {
+                                    showPopover = false
+                                }
+                                .padding()
+                                
+                                Spacer()
+                                
+                                Button("Add") {
+                                    addItem()
+                                    showPopover = false
+                                }
+                                .padding()
+                            }
+                        }
+                        .padding()
+                        .frame(width: 300, height: 200)
+                    }
                 }
+                
                 List {
-                    ForEach(items) { item in
+                    ForEach(challenges) { challenge in
                         NavigationLink {
-                            Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                            Text("Challenge: \(challenge.name)")
                         } label: {
-                            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                            Text("Challenge: \(challenge.name)")
                         }
                     }
                     .onDelete(perform: deleteItems)
@@ -43,15 +76,16 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            let challenge = Challenge(name: challengeName.isEmpty ? "unnamed" : challengeName)
+            modelContext.insert(challenge)
+            challengeName = ""
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(challenges[index])
             }
         }
     }
@@ -59,5 +93,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Challenge.self, inMemory: true)
 }

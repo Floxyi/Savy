@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
 		17FB1CF32C74E38900E1C6F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF22C74E38900E1C6F4 /* ContentView.swift */; };
-		17FB1CF52C74E38900E1C6F4 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Item.swift */; };
+		17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Challenge.swift */; };
 		17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */; };
 		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -18,7 +18,7 @@
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavyApp.swift; sourceTree = "<group>"; };
 		17FB1CF22C74E38900E1C6F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		17FB1CF42C74E38900E1C6F4 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		17FB1CF42C74E38900E1C6F4 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -34,6 +34,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17F40C152C74EC5200344DBF /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		17FB1CE42C74E38900E1C6F4 = {
 			isa = PBXGroup;
 			children = (
@@ -53,9 +61,9 @@
 		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
 			isa = PBXGroup;
 			children = (
+				17F40C152C74EC5200344DBF /* DataModel */,
 				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
 				17FB1CF22C74E38900E1C6F4 /* ContentView.swift */,
-				17FB1CF42C74E38900E1C6F4 /* Item.swift */,
 				17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */,
 				17FB1CF82C74E38A00E1C6F4 /* Preview Content */,
 			);
@@ -141,7 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17FB1CF32C74E38900E1C6F4 /* ContentView.swift in Sources */,
-				17FB1CF52C74E38900E1C6F4 /* Item.swift in Sources */,
+				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
