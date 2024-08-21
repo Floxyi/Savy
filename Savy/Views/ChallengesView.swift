@@ -13,7 +13,10 @@ struct ChallengesView: View {
     @Query private var challenges: [Challenge]
 
     @State private var showPopover = false
-    @State private var challengeName = ""
+
+    @State private var name = ""
+    @State private var date = Date()
+    @State private var notifications = false
 
     var body: some View {
         TabView {
@@ -33,22 +36,42 @@ struct ChallengesView: View {
                         .popover(isPresented: $showPopover) {
                             NavigationStack {
                                 VStack {
-                                    TextField("Challenge Name", text: $challengeName)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .padding()
+                                    Text("New Challenge")
+                                        .font(.system(size: 28).bold())
+                                    Form {
+                                        TextField(text: $name, prompt: Text("Challenge Name")) {
+                                            Text("Challenge Name")
+                                        }
+                                        DatePicker(
+                                            "End Date",
+                                            selection: $date,
+                                            displayedComponents: [.date]
+                                        )
+                                        Toggle("Send notifications", isOn: $notifications)
+                                    }
 
                                     Spacer()
                                 }
                                 .padding()
-                                .navigationTitle("New Challenge")
+                                .background(Color(.systemGroupedBackground))
                                 .navigationBarTitleDisplayMode(.inline)
                                 .toolbar {
-                                    ToolbarItem(placement: .navigationBarTrailing) {
-                                        Button("Done") {
+                                    ToolbarItem(placement: .confirmationAction) {
+                                        Button(action: {
                                             addItem()
                                             showPopover = false
+                                        }) {
+                                            Text("Done")
+                                                .foregroundColor(name.isEmpty ? .gray : .blue)
                                         }
-                                        .font(.headline)
+                                        .disabled(name.isEmpty)
+                                    }
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button("Cancel") {
+                                            cancelCreation()
+                                            showPopover = false
+                                        }
+                                        .font(.system(size: 16))
                                     }
                                 }
                             }
@@ -58,18 +81,21 @@ struct ChallengesView: View {
                     List {
                         ForEach(challenges) { challenge in
                             NavigationLink {
-                                Text("Challenge \(challenge.name)")
+                                Text("Challenge: \(challenge.name)")
+                                Text("Date: \(challenge.date.formatted())")
+                                Text("Notifications: \(challenge.notifications)")
                             } label: {
-                                Text("Challenge \(challenge.name)")
+                                Text("Challenge: \(challenge.name)")
                             }
                         }
                         .onDelete(perform: deleteItems)
                     }
                 }
                 .padding(16)
+                .background(Color(.systemGroupedBackground))
             }
             .tabItem {
-                Label("Challenges", systemImage: "list.bullet")
+                Label("Challenges", systemImage: "calendar")
             }
 
             LeaderboardView()
@@ -82,14 +108,25 @@ struct ChallengesView: View {
                     Label("Account", systemImage: "person.crop.circle")
                 }
         }
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = .systemBackground
+        }
     }
 
     private func addItem() {
         withAnimation {
-            let challenge = Challenge(name: challengeName.isEmpty ? Date().formatted() : challengeName)
+            let challenge = Challenge(name: name, date: date, notifications: notifications)
             modelContext.insert(challenge)
-            challengeName = ""
+            name = ""
+            date = Date()
+            notifications = false
         }
+    }
+    
+    private func cancelCreation() {
+        name = ""
+        date = Date()
+        notifications = false
     }
 
     private func deleteItems(offsets: IndexSet) {
