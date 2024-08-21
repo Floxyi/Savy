@@ -24,8 +24,3 @@ struct ChallengeDetailView: View {
         .navigationTitle("Challenge Details")
     }
 }
-
-#Preview {
-    ChallengeDetailView(challenge: Challenge(name: "Sample Challenge", date: Date(), notifications: true))
-}
-
