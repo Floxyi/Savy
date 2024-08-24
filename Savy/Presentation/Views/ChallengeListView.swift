@@ -27,7 +27,7 @@ struct ChallengesListView: View {
                     } label: {
                         Text("Challenge: \(challenge.name)")
                     }
-                    .listRowBackground(Color(.systemGroupedBackground))
+                    .listRowBackground(Color(.secondarySystemBackground))
                 }
                 .onDelete(perform: deleteItems)
             }
