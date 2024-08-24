@@ -27,9 +27,11 @@ struct ChallengesListView: View {
                     } label: {
                         Text("Challenge: \(challenge.name)")
                     }
+                    .listRowBackground(Color(.systemGroupedBackground))
                 }
                 .onDelete(perform: deleteItems)
             }
+            .scrollContentBackground(.hidden)
             
             Button(action: {
                 showPopover = true
