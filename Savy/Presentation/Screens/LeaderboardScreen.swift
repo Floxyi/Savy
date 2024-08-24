@@ -1,5 +1,5 @@
 //
-//  LeaderboardView.swift
+//  LeaderboardScreen.swift
 //  Savy
 //
 //  Created by Florian Winkler on 20.08.24.

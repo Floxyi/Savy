@@ -1,5 +1,5 @@
 //
-//  ChallengesView.swift
+//  ChallengesScreen.swift
 //  Savy
 //
 //  Created by Florian Winkler on 20.08.24.
