@@ -25,7 +25,7 @@ struct SavyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ChallengesView()
+            ChallengesScreen()
         }
         .modelContainer(sharedModelContainer)
     }
