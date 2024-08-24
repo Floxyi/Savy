@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
+		17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D0892C7A468A00B28A04 /* ColorManager.swift */; };
+		17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08C2C7A488500B28A04 /* Color+HSL.swift */; };
+		17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */; };
+		17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BFBA462C7A941200E19D10 /* Color+HexString.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
@@ -24,6 +28,10 @@
 /* Begin PBXFileReference section */
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
+		17B5D0892C7A468A00B28A04 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		17B5D08C2C7A488500B28A04 /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
+		17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchema.swift; sourceTree = "<group>"; };
+		17BFBA462C7A941200E19D10 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +56,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17B5D0882C7A466B00B28A04 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
+				17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		17B5D08B2C7A487D00B28A04 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				17B5D08C2C7A488500B28A04 /* Color+HSL.swift */,
+				17BFBA462C7A941200E19D10 /* Color+HexString.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		17F40C152C74EC5200344DBF /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +112,8 @@
 		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
 			isa = PBXGroup;
 			children = (
+				17B5D08B2C7A487D00B28A04 /* Extensions */,
+				17B5D0882C7A466B00B28A04 /* Logic */,
 				17FF019A2C776E090012FCF7 /* Presentation */,
 				17F40C152C74EC5200344DBF /* Models */,
 				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
@@ -197,12 +225,16 @@
 				17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
+				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
+				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
 				17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */,
+				17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */,
 				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
+				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

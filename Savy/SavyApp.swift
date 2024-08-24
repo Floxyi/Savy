@@ -13,6 +13,7 @@ struct SavyApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Challenge.self,
+            ColorManager.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
