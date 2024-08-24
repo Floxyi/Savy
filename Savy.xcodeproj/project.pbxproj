@@ -7,26 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		172BFA652C750EB80057266F /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesView.swift */; };
-		172BFA672C7511C60057266F /* ChallengeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailView.swift */; };
-		17F40C182C74F56A00344DBF /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* AccountView.swift */; };
-		17F40C1A2C74F57F00344DBF /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardView.swift */; };
+		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
+		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
+		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
+		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
 		17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Challenge.swift */; };
 		17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */; };
 		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
+		17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */; };
+		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
+		17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */; };
+		17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A22C7770D20012FCF7 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		172BFA642C750EB80057266F /* ChallengesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
-		172BFA662C7511C60057266F /* ChallengeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailView.swift; sourceTree = "<group>"; };
-		17F40C172C74F56A00344DBF /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		17F40C192C74F57F00344DBF /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
+		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
+		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavyApp.swift; sourceTree = "<group>"; };
 		17FB1CF42C74E38900E1C6F4 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfoView.swift; sourceTree = "<group>"; };
+		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
+		17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddView.swift; sourceTree = "<group>"; };
+		17FF01A22C7770D20012FCF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,21 +48,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		17F40C152C74EC5200344DBF /* DataModel */ = {
+		17F40C152C74EC5200344DBF /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
 			);
-			path = DataModel;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		17F40C162C74F52800344DBF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				17F40C172C74F56A00344DBF /* AccountView.swift */,
-				172BFA642C750EB80057266F /* ChallengesView.swift */,
-				17F40C192C74F57F00344DBF /* LeaderboardView.swift */,
-				172BFA662C7511C60057266F /* ChallengeDetailView.swift */,
+				17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */,
+				17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */,
+				17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */,
+				17FF01A22C7770D20012FCF7 /* HeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -78,8 +86,8 @@
 		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
 			isa = PBXGroup;
 			children = (
-				17F40C162C74F52800344DBF /* Views */,
-				17F40C152C74EC5200344DBF /* DataModel */,
+				17FF019A2C776E090012FCF7 /* Presentation */,
+				17F40C152C74EC5200344DBF /* Models */,
 				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
 				17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */,
 				17FB1CF82C74E38A00E1C6F4 /* Preview Content */,
@@ -93,6 +101,26 @@
 				17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		17FF019A2C776E090012FCF7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				17FF019B2C776E150012FCF7 /* Screens */,
+				17F40C162C74F52800344DBF /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		17FF019B2C776E150012FCF7 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */,
+				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
+				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
+				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,10 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172BFA652C750EB80057266F /* ChallengesView.swift in Sources */,
-				17F40C1A2C74F57F00344DBF /* LeaderboardView.swift in Sources */,
-				172BFA672C7511C60057266F /* ChallengeDetailView.swift in Sources */,
-				17F40C182C74F56A00344DBF /* AccountView.swift in Sources */,
+				172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */,
+				17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */,
+				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
+				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
+				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
+				17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */,
+				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
+				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 			);
