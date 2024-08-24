@@ -67,6 +67,7 @@ struct SettingsScreen: View {
             
             Spacer()
         }
+        .padding()
         .onAppear {
             selectedMode = colorManager.currentSchema.mode
         }
