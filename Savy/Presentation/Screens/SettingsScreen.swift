@@ -9,26 +9,10 @@ import SwiftData
 import SwiftUI
 
 struct SettingsScreen: View {
-    @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
-    @Query private var colorManagers: [ColorManager]
-    @State private var selectedMode: ColorSchemesEnum = .light
-    
-    private var colorManager: ColorManager {
-        if let existingManager = colorManagers.first {
-            if colorManagers.count > 1 {
-                for manager in colorManagers.dropFirst() {
-                    modelContext.delete(manager)
-                }
-            }
-            return existingManager
-        } else {
-            let newManager = ColorManager(hue: 180, currentSchema: ColorSchemes.lightMode())
-            modelContext.insert(newManager)
-            return newManager
-        }
-    }
-    
+    @State private var selectedMode: ColorSchemaMode = .light
+
     var body: some View {
         VStack {
             HeaderView(title: "Settings")
@@ -36,10 +20,10 @@ struct SettingsScreen: View {
             Spacer()
             
             Picker("Color Mode", selection: $selectedMode) {
-                Text("Light").tag(ColorSchemesEnum.light)
-                Text("Dark").tag(ColorSchemesEnum.dark)
-                Text("Colored Light").tag(ColorSchemesEnum.coloredLight)
-                Text("Colored Dark").tag(ColorSchemesEnum.coloredDark)
+                Text("Light").tag(ColorSchemaMode.light)
+                Text("Dark").tag(ColorSchemaMode.dark)
+                Text("Colored Light").tag(ColorSchemaMode.coloredLight)
+                Text("Colored Dark").tag(ColorSchemaMode.coloredDark)
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
@@ -51,9 +35,9 @@ struct SettingsScreen: View {
             
             if selectedMode == .coloredLight || selectedMode == .coloredDark {
                 Slider(value: Binding(
-                    get: { self.colorManager.hue },
+                    get: { self.colorManagerVM.colorManager.hue },
                     set: { newValue in
-                        self.colorManager.hue = newValue
+                        self.colorManagerVM.colorManager.hue = newValue
                         self.updateSchemaForSelectedMode()
                     }
                 ), in: 0...360, step: 1) {
@@ -61,28 +45,25 @@ struct SettingsScreen: View {
                 }
                 .padding()
             }
-            
-            Text("Hello, SwiftUI!")
-                .background(colorManager.currentSchema.background)
-            
             Spacer()
         }
         .padding()
+        .background(colorManagerVM.colorManager.currentSchema.background)
         .onAppear {
-            selectedMode = colorManager.currentSchema.mode
+            selectedMode = colorManagerVM.colorManager.currentSchema.mode
         }
     }
-    
+
     private func updateSchemaForSelectedMode() {
         switch selectedMode {
             case .light:
-                colorManager.updateSchema(schema: ColorSchemes.lightMode())
+                colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.lightMode())
             case .dark:
-                colorManager.updateSchema(schema: ColorSchemes.darkMode())
+                colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.darkMode())
             case .coloredLight:
-                colorManager.updateSchema(schema: ColorSchemes.coloredLightMode(hue: colorManager.hue))
+                colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredLightMode(hue: colorManagerVM.colorManager.hue))
             case .coloredDark:
-                colorManager.updateSchema(schema: ColorSchemes.coloredDarkMode(hue: colorManager.hue))
+                colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredDarkMode(hue: colorManagerVM.colorManager.hue))
         }
     }
 }
@@ -90,4 +71,5 @@ struct SettingsScreen: View {
 #Preview {
     SettingsScreen()
         .modelContainer(for: [ColorManager.self])
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
