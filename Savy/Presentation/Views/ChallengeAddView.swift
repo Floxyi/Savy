@@ -10,6 +10,7 @@ import SwiftData
 
 struct ChallengeAddView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     @Binding var name: String
     @Binding var date: Date
@@ -21,6 +22,7 @@ struct ChallengeAddView: View {
             VStack {
                 Text("New Challenge")
                     .font(.system(size: 28).bold())
+                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
                 Form {
                     TextField(text: $name, prompt: Text("Challenge Name")) {
                         Text("Challenge Name")
@@ -36,7 +38,7 @@ struct ChallengeAddView: View {
                 Spacer()
             }
             .padding()
-            .background(Color(.systemGroupedBackground))
+            .background(colorManagerVM.colorManager.currentSchema.background)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -45,7 +47,7 @@ struct ChallengeAddView: View {
                         showPopover = false
                     }) {
                         Text("Done")
-                            .foregroundColor(name.isEmpty ? .gray : .blue)
+                            .foregroundColor(name.isEmpty ? colorManagerVM.colorManager.currentSchema.barIcons.opacity(0.4) : colorManagerVM.colorManager.currentSchema.barIcons)
                     }
                     .disabled(name.isEmpty)
                 }
@@ -55,6 +57,7 @@ struct ChallengeAddView: View {
                         showPopover = false
                     }
                     .font(.system(size: 16))
+                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.barIcons)
                 }
             }
         }

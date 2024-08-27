@@ -9,11 +9,14 @@ import SwiftUI
 
 struct HeaderView: View {
     var title: String
+    
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     var body: some View {
         HStack {
             Text(title)
                 .font(.largeTitle.bold())
+                .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
         }
     }
 }
