@@ -14,6 +14,8 @@ struct ChallengesScreen: View {
     @Query private var challenges: [Challenge]
     
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         NavigationView {
             VStack {
                 HeaderView(title: "Challenges")
@@ -21,7 +23,7 @@ struct ChallengesScreen: View {
             }
             .padding(.top, 14)
             .padding(.bottom, 112)
-            .background(colorManagerVM.colorManager.currentSchema.background)
+            .background(currentSchema.background)
         }
     }
 }

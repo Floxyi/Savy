@@ -20,6 +20,8 @@ struct ChallengesListView: View {
     @State private var notifications = false
 
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         VStack(alignment: .center) {
             List {
                 ForEach(challenges) { challenge in
@@ -38,7 +40,7 @@ struct ChallengesListView: View {
                 showPopover = true
             }) {
                 Image(systemName: "plus").font(.title)
-                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.barIcons)
+                    .foregroundStyle(currentSchema.barIcons)
             }
             .padding(.bottom, 12)
         }

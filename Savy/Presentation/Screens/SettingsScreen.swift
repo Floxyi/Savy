@@ -14,6 +14,8 @@ struct SettingsScreen: View {
     @State private var selectedMode: ColorSchemaMode = .light
 
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         VStack {
             HeaderView(title: "Settings")
             
@@ -48,9 +50,9 @@ struct SettingsScreen: View {
             Spacer()
         }
         .padding()
-        .background(colorManagerVM.colorManager.currentSchema.background)
+        .background(currentSchema.background)
         .onAppear {
-            selectedMode = colorManagerVM.colorManager.currentSchema.mode
+            selectedMode = currentSchema.mode
         }
     }
 

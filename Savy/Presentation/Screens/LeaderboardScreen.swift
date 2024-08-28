@@ -12,6 +12,8 @@ struct LeaderboardScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         VStack {
             HeaderView(title: "Leaderboard")
             HStack {
@@ -20,7 +22,7 @@ struct LeaderboardScreen: View {
             Spacer()
         }
         .padding()
-        .background(colorManagerVM.colorManager.currentSchema.background)
+        .background(currentSchema.background)
     }
 }
 

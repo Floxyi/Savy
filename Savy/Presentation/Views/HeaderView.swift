@@ -13,11 +13,13 @@ struct HeaderView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         HStack {
             Text(title)
                 .fontWeight(.bold)
                 .font(.custom("Shrikhand-Regular", size: 36))
-                .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+                .foregroundStyle(currentSchema.font)
         }
     }
 }

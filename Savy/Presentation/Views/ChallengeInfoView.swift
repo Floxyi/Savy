@@ -13,6 +13,8 @@ struct ChallengeInfoView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         VStack(alignment: .center, spacing: 16) {
             HeaderView(title: "Challenge")
 
@@ -27,7 +29,7 @@ struct ChallengeInfoView: View {
 
             Spacer()
         }
-        .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+        .foregroundStyle(currentSchema.font)
         .padding()
     }
 }

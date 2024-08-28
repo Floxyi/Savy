@@ -16,6 +16,8 @@ struct BottomTabBarView: View {
     @Binding var currentTab: Tab
     
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+
         HStack {
             TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
                 .frame(width: buttonDimen, height: buttonDimen)
@@ -49,7 +51,7 @@ struct BottomTabBarView: View {
         .frame(width: 300, height: 70)
         .tint(Color.black)
         .padding(.vertical, 2.5)
-        .background(colorManagerVM.colorManager.currentSchema.bar)
+        .background(currentSchema.bar)
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
@@ -63,9 +65,11 @@ private struct TabBarButton: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         Image(systemName: imageName)
             .renderingMode(.template)
-            .foregroundStyle(active ? colorManagerVM.colorManager.currentSchema.font : colorManagerVM.colorManager.currentSchema.barIcons)
+            .foregroundStyle(active ? currentSchema.font : currentSchema.barIcons)
             .fontWeight(.bold)
             .font(.system(size: active ? 40 : 24))
             .animation(.easeInOut, value: active)

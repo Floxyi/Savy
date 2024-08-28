@@ -14,6 +14,8 @@ struct ChallengeDetailScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
         VStack {
             ChallengeInfoView(challenge: challenge)
             Spacer()
@@ -21,7 +23,7 @@ struct ChallengeDetailScreen: View {
                 Spacer()
             }
         }
-        .background(colorManagerVM.colorManager.currentSchema.background)
+        .background(currentSchema.background)
     }
 }
 
