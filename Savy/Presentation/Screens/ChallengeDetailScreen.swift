@@ -5,16 +5,28 @@
 //  Created by Florian Winkler on 20.08.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ChallengeDetailScreen: View {
     let challenge: Challenge
-
+    
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
     var body: some View {
-        ChallengeInfoView(challenge: challenge)
+        VStack {
+            ChallengeInfoView(challenge: challenge)
+            Spacer()
+            HStack {
+                Spacer()
+            }
+        }
+        .background(colorManagerVM.colorManager.currentSchema.background)
     }
 }
 
 #Preview {
     ChallengeDetailScreen(challenge: Challenge(name: "Text Challenge", date: Date(), notifications: true))
+        .modelContainer(for: [Challenge.self, ColorManager.self])
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

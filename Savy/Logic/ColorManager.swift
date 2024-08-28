@@ -45,56 +45,23 @@ class ColorManager {
     }
 }
 
-enum ColorSchemesEnum: String, Codable {
-    case light, dark, coloredLight, coloredDark
-}
-
-struct ColorSchemes {
-    static func lightMode() -> ColorSchema {
-        return ColorSchema(
-            mode: .light,
-            background: Color(hue: 0, saturation: 0, lightness: 95),
-            bar: Color(hue: 0, saturation: 0, lightness: 84),
-            barIcons: Color(hue: 0, saturation: 0, lightness: 67),
-            accent1: Color(hue: 0, saturation: 0, lightness: 75),
-            accent2: Color(hue: 0, saturation: 0, lightness: 36),
-            font: Color(hue: 0, saturation: 0, lightness: 45)
-        )
+class ColorManagerViewModel: ObservableObject {
+    @Published var colorManager: ColorManager
+    private var modelContext: ModelContext
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+        self.colorManager = ColorManagerViewModel.getOrCreateColorManager(in: modelContext)
     }
     
-    static func darkMode() -> ColorSchema {
-        return ColorSchema(
-            mode: .dark,
-            background: Color(hue: 0, saturation: 0, lightness: 22),
-            bar: Color(hue: 0, saturation: 0, lightness: 20),
-            barIcons: Color(hue: 0, saturation: 0, lightness: 42),
-            accent1: Color(hue: 0, saturation: 0, lightness: 31),
-            accent2: Color(hue: 0, saturation: 0, lightness: 80),
-            font: Color(hue: 0, saturation: 0, lightness: 100)
-        )
-    }
-    
-    static func coloredLightMode(hue: Double) -> ColorSchema {
-        return ColorSchema(
-            mode: .coloredLight,
-            background: Color(hue: hue, saturation: 27, lightness: 45),
-            bar: Color(hue: hue, saturation: 30, lightness: 33),
-            barIcons: Color(hue: hue, saturation: 41, lightness: 81),
-            accent1: Color(hue: hue, saturation: 26, lightness: 40),
-            accent2: Color(hue: hue, saturation: 41, lightness: 68),
-            font: Color(hue: hue, saturation: 62, lightness: 93)
-        )
-    }
-    
-    static func coloredDarkMode(hue: Double) -> ColorSchema {
-        return ColorSchema(
-            mode: .coloredDark,
-            background: Color(hue: hue, saturation: 29, lightness: 33),
-            bar: Color(hue: hue, saturation: 27, lightness: 45),
-            barIcons: Color(hue: hue, saturation: 41, lightness: 81),
-            accent1: Color(hue: hue, saturation: 26, lightness: 40),
-            accent2: Color(hue: hue, saturation: 41, lightness: 68),
-            font: Color(hue: hue, saturation: 62, lightness: 93)
-        )
+    static func getOrCreateColorManager(in context: ModelContext) -> ColorManager {
+        let fetchDescriptor = FetchDescriptor<ColorManager>()
+        if let existingManager = try? context.fetch(fetchDescriptor).first {
+            return existingManager
+        } else {
+            let newManager = ColorManager(hue: 180, currentSchema: ColorSchemes.lightMode())
+            context.insert(newManager)
+            return newManager
+        }
     }
 }
