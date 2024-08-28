@@ -1,5 +1,5 @@
 //
-//  ToggleStyle.swift
+//  CustomToggleStyle.swift
 //  Savy
 //
 //  Created by Florian Winkler on 28.08.24.
