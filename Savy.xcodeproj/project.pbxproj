@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
+		17B2464E2C7A9E630036C534 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464D2C7A9E630036C534 /* ContentView.swift */; };
+		17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */; };
+		17B246692C7B0A570036C534 /* ColorSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B246682C7B0A570036C534 /* ColorSchemas.swift */; };
+		17B2466B2C7B0A930036C534 /* ColorSchemaMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2466A2C7B0A930036C534 /* ColorSchemaMode.swift */; };
 		17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D0892C7A468A00B28A04 /* ColorManager.swift */; };
 		17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08C2C7A488500B28A04 /* Color+HSL.swift */; };
 		17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */; };
@@ -28,6 +32,10 @@
 /* Begin PBXFileReference section */
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
+		17B2464D2C7A9E630036C534 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarView.swift; sourceTree = "<group>"; };
+		17B246682C7B0A570036C534 /* ColorSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemas.swift; sourceTree = "<group>"; };
+		17B2466A2C7B0A930036C534 /* ColorSchemaMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemaMode.swift; sourceTree = "<group>"; };
 		17B5D0892C7A468A00B28A04 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		17B5D08C2C7A488500B28A04 /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
 		17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchema.swift; sourceTree = "<group>"; };
@@ -61,6 +69,8 @@
 			children = (
 				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
 				17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */,
+				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
+				17B2466A2C7B0A930036C534 /* ColorSchemaMode.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -89,6 +99,7 @@
 				17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */,
 				17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */,
 				17FF01A22C7770D20012FCF7 /* HeaderView.swift */,
+				17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -134,6 +145,7 @@
 		17FF019A2C776E090012FCF7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				17B2464D2C7A9E630036C534 /* ContentView.swift */,
 				17FF019B2C776E150012FCF7 /* Screens */,
 				17F40C162C74F52800344DBF /* Views */,
 			);
@@ -228,12 +240,16 @@
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
+				17B246692C7B0A570036C534 /* ColorSchemas.swift in Sources */,
 				17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */,
+				17B2466B2C7B0A930036C534 /* ColorSchemaMode.swift in Sources */,
 				17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */,
 				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
+				17B2464E2C7A9E630036C534 /* ContentView.swift in Sources */,
+				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

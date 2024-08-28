@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ChallengeInfoView: View {
     let challenge: Challenge
+    
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
@@ -25,6 +27,7 @@ struct ChallengeInfoView: View {
 
             Spacer()
         }
+        .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
         .padding()
     }
 }

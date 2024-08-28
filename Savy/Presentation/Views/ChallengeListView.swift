@@ -12,6 +12,7 @@ struct ChallengesListView: View {
     let challenges: [Challenge]
     
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     @State private var showPopover = false
     @State private var name = ""
@@ -37,6 +38,7 @@ struct ChallengesListView: View {
                 showPopover = true
             }) {
                 Image(systemName: "plus").font(.title)
+                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.barIcons)
             }
             .padding(.bottom, 12)
         }
