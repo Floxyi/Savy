@@ -23,7 +23,7 @@ struct BottomTabBarView: View {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     currentTab = .challenges
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 16)
             
             Spacer()
 
@@ -33,7 +33,7 @@ struct BottomTabBarView: View {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     currentTab = .leaderboard
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 16)
 
             Spacer()
             
@@ -43,15 +43,15 @@ struct BottomTabBarView: View {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     currentTab = .settings
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 16)
 
         }
-        .frame(width: (buttonDimen * CGFloat(Tab.allCases.count)) + 80)
+        .frame(width: 300, height: 70)
         .tint(Color.black)
         .padding(.vertical, 2.5)
         .background(colorManagerVM.colorManager.currentSchema.bar)
-        .clipShape(Capsule(style: .continuous))
-        .shadow(color: colorManagerVM.colorManager.currentSchema.bar.opacity(0.5), radius: 5, x: 0, y: 5)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
     
 }
@@ -65,10 +65,9 @@ private struct TabBarButton: View {
     var body: some View {
         Image(systemName: imageName)
             .renderingMode(.template)
-            .foregroundStyle(colorManagerVM.colorManager.currentSchema.barIcons)
+            .foregroundStyle(active ? colorManagerVM.colorManager.currentSchema.font : colorManagerVM.colorManager.currentSchema.barIcons)
             .fontWeight(.bold)
-            .font(.system(size: active ? 30 : 20))
-            .scaleEffect(active ? 1.1 : 1.0)
+            .font(.system(size: active ? 40 : 24))
             .animation(.easeInOut, value: active)
     }
 }
