@@ -13,7 +13,7 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.largeTitle.bold())
+                .font(.custom("Shrikhand-Regular", size: 36))
         }
     }
 }
