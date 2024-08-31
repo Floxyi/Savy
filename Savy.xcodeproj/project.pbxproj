@@ -121,7 +121,6 @@
 				17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */,
 				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
 				17B2466A2C7B0A930036C534 /* ColorSchemaMode.swift */,
-				17530FA42C811348003D768C /* User.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -138,6 +137,7 @@
 		17F40C152C74EC5200344DBF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				17530FA42C811348003D768C /* User.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
 			);
 			path = Models;
