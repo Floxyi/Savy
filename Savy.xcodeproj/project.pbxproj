@@ -15,6 +15,9 @@
 		17530FA02C811214003D768C /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17530F9F2C811214003D768C /* Supabase.swift */; };
 		17530FA32C811276003D768C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 17530FA22C811276003D768C /* Supabase */; };
 		17530FA52C811348003D768C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17530FA42C811348003D768C /* User.swift */; };
+		1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */; };
+		1767EFDA2C84F13600E2BDFA /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD92C84F13600E2BDFA /* LoginScreen.swift */; };
+		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
 		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
 		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
 		17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */; };
@@ -37,7 +40,6 @@
 		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
 		17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */; };
 		17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A22C7770D20012FCF7 /* HeaderView.swift */; };
-		8E7157C02C74F67C007EB767 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7157BF2C74F67C007EB767 /* LoginScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,9 @@
 		174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		17530F9F2C811214003D768C /* Supabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
 		17530FA42C811348003D768C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBarView.swift; sourceTree = "<group>"; };
+		1767EFD92C84F13600E2BDFA /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
 		176EAE212C8290F9007CBABE /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
@@ -71,7 +76,6 @@
 		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
 		17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddView.swift; sourceTree = "<group>"; };
 		17FF01A22C7770D20012FCF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		8E7157BF2C74F67C007EB767 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 				17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */,
 				173DB7532C847832003B30D8 /* GradientSliderView.swift */,
 				17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */,
+				1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +228,8 @@
 				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
 				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
 				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
+				1767EFD92C84F13600E2BDFA /* LoginScreen.swift */,
+				1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -312,9 +319,11 @@
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
 				17530FA02C811214003D768C /* Supabase.swift in Sources */,
+				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
+				1767EFDA2C84F13600E2BDFA /* LoginScreen.swift in Sources */,
 				17B246692C7B0A570036C534 /* ColorSchemas.swift in Sources */,
 				17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */,
 				17B2466B2C7B0A930036C534 /* ColorSchemaMode.swift in Sources */,
@@ -327,6 +336,7 @@
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
+				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
 				17530FA52C811348003D768C /* User.swift in Sources */,

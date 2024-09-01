@@ -38,10 +38,12 @@ struct SettingsTileView<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.top, 16)
             
-            content
-                .padding(.horizontal, 16)
-                .padding(.bottom, 16)
-                .padding(.top, 8)
+            VStack {
+                content
+                    .padding(.bottom, 4)
+            }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 12)
         }
         .background(currentSchema.bar)
         .clipShape(RoundedRectangle(cornerRadius: 16))
