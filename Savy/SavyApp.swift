@@ -33,7 +33,7 @@ struct SavyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView()
                 .environmentObject(colorManagerVM)
         }
         .modelContainer(sharedModelContainer)

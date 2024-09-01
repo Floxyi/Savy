@@ -1,5 +1,5 @@
 //
-//  TabBarView.swift
+//  AppView.swift
 //  Savy
 //
 //  Created by Florian Winkler on 25.08.24.
@@ -14,7 +14,7 @@ enum Tab: String, Hashable, CaseIterable {
     case settings = "gear"
 }
 
-struct ContentView: View {
+struct AppView: View {
     @Query private var challenges: [Challenge]
     
     @State private var selectedTab: Tab = Tab.challenges
@@ -42,7 +42,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    AppView()
         .modelContainer(for: [Challenge.self, ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

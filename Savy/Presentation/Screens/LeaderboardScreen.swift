@@ -11,13 +11,30 @@ import SwiftUI
 struct LeaderboardScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
+    @State var users: [User] = []
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack {
             HeaderView(title: "Leaderboard")
             HStack {
-                Spacer()
+                List(users) { user in
+                  Text(user.name)
+                }
+                .scrollContentBackground(.hidden)
+                .overlay {
+                  if users.isEmpty {
+                    ProgressView()
+                  }
+                }
+                .task {
+                  do {
+                      users = try await supabase.from("users").select().execute().value
+                  } catch {
+                    dump(error)
+                  }
+                }
             }
             Spacer()
         }
