@@ -40,6 +40,9 @@
 		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
 		17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */; };
 		17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A22C7770D20012FCF7 /* HeaderView.swift */; };
+		8E7157C02C74F67C007EB767 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7157BF2C74F67C007EB767 /* LoginScreen.swift */; };
+		8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */; };
+		8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,9 @@
 		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
 		17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddView.swift; sourceTree = "<group>"; };
 		17FF01A22C7770D20012FCF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		8E7157BF2C74F67C007EB767 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAccountStyle.swift; sourceTree = "<group>"; };
+		8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */,
+				8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */,
+				8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -228,7 +236,7 @@
 				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
 				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
 				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
-				1767EFD92C84F13600E2BDFA /* LoginScreen.swift */,
+				8E7157BF2C74F67C007EB767 /* LoginScreen.swift */,
 				1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */,
 			);
 			path = Screens;
@@ -316,9 +324,11 @@
 				17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
 				176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */,
+				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
 				17530FA02C811214003D768C /* Supabase.swift in Sources */,
+				8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */,
 				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
@@ -334,6 +344,7 @@
 				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
+				8E7157C02C74F67C007EB767 /* LoginScreen.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
