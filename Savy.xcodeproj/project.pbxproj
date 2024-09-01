@@ -20,6 +20,7 @@
 		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
 		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
 		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
+		178530AA2C850FA4003426CD /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178530A92C850FA4003426CD /* Saving.swift */; };
 		17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */; };
 		17B2464E2C7A9E630036C534 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464D2C7A9E630036C534 /* AppView.swift */; };
 		17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */; };
@@ -54,6 +55,7 @@
 		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
 		176EAE212C8290F9007CBABE /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		178530A92C850FA4003426CD /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
 		17A876D02C7F389700A47AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B2464D2C7A9E630036C534 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				17530FA42C811348003D768C /* User.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
+				178530A92C850FA4003426CD /* Saving.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				17530FA02C811214003D768C /* Supabase.swift in Sources */,
 				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
+				178530AA2C850FA4003426CD /* Saving.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
 				1767EFDA2C84F13600E2BDFA /* LoginScreen.swift in Sources */,

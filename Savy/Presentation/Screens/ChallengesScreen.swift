@@ -20,6 +20,9 @@ struct ChallengesScreen: View {
             VStack {
                 HeaderView(title: "Challenges")
                 ChallengesListView(challenges: challenges)
+                HStack {
+                    Spacer()
+                }
             }
             .padding(.top, 14)
             .padding(.bottom, 112)

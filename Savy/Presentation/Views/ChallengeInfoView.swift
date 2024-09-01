@@ -22,9 +22,12 @@ struct ChallengeInfoView: View {
 
             Text("Challenge: \(challenge.name)")
                 .font(.headline)
-            Text("Date: \(challenge.date.formatted())")
+            Image(systemName: challenge.icon)
+            Text("Start Date: \(challenge.startDate.formatted())")
                 .font(.subheadline)
-            Text("Notifications: \(challenge.notifications ? "Enabled" : "Disabled")")
+            Text("End Date: \(challenge.endDate.formatted())")
+                .font(.subheadline)
+            Text("Amount: \(challenge.targetAmount)")
                 .font(.subheadline)
 
             Spacer()

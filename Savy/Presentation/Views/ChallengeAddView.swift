@@ -9,12 +9,13 @@ import SwiftUI
 import SwiftData
 
 struct ChallengeAddView: View {
+    @Binding var showPopover: Bool
+    
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
-    @Binding var name: String
-    @Binding var date: Date
-    @Binding var notifications: Bool
-    @Binding var showPopover: Bool
+    @State private var name: String = ""
+    @State private var icon: String = ""
+    @State private var date: Date = Date()
 
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -29,6 +30,15 @@ struct ChallengeAddView: View {
                     TextField(text: $name, prompt: Text("Challenge Name")) {
                         Text("Challenge Name")
                     }
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .listRowBackground(currentSchema.accent1)
+                    
+                    TextField(text: $icon, prompt: Text("Challenge Icon")) {
+                        Text("Icon Name")
+                    }
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
                     .listRowBackground(currentSchema.accent1)
 
                     DatePicker(
@@ -39,10 +49,6 @@ struct ChallengeAddView: View {
                     .environment(\.colorScheme, .dark)
                     .accentColor(currentSchema.accent1)
                     .listRowBackground(currentSchema.accent1)
-
-                    Toggle("Send notifications", isOn: $notifications)
-                        .toggleStyle(CustomToggleStyle())
-                        .listRowBackground(currentSchema.accent1)
                 }
                 .scrollContentBackground(.hidden)
                 .foregroundColor(currentSchema.font)
@@ -56,8 +62,8 @@ struct ChallengeAddView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     ToolbarDoneButton(
                         name: $name,
+                        icon: $icon,
                         date: $date,
-                        notifications: $notifications,
                         showPopover: $showPopover
                     )
                 }
@@ -65,7 +71,6 @@ struct ChallengeAddView: View {
                     ToolbarCancelButton(
                         name: $name,
                         date: $date,
-                        notifications: $notifications,
                         showPopover: $showPopover
                     )
                 }
@@ -76,8 +81,8 @@ struct ChallengeAddView: View {
 
 private struct ToolbarDoneButton: View {
     @Binding var name: String
+    @Binding var icon: String
     @Binding var date: Date
-    @Binding var notifications: Bool
     @Binding var showPopover: Bool
 
     @Environment(\.modelContext) private var modelContext
@@ -98,27 +103,25 @@ private struct ToolbarDoneButton: View {
 
     private func addItem() {
         withAnimation {
-            modelContext.insert(Challenge(name: name, date: date, notifications: notifications))
+            modelContext.insert(Challenge(name: name, icon: icon, startDate: Date(), endDate: date, targetAmount: 300))
             do {
                 try modelContext.save()
             } catch {
                 print(error.localizedDescription)
             }
-            cancelCreation()
+            resetValues()
         }
     }
 
-    private func cancelCreation() {
+    private func resetValues() {
         name = ""
         date = Date()
-        notifications = false
     }
 }
 
 private struct ToolbarCancelButton: View {
     @Binding var name: String
     @Binding var date: Date
-    @Binding var notifications: Bool
     @Binding var showPopover: Bool
 
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
@@ -127,17 +130,16 @@ private struct ToolbarCancelButton: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
 
         Button("Cancel") {
-            cancelCreation()
+            resetValues()
             showPopover = false
         }
         .font(.system(size: 16))
         .foregroundStyle(currentSchema.barIcons)
     }
 
-    private func cancelCreation() {
+    private func resetValues() {
         name = ""
         date = Date()
-        notifications = false
     }
 }
 

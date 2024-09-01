@@ -12,45 +12,22 @@ struct ChallengesListView: View {
     let challenges: [Challenge]
     
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     @State private var showPopover = false
-    @State private var name = ""
-    @State private var date = Date()
-    @State private var notifications = false
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
-        
         VStack(alignment: .center) {
-            List {
+            ScrollView(.vertical, showsIndicators: false) {
                 ForEach(challenges) { challenge in
-                    NavigationLink {
-                        ChallengeDetailScreen(challenge: challenge)
-                    } label: {
-                        Text("Challenge: \(challenge.name)")
-                    }
-                    .listRowBackground(Color(.secondarySystemBackground))
+                    ChallengeListItem(challenge: challenge)
                 }
                 .onDelete(perform: deleteItems)
             }
-            .scrollContentBackground(.hidden)
             
-            Button(action: {
-                showPopover = true
-            }) {
-                Image(systemName: "plus").font(.title)
-                    .foregroundStyle(currentSchema.barIcons)
-            }
-            .padding(.bottom, 12)
+            AddButton(showPopover: $showPopover)
         }
         .popover(isPresented: $showPopover) {
-            ChallengeAddView(
-                name: $name,
-                date: $date,
-                notifications: $notifications,
-                showPopover: $showPopover
-            )
+            ChallengeAddView(showPopover: $showPopover)
         }
     }
     
@@ -67,3 +44,59 @@ struct ChallengesListView: View {
         }
     }
 }
+
+struct ChallengeListItem: View {
+    var challenge: Challenge
+    
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
+        NavigationLink(destination: ChallengeDetailScreen(challenge: challenge)) {
+            HStack {
+                Image(systemName: challenge.icon)
+                    .fontWeight(.bold)
+                    .foregroundStyle(currentSchema.font)
+                    .padding(12)
+                Text(challenge.name)
+                    .fontWeight(.bold)
+                    .foregroundStyle(currentSchema.font)
+                Spacer()
+            }
+            .padding(8)
+            .background(currentSchema.bar)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .listRowBackground(Color(.secondarySystemBackground))
+        .padding(24)
+    }
+}
+
+struct AddButton: View {
+    @Binding var showPopover: Bool
+    
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
+        Button(action: {
+            showPopover = true
+        }) {
+            Image(systemName: "plus")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(currentSchema.barIcons)
+                .padding()
+                .frame(width: 220, height: 50)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [6]))
+                        .foregroundColor(currentSchema.barIcons)
+                )
+        }
+        .background(.clear)
+        .cornerRadius(16)
+    }
+}
+

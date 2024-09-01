@@ -28,7 +28,13 @@ struct ChallengeDetailScreen: View {
 }
 
 #Preview {
-    ChallengeDetailScreen(challenge: Challenge(name: "Text Challenge", date: Date(), notifications: true))
+    ChallengeDetailScreen(challenge: Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: Calendar.current.date(byAdding: .month, value: 6, to: Date())!,
+        targetAmount: 1500
+    ))
         .modelContainer(for: [Challenge.self, ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
