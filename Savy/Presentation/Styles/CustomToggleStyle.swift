@@ -20,11 +20,11 @@ struct CustomToggleStyle: ToggleStyle {
 
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(configuration.isOn ? currentSchema.accent2 : currentSchema.background)
+                    .fill(currentSchema.bar)
                     .frame(width: 51, height: 31)
 
                 Circle()
-                    .fill(currentSchema.bar)
+                    .fill(currentSchema.background)
                     .frame(width: 27, height: 27)
                     .offset(x: configuration.isOn ? 10 : -10)
                     .animation(.easeInOut(duration: 0.2), value: configuration.isOn)
