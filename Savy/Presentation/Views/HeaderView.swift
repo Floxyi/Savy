@@ -18,7 +18,7 @@ struct HeaderView: View {
         HStack {
             Text(title)
                 .fontWeight(.bold)
-                .font(.custom("Shrikhand-Regular", size: 36))
+                .font(.custom("Shrikhand-Regular", size: 44))
                 .foregroundStyle(currentSchema.font)
         }
     }
