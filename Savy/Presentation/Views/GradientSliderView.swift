@@ -11,28 +11,50 @@ struct GradientSliderView: View {
     @Binding var value: Double
     var range: ClosedRange<Double>
     
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
     @State private var isDragging = false
+    @FocusState var isInputActive: Bool
     
     private let gradientColors: [Color] = [.red, .yellow, .green, .cyan, .blue, .purple, .red]
     private let thumbSize: CGFloat = 28
     private let trackHeight: CGFloat = 8
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: trackHeight / 2)
-                    .fill(LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .leading, endPoint: .trailing))
-                    .frame(height: trackHeight)
+        let currentSchema = colorManagerVM.colorManager.currentSchema
+        
+        VStack {
+            HStack {
+                Text(String(format: "%.0f", value))
+                    .foregroundStyle(currentSchema.font)
+                    .fontWeight(.bold)
+                    .font(.system(size: 14))
+                    .padding(.horizontal, 4)
+                    .frame(width: 38, alignment: .trailing)
                 
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: thumbSize, height: thumbSize)
-                    .shadow(radius: isDragging ? 4 : 2)
-                    .offset(x: thumbPosition(in: geometry.size.width))
-                    .gesture(dragGesture(in: geometry.size.width))
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: trackHeight / 2)
+                            .fill(LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .leading, endPoint: .trailing))
+                            .frame(height: trackHeight)
+                        
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: thumbSize, height: thumbSize)
+                            .shadow(radius: isDragging ? 4 : 2)
+                            .offset(x: thumbPosition(in: geometry.size.width))
+                            .gesture(dragGesture(in: geometry.size.width))
+                    }
+                }
+                .frame(height: thumbSize)
+                
+                Text("360")
+                    .foregroundStyle(currentSchema.font)
+                    .fontWeight(.bold)
+                    .font(.system(size: 14))
+                    .padding(.horizontal, 4)
             }
         }
-        .frame(height: thumbSize)
     }
     
     private func thumbPosition(in width: CGFloat) -> CGFloat {
