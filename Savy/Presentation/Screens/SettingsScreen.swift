@@ -19,32 +19,41 @@ struct SettingsScreen: View {
         VStack {
             HeaderView(title: "Settings")
             
-            Spacer()
-            
-            Picker("Color Mode", selection: $selectedMode) {
-                Text("Light").tag(ColorSchemaMode.light)
-                Text("Dark").tag(ColorSchemaMode.dark)
-                Text("Colored Light").tag(ColorSchemaMode.coloredLight)
-                Text("Colored Dark").tag(ColorSchemaMode.coloredDark)
+            SettingsTileView(image: "person.fill", text: "Account") {
+                Text("Minim occaecat cillum duis velit voluptate est elit quis pariatur laborum ex nostrud ad ex cillum.")
+                    .foregroundStyle(currentSchema.font)
             }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            .onChange(of: selectedMode) {
-                withAnimation {
-                    updateSchemaForSelectedMode()
+            
+            SettingsTileView(image: "paintbrush.fill", text: "Design") {
+                Picker("Color Mode", selection: $selectedMode) {
+                    Text("Light").tag(ColorSchemaMode.light)
+                    Text("Dark").tag(ColorSchemaMode.dark)
+                    Text("Colored Light").tag(ColorSchemaMode.coloredLight)
+                    Text("Colored Dark").tag(ColorSchemaMode.coloredDark)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .onChange(of: selectedMode) {
+                    withAnimation {
+                        updateSchemaForSelectedMode()
+                    }
+                }
+                
+                if selectedMode == .coloredLight || selectedMode == .coloredDark {
+                    GradientSliderView(value: Binding(
+                        get: { self.colorManagerVM.colorManager.hue },
+                        set: { newValue in
+                            self.colorManagerVM.colorManager.hue = newValue
+                            self.updateSchemaForSelectedMode()
+                        }
+                    ), range: 0...360)
                 }
             }
             
-            if selectedMode == .coloredLight || selectedMode == .coloredDark {
-                GradientSliderView(value: Binding(
-                    get: { self.colorManagerVM.colorManager.hue },
-                    set: { newValue in
-                        self.colorManagerVM.colorManager.hue = newValue
-                        self.updateSchemaForSelectedMode()
-                    }
-                ), range: 0...360)
-                .padding()
+            SettingsTileView(image: "bell.fill", text: "Notifications") {
+                Text("Minim occaecat cillum duis velit voluptate est elit quis pariatur laborum ex nostrud ad ex cillum.")
+                    .foregroundStyle(currentSchema.font)
             }
+            
             Spacer()
         }
         .padding()
