@@ -205,10 +205,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8E5D9B8A2C848A6700B41226 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				8E7157BE2C74F638007EB767 /* Screens */,
 		17FF019A2C776E090012FCF7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +212,7 @@
 				174173252C7F3EF400A136A3 /* Styles */,
 				17FF019B2C776E150012FCF7 /* Screens */,
 				17F40C162C74F52800344DBF /* Views */,
+        8E7157BE2C74F638007EB767 /* Screens */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
