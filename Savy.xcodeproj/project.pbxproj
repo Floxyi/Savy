@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
+		173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DB7532C847832003B30D8 /* GradientSliderView.swift */; };
 		174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */; };
 		17530F9E2C8111F8003D768C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 17530F9D2C8111F8003D768C /* PostgREST */; };
 		17530FA02C811214003D768C /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17530F9F2C811214003D768C /* Supabase.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
+		173DB7532C847832003B30D8 /* GradientSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSliderView.swift; sourceTree = "<group>"; };
 		174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		17530F9F2C811214003D768C /* Supabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
 		17530FA42C811348003D768C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */,
 				17FF01A22C7770D20012FCF7 /* HeaderView.swift */,
 				17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */,
+				173DB7532C847832003B30D8 /* GradientSliderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				17B2466B2C7B0A930036C534 /* ColorSchemaMode.swift in Sources */,
 				17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */,
 				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
+				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
 				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,

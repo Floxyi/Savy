@@ -36,7 +36,7 @@ struct SettingsScreen: View {
             }
             
             if selectedMode == .coloredLight || selectedMode == .coloredDark {
-                GradientSlider(value: Binding(
+                GradientSliderView(value: Binding(
                     get: { self.colorManagerVM.colorManager.hue },
                     set: { newValue in
                         self.colorManagerVM.colorManager.hue = newValue
@@ -65,27 +65,6 @@ struct SettingsScreen: View {
             case .coloredDark:
                 colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredDarkMode(hue: colorManagerVM.colorManager.hue))
         }
-    }
-}
-
-struct GradientSlider: View {
-    @Binding var value: Double
-    var range: ClosedRange<Double>
-
-    var body: some View {
-        Slider(value: $value, in: range)
-            .accentColor(.clear)
-            .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        .red, .yellow, .green, .cyan, .blue, .purple, .red
-                    ]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                .cornerRadius(10)
-                .frame(height: 8)
-            )
     }
 }
 
