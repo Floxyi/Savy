@@ -12,7 +12,7 @@
 		17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Challenge.swift */; };
 		17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */; };
 		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
-		8E7157C02C74F67C007EB767 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7157BF2C74F67C007EB767 /* LoginView.swift */; };
+		8E7157C02C74F67C007EB767 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7157BF2C74F67C007EB767 /* LoginScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +22,7 @@
 		17FB1CF42C74E38900E1C6F4 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8E7157BF2C74F67C007EB767 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8E7157BF2C74F67C007EB767 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
 			isa = PBXGroup;
 			children = (
-				8E7157BE2C74F638007EB767 /* Views */,
+				8E5D9B8A2C848A6700B41226 /* Presentation */,
 				17F40C152C74EC5200344DBF /* DataModel */,
 				17FB1CF22C74E38900E1C6F4 /* ContentView.swift */,
 				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
@@ -81,12 +81,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8E7157BE2C74F638007EB767 /* Views */ = {
+		8E5D9B8A2C848A6700B41226 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				8E7157BF2C74F67C007EB767 /* LoginView.swift */,
+				8E7157BE2C74F638007EB767 /* Screens */,
 			);
-			path = Views;
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		8E7157BE2C74F638007EB767 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8E7157BF2C74F67C007EB767 /* LoginScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,7 +169,7 @@
 			files = (
 				17FB1CF32C74E38900E1C6F4 /* ContentView.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
-				8E7157C02C74F67C007EB767 /* LoginView.swift in Sources */,
+				8E7157C02C74F67C007EB767 /* LoginScreen.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
