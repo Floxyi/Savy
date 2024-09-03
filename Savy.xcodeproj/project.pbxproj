@@ -20,6 +20,7 @@
 		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
 		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
 		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
+		176F63982C877261004437C1 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63972C877261004437C1 /* TabBarManager.swift */; };
 		178530AA2C850FA4003426CD /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178530A92C850FA4003426CD /* Saving.swift */; };
 		17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */; };
 		17B2464E2C7A9E630036C534 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464D2C7A9E630036C534 /* AppView.swift */; };
@@ -58,6 +59,7 @@
 		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
 		176EAE212C8290F9007CBABE /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		176F63972C877261004437C1 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 		178530A92C850FA4003426CD /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
 		17A876D02C7F389700A47AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */,
 				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
 				17B2466A2C7B0A930036C534 /* ColorSchemaMode.swift */,
+				176F63972C877261004437C1 /* TabBarManager.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 				171F79C02C85A97100A637C1 /* Profile.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
+				176F63982C877261004437C1 /* TabBarManager.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,

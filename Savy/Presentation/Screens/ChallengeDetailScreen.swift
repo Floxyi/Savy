@@ -13,18 +13,26 @@ struct ChallengeDetailScreen: View {
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var tabBarManager: TabBarManager
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         NavigationView {
             VStack {
-                HeaderView(title: "Challenge", dismiss: { dismiss() })
+                HeaderView(title: "Challenge", dismiss: {
+                    dismiss()
+                    tabBarManager.show()
+                })
                 
                 ChallengeInfoView(challenge: challenge)
             }
             .background(currentSchema.background)
         }
+        .onAppear(perform: {
+            tabBarManager.hide()
+        })
+        .padding()
         .background(currentSchema.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
@@ -43,4 +51,5 @@ struct ChallengeDetailScreen: View {
     )
     .modelContainer(for: [Challenge.self, ColorManager.self])
     .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .environmentObject(TabBarManager())
 }

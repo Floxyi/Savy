@@ -11,6 +11,8 @@ import SwiftUI
 struct LoginScreen: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var tabBarManager: TabBarManager
+    
     @State private var emailAddress = ""
     @State private var password = ""
     
@@ -24,7 +26,10 @@ struct LoginScreen: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack {
-            HeaderView(title: "Login", dismiss: { dismiss() })
+            HeaderView(title: "Login", dismiss: {
+                dismiss()
+                tabBarManager.show()
+            })
                 .padding(.bottom, 88)
             
             TextField("", text: $emailAddress, prompt: Text(verbatim: "someone@example.com")
@@ -135,6 +140,9 @@ struct LoginScreen: View {
                 }
             }
         })
+        .onAppear(perform: {
+            tabBarManager.hide()
+        })
     }
     
     func signInButtonTapped() {
@@ -159,4 +167,5 @@ struct LoginScreen: View {
     LoginScreen()
         .modelContainer(for: [Challenge.self, ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
 }

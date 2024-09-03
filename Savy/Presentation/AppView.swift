@@ -17,6 +17,8 @@ enum Tab: String, Hashable, CaseIterable {
 struct AppView: View {
     @Query private var challenges: [Challenge]
     
+    @EnvironmentObject private var tabBarManager: TabBarManager
+    
     @State private var selectedTab: Tab = Tab.challenges
     
     var body: some View {
@@ -35,14 +37,20 @@ struct AppView: View {
                 UITabBar.appearance().isHidden = true
             })
             
-            BottomTabBarView(currentTab: $selectedTab)
-                .padding(.bottom)
+            if tabBarManager.isOn {
+                BottomTabBarView(currentTab: $selectedTab)
+                    .padding(.bottom)
+            }
         }
     }
 }
 
 #Preview {
-    AppView()
-        .modelContainer(for: [Challenge.self, ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    container.mainContext.insert(Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: Date(), targetAmount: 1500))
+
+    return AppView()
+        .modelContainer(container)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(TabBarManager())
 }
