@@ -96,7 +96,6 @@ struct SettingsScreen: View {
 
 #Preview {
     SettingsScreen()
-        .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
         .environmentObject(TabBarManager())
 }

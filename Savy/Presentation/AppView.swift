@@ -47,7 +47,11 @@ struct AppView: View {
 
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    container.mainContext.insert(Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: Date(), targetAmount: 1500))
+    
+    let endDate = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
+    container.mainContext.insert(Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500))
+    container.mainContext.insert(Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300))
+    container.mainContext.insert(Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 280))
 
     return AppView()
         .modelContainer(container)
