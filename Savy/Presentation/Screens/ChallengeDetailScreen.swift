@@ -11,30 +11,36 @@ import SwiftUI
 struct ChallengeDetailScreen: View {
     let challenge: Challenge
     
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
-        VStack {
-            ChallengeInfoView(challenge: challenge)
-            Spacer()
-            HStack {
-                Spacer()
+        NavigationView {
+            VStack {
+                HeaderView(title: "Challenge", dismiss: { dismiss() })
+                
+                ChallengeInfoView(challenge: challenge)
             }
+            .background(currentSchema.background)
         }
         .background(currentSchema.background)
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle("")
     }
 }
 
 #Preview {
-    ChallengeDetailScreen(challenge: Challenge(
-        name: "MacBook",
-        icon: "macbook",
-        startDate: Date(),
-        endDate: Calendar.current.date(byAdding: .month, value: 6, to: Date())!,
-        targetAmount: 1500
-    ))
-        .modelContainer(for: [Challenge.self, ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    ChallengeDetailScreen(
+        challenge: Challenge(
+            name: "MacBook",
+            icon: "macbook",
+            startDate: Date(),
+            endDate: Calendar.current.date(byAdding: .month, value: 6, to: Date())!,
+            targetAmount: 1500
+        )
+    )
+    .modelContainer(for: [Challenge.self, ColorManager.self])
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

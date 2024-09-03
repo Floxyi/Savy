@@ -16,13 +16,13 @@ struct ChallengeInfoView: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack(alignment: .center, spacing: 16) {
-            HeaderView(title: "Challenge")
-
             Spacer()
-
-            Text("Challenge: \(challenge.name)")
-                .font(.headline)
-            Image(systemName: challenge.icon)
+            
+            HStack {
+                Image(systemName: challenge.icon)
+                Text(challenge.name)
+                    .font(.headline)
+            }
             Text("Start Date: \(challenge.startDate.formatted())")
                 .font(.subheadline)
             Text("End Date: \(challenge.endDate.formatted())")

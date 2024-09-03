@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171F79C02C85A97100A637C1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171F79BF2C85A97100A637C1 /* Profile.swift */; };
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
 		173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DB7532C847832003B30D8 /* GradientSliderView.swift */; };
@@ -16,7 +17,6 @@
 		17530FA32C811276003D768C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 17530FA22C811276003D768C /* Supabase */; };
 		17530FA52C811348003D768C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17530FA42C811348003D768C /* User.swift */; };
 		1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */; };
-		1767EFDA2C84F13600E2BDFA /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD92C84F13600E2BDFA /* LoginScreen.swift */; };
 		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
 		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
 		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
@@ -47,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		171F79BF2C85A97100A637C1 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
 		173DB7532C847832003B30D8 /* GradientSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSliderView.swift; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 				17530FA42C811348003D768C /* User.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
 				178530A92C850FA4003426CD /* Saving.swift */,
+				171F79BF2C85A97100A637C1 /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,7 +186,6 @@
 				17FB1CEF2C74E38900E1C6F4 /* Savy */,
 				17FB1CEE2C74E38900E1C6F4 /* Products */,
 				17530FA12C811276003D768C /* Frameworks */,
-				8E1B976D2C851AA80053BE5C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,8 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				17A876D02C7F389700A47AB6 /* Info.plist */,
-				176EAE202C8290DA007CBABE /* Environment */,
 				17A876CE2C7F388D00A47AB6 /* Fonts */,
+				176EAE202C8290DA007CBABE /* Environment */,
 				17B5D08B2C7A487D00B28A04 /* Extensions */,
 				17B5D0882C7A466B00B28A04 /* Logic */,
 				17FF019A2C776E090012FCF7 /* Presentation */,
@@ -348,6 +349,7 @@
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
+				171F79C02C85A97100A637C1 /* Profile.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
