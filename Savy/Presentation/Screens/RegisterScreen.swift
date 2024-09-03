@@ -30,6 +30,9 @@ struct RegisterScreen: View {
         .background(currentSchema.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
+        .onAppear(perform: {
+            tabBarManager.hide()
+        })
     }
 }
 
