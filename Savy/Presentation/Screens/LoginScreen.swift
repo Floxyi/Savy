@@ -22,7 +22,6 @@ struct LoginScreen: View {
     @State var isAuthenticated = false
     
     var body: some View {
-        
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack {
