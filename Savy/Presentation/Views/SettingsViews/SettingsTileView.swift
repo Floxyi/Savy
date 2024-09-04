@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 01.09.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct SettingsTileView<Content: View>: View {
@@ -49,4 +50,13 @@ struct SettingsTileView<Content: View>: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.bottom, 24)
     }
+}
+
+#Preview {
+    @State var toggle: Bool = true
+    return SettingsTileView(image: "person.fill", text: "Account") {
+        SettingsBarView(text: "Toggle", toggle: $toggle)
+    }
+    .padding()
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

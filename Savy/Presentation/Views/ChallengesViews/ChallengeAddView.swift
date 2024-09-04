@@ -143,3 +143,12 @@ private struct ToolbarCancelButton: View {
     }
 }
 
+#Preview {
+    @State var showPopover: Bool = true
+    
+    return Spacer()
+        .popover(isPresented: $showPopover) {
+            ChallengeAddView(showPopover: $showPopover)
+        }
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+}

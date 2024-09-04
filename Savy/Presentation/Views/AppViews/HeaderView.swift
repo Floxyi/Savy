@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 22.08.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct HeaderView: View {
@@ -42,3 +43,13 @@ struct HeaderView: View {
     }
 }
 
+#Preview {
+    VStack {
+        Spacer()
+        HeaderView(title: "Challenge")
+        Spacer()
+        HeaderView(title: "Challenge", dismiss: {})
+        Spacer()
+    }
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+}

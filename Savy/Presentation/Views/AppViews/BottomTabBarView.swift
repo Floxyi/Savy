@@ -75,3 +75,9 @@ private struct TabBarButton: View {
             .animation(.easeInOut, value: active)
     }
 }
+
+#Preview {
+    @State var selectedTab: Tab = Tab.challenges
+    return BottomTabBarView(currentTab: $selectedTab)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+}

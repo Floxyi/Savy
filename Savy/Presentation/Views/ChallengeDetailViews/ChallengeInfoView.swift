@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 22.08.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ChallengeInfoView: View {
@@ -35,4 +36,10 @@ struct ChallengeInfoView: View {
         .foregroundStyle(currentSchema.font)
         .padding()
     }
+}
+
+#Preview {
+    let endDate: Date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+    return ChallengeInfoView(challenge: Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500))
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

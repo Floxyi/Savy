@@ -36,10 +36,10 @@ struct ChallengeListItemView: View {
                 .padding(.bottom, 12)
                 HStack {
                     VStack {
-                        Text("50€")
+                        Text("\(challenge.getNextSaving().amount.formatted())€")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundStyle(currentSchema.background)
-                        Text("18.09")
+                        Text(challenge.getNextSaving().date.formatted(.dateTime.month(.twoDigits).day()))
                             .font(.system(size: 12))
                             .foregroundStyle(currentSchema.background)
                     }
@@ -54,10 +54,10 @@ struct ChallengeListItemView: View {
                     }
                     .padding(.horizontal, -8)
                     VStack {
-                        Text("10€")
+                        Text("\(challenge.getNextNextSaving().amount.formatted())€")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundStyle(currentSchema.font)
-                        Text("10.10")
+                        Text(challenge.getNextNextSaving().date.formatted(.dateTime.month(.twoDigits).day()))
                             .font(.system(size: 12))
                             .foregroundStyle(currentSchema.font)
                     }
@@ -120,7 +120,7 @@ struct ChallengeListItemView: View {
 }
 
 #Preview {
-    let endDate = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
+    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
     let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500)
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))

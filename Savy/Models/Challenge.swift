@@ -85,4 +85,12 @@ class Challenge {
     func isCompleted() -> Bool {
         return currentSavedAmount() >= targetAmount || Date() > endDate
     }
+    
+    func getNextSaving() -> Saving {
+        return savings[0]
+    }
+    
+    func getNextNextSaving() -> Saving {
+        return savings[1]
+    }
 }

@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 03.09.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct AccountView: View {
@@ -63,4 +64,12 @@ struct AccountView: View {
             }
         }
     }
+}
+
+#Preview {
+    SettingsTileView(image: "person.fill", text: "Account") {
+        AccountView()
+    }
+    .padding()
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
