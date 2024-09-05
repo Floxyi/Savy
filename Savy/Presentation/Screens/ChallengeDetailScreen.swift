@@ -20,12 +20,13 @@ struct ChallengeDetailScreen: View {
         
         NavigationView {
             VStack {
-                HeaderView(title: "Challenge", dismiss: {
+                HeaderView(title: challenge.name, dismiss: {
                     dismiss()
                     tabBarManager.show()
                 })
                 
                 ChallengeInfoView(challenge: challenge)
+                    .padding(.top, -36)
             }
             .background(currentSchema.background)
         }
@@ -40,16 +41,14 @@ struct ChallengeDetailScreen: View {
 }
 
 #Preview {
-    ChallengeDetailScreen(
-        challenge: Challenge(
-            name: "MacBook",
-            icon: "macbook",
-            startDate: Date(),
-            endDate: Calendar.current.date(byAdding: .month, value: 6, to: Date())!,
-            targetAmount: 1500
-        )
-    )
-    .modelContainer(for: [Challenge.self, ColorManager.self])
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-    .environmentObject(TabBarManager())
+    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
+    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500)
+    
+    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    container.mainContext.insert(challenge)
+    
+    return ChallengeDetailScreen(challenge: challenge)
+        .modelContainer(container)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(TabBarManager())
 }
