@@ -89,9 +89,34 @@ struct LoginScreen: View {
     }
 }
 
-#Preview {
-    LoginScreen(appUser: .constant(.init(uid: "1234", email: nil)))
-        .modelContainer(for: [Challenge.self, ColorManager.self])
+#Preview("Logged Out") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = nil
+        
+        var body: some View {
+            LoginScreen(appUser: $dummyUser)
+                .modelContainer(for: [Challenge.self, ColorManager.self])
+                .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+                .environmentObject(TabBarManager())
+        }
+    }
+    
+    return PreviewWrapper()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
+}
+
+#Preview("Logged In") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
+        
+        var body: some View {
+            LoginScreen(appUser: $dummyUser)
+                .modelContainer(for: [Challenge.self, ColorManager.self])
+                .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+                .environmentObject(TabBarManager())
+        }
+    }
+    
+    return PreviewWrapper()
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

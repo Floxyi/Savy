@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var selectedMode: ColorSchemaMode = .light
     @State private var toggledDarkMode: Bool = false

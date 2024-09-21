@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @Binding var appUser: AppUser?
     
@@ -17,20 +18,33 @@ struct AccountView: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         HStack {
-            Spacer()
-            
             if let appUser = appUser {
-                Text("User is logged in: \(appUser.email ?? "error")")
+                Text("You are logged in: \(appUser.email ?? "error")")
                     .fontWeight(.bold)
                     .foregroundStyle(currentSchema.font)
-                Text("Log Out")
-                    .foregroundStyle(currentSchema.font)
-                    .font(.system(size: 16))
-                    .fontWeight(.bold)
-                    .onTapGesture {
-                        signOutButtonTapped()
-                    }
+                
+                Spacer()
+                
+                HStack {
+                    Text("Log Out")
+                        .foregroundStyle(currentSchema.font)
+                        .font(.system(size: 16))
+                        .fontWeight(.bold)
+                        .onTapGesture {
+                            signOutButtonTapped()
+                        }
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .foregroundStyle(currentSchema.font)
+                        .fontWeight(.bold)
+                        .font(.system(size: 16))
+                }
+                .padding(8)
+                .background(currentSchema.background)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .padding(.trailing, 4)
             } else {
+                Spacer()
+                
                 HStack {
                     NavigationLink(destination: RegisterScreen(appUser: $appUser)) {
                         Text("Register")
@@ -60,27 +74,40 @@ struct AccountView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                 }
+                
+                Spacer()
             }
             
-            Spacer()
         }
         .frame(height: 44)
+        .onAppear(perform: {
+            tabBarManager.show()
+        })
     }
     
     func signOutButtonTapped() {
         Task {
             do {
-                self.appUser = try await AuthManager.shared.signOut()
-                self.appUser = appUser
+                try await AuthManager.shared.signOut()
+                self.appUser = nil
             }
         }
     }
 }
 
 #Preview {
-    SettingsTileView(image: "person.fill", text: "Account") {
-        AccountView(appUser: .constant(.init(uid: "1234", email: nil)))
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
+        
+        var body: some View {
+            SettingsTileView(image: "person.fill", text: "Account") {
+                AccountView(appUser: $dummyUser)
+            }
+        }
     }
-    .padding()
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    
+    return PreviewWrapper()
+        .padding()
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
 }

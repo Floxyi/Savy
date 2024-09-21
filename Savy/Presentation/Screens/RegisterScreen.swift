@@ -22,7 +22,7 @@ struct RegisterScreen: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack {
-            HeaderView(title: "Resgister", dismiss: {
+            HeaderView(title: "Register", dismiss: {
                 dismiss()
                 tabBarManager.show()
             })
