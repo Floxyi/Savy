@@ -17,6 +17,8 @@ struct SettingsScreen: View {
     @State private var toggledNotifications: Bool = false
     @State private var toggledEachNotification: Bool = false
     
+    @Binding var appUser: AppUser?
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
@@ -26,7 +28,7 @@ struct SettingsScreen: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     SettingsTileView(image: "person.fill", text: "Account") {
-                        AccountView()
+                        AccountView(appUser: $appUser)
                     }
                     
                     SettingsTileView(image: "paintbrush.fill", text: "Design") {
@@ -71,10 +73,14 @@ struct SettingsScreen: View {
                 selectedMode = currentSchema.mode
                 toggledDarkMode = currentSchema.mode == .dark || currentSchema.mode == .coloredDark
                 toggledColorMode = currentSchema.mode == .coloredLight || currentSchema.mode == .coloredDark
+                
+                Task {
+                    self.appUser = try await AuthManager.shared.getCurrentSession()
+                }
             }
         }
     }
-
+    
     private func updateSchemaForSelectedMode() {
         if toggledDarkMode && !toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.darkMode())
@@ -95,7 +101,7 @@ struct SettingsScreen: View {
 }
 
 #Preview {
-    SettingsScreen()
+    SettingsScreen(appUser: .constant(.init(uid: "1234", email: nil)))
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
         .environmentObject(TabBarManager())
 }

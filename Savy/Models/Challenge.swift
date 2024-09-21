@@ -55,7 +55,7 @@ class Challenge {
         
         self.savings = savings
     }
-
+    
     private func numberOfMonths() -> Int {
         let calendar = Calendar.current
         return calendar.dateComponents([.month], from: startDate, to: endDate).month ?? 0
@@ -66,8 +66,7 @@ class Challenge {
     }
     
     func progressPercentage() -> Double {
-        let totalSaved = currentSavedAmount()
-        return min((Double(totalSaved) / Double(targetAmount)) * 100.0, 100.0)
+        return Double(currentSavedAmount()) / Double(targetAmount)
     }
     
     func remainingAmount() -> Int {
@@ -76,14 +75,6 @@ class Challenge {
     
     func remainingSavings() -> Int {
         return savings.filter { !$0.done }.count
-    }
-    
-    func daysRemaining() -> Int {
-        return max(Calendar.current.dateComponents([.day], from: Date(), to: endDate).day ?? 0, 0)
-    }
-    
-    func isCompleted() -> Bool {
-        return currentSavedAmount() >= targetAmount || Date() > endDate
     }
     
     func getNextSaving() -> Saving {

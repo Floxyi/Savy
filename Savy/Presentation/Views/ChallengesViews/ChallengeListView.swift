@@ -12,9 +12,9 @@ struct ChallengesListView: View {
     let challenges: [Challenge]
     
     @Environment(\.modelContext) private var modelContext
-
+    
     @State private var showPopover = false
-
+    
     var body: some View {
         VStack(alignment: .center) {
             ScrollView(.vertical, showsIndicators: false) {

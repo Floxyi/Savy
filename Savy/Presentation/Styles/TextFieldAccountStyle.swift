@@ -21,5 +21,5 @@ struct TextFieldAccountStyle: TextFieldStyle {
             .font(.system(size: 20))
             .padding(.vertical, 4)
             .padding(.horizontal, 24)
-        }
+    }
 }

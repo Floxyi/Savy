@@ -53,7 +53,7 @@ struct SettingsTileView<Content: View>: View {
 }
 
 #Preview {
-    @State var toggle: Bool = true
+    @Previewable @State var toggle: Bool = true
     return SettingsTileView(image: "person.fill", text: "Account") {
         SettingsBarView(text: "Toggle", toggle: $toggle)
     }

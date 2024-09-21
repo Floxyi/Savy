@@ -12,20 +12,20 @@ struct ChallengeAddView: View {
     @Binding var showPopover: Bool
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     @State private var name: String = ""
     @State private var icon: String = ""
     @State private var date: Date = Date()
-
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-
+        
         NavigationStack {
             VStack {
                 Text("New Challenge")
                     .font(.system(size: 28).bold())
                     .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
-
+                
                 Form {
                     TextField(text: $name, prompt: Text("Challenge Name")) {
                         Text("Challenge Name")
@@ -40,7 +40,7 @@ struct ChallengeAddView: View {
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
                     .listRowBackground(currentSchema.accent1)
-
+                    
                     DatePicker(
                         "End Date",
                         selection: $date,
@@ -52,7 +52,7 @@ struct ChallengeAddView: View {
                 }
                 .scrollContentBackground(.hidden)
                 .foregroundColor(currentSchema.font)
-
+                
                 Spacer()
             }
             .padding()
@@ -84,13 +84,13 @@ private struct ToolbarDoneButton: View {
     @Binding var icon: String
     @Binding var date: Date
     @Binding var showPopover: Bool
-
+    
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-
+        
         Button(action: {
             addItem()
             showPopover = false
@@ -100,7 +100,7 @@ private struct ToolbarDoneButton: View {
         }
         .disabled(name.isEmpty)
     }
-
+    
     private func addItem() {
         withAnimation {
             modelContext.insert(Challenge(name: name, icon: icon, startDate: Date(), endDate: date, targetAmount: 300))
@@ -112,7 +112,7 @@ private struct ToolbarDoneButton: View {
             resetValues()
         }
     }
-
+    
     private func resetValues() {
         name = ""
         date = Date()
@@ -123,12 +123,12 @@ private struct ToolbarCancelButton: View {
     @Binding var name: String
     @Binding var date: Date
     @Binding var showPopover: Bool
-
+    
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-
+        
         Button("Cancel") {
             resetValues()
             showPopover = false
@@ -136,7 +136,7 @@ private struct ToolbarCancelButton: View {
         .font(.system(size: 16))
         .foregroundStyle(currentSchema.barIcons)
     }
-
+    
     private func resetValues() {
         name = ""
         date = Date()
@@ -144,7 +144,7 @@ private struct ToolbarCancelButton: View {
 }
 
 #Preview {
-    @State var showPopover: Bool = true
+    @Previewable @State var showPopover: Bool = true
     
     return Spacer()
         .popover(isPresented: $showPopover) {

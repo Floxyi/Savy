@@ -17,16 +17,45 @@ struct ChallengeDetailScreen: View {
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
+        let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
+        let sortedChallenges = challenge.savings.filter { !$0.done }.sorted(by: { $0.date < $1.date })
         
         NavigationView {
-            VStack {
+            VStack() {
                 HeaderView(title: challenge.name, dismiss: {
                     dismiss()
                     tabBarManager.show()
                 })
                 
                 ChallengeInfoView(challenge: challenge)
-                    .padding(.top, -36)
+                    .padding(.top, -18)
+                    .padding(.bottom, 24)
+                
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(sortedChallenges.prefix(15), id: \.id) { saving in
+                        SavingItemView(saving: saving)
+                    }
+                    if challenge.savings.count - 15 > 1 {
+                        VStack {
+                            Text("\(challenge.savings.count - 15)")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundStyle(currentSchema.font)
+                            Text("more")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundStyle(currentSchema.font)
+                        }
+                        .frame(width: 80, height: 80)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
+                                .foregroundColor(currentSchema.font)
+                        )
+                    } else if challenge.savings.count - 15 == 1 {
+                        SavingItemView(saving: challenge.savings.sorted(by: { $0.date < $1.date }).last!)
+                    }
+                }
+                .padding(.top, -500)
+                
             }
             .background(currentSchema.background)
         }
@@ -41,8 +70,8 @@ struct ChallengeDetailScreen: View {
 }
 
 #Preview {
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500)
+    let endDate = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 500)
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)

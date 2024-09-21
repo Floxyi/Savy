@@ -9,7 +9,7 @@ import SwiftUI
 
 class TabBarManager: ObservableObject {
     @Published var isOn: Bool = true
-
+    
     func hide() {
         isOn = false
     }

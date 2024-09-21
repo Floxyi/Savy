@@ -20,5 +20,5 @@ struct CustomTextFieldStyle: TextFieldStyle {
             .foregroundColor(currentSchema.font)
             .padding(.vertical, 4)
             .padding(.horizontal, 16)
-        }
+    }
 }

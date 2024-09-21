@@ -8,15 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */; };
-		171F79C02C85A97100A637C1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171F79BF2C85A97100A637C1 /* Profile.swift */; };
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
+		172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E54C82C89D98300F521C4 /* SavingItemView.swift */; };
 		173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DB7532C847832003B30D8 /* GradientSliderView.swift */; };
 		174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */; };
+		174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17642C9F0B6200851BC4 /* AuthManager.swift */; };
+		174B17672C9F273D00851BC4 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17662C9F273D00851BC4 /* AppUser.swift */; };
+		174B17692C9F288000851BC4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17682C9F288000851BC4 /* User.swift */; };
 		17530F9E2C8111F8003D768C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 17530F9D2C8111F8003D768C /* PostgREST */; };
-		17530FA02C811214003D768C /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17530F9F2C811214003D768C /* Supabase.swift */; };
 		17530FA32C811276003D768C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 17530FA22C811276003D768C /* Supabase */; };
-		17530FA52C811348003D768C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17530FA42C811348003D768C /* User.swift */; };
 		1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */; };
 		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
 		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
@@ -52,13 +53,14 @@
 
 /* Begin PBXFileReference section */
 		1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManagerViewModel.swift; sourceTree = "<group>"; };
-		171F79BF2C85A97100A637C1 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
+		172E54C82C89D98300F521C4 /* SavingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingItemView.swift; sourceTree = "<group>"; };
 		173DB7532C847832003B30D8 /* GradientSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSliderView.swift; sourceTree = "<group>"; };
 		174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
-		17530F9F2C811214003D768C /* Supabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
-		17530FA42C811348003D768C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		174B17642C9F0B6200851BC4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		174B17662C9F273D00851BC4 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		174B17682C9F288000851BC4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBarView.swift; sourceTree = "<group>"; };
 		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
@@ -137,7 +139,6 @@
 			children = (
 				176EAE1E2C828DD2007CBABE /* DotEnv.swift */,
 				176EAE212C8290F9007CBABE /* AppEnvironment.swift */,
-				17530F9F2C811214003D768C /* Supabase.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -176,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */,
+				172E54C82C89D98300F521C4 /* SavingItemView.swift */,
 			);
 			path = ChallengeDetailViews;
 			sourceTree = "<group>";
@@ -195,6 +197,7 @@
 				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
 				17B2466A2C7B0A930036C534 /* ColorSchemaMode.swift */,
 				176F63972C877261004437C1 /* TabBarManager.swift */,
+				174B17642C9F0B6200851BC4 /* AuthManager.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -211,10 +214,10 @@
 		17F40C152C74EC5200344DBF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				17530FA42C811348003D768C /* User.swift */,
+				174B17682C9F288000851BC4 /* User.swift */,
+				174B17662C9F273D00851BC4 /* AppUser.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
 				178530A92C850FA4003426CD /* Saving.swift */,
-				171F79BF2C85A97100A637C1 /* Profile.swift */,
 				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
 			);
 			path = Models;
@@ -383,7 +386,6 @@
 				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
-				17530FA02C811214003D768C /* Supabase.swift in Sources */,
 				8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */,
 				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
@@ -398,19 +400,21 @@
 				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
 				1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */,
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
+				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
+				174B17692C9F288000851BC4 /* User.swift in Sources */,
 				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
-				171F79C02C85A97100A637C1 /* Profile.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
+				174B17672C9F273D00851BC4 /* AppUser.swift in Sources */,
 				176F63982C877261004437C1 /* TabBarManager.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
+				174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
-				17530FA52C811348003D768C /* User.swift in Sources */,
 				8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

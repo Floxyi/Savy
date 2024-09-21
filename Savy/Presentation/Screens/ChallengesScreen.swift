@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChallengesScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     @Query private var challenges: [Challenge]
     
     var body: some View {

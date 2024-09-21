@@ -20,20 +20,20 @@ struct LeaderboardScreen: View {
             HeaderView(title: "Leaderboard")
             HStack {
                 List(users) { user in
-                  Text(user.name)
+                    Text(user.name)
                 }
                 .scrollContentBackground(.hidden)
                 .overlay {
-                  if users.isEmpty {
-                    ProgressView()
-                  }
+                    if users.isEmpty {
+                        ProgressView()
+                    }
                 }
                 .task {
-                  do {
-                      users = try await supabase.from("users").select().execute().value
-                  } catch {
-                    dump(error)
-                  }
+                    do {
+                        users = try await AuthManager.shared.client.from("users").select().execute().value
+                    } catch {
+                        dump(error)
+                    }
                 }
             }
             Spacer()

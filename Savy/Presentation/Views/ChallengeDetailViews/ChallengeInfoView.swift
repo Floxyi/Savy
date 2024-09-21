@@ -12,7 +12,7 @@ struct ChallengeInfoView: View {
     let challenge: Challenge
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
@@ -34,7 +34,7 @@ struct ChallengeInfoView: View {
                         .foregroundStyle(currentSchema.font)
                 }
                 
-                ProgressBar(challenge: challenge)
+                ProgressBar(challenge: challenge, progress: CGFloat(challenge.progressPercentage()))
                 
                 HStack {
                     Spacer()
@@ -46,20 +46,20 @@ struct ChallengeInfoView: View {
             }
             .padding(16)
             .background(currentSchema.bar)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-
+            .clipShape(RoundedRectangle(cornerRadius: 18))
+            
             Spacer()
         }
     }
 }
 
 struct ProgressBar: View {
-    var challenge: Challenge
+    let challenge: Challenge
+    let progress: CGFloat
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
-        let progress: CGFloat = CGFloat((challenge.currentSavedAmount() / challenge.targetAmount))
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         GeometryReader { geometry in

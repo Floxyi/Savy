@@ -21,6 +21,8 @@ struct AppView: View {
     
     @State private var selectedTab: Tab = Tab.challenges
     
+    @State var appUser: AppUser?
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
@@ -30,7 +32,7 @@ struct AppView: View {
                 LeaderboardScreen()
                     .tag(Tab.leaderboard)
                 
-                SettingsScreen()
+                SettingsScreen(appUser: $appUser)
                     .tag(Tab.settings)
             }
             .onAppear(perform: {
@@ -42,17 +44,22 @@ struct AppView: View {
                     .padding(.bottom)
             }
         }
+        .onAppear {
+            Task {
+                self.appUser = try await AuthManager.shared.getCurrentSession()
+            }
+        }
     }
 }
 
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let endDate = Calendar.current.date(byAdding: .month, value: 10, to: Date())!
+    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
     container.mainContext.insert(Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500))
     container.mainContext.insert(Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300))
     container.mainContext.insert(Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 280))
-
+    
     return AppView()
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))

@@ -78,7 +78,7 @@ struct GradientSliderView: View {
 }
 
 #Preview {
-    @State var value: Double = 0
+    @Previewable @State var value: Double = 0
     return GradientSliderView(value: $value, range: 0...360)
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

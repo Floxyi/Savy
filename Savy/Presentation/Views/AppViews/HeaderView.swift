@@ -13,7 +13,7 @@ struct HeaderView: View {
     var dismiss: (() -> Void)? = nil
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
