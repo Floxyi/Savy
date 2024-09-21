@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 01.09.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct GradientSliderView: View {
@@ -74,4 +75,10 @@ struct GradientSliderView: View {
                 isDragging = false
             }
     }
+}
+
+#Preview {
+    @Previewable @State var value: Double = 0
+    return GradientSliderView(value: $value, range: 0...360)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

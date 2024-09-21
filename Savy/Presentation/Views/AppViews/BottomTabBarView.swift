@@ -17,7 +17,7 @@ struct BottomTabBarView: View {
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-
+        
         HStack {
             TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
                 .frame(width: buttonDimen, height: buttonDimen)
@@ -28,7 +28,7 @@ struct BottomTabBarView: View {
                 .padding(.horizontal, 16)
             
             Spacer()
-
+            
             TabBarButton(imageName: Tab.leaderboard.rawValue, active: currentTab == Tab.leaderboard)
                 .frame(width: buttonDimen, height: buttonDimen)
                 .onTapGesture {
@@ -36,7 +36,7 @@ struct BottomTabBarView: View {
                     currentTab = .leaderboard
                 }
                 .padding(.horizontal, 16)
-
+            
             Spacer()
             
             TabBarButton(imageName: Tab.settings.rawValue, active: currentTab == Tab.settings)
@@ -46,7 +46,7 @@ struct BottomTabBarView: View {
                     currentTab = .settings
                 }
                 .padding(.horizontal, 16)
-
+            
         }
         .frame(width: 300, height: 70)
         .tint(Color.black)
@@ -61,9 +61,9 @@ struct BottomTabBarView: View {
 private struct TabBarButton: View {
     let imageName: String
     let active: Bool
-
+    
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
@@ -74,4 +74,10 @@ private struct TabBarButton: View {
             .font(.system(size: active ? 40 : 24))
             .animation(.easeInOut, value: active)
     }
+}
+
+#Preview {
+    @Previewable @State var selectedTab: Tab = Tab.challenges
+    return BottomTabBarView(currentTab: $selectedTab)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

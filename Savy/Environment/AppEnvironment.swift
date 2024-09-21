@@ -12,10 +12,10 @@ enum AppEnvironment {
     case production
     
     static let current: AppEnvironment = {
-        #if DEBUG
+#if DEBUG
         return .development
-        #else
+#else
         return .production
-        #endif
+#endif
     }()
 }

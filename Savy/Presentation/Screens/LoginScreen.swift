@@ -9,62 +9,59 @@ import SwiftData
 import SwiftUI
 
 struct LoginScreen: View {
-    
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @State private var emailAddress = ""
+    @EnvironmentObject private var tabBarManager: TabBarManager
+    
+    @State private var email = ""
     @State private var password = ""
     
+    @Binding var appUser: AppUser?
+    
     var body: some View {
-        
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack {
-            HeaderView(title: "Login")
-                .padding(.bottom, 88)
+            HeaderView(title: "Login", dismiss: {
+                dismiss()
+                tabBarManager.show()
+            })
+            .padding(.bottom, 88)
             
-            TextField("", text: $emailAddress, prompt: Text(verbatim: "someone@example.com")
-                .foregroundColor(currentSchema.font.opacity(0.4)))
-                .keyboardType(.emailAddress)
-                .textFieldStyle(TextFieldAccountStyle())
-            
-            SecureField("", text: $password, prompt: Text(verbatim: "password")
-                .foregroundColor(currentSchema.font.opacity(0.4)))
-                .textFieldStyle(TextFieldAccountStyle())
-                .padding(.bottom, 0)
-            
-            HStack {
-                Text("Forgot password?")
-                    .foregroundColor(currentSchema.font.opacity(0.6))
-                    .padding(.top, -10)
-                    .padding(.leading, 32)
-                    .underline()
-                Spacer()
-            }
-            
-            HStack {
-                Text("Log in")
-                    .foregroundStyle(currentSchema.font)
-                    .font(.system(size: 26))
-                    .fontWeight(.bold)
-                Image(systemName: "arrow.forward")
-                    .foregroundStyle(currentSchema.font)
-                    .font(.system(size: 20))
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, 28)
-            .background(currentSchema.bar)
-            .cornerRadius(12)
-            .padding(.top, 72)
-            
-            HStack {
-                Text("No account yet? Register")
-                    .foregroundColor(currentSchema.font.opacity(0.6))
-                    .padding(.trailing, -2)
-                
-                Text("here.")
-                    .foregroundColor(currentSchema.font.opacity(0.6))
-                    .underline()
-                    .padding(.leading, -2)
+            if appUser != nil {
+                Text("You are now logged in.")
+            } else {
+                VStack {
+                    TextField("", text: $email, prompt: Text(verbatim: "someone@example.com")
+                        .foregroundColor(currentSchema.font.opacity(0.4)))
+                    .textContentType(.emailAddress)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .keyboardType(.emailAddress)
+                    .textFieldStyle(TextFieldAccountStyle())
+                    
+                    SecureField("", text: $password, prompt: Text(verbatim: "password")
+                        .foregroundColor(currentSchema.font.opacity(0.4)))
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .textFieldStyle(TextFieldAccountStyle())
+                    .padding(.bottom, 0)
+                    
+                    HStack {
+                        Text("Log In")
+                            .foregroundStyle(currentSchema.font)
+                            .font(.system(size: 26))
+                            .fontWeight(.bold)
+                    }
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 28)
+                    .background(currentSchema.bar)
+                    .cornerRadius(12)
+                    .padding(.top, 72)
+                    .onTapGesture {
+                        signInButtonTapped()
+                    }
+                }
             }
             
             Spacer()
@@ -75,11 +72,51 @@ struct LoginScreen: View {
         .padding(.top, 92)
         .padding(.bottom, 112)
         .background(currentSchema.background)
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle("")
+        .onAppear(perform: {
+            tabBarManager.hide()
+        })
+    }
+    
+    func signInButtonTapped() {
+        Task {
+            do {
+                let appUser = try await AuthManager.shared.signInWithEmail(email: email, password: password)
+                self.appUser = appUser
+            }
+        }
     }
 }
 
-#Preview {
-    LoginScreen()
-        .modelContainer(for: [Challenge.self, ColorManager.self])
+#Preview("Logged Out") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = nil
+        
+        var body: some View {
+            LoginScreen(appUser: $dummyUser)
+                .modelContainer(for: [Challenge.self, ColorManager.self])
+                .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+                .environmentObject(TabBarManager())
+        }
+    }
+    
+    return PreviewWrapper()
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+}
+
+#Preview("Logged In") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
+        
+        var body: some View {
+            LoginScreen(appUser: $dummyUser)
+                .modelContainer(for: [Challenge.self, ColorManager.self])
+                .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+                .environmentObject(TabBarManager())
+        }
+    }
+    
+    return PreviewWrapper()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

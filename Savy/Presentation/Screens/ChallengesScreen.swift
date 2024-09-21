@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChallengesScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-
+    
     @Query private var challenges: [Challenge]
     
     var body: some View {
@@ -20,8 +20,10 @@ struct ChallengesScreen: View {
             VStack {
                 HeaderView(title: "Challenges")
                 ChallengesListView(challenges: challenges)
+                HStack {
+                    Spacer()
+                }
             }
-            .padding(.top, 14)
             .padding(.bottom, 112)
             .background(currentSchema.background)
         }

@@ -16,7 +16,7 @@ struct SavyApp: App {
             ColorManager.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+        
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
@@ -25,6 +25,7 @@ struct SavyApp: App {
     }()
     
     @StateObject private var colorManagerVM: ColorManagerViewModel
+    @StateObject private var tabBarManager = TabBarManager()
     
     init() {
         let context = sharedModelContainer.mainContext
@@ -35,6 +36,7 @@ struct SavyApp: App {
         WindowGroup {
             AppView()
                 .environmentObject(colorManagerVM)
+                .environmentObject(tabBarManager)
         }
         .modelContainer(sharedModelContainer)
     }

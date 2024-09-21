@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 01.09.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct SettingsBarView<Content: View>: View {
@@ -42,4 +43,16 @@ struct SettingsBarView<Content: View>: View {
         .background(currentSchema.background)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
+}
+
+#Preview {
+    @Previewable @State var toggle: Bool = true
+    return VStack {
+        SettingsBarView(text: "Toggle", toggle: $toggle)
+        SettingsBarView(text: "Toggle", toggle: $toggle) {
+            Text("Account settings.")
+        }
+    }
+    .padding()
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

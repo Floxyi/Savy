@@ -10,13 +10,16 @@ import SwiftUI
 
 struct SettingsScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var selectedMode: ColorSchemaMode = .light
     @State private var toggledDarkMode: Bool = false
     @State private var toggledColorMode: Bool = false
     @State private var toggledNotifications: Bool = false
     @State private var toggledEachNotification: Bool = false
-
+    
+    @Binding var appUser: AppUser?
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
@@ -26,7 +29,7 @@ struct SettingsScreen: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     SettingsTileView(image: "person.fill", text: "Account") {
-                        AccountView()
+                        AccountView(appUser: $appUser)
                     }
                     
                     SettingsTileView(image: "paintbrush.fill", text: "Design") {
@@ -71,10 +74,14 @@ struct SettingsScreen: View {
                 selectedMode = currentSchema.mode
                 toggledDarkMode = currentSchema.mode == .dark || currentSchema.mode == .coloredDark
                 toggledColorMode = currentSchema.mode == .coloredLight || currentSchema.mode == .coloredDark
+                
+                Task {
+                    self.appUser = try await AuthManager.shared.getCurrentSession()
+                }
             }
         }
     }
-
+    
     private func updateSchemaForSelectedMode() {
         if toggledDarkMode && !toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.darkMode())
@@ -94,51 +101,8 @@ struct SettingsScreen: View {
     }
 }
 
-struct AccountView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
-    var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
-        
-        HStack {
-            Spacer()
-            
-            NavigationLink(destination: RegisterScreen()) {
-                Text("Register")
-                    .fontWeight(.bold)
-                    .foregroundStyle(currentSchema.font)
-                    .frame(width: 80)
-                    .padding(12)
-                    .background(currentSchema.background)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-            
-            Spacer()
-            
-            Text("or")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .foregroundStyle(currentSchema.font)
-            
-            Spacer()
-            
-            NavigationLink(destination: LoginScreen()) {
-                Text("Login")
-                    .fontWeight(.bold)
-                    .foregroundStyle(currentSchema.font)
-                    .frame(width: 80)
-                    .padding(12)
-                    .background(currentSchema.background)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-            
-            Spacer()
-        }
-        .frame(height: 44)
-    }
-}
-
 #Preview {
-    SettingsScreen()
-        .modelContainer(for: [ColorManager.self])
+    SettingsScreen(appUser: .constant(.init(uid: "1234", email: nil)))
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
 }
