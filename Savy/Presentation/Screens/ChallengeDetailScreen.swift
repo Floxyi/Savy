@@ -35,9 +35,9 @@ struct ChallengeDetailScreen: View {
                     ForEach(sortedChallenges.prefix(15), id: \.id) { saving in
                         SavingItemView(saving: saving)
                     }
-                    if challenge.savings.count - 15 > 1 {
+                    if sortedChallenges.count - 15 > 1 {
                         VStack {
-                            Text("\(challenge.savings.count - 15)")
+                            Text("\(sortedChallenges.count - 15)")
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundStyle(currentSchema.font)
                             Text("more")
@@ -50,8 +50,8 @@ struct ChallengeDetailScreen: View {
                                 .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
                                 .foregroundColor(currentSchema.font)
                         )
-                    } else if challenge.savings.count - 15 == 1 {
-                        SavingItemView(saving: challenge.savings.sorted(by: { $0.date < $1.date }).last!)
+                    } else if sortedChallenges.count - 15 == 1 {
+                        SavingItemView(saving: sortedChallenges.last!)
                     }
                 }
                 .padding(.top, -500)
@@ -70,7 +70,7 @@ struct ChallengeDetailScreen: View {
 }
 
 #Preview {
-    let endDate = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
+    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
     let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 500)
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
