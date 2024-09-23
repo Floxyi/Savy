@@ -12,6 +12,8 @@ struct AccountView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     @EnvironmentObject private var tabBarManager: TabBarManager
     
+    @State private var showConfirmationDialog = false
+    
     @Binding var appUser: AppUser?
     
     var body: some View {
@@ -19,9 +21,13 @@ struct AccountView: View {
         
         HStack {
             if let appUser = appUser {
-                Text("You are logged in: \(appUser.email ?? "error")")
-                    .fontWeight(.bold)
-                    .foregroundStyle(currentSchema.font)
+                VStack(alignment: .leading) {
+                    Text("You are logged in:")
+                        .foregroundStyle(currentSchema.font)
+                    Text(appUser.email ?? "error")
+                        .fontWeight(.bold)
+                        .foregroundStyle(currentSchema.font)
+                }
                 
                 Spacer()
                 
@@ -30,8 +36,15 @@ struct AccountView: View {
                         .foregroundStyle(currentSchema.font)
                         .font(.system(size: 16))
                         .fontWeight(.bold)
+                        .padding(.leading, 4)
                         .onTapGesture {
-                            signOutButtonTapped()
+                            showConfirmationDialog = true
+                        }
+                        .confirmationDialog("Are you sure you want to log out?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                            Button("Log Out", role: .destructive) {
+                                signOutButtonTapped()
+                            }
+                            Button("Cancel", role: .cancel) { }
                         }
                     Image(systemName: "rectangle.portrait.and.arrow.right")
                         .foregroundStyle(currentSchema.font)
@@ -95,9 +108,26 @@ struct AccountView: View {
     }
 }
 
-#Preview {
+#Preview("Logged In") {
     struct PreviewWrapper: View {
         @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
+        
+        var body: some View {
+            SettingsTileView(image: "person.fill", text: "Account") {
+                AccountView(appUser: $dummyUser)
+            }
+        }
+    }
+    
+    return PreviewWrapper()
+        .padding()
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
+}
+
+#Preview("Logged Out") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = nil
         
         var body: some View {
             SettingsTileView(image: "person.fill", text: "Account") {

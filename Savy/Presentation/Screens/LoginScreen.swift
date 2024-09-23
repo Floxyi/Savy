@@ -52,6 +52,10 @@ struct LoginScreen: View {
                             .foregroundStyle(currentSchema.font)
                             .font(.system(size: 26))
                             .fontWeight(.bold)
+                        Image(systemName: "arrow.right")
+                            .foregroundStyle(currentSchema.font)
+                            .fontWeight(.bold)
+                            .font(.system(size: 20))
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 28)
@@ -95,14 +99,13 @@ struct LoginScreen: View {
         
         var body: some View {
             LoginScreen(appUser: $dummyUser)
-                .modelContainer(for: [Challenge.self, ColorManager.self])
-                .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-                .environmentObject(TabBarManager())
         }
     }
     
     return PreviewWrapper()
+        .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
 }
 
 #Preview("Logged In") {
@@ -111,12 +114,11 @@ struct LoginScreen: View {
         
         var body: some View {
             LoginScreen(appUser: $dummyUser)
-                .modelContainer(for: [Challenge.self, ColorManager.self])
-                .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-                .environmentObject(TabBarManager())
         }
     }
     
     return PreviewWrapper()
+        .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
 }

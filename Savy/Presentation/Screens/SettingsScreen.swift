@@ -101,8 +101,30 @@ struct SettingsScreen: View {
     }
 }
 
-#Preview {
-    SettingsScreen(appUser: .constant(.init(uid: "1234", email: nil)))
+#Preview("Logged In") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
+        
+        var body: some View {
+            SettingsScreen(appUser: $dummyUser)
+        }
+    }
+    
+    return PreviewWrapper()
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
+}
+
+#Preview("Logged Out") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = nil
+        
+        var body: some View {
+            SettingsScreen(appUser: $dummyUser)
+        }
+    }
+    
+    return PreviewWrapper()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
         .environmentObject(TabBarManager())
 }
