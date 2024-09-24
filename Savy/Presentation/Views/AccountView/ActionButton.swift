@@ -9,10 +9,10 @@
 import SwiftData
 import SwiftUI
 
-struct ActionButton: View {
+struct ActionButton<Content: View>: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
-    let text: String
+    let content: Content
     let isEnabled: Bool
     let action: () -> Void
     
@@ -20,15 +20,10 @@ struct ActionButton: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         HStack {
-            Text(text)
+            content
                 .foregroundStyle(isEnabled ? currentSchema.font : currentSchema.accent1)
-                .font(.system(size: 26))
-                .fontWeight(.bold)
-            Image(systemName: "arrow.right")
-                .foregroundStyle(isEnabled ? currentSchema.font : currentSchema.accent1)
-                .fontWeight(.bold)
-                .font(.system(size: 20))
         }
+        .frame(width: 140)
         .padding(.vertical, 16)
         .padding(.horizontal, 28)
         .background(currentSchema.bar)
@@ -41,8 +36,33 @@ struct ActionButton: View {
     }
 }
 
-#Preview {
-    ActionButton(text: "Action", isEnabled: true, action: {})
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+#Preview("Text Button") {
+    ActionButton(
+        content: HStack {
+            Text("Login")
+                .font(.system(size: 26))
+                .fontWeight(.bold)
+            Image(systemName: "arrow.right")
+                .fontWeight(.bold)
+                .font(.system(size: 20))
+        },
+        isEnabled: true,
+        action: {}
+    )
+    .modelContainer(for: [ColorManager.self])
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+}
+
+#Preview("Loading Button") {
+    ActionButton(
+        content: HStack {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .frame(width: 20, height: 20)
+        },
+        isEnabled: true,
+        action: {}
+    )
+    .modelContainer(for: [ColorManager.self])
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

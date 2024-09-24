@@ -12,6 +12,7 @@ struct AccountView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     @State private var showConfirmationDialog = false
+    @State private var isLoading = false
     
     @Binding var appUser: AppUser?
     
@@ -33,26 +34,33 @@ struct AccountView: View {
                 Spacer()
                 
                 HStack {
-                    Text("Log Out")
-                        .foregroundStyle(currentSchema.font)
-                        .font(.system(size: 14))
-                        .fontWeight(.bold)
-                        .padding(.leading, 4)
-                        .onTapGesture {
-                            showConfirmationDialog = true
-                        }
-                        .confirmationDialog("Are you sure you want to log out?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
-                            Button("Log Out", role: .destructive) {
-                                signOutButtonTapped()
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .frame(width: 20, height: 20)
+                    } else {
+                        Text("Log Out")
+                            .foregroundStyle(currentSchema.font)
+                            .font(.system(size: 14))
+                            .fontWeight(.bold)
+                            .padding(.leading, 4)
+                            .onTapGesture {
+                                showConfirmationDialog = true
                             }
-                            Button("Cancel", role: .cancel) { }
-                        }
-                    Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .foregroundStyle(currentSchema.font)
-                        .fontWeight(.bold)
-                        .font(.system(size: 16))
+                            .confirmationDialog("Are you sure you want to log out?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                                Button("Log Out", role: .destructive) {
+                                    signOutButtonTapped()
+                                }
+                                Button("Cancel", role: .cancel) { }
+                            }
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .foregroundStyle(currentSchema.font)
+                            .fontWeight(.bold)
+                            .font(.system(size: 16))
+                    }
                 }
                 .padding(8)
+                .frame(width: 110)
                 .background(currentSchema.background)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding(.trailing, 4)
@@ -97,7 +105,13 @@ struct AccountView: View {
     }
     
     func signOutButtonTapped() {
+        isLoading = true
+        
         Task {
+            defer {
+                isLoading = false
+            }
+            
             do {
                 try await AuthManager.shared.signOut()
                 self.appUser = nil

@@ -24,6 +24,7 @@ struct RegisterScreen: View {
     @State private var showPasswordPopup = false
     
     @State private var authError = false
+    @State private var isLoading = false
     
     @Binding var appUser: AppUser?
     
@@ -69,8 +70,21 @@ struct RegisterScreen: View {
                         .foregroundStyle(authError ? Color.red : currentSchema.background)
                     
                     ActionButton(
-                        text: "Register",
-                        isEnabled: isEmailValid && isPasswordValid,
+                        content: HStack {
+                            if isLoading {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                Text("Register")
+                                    .font(.system(size: 26))
+                                    .fontWeight(.bold)
+                                Image(systemName: "arrow.right")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 20))
+                            }
+                        },
+                        isEnabled: isEmailValid && isPasswordValid && !isLoading,
                         action: signUpButtonTapped
                     )
                     .padding(.top, 72)
@@ -106,7 +120,13 @@ struct RegisterScreen: View {
     }
     
     func signUpButtonTapped() {
+        isLoading = true
+        
         Task {
+            defer {
+                isLoading = false
+            }
+            
             do {
                 let appUser = try await AuthManager.shared.registerWithEmail(email: email, password: password)
                 self.appUser = appUser
