@@ -5,10 +5,12 @@
 //  Created by Florian Winkler on 23.09.24.
 //
 
-
+import SwiftData
 import SwiftUI
 
 struct AccountTextFieldView: View {
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
     @Binding var text: String
     @Binding var isValid: Bool
     @Binding var showPopup: Bool
@@ -18,8 +20,6 @@ struct AccountTextFieldView: View {
     let isSecure: Bool
     let validationFunction: () -> Void
     let popupText: String
-    
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -85,4 +85,68 @@ struct AccountTextFieldView: View {
             TextFieldPopoverView(showPopup: $showPopup, isValid: isValid, error: error, text: popupText)
         )
     }
+}
+
+#Preview("Email TextField") {
+    struct PreviewWrapper: View {
+        @State private var email = ""
+        @State private var isEmailValid = false
+        @State private var emailError = true
+        @State private var showEmailPopup = false
+
+        var body: some View {
+            AccountTextFieldView(
+                text: $email,
+                isValid: $isEmailValid,
+                showPopup: $showEmailPopup,
+                error: $emailError,
+                placeholder: "someone@example.com",
+                isSecure: false,
+                validationFunction: validateEmail,
+                popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+            )
+        }
+        
+        func validateEmail() {
+            let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+            isEmailValid = emailPredicate.evaluate(with: email)
+            emailError = email.isEmpty
+        }
+    }
+
+    return PreviewWrapper()
+        .modelContainer(for: [ColorManager.self])
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+}
+
+#Preview("Password TextField") {
+    struct PreviewWrapper: View {
+        @State private var password = ""
+        @State private var isPasswordValid = false
+        @State private var passwordError = true
+        @State private var showPasswordPopup = false
+
+        var body: some View {
+            AccountTextFieldView(
+                text: $password,
+                isValid: $isPasswordValid,
+                showPopup: $showPasswordPopup,
+                error: $passwordError,
+                placeholder: "password",
+                isSecure: true,
+                validationFunction: validatePassword,
+                popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
+            )
+        }
+        
+        func validatePassword() {
+            isPasswordValid = password.count >= 8
+            passwordError = password.isEmpty
+        }
+    }
+
+    return PreviewWrapper()
+        .modelContainer(for: [ColorManager.self])
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

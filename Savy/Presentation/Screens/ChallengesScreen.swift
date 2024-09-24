@@ -24,6 +24,7 @@ struct ChallengesScreen: View {
                     Spacer()
                 }
             }
+            .padding()
             .padding(.bottom, 112)
             .background(currentSchema.background)
         }

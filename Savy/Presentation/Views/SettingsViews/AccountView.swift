@@ -10,7 +10,6 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var showConfirmationDialog = false
     
@@ -23,9 +22,11 @@ struct AccountView: View {
             if let appUser = appUser {
                 VStack(alignment: .leading) {
                     Text("You are logged in:")
+                        .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
                     Text(appUser.email ?? "error")
                         .fontWeight(.bold)
+                        .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
                 }
                 
@@ -34,7 +35,7 @@ struct AccountView: View {
                 HStack {
                     Text("Log Out")
                         .foregroundStyle(currentSchema.font)
-                        .font(.system(size: 16))
+                        .font(.system(size: 14))
                         .fontWeight(.bold)
                         .padding(.leading, 4)
                         .onTapGesture {
@@ -93,9 +94,6 @@ struct AccountView: View {
             
         }
         .frame(height: 44)
-        .onAppear(perform: {
-            tabBarManager.show()
-        })
     }
     
     func signOutButtonTapped() {
@@ -122,7 +120,6 @@ struct AccountView: View {
     return PreviewWrapper()
         .padding()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
 }
 
 #Preview("Logged Out") {
@@ -139,5 +136,4 @@ struct AccountView: View {
     return PreviewWrapper()
         .padding()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
 }
