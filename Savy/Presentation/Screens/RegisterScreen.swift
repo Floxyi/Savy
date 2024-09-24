@@ -14,7 +14,17 @@ struct RegisterScreen: View {
     @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var email = ""
+    @State private var isEmailValid = false
+    @State private var emailError = true
+    @State private var showEmailPopup = false
+    
     @State private var password = ""
+    @State private var isPasswordValid = false
+    @State private var passwordError = true
+    @State private var showPasswordPopup = false
+    
+    @State private var authError = false
+    @State private var isLoading = false
     
     @Binding var appUser: AppUser?
     
@@ -30,37 +40,54 @@ struct RegisterScreen: View {
             
             if appUser != nil {
                 Text("You are now registered.")
-            } else {
+            }
+            
+            if appUser == nil {
                 VStack {
-                    TextField("", text: $email, prompt: Text(verbatim: "someone@example.com")
-                        .foregroundColor(currentSchema.font.opacity(0.4)))
-                    .textContentType(.emailAddress)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .keyboardType(.emailAddress)
-                    .textFieldStyle(TextFieldAccountStyle())
+                    AccountTextFieldView(
+                        text: $email,
+                        isValid: $isEmailValid,
+                        showPopup: $showEmailPopup,
+                        error: $emailError,
+                        placeholder: "someone@example.com",
+                        isSecure: false,
+                        validationFunction: validateEmail,
+                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+                    )
                     
-                    SecureField("", text: $password, prompt: Text(verbatim: "password")
-                        .foregroundColor(currentSchema.font.opacity(0.4)))
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .textFieldStyle(TextFieldAccountStyle())
-                    .padding(.bottom, 0)
+                    AccountTextFieldView(
+                        text: $password,
+                        isValid: $isPasswordValid,
+                        showPopup: $showPasswordPopup,
+                        error: $passwordError,
+                        placeholder: "password",
+                        isSecure: true,
+                        validationFunction: validatePassword,
+                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
+                    )
                     
-                    HStack {
-                        Text("Register")
-                            .foregroundStyle(currentSchema.font)
-                            .font(.system(size: 26))
-                            .fontWeight(.bold)
-                    }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 28)
-                    .background(currentSchema.bar)
-                    .cornerRadius(12)
+                    Text("This email address is already registered.")
+                        .foregroundStyle(authError ? Color.red : currentSchema.background)
+                    
+                    ActionButton(
+                        content: HStack {
+                            if isLoading {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                Text("Register")
+                                    .font(.system(size: 26))
+                                    .fontWeight(.bold)
+                                Image(systemName: "arrow.right")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 20))
+                            }
+                        },
+                        isEnabled: isEmailValid && isPasswordValid && !isLoading,
+                        action: signUpButtonTapped
+                    )
                     .padding(.top, 72)
-                    .onTapGesture {
-                        signUpButtonTapped()
-                    }
                 }
             }
             
@@ -79,19 +106,63 @@ struct RegisterScreen: View {
         })
     }
     
+    func validateEmail() {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        isEmailValid = emailPredicate.evaluate(with: email)
+        emailError = email.isEmpty
+        authError = false
+    }
+    
+    func validatePassword() {
+        isPasswordValid = password.count >= 8
+        passwordError = password.isEmpty
+    }
+    
     func signUpButtonTapped() {
+        isLoading = true
+        
         Task {
+            defer {
+                isLoading = false
+            }
+            
             do {
                 let appUser = try await AuthManager.shared.registerWithEmail(email: email, password: password)
                 self.appUser = appUser
+            } catch {
+                authError = true
             }
         }
     }
 }
 
-#Preview {
-    RegisterScreen(appUser: .constant(.init(uid: "1234", email: nil)))
-        .modelContainer(for: [Challenge.self, ColorManager.self])
+#Preview("Logged Out") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = nil
+        
+        var body: some View {
+            RegisterScreen(appUser: $dummyUser)
+        }
+    }
+    
+    return PreviewWrapper()
+        .modelContainer(for: [ColorManager.self])
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(TabBarManager())
+}
+
+#Preview("Logged In") {
+    struct PreviewWrapper: View {
+        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
+        
+        var body: some View {
+            RegisterScreen(appUser: $dummyUser)
+        }
+    }
+    
+    return PreviewWrapper()
+        .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
         .environmentObject(TabBarManager())
 }
