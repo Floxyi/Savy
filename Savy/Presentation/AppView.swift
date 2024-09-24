@@ -21,8 +21,6 @@ struct AppView: View {
     
     @State private var selectedTab: Tab = Tab.challenges
     
-    @State var appUser: AppUser?
-    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
@@ -32,7 +30,7 @@ struct AppView: View {
                 LeaderboardScreen()
                     .tag(Tab.leaderboard)
                 
-                SettingsScreen(appUser: $appUser)
+                SettingsScreen()
                     .tag(Tab.settings)
             }
             .onAppear(perform: {
@@ -46,7 +44,7 @@ struct AppView: View {
         }
         .onAppear {
             Task {
-                self.appUser = try await AuthManager.shared.getCurrentSession()
+                try await AuthManager.shared.getCurrentSession()
             }
         }
     }

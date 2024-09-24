@@ -11,7 +11,7 @@ import SwiftUI
 struct LeaderboardScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
-    @State var users: [User] = []
+    @State var users: [Profile] = []
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -20,7 +20,7 @@ struct LeaderboardScreen: View {
             HeaderView(title: "Leaderboard")
             HStack {
                 List(users) { user in
-                    Text(user.name)
+                    Text(user.username ?? "Unknown")
                 }
                 .scrollContentBackground(.hidden)
                 .overlay {
@@ -30,7 +30,7 @@ struct LeaderboardScreen: View {
                 }
                 .task {
                     do {
-                        users = try await AuthManager.shared.client.from("users").select().execute().value
+                        users = try await AuthManager.shared.client.from("profiles").select().execute().value
                     } catch {
                         dump(error)
                     }

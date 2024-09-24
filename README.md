@@ -76,15 +76,35 @@ Before you begin, ensure you have the following installed:
 
 ### Supabase Management
 
+- Link to the Production instance:
+   ```bash
+   supabase link --project-ref dttigamyidncuoomgkpo
+  ```
+
 - Start the local Supabase instance:
   ```bash
   supabase start
   ```
   **Note:** Ensure Docker is running before executing this command.
 
+- Apply newest migrations:
+  ```bash
+   supabase migration up
+   ```
+
 - Stop the local Supabase instance:
   ```bash
   supabase stop
+  ```
+
+- Pull the changes from Production:
+   ```bash
+   supabase db pull
+  ```
+
+- Push the local changes to Production:
+   ```bash
+   supabase db push
   ```
 
 ### Xcode Run Configurations

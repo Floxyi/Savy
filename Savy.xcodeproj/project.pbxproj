@@ -17,8 +17,8 @@
 		17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */; };
 		17444A202CA18D3900D3E14E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1F2CA18D3900D3E14E /* ActionButton.swift */; };
 		174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17642C9F0B6200851BC4 /* AuthManager.swift */; };
-		174B17672C9F273D00851BC4 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17662C9F273D00851BC4 /* AppUser.swift */; };
-		174B17692C9F288000851BC4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17682C9F288000851BC4 /* User.swift */; };
+		174B17672C9F273D00851BC4 /* SupabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17662C9F273D00851BC4 /* SupabaseAccount.swift */; };
+		174B17692C9F288000851BC4 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17682C9F288000851BC4 /* Profile.swift */; };
 		17530F9E2C8111F8003D768C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 17530F9D2C8111F8003D768C /* PostgREST */; };
 		17530FA32C811276003D768C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 17530FA22C811276003D768C /* Supabase */; };
 		1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */; };
@@ -65,8 +65,8 @@
 		17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPopoverView.swift; sourceTree = "<group>"; };
 		17444A1F2CA18D3900D3E14E /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		174B17642C9F0B6200851BC4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		174B17662C9F273D00851BC4 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
-		174B17682C9F288000851BC4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		174B17662C9F273D00851BC4 /* SupabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAccount.swift; sourceTree = "<group>"; };
+		174B17682C9F288000851BC4 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBarView.swift; sourceTree = "<group>"; };
 		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
 		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
@@ -230,8 +230,8 @@
 		17F40C152C74EC5200344DBF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				174B17682C9F288000851BC4 /* User.swift */,
-				174B17662C9F273D00851BC4 /* AppUser.swift */,
+				174B17682C9F288000851BC4 /* Profile.swift */,
+				174B17662C9F273D00851BC4 /* SupabaseAccount.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
 				178530A92C850FA4003426CD /* Saving.swift */,
 				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
@@ -421,13 +421,13 @@
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
-				174B17692C9F288000851BC4 /* User.swift in Sources */,
+				174B17692C9F288000851BC4 /* Profile.swift in Sources */,
 				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
-				174B17672C9F273D00851BC4 /* AppUser.swift in Sources */,
+				174B17672C9F273D00851BC4 /* SupabaseAccount.swift in Sources */,
 				176F63982C877261004437C1 /* TabBarManager.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
