@@ -14,7 +14,16 @@ struct LoginScreen: View {
     @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var email = ""
+    @State private var isEmailValid = false
+    @State private var emailError = true
+    @State private var showEmailPopup = false
+    
     @State private var password = ""
+    @State private var isPasswordValid = false
+    @State private var passwordError = true
+    @State private var showPasswordPopup = false
+    
+    @State private var authError = false
     
     @Binding var appUser: AppUser?
     
@@ -30,41 +39,41 @@ struct LoginScreen: View {
             
             if appUser != nil {
                 Text("You are now logged in.")
-            } else {
+            }
+            
+            if appUser == nil {
                 VStack {
-                    TextField("", text: $email, prompt: Text(verbatim: "someone@example.com")
-                        .foregroundColor(currentSchema.font.opacity(0.4)))
-                    .textContentType(.emailAddress)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .keyboardType(.emailAddress)
-                    .textFieldStyle(TextFieldAccountStyle())
+                    AccountTextFieldView(
+                        text: $email,
+                        isValid: $isEmailValid,
+                        showPopup: $showEmailPopup,
+                        error: $emailError,
+                        placeholder: "someone@example.com",
+                        isSecure: false,
+                        validationFunction: validateEmail,
+                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+                    )
                     
-                    SecureField("", text: $password, prompt: Text(verbatim: "password")
-                        .foregroundColor(currentSchema.font.opacity(0.4)))
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .textFieldStyle(TextFieldAccountStyle())
-                    .padding(.bottom, 0)
+                    AccountTextFieldView(
+                        text: $password,
+                        isValid: $isPasswordValid,
+                        showPopup: $showPasswordPopup,
+                        error: $passwordError,
+                        placeholder: "password",
+                        isSecure: true,
+                        validationFunction: validatePassword,
+                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
+                    )
                     
-                    HStack {
-                        Text("Log In")
-                            .foregroundStyle(currentSchema.font)
-                            .font(.system(size: 26))
-                            .fontWeight(.bold)
-                        Image(systemName: "arrow.right")
-                            .foregroundStyle(currentSchema.font)
-                            .fontWeight(.bold)
-                            .font(.system(size: 20))
-                    }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 28)
-                    .background(currentSchema.bar)
-                    .cornerRadius(12)
+                    Text("The account does not exist or the password is incorrect.")
+                        .foregroundStyle(authError ? Color.red : currentSchema.background)
+                    
+                    ActionButton(
+                        text: "Login",
+                        isEnabled: isEmailValid && isPasswordValid,
+                        action: signInButtonTapped
+                    )
                     .padding(.top, 72)
-                    .onTapGesture {
-                        signInButtonTapped()
-                    }
                 }
             }
             
@@ -83,11 +92,26 @@ struct LoginScreen: View {
         })
     }
     
+    func validateEmail() {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        isEmailValid = emailPredicate.evaluate(with: email)
+        emailError = email.isEmpty
+        authError = false
+    }
+    
+    func validatePassword() {
+        isPasswordValid = password.count >= 8
+        passwordError = password.isEmpty
+    }
+    
     func signInButtonTapped() {
         Task {
             do {
                 let appUser = try await AuthManager.shared.signInWithEmail(email: email, password: password)
                 self.appUser = appUser
+            } catch {
+                authError = true
             }
         }
     }

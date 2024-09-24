@@ -23,7 +23,7 @@ struct RegisterScreen: View {
     @State private var passwordError = true
     @State private var showPasswordPopup = false
     
-    @State private var emailUnavailable = false
+    @State private var authError = false
     
     @Binding var appUser: AppUser?
     
@@ -39,183 +39,41 @@ struct RegisterScreen: View {
             
             if appUser != nil {
                 Text("You are now registered.")
-            } else {
+            }
+            
+            if appUser == nil {
                 VStack {
-                    ZStack(alignment: .trailing) {
-                        TextField("", text: $email, prompt: Text(verbatim: "someone@example.com")
-                            .foregroundColor(currentSchema.font.opacity(0.4)))
-                        .textContentType(.emailAddress)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .keyboardType(.emailAddress)
-                        .textFieldStyle(TextFieldAccountStyle())
-                        .onChange(of: email) {
-                            validateEmail()
-                            emailUnavailable = false
-                        }
-                        
-                        HStack {
-                            if !isEmailValid {
-                                if emailError {
-                                    Image(systemName: "questionmark.circle.fill")
-                                        .foregroundStyle(currentSchema.font)
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 20))
-                                        .padding(.trailing, 34)
-                                        .gesture(
-                                            DragGesture(minimumDistance: 0)
-                                                .onChanged { _ in showEmailPopup = true }
-                                                .onEnded { _ in showEmailPopup = false }
-                                        )
-                                } else {
-                                    Image(systemName: "x.circle.fill")
-                                        .foregroundStyle(Color.red)
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 20))
-                                        .padding(.trailing, 34)
-                                        .gesture(
-                                            DragGesture(minimumDistance: 0)
-                                                .onChanged { _ in showEmailPopup = true }
-                                                .onEnded { _ in showEmailPopup = false }
-                                        )
-                                }
-                            }
-                            if isEmailValid {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(Color.green)
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 20))
-                                    .padding(.trailing, 34)
-                                    .gesture(
-                                        DragGesture(minimumDistance: 0)
-                                            .onChanged { _ in showEmailPopup = true }
-                                            .onEnded { _ in showEmailPopup = false }
-                                    )
-                            }
-                        }
-                    }
-                    .overlay(
-                        Group {
-                            if showEmailPopup {
-                                VStack {
-                                    Text(isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address.")
-                                        .foregroundColor(isEmailValid ? .green : emailError ? .gray : .red)
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .padding()
-                                        .padding(.trailing, 14)
-                                        .cornerRadius(8)
-                                        .shadow(radius: 4)
-                                        .background(
-                                            SpeechBubbleShape()
-                                                .fill(Color.white)
-                                                .shadow(radius: 4)
-                                        )
-                                }
-                                .transition(.scale)
-                                .animation(.spring(), value: showEmailPopup)
-                            }
-                        }
+                    AccountTextFieldView(
+                        text: $email,
+                        isValid: $isEmailValid,
+                        showPopup: $showEmailPopup,
+                        error: $emailError,
+                        placeholder: "someone@example.com",
+                        isSecure: false,
+                        validationFunction: validateEmail,
+                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
                     )
                     
-                    ZStack(alignment: .trailing) {
-                        SecureField("", text: $password, prompt: Text(verbatim: "password")
-                            .foregroundColor(currentSchema.font.opacity(0.4)))
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .textFieldStyle(TextFieldAccountStyle())
-                        .padding(.bottom, 0)
-                        .onChange(of: password) {
-                            validatePassword()
-                        }
-                        
-                        HStack {
-                            if !isPasswordValid {
-                                if passwordError {
-                                    Image(systemName: "questionmark.circle.fill")
-                                        .foregroundStyle(currentSchema.font)
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 20))
-                                        .padding(.trailing, 34)
-                                        .gesture(
-                                            DragGesture(minimumDistance: 0)
-                                                .onChanged { _ in showPasswordPopup = true }
-                                                .onEnded { _ in showPasswordPopup = false }
-                                        )
-                                } else {
-                                    Image(systemName: "x.circle.fill")
-                                        .foregroundStyle(Color.red)
-                                        .fontWeight(.bold)
-                                        .font(.system(size: 20))
-                                        .padding(.trailing, 34)
-                                        .gesture(
-                                            DragGesture(minimumDistance: 0)
-                                                .onChanged { _ in showPasswordPopup = true }
-                                                .onEnded { _ in showPasswordPopup = false }
-                                        )
-                                }
-                            }
-                            if isPasswordValid {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(Color.green)
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 20))
-                                    .padding(.trailing, 34)
-                                    .gesture(
-                                        DragGesture(minimumDistance: 0)
-                                            .onChanged { _ in showPasswordPopup = true }
-                                            .onEnded { _ in showPasswordPopup = false }
-                                    )
-                            }
-                        }
-                    }
-                    .overlay(
-                        Group {
-                            if showPasswordPopup {
-                                VStack {
-                                    Text(isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 chatacter password." : "This password is not 8 characters long.")
-                                        .foregroundColor(isPasswordValid ? .green : passwordError ? .gray : .red)
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .padding()
-                                        .padding(.trailing, 14)
-                                        .cornerRadius(8)
-                                        .shadow(radius: 4)
-                                        .background(
-                                            SpeechBubbleShape()
-                                                .fill(Color.white)
-                                                .shadow(radius: 4)
-                                        )
-                                }
-                                .transition(.scale)
-                                .animation(.spring(), value: showPasswordPopup)
-                            }
-                        }
+                    AccountTextFieldView(
+                        text: $password,
+                        isValid: $isPasswordValid,
+                        showPopup: $showPasswordPopup,
+                        error: $passwordError,
+                        placeholder: "password",
+                        isSecure: true,
+                        validationFunction: validatePassword,
+                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
                     )
                     
-                    Text("This email adress is already registered.")
-                        .foregroundStyle(emailUnavailable ? Color.red : currentSchema.background)
+                    Text("This email address is already registered.")
+                        .foregroundStyle(authError ? Color.red : currentSchema.background)
                     
-                    HStack {
-                        Text("Register")
-                            .foregroundStyle(isEmailValid && isPasswordValid ? currentSchema.font : currentSchema.accent1)
-                            .font(.system(size: 26))
-                            .fontWeight(.bold)
-                        Image(systemName: "arrow.right")
-                            .foregroundStyle(isEmailValid && isPasswordValid ? currentSchema.font : currentSchema.accent1)
-                            .fontWeight(.bold)
-                            .font(.system(size: 20))
-                    }
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 28)
-                    .background(currentSchema.bar)
-                    .cornerRadius(12)
+                    ActionButton(
+                        text: "Register",
+                        isEnabled: isEmailValid && isPasswordValid,
+                        action: signUpButtonTapped
+                    )
                     .padding(.top, 72)
-                    .onTapGesture {
-                        if isEmailValid && isPasswordValid {
-                            signUpButtonTapped()
-                        }
-                    }
                 }
             }
             
@@ -238,12 +96,13 @@ struct RegisterScreen: View {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
         isEmailValid = emailPredicate.evaluate(with: email)
-        emailError = isEmailValid
+        emailError = email.isEmpty
+        authError = false
     }
     
     func validatePassword() {
-        isPasswordValid = password.count >= 6
-        passwordError = isPasswordValid
+        isPasswordValid = password.count >= 8
+        passwordError = password.isEmpty
     }
     
     func signUpButtonTapped() {
@@ -252,27 +111,9 @@ struct RegisterScreen: View {
                 let appUser = try await AuthManager.shared.registerWithEmail(email: email, password: password)
                 self.appUser = appUser
             } catch {
-                emailUnavailable = true
+                authError = true
             }
         }
-    }
-}
-
-struct SpeechBubbleShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        let cornerRadius: CGFloat = 8
-        let triangleHeight: CGFloat = 20
-        let triangleWidth: CGFloat = 15
-        
-        path.addRoundedRect(in: CGRect(x: 0, y: 0, width: rect.width - triangleWidth, height: rect.height), cornerSize: CGSize(width: cornerRadius, height: cornerRadius))
-        
-        path.move(to: CGPoint(x: rect.width - triangleWidth, y: rect.height / 2 - triangleHeight / 2))
-        path.addLine(to: CGPoint(x: rect.width, y: rect.height / 2))
-        path.addLine(to: CGPoint(x: rect.width - triangleWidth, y: rect.height / 2 + triangleHeight / 2))
-        
-        return path
     }
 }
 
