@@ -52,7 +52,9 @@ struct LoginScreen: View {
                         placeholder: "someone@example.com",
                         isSecure: false,
                         validationFunction: validateEmail,
-                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address.",
+                        keyboardType: .emailAddress,
+                        contentType: .emailAddress
                     )
                     
                     AccountTextFieldView(
@@ -63,7 +65,9 @@ struct LoginScreen: View {
                         placeholder: "password",
                         isSecure: true,
                         validationFunction: validatePassword,
-                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
+                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long.",
+                        keyboardType: .default,
+                        contentType: .password
                     )
                     
                     Text("The account does not exist or the password is incorrect.")

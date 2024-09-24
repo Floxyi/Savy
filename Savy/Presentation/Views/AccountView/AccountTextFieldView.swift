@@ -20,6 +20,8 @@ struct AccountTextFieldView: View {
     let isSecure: Bool
     let validationFunction: () -> Void
     let popupText: String
+    let keyboardType: UIKeyboardType
+    let contentType: UITextContentType
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -74,10 +76,10 @@ struct AccountTextFieldView: View {
             }
         }
         .textFieldStyle(TextFieldAccountStyle())
-        .textContentType(isSecure ? .password : .emailAddress)
+        .textContentType(contentType)
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
-        .keyboardType(isSecure ? .default : .emailAddress)
+        .keyboardType(keyboardType)
         .onChange(of: text) {
             validationFunction()
         }
@@ -103,7 +105,9 @@ struct AccountTextFieldView: View {
                 placeholder: "someone@example.com",
                 isSecure: false,
                 validationFunction: validateEmail,
-                popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+                popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address.",
+                keyboardType: .emailAddress,
+                contentType: .emailAddress
             )
         }
         
@@ -136,7 +140,9 @@ struct AccountTextFieldView: View {
                 placeholder: "password",
                 isSecure: true,
                 validationFunction: validatePassword,
-                popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
+                popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long.",
+                keyboardType: .default,
+                contentType: .password
             )
         }
         

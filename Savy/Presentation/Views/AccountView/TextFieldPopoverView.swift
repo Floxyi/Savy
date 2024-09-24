@@ -77,7 +77,9 @@ struct SpeechBubbleShape: Shape {
                 placeholder: "someone@example.com",
                 isSecure: false,
                 validationFunction: validateEmail,
-                popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+                popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address.",
+                keyboardType: .emailAddress,
+                contentType: .emailAddress
             )
         }
         

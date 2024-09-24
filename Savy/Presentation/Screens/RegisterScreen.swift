@@ -57,7 +57,9 @@ struct RegisterScreen: View {
                         placeholder: "username",
                         isSecure: false,
                         validationFunction: validateuUsername,
-                        popupText: isUsernameValid ? "Valid username." : usernameError ? "Please provide a 5 character username." : "This is not 5 characters long."
+                        popupText: isUsernameValid ? "Valid username." : usernameError ? "Please provide a 5 character username." : "This is not 5 characters long.",
+                        keyboardType: .default,
+                        contentType: .username
                     )
                     
                     AccountTextFieldView(
@@ -68,7 +70,9 @@ struct RegisterScreen: View {
                         placeholder: "someone@example.com",
                         isSecure: false,
                         validationFunction: validateEmail,
-                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address."
+                        popupText: isEmailValid ? "Valid email address." : emailError ? "Please provide a valid email address." : "This is not a valid email address.",
+                        keyboardType: .emailAddress,
+                        contentType: .emailAddress
                     )
                     
                     AccountTextFieldView(
@@ -79,7 +83,9 @@ struct RegisterScreen: View {
                         placeholder: "password",
                         isSecure: true,
                         validationFunction: validatePassword,
-                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long."
+                        popupText: isPasswordValid ? "Valid password." : passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long.",
+                        keyboardType: .default,
+                        contentType: .password
                     )
                     
                     Text("This email address is already registered.")
