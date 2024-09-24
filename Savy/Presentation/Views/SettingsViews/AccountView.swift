@@ -14,18 +14,19 @@ struct AccountView: View {
     @State private var showConfirmationDialog = false
     @State private var isLoading = false
     
-    @Binding var appUser: AppUser?
+    @State private var isSignedIn = false
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         HStack {
-            if let appUser = appUser {
+            if isSignedIn {
                 VStack(alignment: .leading) {
-                    Text("You are logged in:")
+                    Text(AuthManager.shared.profile?.username ?? "Unkown")
+                        .fontWeight(.bold)
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
-                    Text(appUser.email ?? "error")
+                    Text(AuthManager.shared.supabaseAccount?.email ?? "error")
                         .fontWeight(.bold)
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
@@ -68,7 +69,7 @@ struct AccountView: View {
                 Spacer()
                 
                 HStack {
-                    NavigationLink(destination: RegisterScreen(appUser: $appUser)) {
+                    NavigationLink(destination: RegisterScreen(isSignedIn: $isSignedIn)) {
                         Text("Register")
                             .fontWeight(.bold)
                             .foregroundStyle(currentSchema.font)
@@ -86,7 +87,7 @@ struct AccountView: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: LoginScreen(appUser: $appUser)) {
+                    NavigationLink(destination: LoginScreen(isSignedIn: $isSignedIn)) {
                         Text("Login")
                             .fontWeight(.bold)
                             .foregroundStyle(currentSchema.font)
@@ -102,52 +103,26 @@ struct AccountView: View {
             
         }
         .frame(height: 44)
+        .onAppear {
+            Task {
+                isSignedIn = AuthManager.shared.isSignedIn()
+            }
+        }
     }
     
     func signOutButtonTapped() {
         isLoading = true
-        
         Task {
-            defer {
-                isLoading = false
-            }
-            
-            do {
-                try await AuthManager.shared.signOut()
-                self.appUser = nil
-            }
+            defer { isLoading = false }
+            isSignedIn = try await AuthManager.shared.signOut()
         }
     }
 }
 
-#Preview("Logged In") {
-    struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
-        
-        var body: some View {
-            SettingsTileView(image: "person.fill", text: "Account") {
-                AccountView(appUser: $dummyUser)
-            }
-        }
+#Preview {
+    SettingsTileView(image: "person.fill", text: "Account") {
+        AccountView()
     }
-    
-    return PreviewWrapper()
-        .padding()
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-}
-
-#Preview("Logged Out") {
-    struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = nil
-        
-        var body: some View {
-            SettingsTileView(image: "person.fill", text: "Account") {
-                AccountView(appUser: $dummyUser)
-            }
-        }
-    }
-    
-    return PreviewWrapper()
-        .padding()
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .padding()
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

@@ -26,7 +26,7 @@ struct LoginScreen: View {
     @State private var authError = false
     @State private var isLoading = false
     
-    @Binding var appUser: AppUser?
+    @Binding var isSignedIn: Bool
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -38,11 +38,11 @@ struct LoginScreen: View {
             })
             .padding(.bottom, 88)
             
-            if appUser != nil {
+            if AuthManager.shared.isSignedIn() {
                 Text("You are now logged in.")
             }
             
-            if appUser == nil {
+            if !AuthManager.shared.isSignedIn() {
                 VStack {
                     AccountTextFieldView(
                         text: $email,
@@ -121,15 +121,10 @@ struct LoginScreen: View {
     
     func signInButtonTapped() {
         isLoading = true
-
         Task {
-            defer {
-                isLoading = false
-            }
-            
+            defer { isLoading = false }
             do {
-                let appUser = try await AuthManager.shared.signInWithEmail(email: email, password: password)
-                self.appUser = appUser
+                isSignedIn = try await AuthManager.shared.signInWithEmail(email: email, password: password)
             } catch {
                 authError = true
             }
@@ -137,27 +132,12 @@ struct LoginScreen: View {
     }
 }
 
-#Preview("Logged Out") {
+#Preview {
     struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = nil
+        @State private var isSignedIn: Bool = false
         
         var body: some View {
-            LoginScreen(appUser: $dummyUser)
-        }
-    }
-    
-    return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
-}
-
-#Preview("Logged In") {
-    struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
-        
-        var body: some View {
-            LoginScreen(appUser: $dummyUser)
+            LoginScreen(isSignedIn: $isSignedIn)
         }
     }
     

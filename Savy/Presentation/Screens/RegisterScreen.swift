@@ -13,6 +13,11 @@ struct RegisterScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     @EnvironmentObject private var tabBarManager: TabBarManager
     
+    @State private var username = ""
+    @State private var isUsernameValid = false
+    @State private var usernameError = true
+    @State private var showUsernamePopup = false
+    
     @State private var email = ""
     @State private var isEmailValid = false
     @State private var emailError = true
@@ -26,7 +31,7 @@ struct RegisterScreen: View {
     @State private var authError = false
     @State private var isLoading = false
     
-    @Binding var appUser: AppUser?
+    @Binding var isSignedIn: Bool
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -38,12 +43,23 @@ struct RegisterScreen: View {
             })
             .padding(.bottom, 88)
             
-            if appUser != nil {
+            if AuthManager.shared.isSignedIn() {
                 Text("You are now registered.")
             }
             
-            if appUser == nil {
+            if !AuthManager.shared.isSignedIn() {
                 VStack {
+                    AccountTextFieldView(
+                        text: $username,
+                        isValid: $isUsernameValid,
+                        showPopup: $showUsernamePopup,
+                        error: $usernameError,
+                        placeholder: "username",
+                        isSecure: false,
+                        validationFunction: validateuUsername,
+                        popupText: isUsernameValid ? "Valid username." : usernameError ? "Please provide a 5 character username." : "This is not 5 characters long."
+                    )
+                    
                     AccountTextFieldView(
                         text: $email,
                         isValid: $isEmailValid,
@@ -84,7 +100,7 @@ struct RegisterScreen: View {
                                     .font(.system(size: 20))
                             }
                         },
-                        isEnabled: isEmailValid && isPasswordValid && !isLoading,
+                        isEnabled: isUsernameValid && isEmailValid && isPasswordValid && !isLoading,
                         action: signUpButtonTapped
                     )
                     .padding(.top, 72)
@@ -106,6 +122,11 @@ struct RegisterScreen: View {
         })
     }
     
+    func validateuUsername() {
+        isUsernameValid = username.count >= 5
+        usernameError = username.isEmpty
+    }
+    
     func validateEmail() {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
@@ -121,15 +142,10 @@ struct RegisterScreen: View {
     
     func signUpButtonTapped() {
         isLoading = true
-        
         Task {
-            defer {
-                isLoading = false
-            }
-            
+            defer { isLoading = false }
             do {
-                let appUser = try await AuthManager.shared.registerWithEmail(email: email, password: password)
-                self.appUser = appUser
+                isSignedIn =  try await AuthManager.shared.registerWithEmail(username: username, email: email, password: password)
             } catch {
                 authError = true
             }
@@ -137,27 +153,12 @@ struct RegisterScreen: View {
     }
 }
 
-#Preview("Logged Out") {
+#Preview {
     struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = nil
+        @State private var isSignedIn: Bool = false
         
         var body: some View {
-            RegisterScreen(appUser: $dummyUser)
-        }
-    }
-    
-    return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
-}
-
-#Preview("Logged In") {
-    struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
-        
-        var body: some View {
-            RegisterScreen(appUser: $dummyUser)
+            RegisterScreen(isSignedIn: $isSignedIn)
         }
     }
     

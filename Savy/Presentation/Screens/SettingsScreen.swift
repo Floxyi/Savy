@@ -18,8 +18,6 @@ struct SettingsScreen: View {
     @State private var toggledNotifications: Bool = false
     @State private var toggledEachNotification: Bool = false
     
-    @Binding var appUser: AppUser?
-    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
@@ -29,7 +27,7 @@ struct SettingsScreen: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     SettingsTileView(image: "person.fill", text: "Account") {
-                        AccountView(appUser: $appUser)
+                        AccountView()
                     }
                     
                     SettingsTileView(image: "paintbrush.fill", text: "Design") {
@@ -71,13 +69,10 @@ struct SettingsScreen: View {
             .padding(.bottom, 80)
             .background(currentSchema.background)
             .onAppear {
+                tabBarManager.show()
                 selectedMode = currentSchema.mode
                 toggledDarkMode = currentSchema.mode == .dark || currentSchema.mode == .coloredDark
                 toggledColorMode = currentSchema.mode == .coloredLight || currentSchema.mode == .coloredDark
-                
-                Task {
-                    self.appUser = try await AuthManager.shared.getCurrentSession()
-                }
             }
         }
     }
@@ -101,30 +96,8 @@ struct SettingsScreen: View {
     }
 }
 
-#Preview("Logged In") {
-    struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = AppUser(uid: "123", email: "preview@example.com")
-        
-        var body: some View {
-            SettingsScreen(appUser: $dummyUser)
-        }
-    }
-    
-    return PreviewWrapper()
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
-}
-
-#Preview("Logged Out") {
-    struct PreviewWrapper: View {
-        @State private var dummyUser: AppUser? = nil
-        
-        var body: some View {
-            SettingsScreen(appUser: $dummyUser)
-        }
-    }
-    
-    return PreviewWrapper()
+#Preview {
+    SettingsScreen()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
         .environmentObject(TabBarManager())
 }

@@ -5,7 +5,9 @@
 //  Created by Florian Winkler on 21.09.24.
 //
 
-struct AppUser {
-    let uid: String
+import Foundation
+
+struct SupabaseAccount {
+    let uuid: UUID
     let email: String?
 }
