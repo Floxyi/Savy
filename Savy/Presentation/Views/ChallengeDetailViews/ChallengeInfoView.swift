@@ -34,7 +34,7 @@ struct ChallengeInfoView: View {
                         .foregroundStyle(currentSchema.font)
                 }
                 
-                ProgressBar(challenge: challenge, progress: CGFloat(challenge.progressPercentage()))
+                ChallengeProgressBarView(challenge: challenge)
                 
                 HStack {
                     Spacer()
@@ -50,48 +50,6 @@ struct ChallengeInfoView: View {
             
             Spacer()
         }
-    }
-}
-
-struct ProgressBar: View {
-    let challenge: Challenge
-    let progress: CGFloat
-    
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
-    var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
-        
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: geometry.size.height / 2)
-                    .fill(currentSchema.accent1)
-                    .frame(height: geometry.size.height)
-                
-                RoundedRectangle(cornerRadius: geometry.size.height / 2)
-                    .fill(currentSchema.barIcons)
-                    .frame(width: geometry.size.width * progress, height: geometry.size.height)
-                
-                HStack {
-                    Image(systemName: challenge.icon)
-                        .foregroundColor(currentSchema.accent2)
-                    
-                    Spacer()
-                    
-                    Text("\(challenge.currentSavedAmount())€")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
-                    
-                    Spacer()
-                    
-                    Text("\(challenge.targetAmount)€")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
-                }
-                .padding(.horizontal, 10)
-            }
-        }
-        .frame(height: 30)
     }
 }
 

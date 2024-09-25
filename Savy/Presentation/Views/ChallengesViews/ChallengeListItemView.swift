@@ -114,7 +114,7 @@ struct ChallengeListItemView: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .listRowBackground(Color(.secondarySystemBackground))
-        .padding(.horizontal, 24)
+        .padding(.horizontal)
         .padding(.bottom, 16)
     }
 }
