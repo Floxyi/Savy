@@ -18,7 +18,7 @@ class Challenge {
     public var targetAmount: Int
     public var savings: [Saving] = []
     
-    init(name: String, icon: String, startDate: Date, endDate: Date, targetAmount: Int) {
+    init(name: String, icon: String, startDate: Date, endDate: Date, targetAmount: Int, strategy: Strategy) {
         self.id = UUID()
         self.name = name
         self.icon = icon
@@ -26,25 +26,33 @@ class Challenge {
         self.endDate = endDate
         self.targetAmount = targetAmount
         
-        generateSavings()
+        generateSavings(strategy: strategy)
     }
     
-    private func generateSavings() {
+    private func generateSavings(strategy: Strategy) {
         let calendar = Calendar.current
         var savings: [Saving] = []
-        var date = calendar.date(byAdding: .month, value: 1, to: startDate)!
+        var date = calendar.date(byAdding: strategy == .Monthly ? .month : .weekOfYear, value: 1, to: startDate)!
         
-        let numberOfMonths = self.numberOfMonths()
-        let amountPerMonth = (targetAmount + numberOfMonths - 1) / numberOfMonths
+        let numberOfCyles = strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()
+        let amountPerCyles = (targetAmount + numberOfCyles - 1) / numberOfCyles
         
         while date <= endDate {
-            let saving = Saving(challengeId: id, amount: amountPerMonth, date: date, done: false)
+            let saving = Saving(challengeId: id, amount: amountPerCyles, date: date, done: false)
             savings.append(saving)
             
-            if let nextMonth = calendar.date(byAdding: .month, value: 1, to: date) {
-                date = nextMonth
+            if strategy == .Monthly {
+                if let nextMonth = calendar.date(byAdding: .month, value: 1, to: date) {
+                    date = nextMonth
+                } else {
+                    break
+                }
             } else {
-                break
+                if let nextWeek = calendar.date(byAdding: .weekOfYear, value: 1, to: date) {
+                    date = nextWeek
+                } else {
+                    break
+                }
             }
         }
         
@@ -59,6 +67,11 @@ class Challenge {
     private func numberOfMonths() -> Int {
         let calendar = Calendar.current
         return calendar.dateComponents([.month], from: startDate, to: endDate).month ?? 0
+    }
+    
+    private func numberOfWeeks() -> Int {
+        let calendar = Calendar.current
+        return calendar.dateComponents([.weekOfYear], from: startDate, to: endDate).weekOfYear ?? 0
     }
     
     func currentSavedAmount() -> Int {

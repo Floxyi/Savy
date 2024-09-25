@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */; };
+		171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */; };
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
 		172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E54C82C89D98300F521C4 /* SavingItemView.swift */; };
@@ -40,6 +41,7 @@
 		17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08C2C7A488500B28A04 /* Color+HSL.swift */; };
 		17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */; };
 		17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BFBA462C7A941200E19D10 /* Color+HexString.swift */; };
+		17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */; };
 		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
@@ -58,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManagerViewModel.swift; sourceTree = "<group>"; };
+		171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerStyle.swift; sourceTree = "<group>"; };
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
 		172E54C82C89D98300F521C4 /* SavingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingItemView.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		17B5D08C2C7A488500B28A04 /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
 		17B5D08E2C7A4AA500B28A04 /* ColorSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchema.swift; sourceTree = "<group>"; };
 		17BFBA462C7A941200E19D10 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
+		17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeConfiguration.swift; sourceTree = "<group>"; };
 		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 		174173252C7F3EF400A136A3 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
+				171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */,
 				174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */,
 				8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */,
 				8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */,
@@ -239,6 +244,7 @@
 				174B17682C9F288000851BC4 /* Profile.swift */,
 				174B17662C9F273D00851BC4 /* SupabaseAccount.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
+				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
 				178530A92C850FA4003426CD /* Saving.swift */,
 				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
 			);
@@ -428,6 +434,7 @@
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
 				174B17692C9F288000851BC4 /* Profile.swift in Sources */,
+				171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */,
 				173760872CA413130062CB83 /* ChallengeAddButtonView.swift in Sources */,
 				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
@@ -443,6 +450,7 @@
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
 				8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */,
+				17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */,
 				17444A202CA18D3900D3E14E /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
