@@ -47,7 +47,7 @@ struct SettingsTileView<Content: View>: View {
             .padding(.bottom, 12)
         }
         .background(currentSchema.bar)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.bottom, 24)
     }
 }
