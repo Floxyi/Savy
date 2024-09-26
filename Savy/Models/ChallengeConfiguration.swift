@@ -17,7 +17,15 @@ class ChallengeConfiguration {
     public var cycleAmount: Int?
     public var endDate: Date
     
-    init(name: String? = nil, amount: Int? = nil, icon: String? = nil, strategy: Strategy, calculation: Calculation, cycleAmount: Int? = nil, endDate: Date = Date()) {
+    init(
+        name: String? = nil,
+        amount: Int? = nil,
+        icon: String? = nil,
+        strategy: Strategy,
+        calculation: Calculation,
+        cycleAmount: Int? = nil,
+        endDate: Date = Date()
+    ) {
         self.name = name
         self.amount = amount
         self.icon = icon
@@ -28,27 +36,24 @@ class ChallengeConfiguration {
     }
     
     func calculateEndDateByAmount() -> Date {
-        let calendar = Calendar.current
-        var date = Date()
+        let date = Date()
 
         guard let amount = amount, let cycleAmount = cycleAmount, cycleAmount > 0 else {
             return date
         }
         
         let numberOfCycles = amount / cycleAmount
-
-        switch strategy {
-        case .Weekly:
-            date = calendar.date(byAdding: .weekOfYear, value: numberOfCycles, to: date) ?? date
-        case .Monthly:
-            date = calendar.date(byAdding: .month, value: numberOfCycles, to: date) ?? date
-        }
-
-        return date
+        
+        return Calendar.current.date(
+            byAdding: strategy == .Monthly ? .month : .weekOfYear,
+            value: numberOfCycles,
+            to: date
+        ) ?? date
     }
     
     func calculateCycleAmount() -> Int? {
-        let numberOfCyles = (strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()) == 0 ? nil : (strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks())
+        let duration = strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()
+        let numberOfCyles = duration == 0 ? nil : duration
         
         guard let amount = amount, let numberOfCyles = numberOfCyles else {
             return amount
@@ -69,11 +74,18 @@ class ChallengeConfiguration {
     }
     
     func createChallenge() -> Challenge {
-        if calculation == .Date {
-            return Challenge(name: name!, icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: amount!, strategy: strategy)
-        }
-        
-        return Challenge(name: name!, icon: "macbook", startDate: Date(), endDate: calculateEndDateByAmount(), targetAmount: amount!, strategy: strategy)
+        return Challenge(
+            name: name!,
+            icon: icon ?? "square.dashed",
+            startDate: Date(),
+            endDate: calculation == .Date ? endDate : calculateEndDateByAmount(),
+            targetAmount: amount!,
+            strategy: strategy
+        )
+    }
+    
+    func isValid() -> Bool {
+        return name != "" && amount != nil && calculation == .Amount ? cycleAmount != nil : true // && icon != nil
     }
 }
 

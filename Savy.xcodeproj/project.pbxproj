@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */; };
 		171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */; };
+		171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */; };
+		171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */; };
+		171969D32CA564DF008CCBDD /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D22CA564DF008CCBDD /* CustomDatePicker.swift */; };
+		171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D42CA5657B008CCBDD /* DismissableOverlay.swift */; };
+		171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D82CA5679E008CCBDD /* StrategySelector.swift */; };
+		171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969DB2CA567FE008CCBDD /* CalculationSelector.swift */; };
+		171969DE2CA568A2008CCBDD /* IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969DD2CA568A2008CCBDD /* IconPicker.swift */; };
 		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
 		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
 		172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E54C82C89D98300F521C4 /* SavingItemView.swift */; };
@@ -51,7 +58,7 @@
 		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
 		17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */; };
 		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
-		17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */; };
+		17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */; };
 		17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A22C7770D20012FCF7 /* HeaderView.swift */; };
 		8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */; };
 		8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */; };
@@ -61,6 +68,13 @@
 /* Begin PBXFileReference section */
 		1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManagerViewModel.swift; sourceTree = "<group>"; };
 		171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerStyle.swift; sourceTree = "<group>"; };
+		171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDoneButton.swift; sourceTree = "<group>"; };
+		171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarCancelButton.swift; sourceTree = "<group>"; };
+		171969D22CA564DF008CCBDD /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		171969D42CA5657B008CCBDD /* DismissableOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableOverlay.swift; sourceTree = "<group>"; };
+		171969D82CA5679E008CCBDD /* StrategySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategySelector.swift; sourceTree = "<group>"; };
+		171969DB2CA567FE008CCBDD /* CalculationSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationSelector.swift; sourceTree = "<group>"; };
+		171969DD2CA568A2008CCBDD /* IconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPicker.swift; sourceTree = "<group>"; };
 		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
 		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
 		172E54C82C89D98300F521C4 /* SavingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingItemView.swift; sourceTree = "<group>"; };
@@ -103,7 +117,7 @@
 		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfoView.swift; sourceTree = "<group>"; };
 		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
-		17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddView.swift; sourceTree = "<group>"; };
+		17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddScreen.swift; sourceTree = "<group>"; };
 		17FF01A22C7770D20012FCF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAccountStyle.swift; sourceTree = "<group>"; };
@@ -129,6 +143,20 @@
 				1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		171969CF2CA563DF008CCBDD /* ChallengeAddViews */ = {
+			isa = PBXGroup;
+			children = (
+				171969DD2CA568A2008CCBDD /* IconPicker.swift */,
+				171969DB2CA567FE008CCBDD /* CalculationSelector.swift */,
+				171969D82CA5679E008CCBDD /* StrategySelector.swift */,
+				171969D42CA5657B008CCBDD /* DismissableOverlay.swift */,
+				171969D22CA564DF008CCBDD /* CustomDatePicker.swift */,
+				171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */,
+				171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */,
+			);
+			path = ChallengeAddViews;
 			sourceTree = "<group>";
 		};
 		174173252C7F3EF400A136A3 /* Styles */ = {
@@ -192,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				173760862CA413130062CB83 /* ChallengeAddButtonView.swift */,
-				17FF01A02C7770350012FCF7 /* ChallengeAddView.swift */,
 				17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */,
 				17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */,
 			);
@@ -259,6 +286,7 @@
 				17A38E852C87029C000F8A70 /* ChallengeDetailViews */,
 				17A38E842C87028E000F8A70 /* ChallengesViews */,
 				17A38E832C87021A000F8A70 /* SettingsViews */,
+				171969CF2CA563DF008CCBDD /* ChallengeAddViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +351,7 @@
 				17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */,
 				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
 				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
+				17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */,
 				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
 				1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */,
 				8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */,
@@ -409,17 +438,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */,
-				17FF01A12C7770350012FCF7 /* ChallengeAddView.swift in Sources */,
+				17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
+				171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */,
 				176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */,
 				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
+				171969DE2CA568A2008CCBDD /* IconPicker.swift in Sources */,
 				8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */,
 				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
 				178530AA2C850FA4003426CD /* Saving.swift in Sources */,
 				17444A1B2CA18BD200D3E14E /* AccountTextFieldView.swift in Sources */,
+				171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */,
 				17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
@@ -428,7 +460,9 @@
 				17B2466B2C7B0A930036C534 /* ColorSchemaMode.swift in Sources */,
 				17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */,
 				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
+				171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */,
 				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
+				171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */,
 				1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */,
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
@@ -446,12 +480,14 @@
 				173760892CA413BC0062CB83 /* ChallengeProgressBarView.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
+				171969D32CA564DF008CCBDD /* CustomDatePicker.swift in Sources */,
 				174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
 				8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */,
 				17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */,
 				17444A202CA18D3900D3E14E /* ActionButton.swift in Sources */,
+				171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
