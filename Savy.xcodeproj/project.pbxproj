@@ -23,7 +23,7 @@
 		173760892CA413BC0062CB83 /* ChallengeProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */; };
 		173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DB7532C847832003B30D8 /* GradientSliderView.swift */; };
 		174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */; };
-		17444A1B2CA18BD200D3E14E /* AccountTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1A2CA18BD200D3E14E /* AccountTextFieldView.swift */; };
+		17444A1B2CA18BD200D3E14E /* RegistrationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */; };
 		17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */; };
 		17444A202CA18D3900D3E14E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1F2CA18D3900D3E14E /* ActionButton.swift */; };
 		174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17642C9F0B6200851BC4 /* AuthManager.swift */; };
@@ -50,6 +50,7 @@
 		17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BFBA462C7A941200E19D10 /* Color+HexString.swift */; };
 		17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */; };
 		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
+		17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290152CA9C317007382CD /* LoginTextFieldView.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
@@ -82,7 +83,7 @@
 		173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeProgressBarView.swift; sourceTree = "<group>"; };
 		173DB7532C847832003B30D8 /* GradientSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSliderView.swift; sourceTree = "<group>"; };
 		174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
-		17444A1A2CA18BD200D3E14E /* AccountTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTextFieldView.swift; sourceTree = "<group>"; };
+		17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldView.swift; sourceTree = "<group>"; };
 		17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPopoverView.swift; sourceTree = "<group>"; };
 		17444A1F2CA18D3900D3E14E /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		174B17642C9F0B6200851BC4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		17BFBA462C7A941200E19D10 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
 		17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeConfiguration.swift; sourceTree = "<group>"; };
 		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
+		17F290152CA9C317007382CD /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,9 +175,10 @@
 		17444A1E2CA18C5800D3E14E /* AccountView */ = {
 			isa = PBXGroup;
 			children = (
+				17F290152CA9C317007382CD /* LoginTextFieldView.swift */,
 				17444A1F2CA18D3900D3E14E /* ActionButton.swift */,
 				17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */,
-				17444A1A2CA18BD200D3E14E /* AccountTextFieldView.swift */,
+				17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */,
 			);
 			path = AccountView;
 			sourceTree = "<group>";
@@ -450,7 +453,7 @@
 				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
 				178530AA2C850FA4003426CD /* Saving.swift in Sources */,
-				17444A1B2CA18BD200D3E14E /* AccountTextFieldView.swift in Sources */,
+				17444A1B2CA18BD200D3E14E /* RegistrationTextFieldView.swift in Sources */,
 				171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */,
 				17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorSchema.swift in Sources */,
@@ -467,6 +470,7 @@
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
+				17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */,
 				174B17692C9F288000851BC4 /* Profile.swift in Sources */,
 				171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */,
 				173760872CA413130062CB83 /* ChallengeAddButtonView.swift in Sources */,

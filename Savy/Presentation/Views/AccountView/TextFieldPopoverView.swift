@@ -69,7 +69,7 @@ struct SpeechBubbleShape: Shape {
         @State private var showEmailPopup = false
 
         var body: some View {
-            AccountTextFieldView(
+            RegistrationTextFieldView(
                 text: $email,
                 isValid: $isEmailValid,
                 showPopup: $showEmailPopup,

@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct AccountTextFieldView: View {
+struct RegistrationTextFieldView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     @Binding var text: String
@@ -97,7 +97,7 @@ struct AccountTextFieldView: View {
         @State private var showEmailPopup = false
 
         var body: some View {
-            AccountTextFieldView(
+            RegistrationTextFieldView(
                 text: $email,
                 isValid: $isEmailValid,
                 showPopup: $showEmailPopup,
@@ -132,7 +132,7 @@ struct AccountTextFieldView: View {
         @State private var showPasswordPopup = false
 
         var body: some View {
-            AccountTextFieldView(
+            RegistrationTextFieldView(
                 text: $password,
                 isValid: $isPasswordValid,
                 showPopup: $showPasswordPopup,

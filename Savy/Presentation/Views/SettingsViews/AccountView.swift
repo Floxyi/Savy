@@ -50,7 +50,7 @@ struct AccountView: View {
                             }
                             .confirmationDialog("Are you sure you want to log out?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
                                 Button("Log Out", role: .destructive) {
-                                    signOutButtonTapped()
+                                    signOutButtonPressed()
                                 }
                                 Button("Cancel", role: .cancel) { }
                             }
@@ -110,7 +110,7 @@ struct AccountView: View {
         }
     }
     
-    func signOutButtonTapped() {
+    func signOutButtonPressed() {
         isLoading = true
         Task {
             defer { isLoading = false }
