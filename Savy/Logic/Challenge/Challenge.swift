@@ -18,7 +18,7 @@ class Challenge {
     public var targetAmount: Int
     public var savings: [Saving] = []
     
-    init(name: String, icon: String, startDate: Date, endDate: Date, targetAmount: Int, strategy: Strategy) {
+    init(name: String, icon: String, startDate: Date, endDate: Date, targetAmount: Int, strategy: SavingStrategy) {
         self.id = UUID()
         self.name = name
         self.icon = icon
@@ -29,7 +29,7 @@ class Challenge {
         generateSavings(strategy: strategy)
     }
     
-    private func generateSavings(strategy: Strategy) {
+    private func generateSavings(strategy: SavingStrategy) {
         let calendar = Calendar.current
         var savings: [Saving] = []
         var date = calendar.date(byAdding: strategy == .Monthly ? .month : .weekOfYear, value: 1, to: startDate)!

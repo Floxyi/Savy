@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */; };
 		171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */; };
 		171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */; };
 		171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */; };
@@ -51,6 +50,9 @@
 		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
 		17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290152CA9C317007382CD /* LoginTextFieldView.swift */; };
 		17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290172CA9CDAF007382CD /* IconsPickerList.swift */; };
+		17F2901E2CA9DBF9007382CD /* TabEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901D2CA9DBF9007382CD /* TabEnum.swift */; };
+		17F290202CA9DC72007382CD /* SavingStrategyEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901F2CA9DC72007382CD /* SavingStrategyEnum.swift */; };
+		17F290222CA9DC9B007382CD /* SavingCalculationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290212CA9DC9B007382CD /* SavingCalculationEnum.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
@@ -67,7 +69,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManagerViewModel.swift; sourceTree = "<group>"; };
 		171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerStyle.swift; sourceTree = "<group>"; };
 		171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDoneButton.swift; sourceTree = "<group>"; };
 		171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarCancelButton.swift; sourceTree = "<group>"; };
@@ -110,6 +111,9 @@
 		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
 		17F290152CA9C317007382CD /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
 		17F290172CA9CDAF007382CD /* IconsPickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsPickerList.swift; sourceTree = "<group>"; };
+		17F2901D2CA9DBF9007382CD /* TabEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEnum.swift; sourceTree = "<group>"; };
+		17F2901F2CA9DC72007382CD /* SavingStrategyEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingStrategyEnum.swift; sourceTree = "<group>"; };
+		17F290212CA9DC9B007382CD /* SavingCalculationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCalculationEnum.swift; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,14 +143,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1701AA8D2C87C84600D8ACCC /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				1701AA8B2C87C80700D8ACCC /* ColorManagerViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		171969CF2CA563DF008CCBDD /* ChallengeAddViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,11 +246,10 @@
 		17B5D0882C7A466B00B28A04 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */,
-				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
-				17B2466A2C7B0A930036C534 /* ColorSchemeMode.swift */,
-				176F63972C877261004437C1 /* TabBarManager.swift */,
-				174B17642C9F0B6200851BC4 /* AuthManager.swift */,
+				17F2901C2CA9DBED007382CD /* App */,
+				17F2901B2CA9DBAE007382CD /* Challenge */,
+				17F2901A2CA9DB8D007382CD /* ColorScheme */,
+				17F290192CA9DB62007382CD /* Authentication */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -268,17 +263,46 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		17F40C152C74EC5200344DBF /* Models */ = {
+		17F290192CA9DB62007382CD /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				174B17642C9F0B6200851BC4 /* AuthManager.swift */,
 				174B17682C9F288000851BC4 /* Profile.swift */,
 				174B17662C9F273D00851BC4 /* SupabaseAccount.swift */,
-				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
-				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
-				178530A92C850FA4003426CD /* Saving.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		17F2901A2CA9DB8D007382CD /* ColorScheme */ = {
+			isa = PBXGroup;
+			children = (
+				17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */,
+				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
+				17B2466A2C7B0A930036C534 /* ColorSchemeMode.swift */,
 				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
 			);
-			path = Models;
+			path = ColorScheme;
+			sourceTree = "<group>";
+		};
+		17F2901B2CA9DBAE007382CD /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
+				17F290212CA9DC9B007382CD /* SavingCalculationEnum.swift */,
+				17F2901F2CA9DC72007382CD /* SavingStrategyEnum.swift */,
+				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
+				178530A92C850FA4003426CD /* Saving.swift */,
+				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
+			);
+			path = Challenge;
+			sourceTree = "<group>";
+		};
+		17F2901C2CA9DBED007382CD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				17F2901D2CA9DBF9007382CD /* TabEnum.swift */,
+				176F63972C877261004437C1 /* TabBarManager.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		17F40C162C74F52800344DBF /* Views */ = {
@@ -314,15 +338,14 @@
 		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
 			isa = PBXGroup;
 			children = (
+				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
+				17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */,
 				17A876D02C7F389700A47AB6 /* Info.plist */,
 				17A876CE2C7F388D00A47AB6 /* Fonts */,
 				176EAE202C8290DA007CBABE /* Environment */,
 				17B5D08B2C7A487D00B28A04 /* Extensions */,
 				17B5D0882C7A466B00B28A04 /* Logic */,
 				17FF019A2C776E090012FCF7 /* Presentation */,
-				17F40C152C74EC5200344DBF /* Models */,
-				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
-				17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */,
 				17FB1CF82C74E38A00E1C6F4 /* Preview Content */,
 			);
 			path = Savy;
@@ -343,7 +366,6 @@
 				174173252C7F3EF400A136A3 /* Styles */,
 				17FF019B2C776E150012FCF7 /* Screens */,
 				17F40C162C74F52800344DBF /* Views */,
-				1701AA8D2C87C84600D8ACCC /* ViewModels */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -441,12 +463,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */,
+				17F290202CA9DC72007382CD /* SavingStrategyEnum.swift in Sources */,
 				17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */,
+				17F290222CA9DC9B007382CD /* SavingCalculationEnum.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
 				171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */,
 				176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */,
 				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
+				17F2901E2CA9DBF9007382CD /* TabEnum.swift in Sources */,
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
 				171969DE2CA568A2008CCBDD /* IconPicker.swift in Sources */,
 				8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */,
@@ -467,7 +492,6 @@
 				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
 				171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */,
 				17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */,
-				1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */,
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
 				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,

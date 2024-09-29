@@ -14,8 +14,8 @@ struct ChallengeAddView: View {
     @State private var icon: String?
     @State private var name: String = ""
     @State private var amount: Int?
-    @State private var selectedStrategy: Strategy = .Weekly
-    @State private var selectedCalculation: Calculation = .Date
+    @State private var selectedStrategy: SavingStrategy = .Weekly
+    @State private var selectedCalculation: SavingCalculation = .Date
     @State private var cycleAmount: Int?
     @State private var endDate: Date = Date()
     

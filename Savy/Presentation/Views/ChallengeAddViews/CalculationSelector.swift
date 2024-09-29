@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalculationSelector: View {
-    @Binding var selectedCalculation: Calculation
+    @Binding var selectedCalculation: SavingCalculation
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
@@ -19,7 +19,7 @@ struct CalculationSelector: View {
             Button(action: {
                 selectedCalculation = .Date
             }) {
-                Text(Calculation.Date.rawValue)
+                Text(SavingCalculation.Date.rawValue)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(selectedCalculation == .Date ? currentSchema.font : currentSchema.font.opacity(0.4))
                     .frame(width: 146)
@@ -32,7 +32,7 @@ struct CalculationSelector: View {
             Button(action: {
                 selectedCalculation = .Amount
             }) {
-                Text(Calculation.Amount.rawValue)
+                Text(SavingCalculation.Amount.rawValue)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(selectedCalculation == .Amount ? currentSchema.font : currentSchema.font.opacity(0.4))
                     .frame(width: 146)

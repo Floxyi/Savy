@@ -12,8 +12,8 @@ class ChallengeConfiguration {
     public var name: String?
     public var amount: Int?
     public var icon: String?
-    public var strategy: Strategy
-    public var calculation: Calculation
+    public var strategy: SavingStrategy
+    public var calculation: SavingCalculation
     public var cycleAmount: Int?
     public var endDate: Date
     
@@ -21,8 +21,8 @@ class ChallengeConfiguration {
         name: String? = nil,
         amount: Int? = nil,
         icon: String? = nil,
-        strategy: Strategy,
-        calculation: Calculation,
+        strategy: SavingStrategy,
+        calculation: SavingCalculation,
         cycleAmount: Int? = nil,
         endDate: Date = Date()
     ) {
@@ -87,14 +87,4 @@ class ChallengeConfiguration {
     func isValid() -> Bool {
         return icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
-}
-
-enum Strategy: String, CaseIterable {
-    case Weekly
-    case Monthly
-}
-
-enum Calculation: String {
-    case Date = "Until Date"
-    case Amount = "With Amount"
 }

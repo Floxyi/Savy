@@ -8,12 +8,6 @@
 import SwiftData
 import SwiftUI
 
-enum Tab: String, Hashable, CaseIterable {
-    case challenges = "calendar"
-    case leaderboard = "trophy"
-    case settings = "gear"
-}
-
 struct AppView: View {
     @Query private var challenges: [Challenge]
     
@@ -62,3 +56,4 @@ struct AppView: View {
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
         .environmentObject(TabBarManager())
 }
+e
