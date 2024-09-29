@@ -37,7 +37,7 @@ struct ChallengeListItemView: View {
                 HStack {
                     VStack {
                         Text("\(challenge.getNextSaving().amount.formatted())€")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: 14, weight: .bold))
                             .foregroundStyle(currentSchema.background)
                         Text(challenge.getNextSaving().date.formatted(.dateTime.month(.twoDigits).day()))
                             .font(.system(size: 12))
@@ -55,7 +55,7 @@ struct ChallengeListItemView: View {
                     .padding(.horizontal, -8)
                     VStack {
                         Text("\(challenge.getNextNextSaving().amount.formatted())€")
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: 14, weight: .bold))
                             .foregroundStyle(currentSchema.font)
                         Text(challenge.getNextNextSaving().date.formatted(.dateTime.month(.twoDigits).day()))
                             .font(.system(size: 12))
@@ -78,7 +78,7 @@ struct ChallengeListItemView: View {
                     .padding(.horizontal, -8)
                     VStack {
                         Text("\(challenge.remainingSavings())x")
-                            .font(.system(size: 16))
+                            .font(.system(size: 14))
                             .foregroundStyle(currentSchema.font)
                         Text("to go")
                             .font(.system(size: 14))
@@ -121,7 +121,7 @@ struct ChallengeListItemView: View {
 
 #Preview {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500)
+    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500, strategy: .Monthly)
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)

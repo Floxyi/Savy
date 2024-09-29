@@ -49,7 +49,7 @@ struct RegisterScreen: View {
             
             if !AuthManager.shared.isSignedIn() {
                 VStack {
-                    AccountTextFieldView(
+                    RegistrationTextFieldView(
                         text: $username,
                         isValid: $isUsernameValid,
                         showPopup: $showUsernamePopup,
@@ -62,7 +62,7 @@ struct RegisterScreen: View {
                         contentType: .username
                     )
                     
-                    AccountTextFieldView(
+                    RegistrationTextFieldView(
                         text: $email,
                         isValid: $isEmailValid,
                         showPopup: $showEmailPopup,
@@ -75,7 +75,7 @@ struct RegisterScreen: View {
                         contentType: .emailAddress
                     )
                     
-                    AccountTextFieldView(
+                    RegistrationTextFieldView(
                         text: $password,
                         isValid: $isPasswordValid,
                         showPopup: $showPasswordPopup,
@@ -107,7 +107,7 @@ struct RegisterScreen: View {
                             }
                         },
                         isEnabled: isUsernameValid && isEmailValid && isPasswordValid && !isLoading,
-                        action: signUpButtonTapped
+                        action: signUpButtonPressed
                     )
                     .padding(.top, 72)
                 }
@@ -135,7 +135,7 @@ struct RegisterScreen: View {
     
     func validateEmail() {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         isEmailValid = emailPredicate.evaluate(with: email)
         emailError = email.isEmpty
         authError = false
@@ -146,7 +146,7 @@ struct RegisterScreen: View {
         passwordError = password.isEmpty
     }
     
-    func signUpButtonTapped() {
+    func signUpButtonPressed() {
         isLoading = true
         Task {
             defer { isLoading = false }
