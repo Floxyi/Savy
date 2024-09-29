@@ -13,10 +13,10 @@ class ColorManager {
     public var hue: Double
     public var currentSchemaData: Data
     
-    public var currentSchema: ColorSchema {
+    public var currentSchema: ColorScheme {
         get {
             do {
-                return try JSONDecoder().decode(ColorSchema.self, from: currentSchemaData)
+                return try JSONDecoder().decode(ColorScheme.self, from: currentSchemaData)
             } catch {
                 return ColorSchemes.lightMode()
             }
@@ -25,22 +25,22 @@ class ColorManager {
             do {
                 currentSchemaData = try JSONEncoder().encode(newValue)
             } catch {
-                print("Failed to encode ColorSchema: \(error)")
+                print("Failed to encode ColorScheme: \(error)")
             }
         }
     }
     
-    public init(hue: Double, currentSchema: ColorSchema) {
+    public init(hue: Double, currentSchema: ColorScheme) {
         self.hue = hue
         do {
             self.currentSchemaData = try JSONEncoder().encode(currentSchema)
         } catch {
-            print("Failed to encode initial ColorSchema: \(error)")
+            print("Failed to encode initial ColorScheme: \(error)")
             self.currentSchemaData = Data()
         }
     }
     
-    func updateSchema(schema: ColorSchema) {
+    func updateSchema(schema: ColorScheme) {
         self.currentSchema = schema
     }
 }

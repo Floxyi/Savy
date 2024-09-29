@@ -1,5 +1,5 @@
 //
-//  Icons.swift
+//  IconPickerList.swift
 //  Savy
 //
 //  Created by Florian Winkler on 29.09.24.

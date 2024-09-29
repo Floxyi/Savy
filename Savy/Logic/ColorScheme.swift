@@ -1,5 +1,5 @@
 //
-//  ColorSchema.swift
+//  ColorScheme.swift
 //  Savy
 //
 //  Created by Florian Winkler on 24.08.24.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ColorSchema: Codable, Equatable {
-    let mode: ColorSchemaMode
+struct ColorScheme: Codable, Equatable {
+    let mode: ColorSchemeMode
     let background: Color
     let bar: Color
     let barIcons: Color
@@ -20,7 +20,7 @@ struct ColorSchema: Codable, Equatable {
         case mode, background, bar, barIcons, accent1, accent2, font
     }
     
-    init(mode: ColorSchemaMode, background: Color, bar: Color, barIcons: Color, accent1: Color, accent2: Color, font: Color) {
+    init(mode: ColorSchemeMode, background: Color, bar: Color, barIcons: Color, accent1: Color, accent2: Color, font: Color) {
         self.mode = mode
         self.background = background
         self.bar = bar
@@ -32,7 +32,7 @@ struct ColorSchema: Codable, Equatable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        mode = try container.decode(ColorSchemaMode.self, forKey: .mode)
+        mode = try container.decode(ColorSchemeMode.self, forKey: .mode)
         background = Color(hexString: try container.decode(String.self, forKey: .background)) ?? .clear
         bar = Color(hexString: try container.decode(String.self, forKey: .bar)) ?? .clear
         barIcons = Color(hexString: try container.decode(String.self, forKey: .barIcons)) ?? .clear

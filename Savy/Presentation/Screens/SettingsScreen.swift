@@ -12,7 +12,7 @@ struct SettingsScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     @EnvironmentObject private var tabBarManager: TabBarManager
     
-    @State private var selectedMode: ColorSchemaMode = .light
+    @State private var selectedMode: ColorSchemeMode = .light
     @State private var toggledDarkMode: Bool = false
     @State private var toggledColorMode: Bool = false
     @State private var toggledNotifications: Bool = false
