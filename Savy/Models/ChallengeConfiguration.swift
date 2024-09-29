@@ -85,7 +85,7 @@ class ChallengeConfiguration {
     }
     
     func isValid() -> Bool {
-        return name != "" && amount != nil && calculation == .Amount ? cycleAmount != nil : true // && icon != nil
+        return icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
 }
 
