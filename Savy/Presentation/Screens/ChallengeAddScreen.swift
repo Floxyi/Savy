@@ -20,6 +20,7 @@ struct ChallengeAddView: View {
     @State private var endDate: Date = Date()
     
     @State private var isDatePickerVisible = false
+    @State private var isIconPickerVisible = false
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
@@ -39,7 +40,7 @@ struct ChallengeAddView: View {
         NavigationStack {
             ZStack {
                 VStack {
-                    IconPicker(selectedIcon: $icon)
+                    IconPicker(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
                     
                     TextField("", text: $name, prompt: Text(verbatim: "Name")
                         .font(.system(size: 16, weight: .bold))
@@ -91,7 +92,9 @@ struct ChallengeAddView: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
                         
-                        Text("\(challengeConfiguration.calculateCycleAmount() ?? 0) €")
+                        Text("\(selectedStrategy) Amount: \(challengeConfiguration.calculateCycleAmount() ?? 0) €")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(currentSchema.font)
                             .padding()
                     }
                     
@@ -113,7 +116,9 @@ struct ChallengeAddView: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
                         
-                        Text("\(challengeConfiguration.calculateEndDateByAmount().formatted(.dateTime.day().month().year()))")
+                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount().formatted(.dateTime.day().month().year()))")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(currentSchema.font)
                             .padding()
                     }
                     
@@ -136,13 +141,13 @@ struct ChallengeAddView: View {
                     }
                 }
                 
-                if isDatePickerVisible {
-                    DismissableOverlay(bindings: [$isDatePickerVisible])
+                if isDatePickerVisible || isIconPickerVisible {
+                    DismissableOverlay(bindings: [$isDatePickerVisible, $isIconPickerVisible])
                 }
                 
                 if isDatePickerVisible {
                     VStack {
-                        CustomDatePicker(date: $endDate)
+                        CustomDatePickerOverlay(date: $endDate)
                         
                         HStack {
                             Text("\(selectedStrategy) Amount: \(challengeConfiguration.calculateCycleAmount() ?? 0) €")
@@ -154,6 +159,10 @@ struct ChallengeAddView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding(.top, 22)
                     }
+                }
+                
+                if isIconPickerVisible {
+                    IconPickerOverlay(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
                 }
             }
         }

@@ -11,7 +11,6 @@
 		171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */; };
 		171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */; };
 		171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */; };
-		171969D32CA564DF008CCBDD /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D22CA564DF008CCBDD /* CustomDatePicker.swift */; };
 		171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D42CA5657B008CCBDD /* DismissableOverlay.swift */; };
 		171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D82CA5679E008CCBDD /* StrategySelector.swift */; };
 		171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969DB2CA567FE008CCBDD /* CalculationSelector.swift */; };
@@ -51,6 +50,7 @@
 		17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */; };
 		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
 		17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290152CA9C317007382CD /* LoginTextFieldView.swift */; };
+		17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290172CA9CDAF007382CD /* IconsPickerList.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
@@ -71,7 +71,6 @@
 		171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerStyle.swift; sourceTree = "<group>"; };
 		171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDoneButton.swift; sourceTree = "<group>"; };
 		171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarCancelButton.swift; sourceTree = "<group>"; };
-		171969D22CA564DF008CCBDD /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		171969D42CA5657B008CCBDD /* DismissableOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableOverlay.swift; sourceTree = "<group>"; };
 		171969D82CA5679E008CCBDD /* StrategySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategySelector.swift; sourceTree = "<group>"; };
 		171969DB2CA567FE008CCBDD /* CalculationSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationSelector.swift; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeConfiguration.swift; sourceTree = "<group>"; };
 		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
 		17F290152CA9C317007382CD /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
+		17F290172CA9CDAF007382CD /* IconsPickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsPickerList.swift; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,11 +150,11 @@
 		171969CF2CA563DF008CCBDD /* ChallengeAddViews */ = {
 			isa = PBXGroup;
 			children = (
+				17F290172CA9CDAF007382CD /* IconsPickerList.swift */,
 				171969DD2CA568A2008CCBDD /* IconPicker.swift */,
 				171969DB2CA567FE008CCBDD /* CalculationSelector.swift */,
 				171969D82CA5679E008CCBDD /* StrategySelector.swift */,
 				171969D42CA5657B008CCBDD /* DismissableOverlay.swift */,
-				171969D22CA564DF008CCBDD /* CustomDatePicker.swift */,
 				171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */,
 				171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */,
 			);
@@ -466,6 +466,7 @@
 				171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */,
 				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
 				171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */,
+				17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */,
 				1701AA8C2C87C80700D8ACCC /* ColorManagerViewModel.swift in Sources */,
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
@@ -484,7 +485,6 @@
 				173760892CA413BC0062CB83 /* ChallengeProgressBarView.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
-				171969D32CA564DF008CCBDD /* CustomDatePicker.swift in Sources */,
 				174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
