@@ -10,23 +10,24 @@ import SwiftUI
 struct ToolbarDoneButton: View {
     @Binding var showPopover: Bool
     
-    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
-    var challengeConfiguration: ChallengeConfiguration
+    let isValid: () -> Bool
+    let onDoneAction: () -> Void
     
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         Button(action: {
-            if challengeConfiguration.isValid() {
+            if isValid() {
                 showPopover = false
-                modelContext.insert(challengeConfiguration.createChallenge())
+                onDoneAction()
             }
         }) {
             Text("Done")
-                .foregroundColor(!challengeConfiguration.isValid() ? currentSchema.barIcons.opacity(0.4) : currentSchema.barIcons)
+                .foregroundColor(!isValid() ? currentSchema.barIcons.opacity(0.4) : currentSchema.barIcons)
+                .font(.system(size: 16, weight: !isValid() ? .regular : .bold))
         }
-        .disabled(!challengeConfiguration.isValid())
+        .disabled(!isValid())
     }
 }

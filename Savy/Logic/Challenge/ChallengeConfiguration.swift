@@ -85,16 +85,6 @@ class ChallengeConfiguration {
     }
     
     func isValid() -> Bool {
-        return name != "" && amount != nil && calculation == .Amount ? cycleAmount != nil : true // && icon != nil
+        return icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
-}
-
-enum SavingStrategy: String, CaseIterable {
-    case Weekly
-    case Monthly
-}
-
-enum SavingCalculation: String {
-    case Date = "Until Date"
-    case Amount = "With Amount"
 }

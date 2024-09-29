@@ -22,6 +22,7 @@ struct ChallengeAddView: View {
     @State private var isDatePickerVisible = false
     @State private var isIconPickerVisible = false
     
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
@@ -133,7 +134,8 @@ struct ChallengeAddView: View {
                     ToolbarItem(placement: .confirmationAction) {
                         ToolbarDoneButton(
                             showPopover: $showPopover,
-                            challengeConfiguration: challengeConfiguration
+                            isValid: { challengeConfiguration.isValid() },
+                            onDoneAction: { modelContext.insert(challengeConfiguration.createChallenge()) }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {
