@@ -56,4 +56,3 @@ struct AppView: View {
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
         .environmentObject(TabBarManager())
 }
-e
