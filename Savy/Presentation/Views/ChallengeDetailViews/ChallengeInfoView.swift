@@ -47,8 +47,6 @@ struct ChallengeInfoView: View {
             .padding(16)
             .background(currentSchema.bar)
             .clipShape(RoundedRectangle(cornerRadius: 18))
-            
-            Spacer()
         }
     }
 }

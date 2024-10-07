@@ -29,33 +29,46 @@ struct ChallengeDetailScreen: View {
                 
                 ChallengeInfoView(challenge: challenge)
                     .padding(.top, -18)
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 48)
                 
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(sortedChallenges.prefix(15), id: \.id) { saving in
-                        SavingItemView(saving: saving)
-                    }
-                    if sortedChallenges.count - 15 > 1 {
-                        VStack {
-                            Text("\(sortedChallenges.count - 15)")
-                                .font(.system(size: 24, weight: .bold))
-                                .foregroundStyle(currentSchema.font)
-                            Text("more")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundStyle(currentSchema.font)
+                VStack {
+                    if challenge.remainingAmount() > 0 {
+                        LazyVGrid(columns: columns, spacing: 16) {
+                            ForEach(sortedChallenges.prefix(15), id: \.id) { saving in
+                                SavingItemView(saving: saving)
+                            }
+                            if sortedChallenges.count - 15 > 1 {
+                                VStack {
+                                    Text("\(sortedChallenges.count - 15)")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .foregroundStyle(currentSchema.font)
+                                    Text("more")
+                                        .font(.system(size: 18, weight: .bold))
+                                        .foregroundStyle(currentSchema.font)
+                                }
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
+                                        .foregroundColor(currentSchema.font)
+                                )
+                            } else if sortedChallenges.count - 15 == 1 {
+                                SavingItemView(saving: sortedChallenges.last!)
+                            }
                         }
-                        .frame(width: 80, height: 80)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
-                                .foregroundColor(currentSchema.font)
-                        )
-                    } else if sortedChallenges.count - 15 == 1 {
-                        SavingItemView(saving: sortedChallenges.last!)
+                    } else {
+                        VStack {
+                            Image(systemName: "flag.pattern.checkered.2.crossed")
+                                .font(.system(size: 100, weight: .bold))
+                                .foregroundStyle(currentSchema.font)
+                            Text("Congratulations! \nYou've reached your goal!")
+                                .font(.system(size: 24))
+                                .foregroundStyle(currentSchema.font)
+                                .multilineTextAlignment(.center)
+                        }
                     }
                 }
-                .padding(.top, -500)
-                
+                Spacer()
             }
             .background(currentSchema.background)
         }
