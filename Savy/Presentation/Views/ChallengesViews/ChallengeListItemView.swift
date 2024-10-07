@@ -9,113 +9,192 @@ import SwiftData
 import SwiftUI
 
 struct ChallengeListItemView: View {
-    var challenge: Challenge
-    
+    let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
-        
         NavigationLink(destination: ChallengeDetailScreen(challenge: challenge)) {
-            VStack {
-                HStack {
-                    Image(systemName: challenge.icon)
-                        .fontWeight(.bold)
-                        .foregroundStyle(currentSchema.accent2)
-                    Text(challenge.name)
-                        .fontWeight(.bold)
-                        .foregroundStyle(currentSchema.accent2)
-                    Spacer()
-                    Text(challenge.endDate.formatted(.dateTime.month(.wide).day()))
-                        .foregroundStyle(currentSchema.accent2)
-                        .font(.system(size: 13))
-                    Image(systemName: "calendar")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
-                }
-                .padding(.bottom, 12)
-                HStack {
-                    VStack {
-                        Text("\(challenge.getNextSaving().amount.formatted())€")
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundStyle(currentSchema.background)
-                        Text(challenge.getNextSaving().date.formatted(.dateTime.month(.twoDigits).day()))
-                            .font(.system(size: 12))
-                            .foregroundStyle(currentSchema.background)
-                    }
-                    .frame(width: 42, height: 42)
-                    .padding(4)
-                    .background(currentSchema.font)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    VStack {
-                        Divider()
-                            .frame(width: 16, height: 2)
-                            .background(currentSchema.font)
-                    }
-                    .padding(.horizontal, -8)
-                    VStack {
-                        Text("\(challenge.getNextNextSaving().amount.formatted())€")
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundStyle(currentSchema.font)
-                        Text(challenge.getNextNextSaving().date.formatted(.dateTime.month(.twoDigits).day()))
-                            .font(.system(size: 12))
-                            .foregroundStyle(currentSchema.font)
-                    }
-                    .frame(width: 42, height: 42)
-                    .padding(4)
-                    .background(.clear)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(style: StrokeStyle(lineWidth: 2))
-                            .foregroundColor(currentSchema.font)
-                    )
-                    VStack {
-                        Divider()
-                            .frame(width: 16, height: 2)
-                            .background(currentSchema.font)
-                    }
-                    .padding(.horizontal, -8)
-                    VStack {
-                        Text("\(challenge.remainingSavings())x")
-                            .font(.system(size: 14))
-                            .foregroundStyle(currentSchema.font)
-                        Text("to go")
-                            .font(.system(size: 14))
-                            .foregroundStyle(currentSchema.font)
-                    }
-                    .frame(width: 42, height: 42)
-                    .padding(4)
-                    .background(.clear)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                            .foregroundColor(currentSchema.font)
-                    )
-                    Spacer()
-                    HStack {
-                        Text("\(challenge.currentSavedAmount())€")
-                            .padding(.trailing, -4)
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundStyle(currentSchema.font)
-                        Text("/ \(challenge.targetAmount)€")
-                            .padding(.bottom, -2)
-                            .font(.system(size: 10, weight: .bold))
-                            .foregroundStyle(currentSchema.accent2)
-                    }
-                    .padding(8)
-                    .background(currentSchema.accent1)
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                }
+            VStack(spacing: 12) {
+                HeadlineView(challenge: challenge)
+                ProgressView(challenge: challenge)
             }
             .padding(16)
-            .background(currentSchema.bar)
+            .background(colorManagerVM.colorManager.currentSchema.bar)
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .listRowBackground(Color(.secondarySystemBackground))
         .padding(.horizontal)
         .padding(.bottom, 16)
+    }
+}
+
+private struct HeadlineView: View {
+    let challenge: Challenge
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack {
+            IconAndNameView(challenge: challenge)
+            Spacer()
+            DateView(date: challenge.endDate)
+        }
+    }
+}
+
+private struct IconAndNameView: View {
+    let challenge: Challenge
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack {
+            Image(systemName: challenge.icon)
+                .fontWeight(.bold)
+            Text(challenge.name)
+                .fontWeight(.bold)
+        }
+        .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+    }
+}
+
+private struct DateView: View {
+    let date: Date
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack {
+            Text(date.formatted(.dateTime.month(.wide).day()))
+            Image(systemName: "calendar")
+        }
+        .font(.system(size: 13, weight: .bold))
+        .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+    }
+}
+
+private struct ProgressView: View {
+    let challenge: Challenge
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack {
+            if challenge.remainingSavings() != 0 {
+                SavingsProgressView(challenge: challenge)
+            } else {
+                FinishedView()
+            }
+            Spacer()
+            AmountView(challenge: challenge)
+        }
+    }
+}
+
+private struct SavingsProgressView: View {
+    let challenge: Challenge
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack(spacing: -8) {
+            NextSavingView(saving: challenge.getNextSaving(), isNext: true)
+            if challenge.remainingSavings() >= 2 {
+                Divider()
+                    .frame(width: 16, height: 2)
+                    .background(colorManagerVM.colorManager.currentSchema.font)
+                    .padding(.horizontal, 8)
+                NextSavingView(saving: challenge.getNextNextSaving(), isNext: false)
+            }
+            Divider()
+                .frame(width: 16, height: 2)
+                .background(colorManagerVM.colorManager.currentSchema.font)
+                .padding(.horizontal, 8)
+            RemainingView(remainingSavings: challenge.remainingSavings())
+        }
+    }
+}
+
+private struct NextSavingView: View {
+    let saving: Saving
+    let isNext: Bool
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        VStack {
+            Text("\(saving.amount.formatted())€")
+                .font(.system(size: 14, weight: .bold))
+            Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
+                .font(.system(size: 12))
+        }
+        .frame(width: 42, height: 42)
+        .padding(4)
+        .background(isNext ? colorManagerVM.colorManager.currentSchema.font : .clear)
+        .foregroundStyle(isNext ? colorManagerVM.colorManager.currentSchema.background : colorManagerVM.colorManager.currentSchema.font)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(style: StrokeStyle(lineWidth: 2))
+                .foregroundColor(colorManagerVM.colorManager.currentSchema.font)
+                .opacity(isNext ? 0 : 1)
+        )
+    }
+}
+
+private struct RemainingView: View {
+    let remainingSavings: Int
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        VStack {
+            if remainingSavings > 2 {
+                Text("\(remainingSavings - 2)x")
+                Text("to go")
+            } else {
+                Image(systemName: "flag.2.crossed")
+                Text("done")
+            }
+        }
+        .font(.system(size: 14))
+        .frame(width: 42, height: 42)
+        .padding(4)
+        .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
+                .foregroundColor(colorManagerVM.colorManager.currentSchema.font)
+        )
+    }
+}
+
+private struct FinishedView: View {
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "flag.pattern.checkered.2.crossed")
+            Text("Finished!")
+            Image(systemName: "flag.pattern.checkered.2.crossed")
+        }
+        .font(.system(size: 18))
+        .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+    }
+}
+
+private struct AmountView: View {
+    let challenge: Challenge
+    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    
+    var body: some View {
+        HStack(alignment: .bottom, spacing: -4) {
+            Text("\(challenge.currentSavedAmount())€")
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+                .padding(.trailing, 7)
+            Text("/ \(challenge.targetAmount)€")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+                .offset(y: -3)
+        }
+        .padding(8)
+        .background(colorManagerVM.colorManager.currentSchema.accent1)
+        .clipShape(RoundedRectangle(cornerRadius: 25))
     }
 }
 

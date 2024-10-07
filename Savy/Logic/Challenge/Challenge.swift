@@ -91,10 +91,11 @@ class Challenge {
     }
     
     func getNextSaving() -> Saving {
-        return savings[0]
+        return savings.sorted { $0.date < $1.date }.first { !$0.done } ?? savings.first!
     }
-    
+
     func getNextNextSaving() -> Saving {
-        return savings[1]
+        let sortedNotDoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
+        return sortedNotDoneSavings.count > 1 ? sortedNotDoneSavings[1] : savings.first!
     }
 }
