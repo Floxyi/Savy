@@ -20,8 +20,8 @@ struct ToolbarDoneButton: View {
         
         Button(action: {
             if isValid() {
-                showPopover = false
                 onDoneAction()
+                showPopover = false
             }
         }) {
             Text("Done")

@@ -31,47 +31,63 @@ class Challenge {
     
     private func generateSavings(strategy: SavingStrategy) {
         let calendar = Calendar.current
-        var savings: [Saving] = []
         var date = calendar.date(byAdding: strategy == .Monthly ? .month : .weekOfYear, value: 1, to: startDate)!
         
         let numberOfCyles = strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()
         let amountPerCyles = (targetAmount + numberOfCyles - 1) / numberOfCyles
         
-        while date <= endDate {
-            let saving = Saving(challengeId: id, amount: amountPerCyles, date: date, done: false)
-            savings.append(saving)
-            
-            if strategy == .Monthly {
-                if let nextMonth = calendar.date(byAdding: .month, value: 1, to: date) {
-                    date = nextMonth
-                } else {
-                    break
-                }
-            } else {
-                if let nextWeek = calendar.date(byAdding: .weekOfYear, value: 1, to: date) {
-                    date = nextWeek
-                } else {
-                    break
-                }
-            }
+        while startOfDay(for: date) <= startOfDay(for: endDate) {
+            savings.append(Saving(challengeId: id, amount: amountPerCyles, date: date, done: false))
+            let nextDate = nextDate(from: date, strategy: strategy, calendar: calendar)
+            date = nextDate!
         }
         
-        if let lastSaving = savings.last {
-            let totalSaved = savings.reduce(0) { $0 + $1.amount }
-            lastSaving.amount += targetAmount - totalSaved
-        }
-        
-        self.savings = savings
+        let lastSaving = savings.last!
+        let totalSaved = savings.reduce(0) { $0 + $1.amount }
+        lastSaving.amount += targetAmount - totalSaved
+    }
+    
+    private func startOfDay(for date: Date) -> Date {
+        let calendar = Calendar.current
+        return calendar.startOfDay(for: date)
+    }
+    
+    private func nextDate(from date: Date, strategy: SavingStrategy, calendar: Calendar) -> Date? {
+        return calendar.date(byAdding: strategy == .Weekly ? .weekOfYear : .month, value: 1, to: date)
     }
     
     private func numberOfMonths() -> Int {
         let calendar = Calendar.current
-        return calendar.dateComponents([.month], from: startDate, to: endDate).month ?? 0
+        
+        let startComponents = calendar.dateComponents([.year, .month], from: startDate)
+        let startYear = startComponents.year ?? 0
+        let startMonth = startComponents.month ?? 0
+        
+        let endComponents = calendar.dateComponents([.year, .month], from: endDate)
+        let endYear = endComponents.year ?? 0
+        let endMonth = endComponents.month ?? 0
+        
+        let yearDifference = (endYear - startYear) * 12
+        let monthDifference = endMonth - startMonth
+        
+        return yearDifference + monthDifference
     }
     
     private func numberOfWeeks() -> Int {
         let calendar = Calendar.current
-        return calendar.dateComponents([.weekOfYear], from: startDate, to: endDate).weekOfYear ?? 0
+        
+        let startComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: startDate)
+        let startYearForWeek = startComponents.yearForWeekOfYear ?? 0
+        let startWeek = startComponents.weekOfYear ?? 0
+        
+        let endComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: endDate)
+        let endYearForWeek = endComponents.yearForWeekOfYear ?? 0
+        let endWeek = endComponents.weekOfYear ?? 0
+        
+        let yearDifference = (endYearForWeek - startYearForWeek) * 52
+        let weekDifference = endWeek - startWeek
+        
+        return yearDifference + weekDifference
     }
     
     func currentSavedAmount() -> Int {
@@ -93,7 +109,7 @@ class Challenge {
     func getNextSaving() -> Saving {
         return savings.sorted { $0.date < $1.date }.first { !$0.done } ?? savings.first!
     }
-
+    
     func getNextNextSaving() -> Saving {
         let sortedNotDoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
         return sortedNotDoneSavings.count > 1 ? sortedNotDoneSavings[1] : savings.first!

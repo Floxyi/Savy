@@ -17,7 +17,7 @@ struct ChallengeAddView: View {
     @State private var selectedStrategy: SavingStrategy = .Weekly
     @State private var selectedCalculation: SavingCalculation = .Date
     @State private var cycleAmount: Int?
-    @State private var endDate: Date = Date()
+    @State private var endDate: Date = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date()) ?? Date()
     
     @State private var isDatePickerVisible = false
     @State private var isIconPickerVisible = false
@@ -68,7 +68,7 @@ struct ChallengeAddView: View {
                         
                         Spacer()
                         
-                        StrategySelector(selectedStrategy: $selectedStrategy)
+                        StrategySelector(selectedStrategy: $selectedStrategy, onChangeAction: { updateEndDate() })
                     }
                     .frame(height: 38)
                     .background(currentSchema.bar)
@@ -149,7 +149,14 @@ struct ChallengeAddView: View {
                 
                 if isDatePickerVisible {
                     VStack {
-                        CustomDatePickerOverlay(date: $endDate)
+                        CustomDatePickerOverlay(
+                            date: $endDate,
+                            startDate: Calendar.current.date(
+                                byAdding: selectedStrategy == .Weekly ? .weekOfYear : .month,
+                                value: 1,
+                                to: Date()
+                            ) ?? Date()
+                        )
                         
                         HStack {
                             Text("\(selectedStrategy) Amount: \(challengeConfiguration.calculateCycleAmount() ?? 0) €")
@@ -168,6 +175,16 @@ struct ChallengeAddView: View {
                 }
             }
         }
+    }
+    
+    private func updateEndDate() {
+        let newEndDate = Calendar.current.date(
+            byAdding: selectedStrategy == .Weekly ? .weekOfYear : .month,
+            value: 1,
+            to: Date()
+        ) ?? Date()
+        
+        endDate = newEndDate > endDate ? newEndDate : endDate
     }
 }
 
