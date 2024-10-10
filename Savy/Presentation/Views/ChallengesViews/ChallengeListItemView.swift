@@ -93,19 +93,31 @@ private struct SavingsProgressView: View {
     
     var body: some View {
         HStack(spacing: -8) {
-            NextSavingView(saving: challenge.getNextSaving(), isNext: true)
+            NextSavingView(saving: challenge.getNextSaving(at: 1), isNext: true)
+            
             if challenge.remainingSavings() >= 2 {
                 Divider()
                     .frame(width: 16, height: 2)
                     .background(colorManagerVM.colorManager.currentSchema.font)
                     .padding(.horizontal, 8)
-                NextSavingView(saving: challenge.getNextNextSaving(), isNext: false)
+                NextSavingView(saving: challenge.getNextSaving(at: 2), isNext: false)
             }
-            Divider()
-                .frame(width: 16, height: 2)
-                .background(colorManagerVM.colorManager.currentSchema.font)
-                .padding(.horizontal, 8)
-            RemainingView(remainingSavings: challenge.remainingSavings())
+            
+            if challenge.remainingSavings() == 3 {
+                Divider()
+                    .frame(width: 16, height: 2)
+                    .background(colorManagerVM.colorManager.currentSchema.font)
+                    .padding(.horizontal, 8)
+                NextSavingView(saving: challenge.getNextSaving(at: 3), isNext: false)
+            }
+            
+            if challenge.remainingSavings() != 3 {
+                Divider()
+                    .frame(width: 16, height: 2)
+                    .background(colorManagerVM.colorManager.currentSchema.font)
+                    .padding(.horizontal, 8)
+                RemainingView(remainingSavings: challenge.remainingSavings())
+            }
         }
     }
 }

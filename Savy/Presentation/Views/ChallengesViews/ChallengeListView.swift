@@ -21,7 +21,7 @@ struct ChallengesListView: View {
                 ForEach(sortedChallenges()) { challenge in
                     ChallengeListItemView(challenge: challenge)
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteItem)
                 ChallengeAddButtonView(showPopover: $showPopover)
             }
         }
@@ -33,17 +33,22 @@ struct ChallengesListView: View {
     private func sortedChallenges() -> [Challenge] {
         let calendar = Calendar.current
         return challenges.sorted { challenge1, challenge2 in
-            let nextSaving1 = challenge1.getNextSaving()
-            let nextSaving2 = challenge2.getNextSaving()
+            let nextSaving1 = challenge1.getNextSaving(at: 1)
+            let nextSaving2 = challenge2.getNextSaving(at: 1)
             
-            let dateComponents1 = (
-                day: calendar.component(.day, from: nextSaving1.date),
-                month: calendar.component(.month, from: nextSaving1.date)
+            let dateComponents1 = DateComponents(
+                year: calendar.component(.year, from: nextSaving1.date),
+                month: calendar.component(.month, from: nextSaving1.date),
+                day: calendar.component(.day, from: nextSaving1.date)
             )
-            let dateComponents2 = (
-                day: calendar.component(.day, from: nextSaving2.date),
-                month: calendar.component(.month, from: nextSaving2.date)
+            let dateComponents2 = DateComponents(
+                year: calendar.component(.year, from: nextSaving2.date),
+                month: calendar.component(.month, from: nextSaving2.date),
+                day: calendar.component(.day, from: nextSaving2.date)
             )
+            
+            let date1 = calendar.date(from: dateComponents1) ?? Date()
+            let date2 = calendar.date(from: dateComponents2) ?? Date()
             
             let remainingSavings1 = challenge1.remainingSavings()
             let remainingSavings2 = challenge2.remainingSavings()
@@ -51,16 +56,17 @@ struct ChallengesListView: View {
             if remainingSavings1 == 0 && remainingSavings2 == 0 {
                 return challenge1.endDate < challenge2.endDate
             }
+            
             if remainingSavings1 == 0 { return false }
             if remainingSavings2 == 0 { return true }
             
-            return dateComponents1 == dateComponents2
-                ? nextSaving1.amount < nextSaving2.amount
-                : dateComponents1 < dateComponents2
+            return date1 == date2
+            ? nextSaving1.amount < nextSaving2.amount
+            : date1 < date2
         }
     }
     
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteItem(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
                 modelContext.delete(challenges[index])
@@ -77,10 +83,11 @@ struct ChallengesListView: View {
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
+    let startDate = Calendar.current.date(byAdding: .month, value: 2, to: Date())!
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
     container.mainContext.insert(Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500, strategy: .Monthly))
     container.mainContext.insert(Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly))
-    container.mainContext.insert(Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 280, strategy: .Monthly))
+    container.mainContext.insert(Challenge(name: "AirPods", icon: "airpods.gen3", startDate: startDate, endDate: endDate, targetAmount: 280, strategy: .Monthly))
     
     return ChallengesListView()
         .padding(.top, 80)
