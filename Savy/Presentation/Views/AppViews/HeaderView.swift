@@ -11,6 +11,7 @@ import SwiftUI
 struct HeaderView: View {
     var title: String
     var dismiss: (() -> Void)? = nil
+    var actionView: AnyView? = nil
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
@@ -34,9 +35,18 @@ struct HeaderView: View {
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(currentSchema.font)
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.leading, 16)
                     .padding(.bottom, 4)
                     Spacer()
+                }
+            }
+            
+            if let actionView = actionView {
+                HStack {
+                    Spacer()
+                    actionView
+                        .padding(.trailing, 20)
+                        .padding(.bottom, 4)
                 }
             }
         }
@@ -49,6 +59,12 @@ struct HeaderView: View {
         HeaderView(title: "Challenge")
         Spacer()
         HeaderView(title: "Challenge", dismiss: {})
+        Spacer()
+        HeaderView(title: "Challenge", dismiss: {}, actionView: AnyView(
+            Image(systemName: "slider.horizontal.3")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(.gray)
+        ))
         Spacer()
     }
     .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))

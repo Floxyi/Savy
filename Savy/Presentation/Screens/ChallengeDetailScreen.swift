@@ -12,6 +12,7 @@ struct ChallengeDetailScreen: View {
     let challenge: Challenge
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     @EnvironmentObject private var tabBarManager: TabBarManager
     
@@ -22,10 +23,31 @@ struct ChallengeDetailScreen: View {
         
         NavigationView {
             VStack() {
-                HeaderView(title: challenge.name, dismiss: {
-                    dismiss()
-                    tabBarManager.show()
-                })
+                HeaderView(
+                    title: challenge.name,
+                    dismiss: {
+                        dismiss()
+                        tabBarManager.show()
+                    },
+                    actionView: AnyView(
+                        Menu {
+                            Button(action: {
+                                editChallenge()
+                            }) {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            Button(role: .destructive, action: {
+                                deleteChallenge()
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        } label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(currentSchema.font)
+                        }
+                    )
+                )
                 
                 ChallengeInfoView(challenge: challenge)
                     .padding(.top, -18)
@@ -56,7 +78,9 @@ struct ChallengeDetailScreen: View {
                                 SavingItemView(saving: sortedChallenges.last!)
                             }
                         }
-                    } else {
+                    }
+                    
+                    if challenge.remainingAmount() == 0 {
                         VStack {
                             Image(systemName: "flag.pattern.checkered.2.crossed")
                                 .font(.system(size: 100, weight: .bold))
@@ -65,6 +89,12 @@ struct ChallengeDetailScreen: View {
                                 .font(.system(size: 24))
                                 .foregroundStyle(currentSchema.font)
                                 .multilineTextAlignment(.center)
+                                .padding(.vertical, 20)
+                            Button(role: .destructive, action: {
+                                deleteChallenge()
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
                     }
                 }
@@ -80,11 +110,32 @@ struct ChallengeDetailScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
     }
+    
+    private func editChallenge() {
+    }
+    
+    private func deleteChallenge() {
+        dismiss()
+        tabBarManager.show()
+        
+        for saving in challenge.savings {
+            modelContext.delete(saving)
+        }
+        
+        modelContext.delete(challenge)
+        
+        do {
+            try modelContext.save()
+            print("Challenge and related savings deleted successfully.")
+        } catch {
+            print("Failed to save context after deletion: \(error.localizedDescription)")
+        }
+    }
 }
 
 #Preview {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 500, strategy: .Monthly)
+    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 0, strategy: .Monthly)
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)
