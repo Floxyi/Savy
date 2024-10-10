@@ -308,12 +308,12 @@
 		17F40C162C74F52800344DBF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				17444A1E2CA18C5800D3E14E /* AccountView */,
 				17A38E822C87020A000F8A70 /* AppViews */,
-				17A38E852C87029C000F8A70 /* ChallengeDetailViews */,
 				17A38E842C87028E000F8A70 /* ChallengesViews */,
-				17A38E832C87021A000F8A70 /* SettingsViews */,
 				171969CF2CA563DF008CCBDD /* ChallengeAddViews */,
+				17A38E852C87029C000F8A70 /* ChallengeDetailViews */,
+				17444A1E2CA18C5800D3E14E /* AccountView */,
+				17A38E832C87021A000F8A70 /* SettingsViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
