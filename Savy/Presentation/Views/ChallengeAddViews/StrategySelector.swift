@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StrategySelector: View {
     @Binding var selectedStrategy: SavingStrategy
+    let onChangeAction: () -> Void
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
@@ -19,6 +20,7 @@ struct StrategySelector: View {
             ForEach(SavingStrategy.allCases, id: \.self) { strategy in
                 Button(action: {
                     selectedStrategy = strategy
+                    onChangeAction()
                 }) {
                     Text(strategy.rawValue)
                 }

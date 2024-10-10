@@ -40,13 +40,14 @@ struct CustomDatePickerStyle: DatePickerStyle {
 
 struct CustomDatePickerOverlay: View {
     @Binding var date: Date
+    var startDate: Date
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
-        DatePicker("", selection: $date, in: Date()..., displayedComponents: .date)
+        DatePicker("", selection: $date, in: startDate..., displayedComponents: .date)
             .datePickerStyle(.graphical)
             .accentColor(currentSchema.font)
             .labelsHidden()

@@ -76,7 +76,7 @@ class ChallengeConfiguration {
     func createChallenge() -> Challenge {
         return Challenge(
             name: name!,
-            icon: icon ?? "square.dashed",
+            icon: icon!,
             startDate: Date(),
             endDate: calculation == .Date ? endDate : calculateEndDateByAmount(),
             targetAmount: amount!,
