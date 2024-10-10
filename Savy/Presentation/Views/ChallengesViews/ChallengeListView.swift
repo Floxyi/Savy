@@ -18,7 +18,7 @@ struct ChallengesListView: View {
     var body: some View {
         VStack(alignment: .center) {
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(challenges) { challenge in
+                ForEach(sortedChallenges()) { challenge in
                     ChallengeListItemView(challenge: challenge)
                 }
                 .onDelete(perform: deleteItems)
@@ -27,6 +27,36 @@ struct ChallengesListView: View {
         }
         .popover(isPresented: $showPopover) {
             ChallengeAddView(showPopover: $showPopover)
+        }
+    }
+    
+    private func sortedChallenges() -> [Challenge] {
+        let calendar = Calendar.current
+        return challenges.sorted { challenge1, challenge2 in
+            let nextSaving1 = challenge1.getNextSaving()
+            let nextSaving2 = challenge2.getNextSaving()
+            
+            let dateComponents1 = (
+                day: calendar.component(.day, from: nextSaving1.date),
+                month: calendar.component(.month, from: nextSaving1.date)
+            )
+            let dateComponents2 = (
+                day: calendar.component(.day, from: nextSaving2.date),
+                month: calendar.component(.month, from: nextSaving2.date)
+            )
+            
+            let remainingSavings1 = challenge1.remainingSavings()
+            let remainingSavings2 = challenge2.remainingSavings()
+            
+            if remainingSavings1 == 0 && remainingSavings2 == 0 {
+                return challenge1.endDate < challenge2.endDate
+            }
+            if remainingSavings1 == 0 { return false }
+            if remainingSavings2 == 0 { return true }
+            
+            return dateComponents1 == dateComponents2
+                ? nextSaving1.amount < nextSaving2.amount
+                : dateComponents1 < dateComponents2
         }
     }
     
