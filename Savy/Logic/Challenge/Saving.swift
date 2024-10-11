@@ -16,8 +16,9 @@ final class Saving {
     private(set) var date: Date
     private(set) var done: Bool
     
-    init(amount: Int, date: Date) {
+    init(challengeId: UUID, amount: Int, date: Date) {
         self.id = UUID()
+        self.challengeId = challengeId
         self.amount = amount
         self.date = date
         self.done = false
@@ -26,6 +27,10 @@ final class Saving {
     func toggleDone() {
         done.toggle()
         moneySavedStatsEntry()
+    }
+    
+    func setAmount(amount: Int) {
+        self.amount = amount
     }
     
     func moneySavedStatsEntry() {

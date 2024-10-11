@@ -38,7 +38,7 @@ class Challenge {
         let amountPerCyles = (targetAmount + numberOfCyles - 1) / numberOfCyles
         
         while startOfDay(for: date) <= startOfDay(for: endDate) {
-            savings.append(Saving(amount: amountPerCyles, date: date))
+            savings.append(Saving(challengeId: id, amount: amountPerCyles, date: date))
             let nextDate = nextDate(from: date, strategy: strategy, calendar: calendar)
             date = nextDate!
         }
