@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HeaderView: View {
     var title: String
+    var size: CGFloat = 44
     var dismiss: (() -> Void)? = nil
     var actionView: AnyView? = nil
     
@@ -22,7 +23,7 @@ struct HeaderView: View {
             HStack {
                 Text(title)
                     .fontWeight(.bold)
-                    .font(.custom("Shrikhand-Regular", size: 44))
+                    .font(.custom("Shrikhand-Regular", size: size))
                     .foregroundStyle(currentSchema.font)
             }
             

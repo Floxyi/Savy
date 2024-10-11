@@ -17,34 +17,38 @@ struct ChallengeDetailsListScreen: View {
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         let columns = Array(repeating: GridItem(.flexible()), count: 4)
+        let sortedSavings = challenge.savings.sorted(by: { $0.date < $1.date })
         
         NavigationStack {
             VStack {
-                Text("Savings")
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(currentSchema.font)
+                ChallengeDetailsButtonView(title: "Hide", icon: "chevron.down", showPopover: $showPopover)
+                    .padding(.top, -36)
+                    .padding(.bottom, 4)
+                
+                HeaderView(title: "Savings Overview", size: 38)
+                    .padding(.bottom, -1)
                 
                 HStack {
-                    Text("From: ")
+                    Text("Start:")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font)
                     Text(challenge.startDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
                         .foregroundColor(currentSchema.font)
                     Spacer()
-                    Text("Until: ")
+                    Text("End:")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font)
                     Text(challenge.endDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
                         .foregroundColor(currentSchema.font)
                 }
-                .padding(.horizontal, 26)
+                .padding(.horizontal, 20)
                 .padding(.top, 1)
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(challenge.savings, id: \.id) { saving in
+                        ForEach(sortedSavings, id: \.id) { saving in
                             SavingItemView(saving: saving)
                         }
                     }
@@ -59,15 +63,6 @@ struct ChallengeDetailsListScreen: View {
             }
             .padding()
             .background(currentSchema.background)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    ToolbarDoneButton(
-                        showPopover: $showPopover,
-                        isValid: { return true },
-                        onDoneAction: { }
-                    )
-                }
-            }
         }
     }
 }

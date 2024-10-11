@@ -42,11 +42,7 @@ struct SavingItemView: View {
         .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
             Button("Bestätigen", role: .destructive) {
                 withAnimation {
-                    if !saving.done {
-                        saving.markAsDone()
-                    } else {
-                        saving.markAsUnDone()
-                    }
+                    saving.toggleDone()
                 }
             }
             Button("Abbrechen", role: .cancel) { }
@@ -55,7 +51,7 @@ struct SavingItemView: View {
 }
 
 #Preview {
-    let saving: Saving = Saving(challengeId: UUID(), amount: 30, date: Date(), done: false)
+    let saving: Saving = Saving(amount: 30, date: Date())
     
     let container = try! ModelContainer(for: Saving.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(saving)

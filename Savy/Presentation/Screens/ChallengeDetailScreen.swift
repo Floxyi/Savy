@@ -27,6 +27,7 @@ struct ChallengeDetailScreen: View {
             VStack() {
                 HeaderView(
                     title: challenge.name,
+                    size: 32,
                     dismiss: {
                         dismiss()
                         tabBarManager.show()
@@ -50,6 +51,7 @@ struct ChallengeDetailScreen: View {
                         }
                     )
                 )
+                .padding(.bottom, 44)
                 
                 ChallengeInfoView(challenge: challenge)
                     .padding(.top, -18)
@@ -66,25 +68,29 @@ struct ChallengeDetailScreen: View {
                                     VStack {
                                         Text("\(sortedSavings.count - 15)")
                                             .font(.system(size: 24, weight: .bold))
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentSchema.barIcons)
                                         Text("more")
                                             .font(.system(size: 18, weight: .bold))
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentSchema.barIcons)
                                     }
                                     .frame(width: 80, height: 80)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
                                             .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
-                                            .foregroundColor(currentSchema.font)
+                                            .foregroundColor(currentSchema.barIcons)
                                     )
                                 } else if sortedSavings.count - 15 == 1 {
                                     SavingItemView(saving: sortedSavings.last!)
                                 }
                             }
-                            ChallengeDetailsButtonView(showPopover: $showPopover)
-                                .popover(isPresented: $showPopover) {
-                                    ChallengeDetailsListScreen(challenge: challenge, showPopover: $showPopover)
-                                }
+                            ChallengeDetailsButtonView(
+                                title: "View all",
+                                icon: "chevron.up",
+                                showPopover: $showPopover
+                            )
+                            .popover(isPresented: $showPopover) {
+                                ChallengeDetailsListScreen(challenge: challenge, showPopover: $showPopover)
+                            }
                         }
                     }
                     
@@ -123,21 +129,14 @@ struct ChallengeDetailScreen: View {
     }
     
     private func deleteChallenge() {
-        dismiss()
-        tabBarManager.show()
-        
+        modelContext.delete(challenge)
         for saving in challenge.savings {
             modelContext.delete(saving)
         }
+        try? modelContext.save()
         
-        modelContext.delete(challenge)
-        
-        do {
-            try modelContext.save()
-            print("Challenge and related savings deleted successfully.")
-        } catch {
-            print("Failed to save context after deletion: \(error.localizedDescription)")
-        }
+        dismiss()
+        tabBarManager.show()
     }
 }
 

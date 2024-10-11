@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct ChallengeDetailsButtonView: View {
+    var title: String
+    var icon: String
     @Binding var showPopover: Bool
         
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
@@ -17,11 +19,11 @@ struct ChallengeDetailsButtonView: View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         HStack {
-            Image(systemName: "chevron.up")
-                .font(.system(size: 24, weight: .bold))
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(currentSchema.font)
-            Text("Show all")
-                .font(.system(size: 18, weight: .bold))
+            Text(title)
+                .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(currentSchema.font)
                 .padding(.trailing, 2)
         }
@@ -31,7 +33,7 @@ struct ChallengeDetailsButtonView: View {
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .padding(.top, 40)
         .onTapGesture {
-            showPopover = true
+            showPopover.toggle()
         }
     }
 }
@@ -39,6 +41,6 @@ struct ChallengeDetailsButtonView: View {
 #Preview {
     @Previewable @State var showPopover: Bool = true
     
-    return ChallengeDetailsButtonView(showPopover: $showPopover)
+    return ChallengeDetailsButtonView(title: "View all", icon: "chevron.up", showPopover: $showPopover)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
