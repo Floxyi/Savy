@@ -16,6 +16,7 @@ final class Saving {
     var date: Date
     var done: Bool
     
+    
     init(challengeId: UUID, amount: Int, date: Date, done: Bool) {
         self.id = UUID()
         self.challengeId = challengeId
@@ -26,5 +27,16 @@ final class Saving {
     
     func markAsDone() {
         done = true
+        moneySavedStatsEntry()
+    }
+    
+    func moneySavedStatsEntry() {
+        let saving = SavingStats(id: id, amount: amount, expectedDate: date)
+        let entry = StatsEntry(type: .money_saved, date: Date(),savingStats: saving)
+        StatsTracker.shared.addStatsEntry(entry: entry)
+    }
+    
+    func challengeCompletedStatsEntry() {
+    
     }
 }

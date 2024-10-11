@@ -135,7 +135,7 @@ struct ChallengeAddView: View {
                         ToolbarDoneButton(
                             showPopover: $showPopover,
                             isValid: { challengeConfiguration.isValid() },
-                            onDoneAction: { modelContext.insert(challengeConfiguration.createChallenge()) }
+                            onDoneAction: { ChallengeManager.shared.addChallengeToChallenges(challengeConfiguration: challengeConfiguration) }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {

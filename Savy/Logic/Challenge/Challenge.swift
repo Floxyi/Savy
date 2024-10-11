@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import CoreData
 
 @Model
 class Challenge {
@@ -110,4 +111,5 @@ class Challenge {
         let undoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
         return undoneSavings.count >= n ? undoneSavings[n - 1]: savings.first!
     }
+    
 }
