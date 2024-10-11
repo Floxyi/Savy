@@ -53,7 +53,16 @@ struct ChallengeInfoView: View {
 
 #Preview {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 1500,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)
