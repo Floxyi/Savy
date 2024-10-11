@@ -16,7 +16,6 @@ struct ChallengeDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @EnvironmentObject private var tabBarManager: TabBarManager
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -30,7 +29,7 @@ struct ChallengeDetailScreen: View {
                     size: 32,
                     dismiss: {
                         dismiss()
-                        tabBarManager.show()
+                        TabBarManager().show()
                     },
                     actionView: AnyView(
                         Menu {
@@ -117,7 +116,7 @@ struct ChallengeDetailScreen: View {
             .background(currentSchema.background)
         }
         .onAppear(perform: {
-            tabBarManager.hide()
+            TabBarManager().hide()
         })
         .padding()
         .background(currentSchema.background)
@@ -136,7 +135,7 @@ struct ChallengeDetailScreen: View {
         try? modelContext.save()
         
         dismiss()
-        tabBarManager.show()
+        TabBarManager().show()
     }
 }
 
@@ -159,7 +158,6 @@ struct ChallengeDetailScreen: View {
     return ChallengeDetailScreen(challenge: challenge)
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }
 
 #Preview("Finished") {
@@ -181,5 +179,4 @@ struct ChallengeDetailScreen: View {
     return ChallengeDetailScreen(challenge: challenge)
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }

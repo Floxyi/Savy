@@ -7,14 +7,21 @@
 
 import SwiftUI
 
-class TabBarManager: ObservableObject {
-    @Published var isOn: Bool = true
+class TabBarManager {
+    static var shared = TabBarManager()
+    
+    private(set) var selectedTab: Tab = Tab.challenges
+    private(set) var isShown: Bool = true
     
     func hide() {
-        isOn = false
+        isShown = false
     }
     
     func show() {
-        isOn = true
+        isShown = true
+    }
+    
+    func switchTab(tab: Tab) {
+        selectedTab = tab
     }
 }

@@ -10,7 +10,6 @@ import SwiftUI
 
 struct SettingsScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var selectedMode: ColorSchemeMode = .light
     @State private var toggledDarkMode: Bool = false
@@ -69,7 +68,7 @@ struct SettingsScreen: View {
             .padding(.bottom, 80)
             .background(currentSchema.background)
             .onAppear {
-                tabBarManager.show()
+                TabBarManager().show()
                 selectedMode = currentSchema.mode
                 toggledDarkMode = currentSchema.mode == .dark || currentSchema.mode == .coloredDark
                 toggledColorMode = currentSchema.mode == .coloredLight || currentSchema.mode == .coloredDark
@@ -99,5 +98,4 @@ struct SettingsScreen: View {
 #Preview {
     SettingsScreen()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
 }

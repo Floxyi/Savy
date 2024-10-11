@@ -25,7 +25,6 @@ struct SavyApp: App {
     }()
     
     @StateObject private var colorManagerVM: ColorManagerViewModel
-    @StateObject private var tabBarManager = TabBarManager()
     
     init() {
         let context = sharedModelContainer.mainContext
@@ -36,7 +35,6 @@ struct SavyApp: App {
         WindowGroup {
             AppView()
                 .environmentObject(colorManagerVM)
-                .environmentObject(tabBarManager)
         }
         .modelContainer(sharedModelContainer)
     }

@@ -11,9 +11,7 @@ import SwiftUI
 struct AppView: View {
     @Query private var challenges: [Challenge]
     
-    @EnvironmentObject private var tabBarManager: TabBarManager
-    
-    @State private var selectedTab: Tab = Tab.challenges
+    @State private var selectedTab: Tab = TabBarManager().selectedTab
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -31,7 +29,7 @@ struct AppView: View {
                 UITabBar.appearance().isHidden = true
             })
             
-            if tabBarManager.isOn {
+            if TabBarManager().isShown {
                 BottomTabBarView(currentTab: $selectedTab)
                     .padding(.bottom)
             }
@@ -71,7 +69,6 @@ struct AppView: View {
     return AppView()
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }
 
 #Preview("Empty") {
@@ -80,5 +77,4 @@ struct AppView: View {
     return AppView()
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }
