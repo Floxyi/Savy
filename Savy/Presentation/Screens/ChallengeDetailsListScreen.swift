@@ -46,7 +46,6 @@ struct ChallengeDetailsListScreen: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(challenge.savings, id: \.id) { saving in
                             SavingItemView(saving: saving)
-                                .opacity(saving.done ? 0.3 : 1)
                         }
                     }
                 }
