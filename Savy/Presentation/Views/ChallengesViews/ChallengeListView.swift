@@ -85,9 +85,35 @@ struct ChallengesListView: View {
     
     let startDate = Calendar.current.date(byAdding: .month, value: 2, to: Date())!
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    container.mainContext.insert(Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500, strategy: .Monthly))
-    container.mainContext.insert(Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly))
-    container.mainContext.insert(Challenge(name: "AirPods", icon: "airpods.gen3", startDate: startDate, endDate: endDate, targetAmount: 280, strategy: .Monthly))
+    container.mainContext.insert(Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 1500,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    ))
+    container.mainContext.insert(Challenge(
+        name: "HomePod",
+        icon: "homepod",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 300,
+        strategy: .Monthly,
+        calculation: .Date
+    ))
+    container.mainContext.insert(Challenge(
+        name: "AirPods",
+        icon: "airpods.gen3",
+        startDate: startDate,
+        endDate: endDate,
+        targetAmount: 280,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 10
+    ))
     
     return ChallengesListView()
         .padding(.top, 80)

@@ -142,7 +142,16 @@ struct ChallengeDetailScreen: View {
 
 #Preview("Running") {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 200, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 200,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)
@@ -155,7 +164,16 @@ struct ChallengeDetailScreen: View {
 
 #Preview("Finished") {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 0, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 200,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)

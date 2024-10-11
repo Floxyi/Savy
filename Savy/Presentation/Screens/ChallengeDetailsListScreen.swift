@@ -71,7 +71,16 @@ struct ChallengeDetailsListScreen: View {
     @Previewable @State var showPopover: Bool = true
     
     let endDate = Calendar.current.date(byAdding: .month, value: 48, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 200, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 200,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     return Spacer()
         .popover(isPresented: $showPopover) {
