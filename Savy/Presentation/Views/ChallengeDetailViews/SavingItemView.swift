@@ -35,13 +35,18 @@ struct SavingItemView: View {
         .frame(width: 80, height: 80)
         .background(currentSchema.bar)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+        .opacity(saving.done ? 0.3 : 1)
         .onTapGesture {
             showConfirmationDialog = true
         }
-        .confirmationDialog("Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+        .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
             Button("Bestätigen", role: .destructive) {
                 withAnimation {
-                    saving.markAsDone()
+                    if !saving.done {
+                        saving.markAsDone()
+                    } else {
+                        saving.markAsUnDone()
+                    }
                 }
             }
             Button("Abbrechen", role: .cancel) { }

@@ -27,4 +27,8 @@ final class Saving {
     func markAsDone() {
         done = true
     }
+    
+    func markAsUnDone() {
+        done = false
+    }
 }
