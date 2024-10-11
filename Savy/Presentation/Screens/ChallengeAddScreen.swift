@@ -141,7 +141,11 @@ struct ChallengeAddView: View {
                             showPopover: $showPopover,
                             title: "Done",
                             isValid: { challengeConfiguration.isValid() },
-                            onDoneAction: { ChallengeManager.shared.addChallengeToChallenges(challengeConfiguration: challengeConfiguration) }
+                            onDoneAction: {
+                                
+                                ChallengeManager.shared.addChallenge(challenge: challengeConfiguration.createChallenge())
+                                StatsTracker.shared.addChallengeStartedStatsEntry()
+                            }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {

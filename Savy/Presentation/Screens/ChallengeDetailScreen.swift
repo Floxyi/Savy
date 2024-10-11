@@ -40,7 +40,7 @@ struct ChallengeDetailScreen: View {
                                 Label("Edit", systemImage: "pencil")
                             }
                             Button(role: .destructive, action: {
-                                deleteChallenge()
+                                removeChallenge()
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -105,7 +105,8 @@ struct ChallengeDetailScreen: View {
                                 .multilineTextAlignment(.center)
                                 .padding(.vertical, 20)
                             Button(role: .destructive, action: {
-                                deleteChallenge()
+                                removeChallenge()
+                                StatsTracker.shared.addChallengeCompletedStatsEntry()
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -128,13 +129,8 @@ struct ChallengeDetailScreen: View {
     private func editChallenge() {
     }
     
-    private func deleteChallenge() {
-        modelContext.delete(challenge)
-        for saving in challenge.savings {
-            modelContext.delete(saving)
-        }
-        try? modelContext.save()
-        
+    private func removeChallenge() {
+        ChallengeManager.shared.deleteChallenge(id: challenge.id)
         dismiss()
         tabBarManager.show()
     }

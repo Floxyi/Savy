@@ -26,20 +26,15 @@ final class Saving {
     
     func toggleDone() {
         done.toggle()
-        moneySavedStatsEntry()
+        if done {
+            StatsTracker.shared.addMoneySavedStatsEntry(id: id, amount: amount, date: date)
+        } else {
+            StatsTracker.shared.deleteStatsEntry(id: id)
+        }
+        
     }
     
     func setAmount(amount: Int) {
         self.amount = amount
-    }
-    
-    func moneySavedStatsEntry() {
-        let saving = SavingStats(id: id, amount: amount, expectedDate: date)
-        let entry = StatsEntry(type: .money_saved, date: Date(),savingStats: saving)
-        StatsTracker.shared.addStatsEntry(entry: entry)
-    }
-    
-    func challengeCompletedStatsEntry() {
-    
     }
 }

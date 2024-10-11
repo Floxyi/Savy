@@ -10,12 +10,12 @@ import SwiftData
 
 @Model
 class SavingStats {
-    var id: UUID
+    var savingId: UUID
     var amount: Int
     var expectedDate: Date
     
-    init(id: UUID, amount: Int, expectedDate: Date) {
-        self.id = id
+    init(savingId: UUID, amount: Int, expectedDate: Date) {
+        self.savingId = savingId
         self.amount = amount
         self.expectedDate = expectedDate
     }

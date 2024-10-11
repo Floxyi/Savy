@@ -9,7 +9,6 @@ import SwiftData
 import SwiftUI
 
 struct AppView: View {
-    @Query private var challenges: [Challenge]
     
     @EnvironmentObject private var tabBarManager: TabBarManager
     
@@ -45,11 +44,11 @@ struct AppView: View {
 }
 
 #Preview("Filled") {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(for: ChallengeManager.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    container.mainContext.insert(Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly))
-    container.mainContext.insert(Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 250, strategy: .Monthly))
+    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly))
+    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 250, strategy: .Monthly))
     
     return AppView()
         .modelContainer(container)

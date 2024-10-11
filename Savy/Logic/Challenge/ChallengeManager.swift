@@ -6,21 +6,60 @@
 //
 
 import Foundation
+import SwiftData
 
+@Model
 class ChallengeManager {
     static let shared = ChallengeManager()
-    var challenges: [Challenge] = []
+    private(set) var challenges: [Challenge] = []
     
     init() {}
     
     func getChallengeById(id: UUID) -> Challenge? {
-        for challenge in ChallengeManager.shared.challenges where challenge.id == id {
-            return challenge
-        }
-        return nil
+        return ChallengeManager.shared.challenges.first(where: { $0.id == id })
     }
     
-    func addChallengeToChallenges(challengeConfiguration: ChallengeConfiguration) {
-        ChallengeManager.shared.challenges.append(challengeConfiguration.createChallenge())
+    func addChallenge(challenge: Challenge) {
+        ChallengeManager.shared.challenges.append(challenge)
+    }
+    
+    func deleteChallenge(id: UUID) {
+        ChallengeManager.shared.challenges.removeAll(where: { $0.id == id })
+    }
+    
+    func sortedChallenges() -> [Challenge] {
+        let calendar = Calendar.current
+        return ChallengeManager.shared.challenges.sorted { challenge1, challenge2 in
+            let nextSaving1 = challenge1.getNextSaving(at: 1)
+            let nextSaving2 = challenge2.getNextSaving(at: 1)
+            
+            let dateComponents1 = DateComponents(
+                year: calendar.component(.year, from: nextSaving1.date),
+                month: calendar.component(.month, from: nextSaving1.date),
+                day: calendar.component(.day, from: nextSaving1.date)
+            )
+            let dateComponents2 = DateComponents(
+                year: calendar.component(.year, from: nextSaving2.date),
+                month: calendar.component(.month, from: nextSaving2.date),
+                day: calendar.component(.day, from: nextSaving2.date)
+            )
+            
+            let date1 = calendar.date(from: dateComponents1) ?? Date()
+            let date2 = calendar.date(from: dateComponents2) ?? Date()
+            
+            let remainingSavings1 = challenge1.remainingSavings()
+            let remainingSavings2 = challenge2.remainingSavings()
+            
+            if remainingSavings1 == 0 && remainingSavings2 == 0 {
+                return challenge1.endDate < challenge2.endDate
+            }
+            
+            if remainingSavings1 == 0 { return false }
+            if remainingSavings2 == 0 { return true }
+            
+            return date1 == date2
+            ? nextSaving1.amount < nextSaving2.amount
+            : date1 < date2
+        }
     }
 }

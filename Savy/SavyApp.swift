@@ -12,7 +12,10 @@ import SwiftData
 struct SavyApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Challenge.self,
+            ChallengeManager.self,
+            StatsTracker.self,
+            SavingStats.self,
+            StatsEntry.self,
             ColorManager.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
