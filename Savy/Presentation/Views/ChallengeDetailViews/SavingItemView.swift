@@ -11,6 +11,8 @@ import SwiftUI
 struct SavingItemView: View {
     let saving: Saving
     
+    @State private var showConfirmationDialog = false
+    
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
@@ -34,9 +36,15 @@ struct SavingItemView: View {
         .background(currentSchema.bar)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .onTapGesture {
-            withAnimation {
-                saving.markAsDone()
+            showConfirmationDialog = true
+        }
+        .confirmationDialog("Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+            Button("Bestätigen", role: .destructive) {
+                withAnimation {
+                    saving.markAsDone()
+                }
             }
+            Button("Abbrechen", role: .cancel) { }
         }
     }
 }
