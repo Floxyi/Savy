@@ -52,9 +52,9 @@
 		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
 		17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290152CA9C317007382CD /* LoginTextFieldView.swift */; };
 		17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290172CA9CDAF007382CD /* IconsPickerList.swift */; };
-		17F2901E2CA9DBF9007382CD /* TabEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901D2CA9DBF9007382CD /* TabEnum.swift */; };
-		17F290202CA9DC72007382CD /* SavingStrategyEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901F2CA9DC72007382CD /* SavingStrategyEnum.swift */; };
-		17F290222CA9DC9B007382CD /* SavingCalculationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290212CA9DC9B007382CD /* SavingCalculationEnum.swift */; };
+		17F2901E2CA9DBF9007382CD /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901D2CA9DBF9007382CD /* Tab.swift */; };
+		17F290202CA9DC72007382CD /* SavingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901F2CA9DC72007382CD /* SavingStrategy.swift */; };
+		17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290212CA9DC9B007382CD /* SavingCalculation.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
@@ -120,9 +120,9 @@
 		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
 		17F290152CA9C317007382CD /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
 		17F290172CA9CDAF007382CD /* IconsPickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsPickerList.swift; sourceTree = "<group>"; };
-		17F2901D2CA9DBF9007382CD /* TabEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEnum.swift; sourceTree = "<group>"; };
-		17F2901F2CA9DC72007382CD /* SavingStrategyEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingStrategyEnum.swift; sourceTree = "<group>"; };
-		17F290212CA9DC9B007382CD /* SavingCalculationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCalculationEnum.swift; sourceTree = "<group>"; };
+		17F2901D2CA9DBF9007382CD /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		17F2901F2CA9DC72007382CD /* SavingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingStrategy.swift; sourceTree = "<group>"; };
+		17F290212CA9DC9B007382CD /* SavingCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCalculation.swift; sourceTree = "<group>"; };
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,8 +303,8 @@
 		17F2901B2CA9DBAE007382CD /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				17F290212CA9DC9B007382CD /* SavingCalculationEnum.swift */,
-				17F2901F2CA9DC72007382CD /* SavingStrategyEnum.swift */,
+				17F290212CA9DC9B007382CD /* SavingCalculation.swift */,
+				17F2901F2CA9DC72007382CD /* SavingStrategy.swift */,
 				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
 				178530A92C850FA4003426CD /* Saving.swift */,
 				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
@@ -316,7 +316,7 @@
 		17F2901C2CA9DBED007382CD /* App */ = {
 			isa = PBXGroup;
 			children = (
-				17F2901D2CA9DBF9007382CD /* TabEnum.swift */,
+				17F2901D2CA9DBF9007382CD /* Tab.swift */,
 				176F63972C877261004437C1 /* TabBarManager.swift */,
 			);
 			path = App;
@@ -492,16 +492,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */,
-				17F290202CA9DC72007382CD /* SavingStrategyEnum.swift in Sources */,
 				8EFF94DB2CB8891400E77E3F /* StatsEntry.swift in Sources */,
+				17F290202CA9DC72007382CD /* SavingStrategy.swift in Sources */,
 				17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */,
-				17F290222CA9DC9B007382CD /* SavingCalculationEnum.swift in Sources */,
+				17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
 				171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */,
 				176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */,
 				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
-				17F2901E2CA9DBF9007382CD /* TabEnum.swift in Sources */,
+				17F2901E2CA9DBF9007382CD /* Tab.swift in Sources */,
 				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
 				171969DE2CA568A2008CCBDD /* IconPicker.swift in Sources */,
 				8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */,

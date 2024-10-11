@@ -11,7 +11,6 @@ import SwiftUI
 struct LoginScreen: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var email = ""
     @State private var password = ""
@@ -27,7 +26,7 @@ struct LoginScreen: View {
         VStack {
             HeaderView(title: "Login", dismiss: {
                 dismiss()
-                tabBarManager.show()
+                TabBarManager.shared.show()
             })
             .padding(.bottom, 88)
             
@@ -90,7 +89,7 @@ struct LoginScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .onAppear(perform: {
-            tabBarManager.hide()
+            TabBarManager.shared.hide()
         })
     }
     
@@ -134,5 +133,4 @@ struct LoginScreen: View {
     return PreviewWrapper()
         .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
 }

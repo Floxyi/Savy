@@ -59,5 +59,4 @@ struct SavingItemView: View {
     return SavingItemView(saving: saving)
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }

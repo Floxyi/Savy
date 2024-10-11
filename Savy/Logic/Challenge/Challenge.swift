@@ -19,7 +19,16 @@ class Challenge {
     private(set) var targetAmount: Int
     private(set) var savings: [Saving] = []
     
-    init(name: String, icon: String, startDate: Date, endDate: Date, targetAmount: Int, strategy: SavingStrategy) {
+    init(
+        name: String,
+        icon: String,
+        startDate: Date,
+        endDate: Date,
+        targetAmount: Int,
+        strategy: SavingStrategy,
+        calculation: SavingCalculation,
+        savingAmount: Int? = nil
+    ) {
         self.id = UUID()
         self.name = name
         self.icon = icon
@@ -27,18 +36,18 @@ class Challenge {
         self.endDate = endDate
         self.targetAmount = targetAmount
         
-        generateSavings(strategy: strategy)
+        generateSavings(strategy: strategy, calculation: calculation, savingAmount: savingAmount)
     }
     
-    private func generateSavings(strategy: SavingStrategy) {
+    private func generateSavings(strategy: SavingStrategy, calculation: SavingCalculation, savingAmount: Int? = nil) {
         let calendar = Calendar.current
         var date = calendar.date(byAdding: strategy == .Monthly ? .month : .weekOfYear, value: 1, to: startDate)!
         
-        let numberOfCyles = strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()
-        let amountPerCyles = (targetAmount + numberOfCyles - 1) / numberOfCyles
+        let numberOfCycles = strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()
+        let amountPerCycles = calculation == .Date ? targetAmount / numberOfCycles : savingAmount!
         
         while startOfDay(for: date) <= startOfDay(for: endDate) {
-            savings.append(Saving(challengeId: id, amount: amountPerCyles, date: date))
+            savings.append(Saving(challengeId: id, amount: amountPerCycles, date: date))
             let nextDate = nextDate(from: date, strategy: strategy, calendar: calendar)
             date = nextDate!
         }
@@ -56,7 +65,17 @@ class Challenge {
             secondLastSaving.setAmount(amount: secondLastSaving.amount + lastSavingAmount)
         }
         
-        lastSaving.setAmount(amount: lastSaving.amount + targetAmount - totalSaved)
+        if targetAmount - totalSaved == 0 {
+            return
+        }
+        
+        if calculation == .Date{
+            lastSaving.setAmount(amount: lastSaving.amount + targetAmount - totalSaved)
+        }
+        
+        if calculation == .Amount {
+            savings.append(Saving(challengeId: id, amount: targetAmount - totalSaved, date: date))
+        }
     }
     
     private func startOfDay(for date: Date) -> Date {

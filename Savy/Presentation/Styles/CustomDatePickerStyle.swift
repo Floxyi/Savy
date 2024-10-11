@@ -49,10 +49,12 @@ struct CustomDatePickerOverlay: View {
         
         DatePicker("", selection: $date, in: startDate..., displayedComponents: .date)
             .datePickerStyle(.graphical)
-            .accentColor(currentSchema.font)
+            .accentColor(currentSchema.accent2)
             .labelsHidden()
             .padding(.horizontal)
-            .background(currentSchema.background, in: RoundedRectangle(cornerRadius: 20))
+            .background(
+                currentSchema.mode == .light ? currentSchema.background : currentSchema.barIcons,
+                        in: RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 10)
             .frame(width: 300)
             .frame(maxWidth: .infinity)

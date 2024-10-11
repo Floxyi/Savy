@@ -10,13 +10,11 @@ import SwiftUI
 
 struct AppView: View {
     
-    @EnvironmentObject private var tabBarManager: TabBarManager
-    
-    @State private var selectedTab: Tab = Tab.challenges
+    @ObservedObject private var tabBarManager = TabBarManager.shared
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
+            TabView(selection: $tabBarManager.selectedTab) {
                 ChallengesScreen()
                     .tag(Tab.challenges)
                 
@@ -26,12 +24,12 @@ struct AppView: View {
                 SettingsScreen()
                     .tag(Tab.settings)
             }
-            .onAppear(perform: {
+            .onAppear {
                 UITabBar.appearance().isHidden = true
-            })
+            }
             
-            if tabBarManager.isOn {
-                BottomTabBarView(currentTab: $selectedTab)
+            if tabBarManager.isShown {
+                BottomTabBarView(currentTab: $tabBarManager.selectedTab)
                     .padding(.bottom)
             }
         }
@@ -43,24 +41,14 @@ struct AppView: View {
     }
 }
 
-#Preview("Filled") {
+#Preview() {
     let container = try! ModelContainer(for: ChallengeManager.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly))
-    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 250, strategy: .Monthly))
+    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly, calculation: .Amount, savingAmount: 12))
+    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 250, strategy: .Monthly, calculation: .Date))
     
     return AppView()
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
-}
-
-#Preview("Empty") {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
-    return AppView()
-        .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }

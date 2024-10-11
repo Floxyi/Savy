@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUICore
 
 class ChallengeConfiguration {
     public var name: String?
@@ -35,7 +34,7 @@ class ChallengeConfiguration {
         self.endDate = endDate
     }
     
-    func calculateEndDateByAmount() -> Date {
+    private func calculateChallengeEndDate() -> Date {
         let date = Date()
 
         guard let amount = amount, let cycleAmount = cycleAmount, cycleAmount > 0 else {
@@ -47,6 +46,22 @@ class ChallengeConfiguration {
         return Calendar.current.date(
             byAdding: strategy == .Monthly ? .month : .weekOfYear,
             value: numberOfCycles,
+            to: date
+        ) ?? date
+    }
+    
+    func calculateEndDateByAmount() -> Date {
+        let date = Date()
+
+        guard let amount = amount, let cycleAmount = cycleAmount, cycleAmount > 0 else {
+            return date
+        }
+        
+        let numberOfCycles = amount / cycleAmount
+        
+        return Calendar.current.date(
+            byAdding: strategy == .Monthly ? .month : .weekOfYear,
+            value: numberOfCycles * cycleAmount == amount ? numberOfCycles : numberOfCycles + 1,
             to: date
         ) ?? date
     }
@@ -78,9 +93,11 @@ class ChallengeConfiguration {
             name: name!,
             icon: icon!,
             startDate: Date(),
-            endDate: calculation == .Date ? endDate : calculateEndDateByAmount(),
+            endDate: calculation == .Date ? endDate : calculateChallengeEndDate(),
             targetAmount: amount!,
-            strategy: strategy
+            strategy: strategy,
+            calculation: calculation,
+            savingAmount: calculation == .Amount ? cycleAmount! : nil
         )
     }
     

@@ -16,7 +16,6 @@ struct ChallengeDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @EnvironmentObject private var tabBarManager: TabBarManager
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -30,7 +29,7 @@ struct ChallengeDetailScreen: View {
                     size: 32,
                     dismiss: {
                         dismiss()
-                        tabBarManager.show()
+                        TabBarManager.shared.show()
                     },
                     actionView: AnyView(
                         Menu {
@@ -118,7 +117,7 @@ struct ChallengeDetailScreen: View {
             .background(currentSchema.background)
         }
         .onAppear(perform: {
-            tabBarManager.hide()
+            TabBarManager.shared.hide()
         })
         .padding()
         .background(currentSchema.background)
@@ -132,13 +131,22 @@ struct ChallengeDetailScreen: View {
     private func removeChallenge() {
         ChallengeManager.shared.deleteChallenge(id: challenge.id)
         dismiss()
-        tabBarManager.show()
+        TabBarManager.shared.show()
     }
 }
 
 #Preview("Running") {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 200, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 200,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)
@@ -146,12 +154,20 @@ struct ChallengeDetailScreen: View {
     return ChallengeDetailScreen(challenge: challenge)
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }
 
 #Preview("Finished") {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 0, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 200,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)
@@ -159,5 +175,4 @@ struct ChallengeDetailScreen: View {
     return ChallengeDetailScreen(challenge: challenge)
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-        .environmentObject(TabBarManager())
 }

@@ -62,7 +62,7 @@ private struct DateView: View {
     
     var body: some View {
         HStack {
-            Text(date.formatted(.dateTime.month(.wide).day()))
+            Text(date.formatted(.dateTime.month(.twoDigits).day().year()))
             Image(systemName: "calendar")
         }
         .font(.system(size: 13, weight: .bold))
@@ -212,7 +212,16 @@ private struct AmountView: View {
 
 #Preview {
     let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(name: "MacBook", icon: "macbook", startDate: Date(), endDate: endDate, targetAmount: 1500, strategy: .Monthly)
+    let challenge: Challenge = Challenge(
+        name: "MacBook",
+        icon: "macbook",
+        startDate: Date(),
+        endDate: endDate,
+        targetAmount: 1500,
+        strategy: .Monthly,
+        calculation: .Amount,
+        savingAmount: 12
+    )
     
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(challenge)

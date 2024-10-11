@@ -46,6 +46,7 @@ struct ChallengeAddView: View {
                     TextField("", text: $name, prompt: Text(verbatim: "Name")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font.opacity(0.4)))
+                        .textInputAutocapitalization(.never)
                     .textFieldStyle(CustomTextFieldStyle())
                     .onChange(of: name) { _, newValue in
                         if newValue.count > 12 {
