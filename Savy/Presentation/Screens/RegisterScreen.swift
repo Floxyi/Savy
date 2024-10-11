@@ -11,7 +11,6 @@ import SwiftUI
 struct RegisterScreen: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    @EnvironmentObject private var tabBarManager: TabBarManager
     
     @State private var username = ""
     @State private var isUsernameValid = false
@@ -39,7 +38,7 @@ struct RegisterScreen: View {
         VStack {
             HeaderView(title: "Register", dismiss: {
                 dismiss()
-                tabBarManager.show()
+                TabBarManager().show()
             })
             .padding(.bottom, 88)
             
@@ -124,7 +123,7 @@ struct RegisterScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .onAppear(perform: {
-            tabBarManager.hide()
+            TabBarManager().hide()
         })
     }
     
@@ -171,5 +170,4 @@ struct RegisterScreen: View {
     return PreviewWrapper()
         .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
-        .environmentObject(TabBarManager())
 }
