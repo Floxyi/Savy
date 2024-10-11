@@ -46,6 +46,8 @@
 		17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08C2C7A488500B28A04 /* Color+HSL.swift */; };
 		17B5D08F2C7A4AA500B28A04 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */; };
 		17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BFBA462C7A941200E19D10 /* Color+HexString.swift */; };
+		17DB38872CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */; };
+		17DB38892CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */; };
 		17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */; };
 		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
 		17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290152CA9C317007382CD /* LoginTextFieldView.swift */; };
@@ -107,6 +109,8 @@
 		17B5D08C2C7A488500B28A04 /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
 		17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		17BFBA462C7A941200E19D10 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
+		17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsListScreen.swift; sourceTree = "<group>"; };
+		17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsButtonView.swift; sourceTree = "<group>"; };
 		17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeConfiguration.swift; sourceTree = "<group>"; };
 		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
 		17F290152CA9C317007382CD /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
@@ -152,7 +156,6 @@
 				171969D82CA5679E008CCBDD /* StrategySelector.swift */,
 				171969D42CA5657B008CCBDD /* DismissableOverlay.swift */,
 				171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */,
-				171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */,
 			);
 			path = ChallengeAddViews;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			children = (
 				17FF01A22C7770D20012FCF7 /* HeaderView.swift */,
 				17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */,
+				171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */,
 			);
 			path = AppViews;
 			sourceTree = "<group>";
@@ -231,6 +235,7 @@
 				173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */,
 				17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */,
 				172E54C82C89D98300F521C4 /* SavingItemView.swift */,
+				17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */,
 			);
 			path = ChallengeDetailViews;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
 				1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */,
 				8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */,
+				17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				178530AA2C850FA4003426CD /* Saving.swift in Sources */,
 				17444A1B2CA18BD200D3E14E /* RegistrationTextFieldView.swift in Sources */,
 				171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */,
+				17DB38872CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift in Sources */,
 				17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorScheme.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
@@ -491,6 +498,7 @@
 				171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */,
 				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
 				171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */,
+				17DB38892CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift in Sources */,
 				17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */,
 				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
 				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
