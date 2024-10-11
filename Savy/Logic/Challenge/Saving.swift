@@ -10,25 +10,23 @@ import SwiftData
 
 @Model
 final class Saving {
-    var id: UUID
-    var challengeId: UUID
-    var amount: Int
-    var date: Date
-    var done: Bool
+    private(set) var id: UUID
+    private(set) var amount: Int
+    private(set) var date: Date
+    private(set) var done: Bool
     
-    init(challengeId: UUID, amount: Int, date: Date, done: Bool) {
+    init(amount: Int, date: Date) {
         self.id = UUID()
-        self.challengeId = challengeId
         self.amount = amount
         self.date = date
-        self.done = done
+        self.done = false
     }
     
-    func markAsDone() {
-        done = true
+    func toggleDone() {
+        done.toggle()
     }
     
-    func markAsUnDone() {
-        done = false
+    func setAmount(amount: Int) {
+        self.amount = amount
     }
 }

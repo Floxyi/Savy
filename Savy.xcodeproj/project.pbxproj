@@ -378,14 +378,14 @@
 		17FF019B2C776E150012FCF7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */,
-				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
 				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
 				17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */,
 				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
+				17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */,
+				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
 				1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */,
 				8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */,
-				17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */,
+				17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

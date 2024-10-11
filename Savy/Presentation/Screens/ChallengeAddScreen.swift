@@ -47,6 +47,11 @@ struct ChallengeAddView: View {
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font.opacity(0.4)))
                     .textFieldStyle(CustomTextFieldStyle())
+                    .onChange(of: name) { _, newValue in
+                        if newValue.count > 12 {
+                            name = String(newValue.prefix(12))
+                        }
+                    }
                     
                     HStack {
                         TextField("", value: $amount, format: .number, prompt: Text(verbatim: "Amount")
@@ -134,6 +139,7 @@ struct ChallengeAddView: View {
                     ToolbarItem(placement: .confirmationAction) {
                         ToolbarDoneButton(
                             showPopover: $showPopover,
+                            title: "Done",
                             isValid: { challengeConfiguration.isValid() },
                             onDoneAction: { modelContext.insert(challengeConfiguration.createChallenge()) }
                         )

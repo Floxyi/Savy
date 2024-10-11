@@ -12,6 +12,7 @@ struct ToolbarDoneButton: View {
     
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
+    let title: String
     let isValid: () -> Bool
     let onDoneAction: () -> Void
     
@@ -24,7 +25,7 @@ struct ToolbarDoneButton: View {
                 showPopover = false
             }
         }) {
-            Text("Done")
+            Text(title)
                 .foregroundColor(!isValid() ? currentSchema.barIcons.opacity(0.4) : currentSchema.barIcons)
                 .font(.system(size: 16, weight: !isValid() ? .regular : .bold))
         }
