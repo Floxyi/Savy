@@ -64,7 +64,11 @@ class Challenge {
             secondLastSaving.setAmount(amount: secondLastSaving.amount + lastSavingAmount)
         }
         
-        if calculation == .Date {
+        if targetAmount - totalSaved == 0 {
+            return
+        }
+        
+        if calculation == .Date{
             lastSaving.setAmount(amount: lastSaving.amount + targetAmount - totalSaved)
         }
         

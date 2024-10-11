@@ -21,7 +21,6 @@ struct ChallengesListView: View {
                 ForEach(sortedChallenges()) { challenge in
                     ChallengeListItemView(challenge: challenge)
                 }
-                .onDelete(perform: deleteItem)
                 ChallengeAddButtonView(showPopover: $showPopover)
             }
         }
@@ -63,19 +62,6 @@ struct ChallengesListView: View {
             return date1 == date2
             ? nextSaving1.amount < nextSaving2.amount
             : date1 < date2
-        }
-    }
-    
-    private func deleteItem(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(challenges[index])
-                do {
-                    try modelContext.save()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
         }
     }
 }

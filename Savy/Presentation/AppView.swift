@@ -11,11 +11,11 @@ import SwiftUI
 struct AppView: View {
     @Query private var challenges: [Challenge]
     
-    @State private var selectedTab: Tab = TabBarManager().selectedTab
+    @ObservedObject private var tabBarManager = TabBarManager.shared
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
+            TabView(selection: $tabBarManager.selectedTab) {
                 ChallengesScreen()
                     .tag(Tab.challenges)
                 
@@ -25,12 +25,12 @@ struct AppView: View {
                 SettingsScreen()
                     .tag(Tab.settings)
             }
-            .onAppear(perform: {
+            .onAppear {
                 UITabBar.appearance().isHidden = true
-            })
+            }
             
-            if TabBarManager().isShown {
-                BottomTabBarView(currentTab: $selectedTab)
+            if tabBarManager.isShown {
+                BottomTabBarView(currentTab: $tabBarManager.selectedTab)
                     .padding(.bottom)
             }
         }
@@ -65,14 +65,6 @@ struct AppView: View {
         strategy: .Monthly,
         calculation: .Date
     ))
-    
-    return AppView()
-        .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-}
-
-#Preview("Empty") {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
     return AppView()
         .modelContainer(container)

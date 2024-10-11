@@ -68,7 +68,7 @@ struct SettingsScreen: View {
             .padding(.bottom, 80)
             .background(currentSchema.background)
             .onAppear {
-                TabBarManager().show()
+                TabBarManager.shared.show()
                 selectedMode = currentSchema.mode
                 toggledDarkMode = currentSchema.mode == .dark || currentSchema.mode == .coloredDark
                 toggledColorMode = currentSchema.mode == .coloredLight || currentSchema.mode == .coloredDark

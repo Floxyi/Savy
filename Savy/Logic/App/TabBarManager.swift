@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-class TabBarManager {
+class TabBarManager: ObservableObject {
     static var shared = TabBarManager()
     
-    private(set) var selectedTab: Tab = Tab.challenges
-    private(set) var isShown: Bool = true
+    @Published var selectedTab: Tab = .challenges
+    @Published private(set) var isShown: Bool = true
     
     func hide() {
         isShown = false

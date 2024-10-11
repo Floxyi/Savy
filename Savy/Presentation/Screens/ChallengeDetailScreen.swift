@@ -29,7 +29,7 @@ struct ChallengeDetailScreen: View {
                     size: 32,
                     dismiss: {
                         dismiss()
-                        TabBarManager().show()
+                        TabBarManager.shared.show()
                     },
                     actionView: AnyView(
                         Menu {
@@ -116,7 +116,7 @@ struct ChallengeDetailScreen: View {
             .background(currentSchema.background)
         }
         .onAppear(perform: {
-            TabBarManager().hide()
+            TabBarManager.shared.hide()
         })
         .padding()
         .background(currentSchema.background)
@@ -135,7 +135,7 @@ struct ChallengeDetailScreen: View {
         try? modelContext.save()
         
         dismiss()
-        TabBarManager().show()
+        TabBarManager.shared.show()
     }
 }
 

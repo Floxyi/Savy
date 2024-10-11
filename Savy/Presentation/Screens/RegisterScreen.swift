@@ -38,7 +38,7 @@ struct RegisterScreen: View {
         VStack {
             HeaderView(title: "Register", dismiss: {
                 dismiss()
-                TabBarManager().show()
+                TabBarManager.shared.show()
             })
             .padding(.bottom, 88)
             
@@ -123,7 +123,7 @@ struct RegisterScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .onAppear(perform: {
-            TabBarManager().hide()
+            TabBarManager.shared.hide()
         })
     }
     

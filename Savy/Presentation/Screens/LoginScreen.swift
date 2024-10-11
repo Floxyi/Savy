@@ -26,7 +26,7 @@ struct LoginScreen: View {
         VStack {
             HeaderView(title: "Login", dismiss: {
                 dismiss()
-                TabBarManager().show()
+                TabBarManager.shared.show()
             })
             .padding(.bottom, 88)
             
@@ -89,7 +89,7 @@ struct LoginScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .onAppear(perform: {
-            TabBarManager().hide()
+            TabBarManager.shared.hide()
         })
     }
     
