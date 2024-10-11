@@ -11,6 +11,8 @@ import SwiftUI
 struct SavingItemView: View {
     let saving: Saving
     
+    @State private var showConfirmationDialog = false
+    
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     var body: some View {
@@ -33,16 +35,23 @@ struct SavingItemView: View {
         .frame(width: 80, height: 80)
         .background(currentSchema.bar)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+        .opacity(saving.done ? 0.3 : 1)
         .onTapGesture {
-            withAnimation {
-                saving.markAsDone()
+            showConfirmationDialog = true
+        }
+        .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+            Button("Bestätigen", role: .destructive) {
+                withAnimation {
+                    saving.toggleDone()
+                }
             }
+            Button("Abbrechen", role: .cancel) { }
         }
     }
 }
 
 #Preview {
-    let saving: Saving = Saving(challengeId: UUID(), amount: 30, date: Date(), done: false)
+    let saving: Saving = Saving(amount: 30, date: Date())
     
     let container = try! ModelContainer(for: Saving.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(saving)

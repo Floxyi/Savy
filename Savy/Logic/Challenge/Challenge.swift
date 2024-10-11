@@ -11,13 +11,13 @@ import CoreData
 
 @Model
 class Challenge {
-    public var id: UUID
-    public var name: String
-    public var icon: String
-    public var startDate: Date
-    public var endDate: Date
-    public var targetAmount: Int
-    public var savings: [Saving] = []
+    private(set) var id: UUID
+    private(set) var name: String
+    private(set) var icon: String
+    private(set) var startDate: Date
+    private(set) var endDate: Date
+    private(set) var targetAmount: Int
+    private(set) var savings: [Saving] = []
     
     init(name: String, icon: String, startDate: Date, endDate: Date, targetAmount: Int, strategy: SavingStrategy) {
         self.id = UUID()
@@ -38,14 +38,25 @@ class Challenge {
         let amountPerCyles = (targetAmount + numberOfCyles - 1) / numberOfCyles
         
         while startOfDay(for: date) <= startOfDay(for: endDate) {
-            savings.append(Saving(challengeId: id, amount: amountPerCyles, date: date, done: false))
+            savings.append(Saving(amount: amountPerCyles, date: date))
             let nextDate = nextDate(from: date, strategy: strategy, calendar: calendar)
             date = nextDate!
         }
         
         let lastSaving = savings.last!
         let totalSaved = savings.reduce(0) { $0 + $1.amount }
-        lastSaving.amount += targetAmount - totalSaved
+        let lastSavingAmount = lastSaving.amount + targetAmount - totalSaved
+        
+        if lastSavingAmount <= 0 {
+            savings.removeLast()
+        }
+        
+        if lastSavingAmount < 0 {
+            let secondLastSaving = savings.last!
+            secondLastSaving.setAmount(amount: secondLastSaving.amount + lastSavingAmount)
+        }
+        
+        lastSaving.setAmount(amount: lastSaving.amount + targetAmount - totalSaved)
     }
     
     private func startOfDay(for date: Date) -> Date {
@@ -109,7 +120,7 @@ class Challenge {
     
     func getNextSaving(at n: Int) -> Saving {
         let undoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
-        return undoneSavings.count >= n ? undoneSavings[n - 1]: savings.first!
+        return undoneSavings.count >= n ? undoneSavings[n - 1] : savings.first!
     }
     
 }
