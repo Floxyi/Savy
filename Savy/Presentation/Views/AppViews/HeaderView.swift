@@ -46,7 +46,7 @@ struct HeaderView: View {
                 HStack {
                     Spacer()
                     actionView
-                        .padding(.trailing, 20)
+                        .padding(.trailing, 16)
                         .padding(.bottom, 4)
                 }
             }

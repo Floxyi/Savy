@@ -24,6 +24,7 @@ struct ChallengeEditScreen: View {
     @State private var isDatePickerVisible = false
     @State private var isIconPickerVisible = false
     
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
@@ -125,7 +126,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
                         
-                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount().formatted(.dateTime.day().month().year()))")
+                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount(challenge: challenge).formatted(.dateTime.day().month().year()))")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()
@@ -144,7 +145,10 @@ struct ChallengeEditScreen: View {
                             showPopover: $showPopover,
                             title: "Done",
                             isValid: { isValid() },
-                            onDoneAction: { }
+                            onDoneAction: {
+                                dismiss()
+                                ChallengeManager.shared.updateChallenge(id: challenge.id, challengeConfiguration: challengeConfiguration)
+                            }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {
