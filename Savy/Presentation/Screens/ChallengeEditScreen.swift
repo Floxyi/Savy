@@ -126,7 +126,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
                         
-                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount().formatted(.dateTime.day().month().year()))")
+                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount(challenge: challenge).formatted(.dateTime.day().month().year()))")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()

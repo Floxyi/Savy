@@ -37,21 +37,30 @@ class ChallengeConfiguration {
         self.strategy = strategy
         self.calculation = calculation
         self.cycleAmount = cycleAmount
-        
-        calculation == .Amount ? self.endDate = calculateEndDateByAmount() : nil
     }
     
-    func generateSavings(challenge: Challenge) {
+    func generateSavings(challenge: Challenge, startDate: Date? = nil) {
         let calendar = Calendar.current
-        var date = calendar.date(byAdding: strategy == .Monthly ? .month : .weekOfYear, value: 1, to: startDate)!
+        var date = startDate ?? nextDate(from: self.startDate, strategy: strategy, calendar: calendar)!
         
-        let numberOfCycles = strategy == .Monthly ? numberOfMonths() : numberOfWeeks()
-        let amountPerCycles = calculation == .Date ? amount / numberOfCycles : cycleAmount!
+        let finishedSavings = challenge.savings.filter { $0.done }
+        let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
+        let targetAmount = amount - preSavedAmount
+        
+        if calculation == .Amount {
+            if startDate != nil {
+                self.endDate = calculateEndDateByAmount(challenge: challenge, startDate: startDate)
+            } else {
+                self.endDate = calculateEndDateByAmount(challenge: challenge)
+            }
+        }
+        
+        let numberOfCycles = strategy == .Monthly ? numberOfMonths(startDate: date, endDate: endDate) : numberOfWeeks(startDate: date, endDate: endDate)
+        let amountPerCycle = calculation == .Date ? targetAmount / numberOfCycles : cycleAmount!
         
         while startOfDay(for: date) <= startOfDay(for: endDate) {
-            challenge.addSaving(saving: Saving(challengeId: challenge.id, amount: amountPerCycles, date: date))
-            let nextDate = nextDate(from: date, strategy: strategy, calendar: calendar)
-            date = nextDate!
+            challenge.addSaving(saving: Saving(challengeId: challenge.id, amount: amountPerCycle, date: date))
+            date = nextDate(from: date, strategy: strategy, calendar: calendar)!
         }
         
         let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount }
@@ -59,9 +68,12 @@ class ChallengeConfiguration {
         if savedAmount > amount {
             let overflow = savedAmount - amount
             let lastSaving = challenge.savings.last!
-            if challenge.savings.last!.amount - overflow > 0 {
+            
+            if lastSaving.amount - overflow > 0 {
                 lastSaving.setAmount(amount: lastSaving.amount - overflow)
                 challenge.updateSaving(saving: lastSaving)
+            } else if lastSaving.amount - overflow == 0 {
+                challenge.removeSaving(saving: lastSaving)
             } else {
                 challenge.removeSaving(saving: lastSaving)
                 let secondLastSaving = challenge.savings.last!
@@ -69,10 +81,22 @@ class ChallengeConfiguration {
                 challenge.updateSaving(saving: secondLastSaving)
             }
         }
+        
+        if challenge.savings.last!.amount < 0 {
+            let lastSaving = challenge.savings.last!
+            lastSaving.setAmount(amount: lastSaving.amount + cycleAmount!)
+            challenge.updateSaving(saving: lastSaving)
+        }
     }
     
     func regenerateSavings(challenge: Challenge) {
+        challenge.savings.filter { !$0.done }.forEach { saving in
+            challenge.removeSaving(saving: saving)
+        }
         
+        let lastDate = challenge.savings.count > 0 ? challenge.savings.last!.date : self.startDate
+        let nextDate = nextDate(from: lastDate, strategy: strategy, calendar: Calendar.current)!
+        generateSavings(challenge: challenge, startDate: nextDate)
     }
     
     private func startOfDay(for date: Date) -> Date {
@@ -84,7 +108,7 @@ class ChallengeConfiguration {
         return calendar.date(byAdding: strategy == .Weekly ? .weekOfYear : .month, value: 1, to: date)
     }
     
-    private func numberOfMonths() -> Int {
+    private func numberOfMonths(startDate: Date, endDate: Date) -> Int {
         let calendar = Calendar.current
         
         let startComponents = calendar.dateComponents([.year, .month], from: startDate)
@@ -101,7 +125,7 @@ class ChallengeConfiguration {
         return yearDifference + monthDifference
     }
     
-    private func numberOfWeeks() -> Int {
+    private func numberOfWeeks(startDate: Date, endDate: Date) -> Int {
         let calendar = Calendar.current
         
         let startComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: startDate)
@@ -118,24 +142,40 @@ class ChallengeConfiguration {
         return yearDifference + weekDifference
     }
     
-    func calculateEndDateByAmount() -> Date {
-        let date = Date()
+    func calculateEndDateByAmount(challenge: Challenge? = nil, startDate: Date? = nil) -> Date {
+        var targetAmount = amount
+        let date = startDate != nil ? startDate! : self.startDate
+        
+        if challenge != nil {
+            let finishedSavings = challenge!.savings.filter { $0.done }
+            let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
+            targetAmount -= preSavedAmount
+        }
         
         if cycleAmount == nil {
             return date
         }
         
-        let numberOfCycles = amount / cycleAmount!
+        let numberOfCycles = targetAmount / cycleAmount!
         
-        return Calendar.current.date(
+        let endDate = Calendar.current.date(
             byAdding: strategy == .Monthly ? .month : .weekOfYear,
-            value: numberOfCycles * cycleAmount! == amount ? numberOfCycles : numberOfCycles + 1,
+            value: numberOfCycles * cycleAmount! == targetAmount ? numberOfCycles : numberOfCycles + 1,
             to: date
         ) ?? date
+        
+        return endDate
     }
     
     func calculateCycleAmount() -> Int? {
-        let duration = strategy == .Monthly ? self.numberOfMonths() : self.numberOfWeeks()
+        let duration: Int
+
+        if strategy == .Monthly {
+            duration = numberOfMonths(startDate: startDate, endDate: endDate)
+        } else {
+            duration = numberOfWeeks(startDate: startDate, endDate: endDate)
+        }
+        
         let numberOfCyles = duration != 0 ? duration : nil
         return numberOfCyles != nil ? (amount + numberOfCyles! - 1) / numberOfCyles! : nil
     }
