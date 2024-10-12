@@ -265,8 +265,8 @@
 		17B5D0882C7A466B00B28A04 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				8EFF94D32CB881CC00E77E3F /* Stats */,
 				17F2901C2CA9DBED007382CD /* App */,
+				8EFF94D32CB881CC00E77E3F /* Stats */,
 				17F2901B2CA9DBAE007382CD /* Challenge */,
 				17F2901A2CA9DB8D007382CD /* ColorScheme */,
 				17F290192CA9DB62007382CD /* Authentication */,
@@ -307,12 +307,12 @@
 		17F2901B2CA9DBAE007382CD /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				8EFF94E02CB963CC00E77E3F /* ChallengeManager.swift */,
+				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
+				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
+				178530A92C850FA4003426CD /* Saving.swift */,
 				17F290212CA9DC9B007382CD /* SavingCalculation.swift */,
 				17F2901F2CA9DC72007382CD /* SavingStrategy.swift */,
-				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
-				178530A92C850FA4003426CD /* Saving.swift */,
-				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
-				8EFF94E02CB963CC00E77E3F /* ChallengeManager.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -329,8 +329,8 @@
 		17F40C162C74F52800344DBF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				17444A1E2CA18C5800D3E14E /* AccountViews */,
 				17A38E822C87020A000F8A70 /* AppViews */,
+				17444A1E2CA18C5800D3E14E /* AccountViews */,
 				171969CF2CA563DF008CCBDD /* ChallengeAddViews */,
 				17A38E852C87029C000F8A70 /* ChallengeDetailViews */,
 				17A38E842C87028E000F8A70 /* ChallengesViews */,

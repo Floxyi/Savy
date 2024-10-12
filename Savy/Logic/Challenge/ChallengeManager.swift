@@ -31,6 +31,13 @@ class ChallengeManager {
         challenges.removeAll(where: { $0.id == id })
     }
     
+    func updateChallenge(id: UUID, challengeConfiguration: ChallengeConfiguration) {
+        let challenge = challenges.first(where: { $0.id == id })!
+        challenge.updateConfiguration(challengeConfiguration: challengeConfiguration)
+        challenges.removeAll(where: { $0.id == id })
+        challenges.append(challenge)
+    }
+    
     func sortChallenges() -> [Challenge] {
         let calendar = Calendar.current
 

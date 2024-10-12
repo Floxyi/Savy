@@ -71,6 +71,10 @@ class ChallengeConfiguration {
         }
     }
     
+    func regenerateSavings(challenge: Challenge) {
+        
+    }
+    
     private func startOfDay(for date: Date) -> Date {
         let calendar = Calendar.current
         return calendar.startOfDay(for: date)

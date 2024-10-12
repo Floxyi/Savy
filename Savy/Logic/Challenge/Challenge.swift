@@ -30,6 +30,11 @@ class Challenge {
         savings.removeAll(where: { $0.id == saving.id })
     }
     
+    func updateConfiguration(challengeConfiguration: ChallengeConfiguration) {
+        self.challengeConfiguration = challengeConfiguration
+        challengeConfiguration.regenerateSavings(challenge: self)
+    }
+    
     func updateSaving(saving: Saving) {
         savings.first(where: { $0.id == saving.id })?.setAmount(amount: saving.amount)
     }
