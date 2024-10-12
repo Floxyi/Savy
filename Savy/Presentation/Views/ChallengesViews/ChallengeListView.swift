@@ -16,14 +16,14 @@ struct ChallengesListView: View {
     var body: some View {
         VStack(alignment: .center) {
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(ChallengeManager.shared.sortedChallenges()) { challenge in
+                ForEach(ChallengeManager.shared.sortChallenges()) { challenge in
                     ChallengeListItemView(challenge: challenge)
                 }
                 ChallengeAddButtonView(showPopover: $showPopover)
             }
         }
         .popover(isPresented: $showPopover) {
-            ChallengeAddView(showPopover: $showPopover)
+            ChallengeAddScreen(showPopover: $showPopover)
         }
     }
 }
@@ -31,37 +31,16 @@ struct ChallengesListView: View {
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let startDate = Calendar.current.date(byAdding: .month, value: 2, to: Date())!
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    container.mainContext.insert(Challenge(
-        name: "MacBook",
-        icon: "macbook",
-        startDate: Date(),
-        endDate: endDate,
-        targetAmount: 1500,
-        strategy: .Monthly,
-        calculation: .Amount,
-        savingAmount: 12
-    ))
-    container.mainContext.insert(Challenge(
-        name: "HomePod",
+    let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
+        name: "HomePod",
+        amount: 300,
         startDate: Date(),
-        endDate: endDate,
-        targetAmount: 300,
-        strategy: .Monthly,
-        calculation: .Date
-    ))
-    container.mainContext.insert(Challenge(
-        name: "AirPods",
-        icon: "airpods.gen3",
-        startDate: startDate,
-        endDate: endDate,
-        targetAmount: 280,
         strategy: .Monthly,
         calculation: .Amount,
-        savingAmount: 10
-    ))
+        cycleAmount: 12
+    )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     
     return ChallengesListView()
         .padding(.top, 80)

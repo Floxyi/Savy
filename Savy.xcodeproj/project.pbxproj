@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1703E9212CB9B5AC00A89242 /* ChallengeEditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703E9202CB9B5AC00A89242 /* ChallengeEditScreen.swift */; };
 		171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */; };
 		171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */; };
 		171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */; };
@@ -35,6 +36,7 @@
 		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
 		176F63982C877261004437C1 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63972C877261004437C1 /* TabBarManager.swift */; };
 		176F639A2C8778F4004437C1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63992C8778F4004437C1 /* AccountView.swift */; };
+		177728F72CBA75FD00BE814C /* ChallengeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177728F62CBA75FD00BE814C /* ChallengeStats.swift */; };
 		178530AA2C850FA4003426CD /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178530A92C850FA4003426CD /* Saving.swift */; };
 		17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */; };
 		17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */; };
@@ -76,6 +78,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1703E9202CB9B5AC00A89242 /* ChallengeEditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeEditScreen.swift; sourceTree = "<group>"; };
 		171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerStyle.swift; sourceTree = "<group>"; };
 		171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDoneButton.swift; sourceTree = "<group>"; };
 		171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarCancelButton.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 		176EAE212C8290F9007CBABE /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		176F63972C877261004437C1 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 		176F63992C8778F4004437C1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		177728F62CBA75FD00BE814C /* ChallengeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStats.swift; sourceTree = "<group>"; };
 		178530A92C850FA4003426CD /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 		17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
 		17A876D02C7F389700A47AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 			children = (
 				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
 				17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */,
+				1703E9202CB9B5AC00A89242 /* ChallengeEditScreen.swift */,
 				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
 				17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */,
 				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
@@ -405,9 +410,10 @@
 		8EFF94D32CB881CC00E77E3F /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				8EFF94D82CB885F000E77E3F /* StatsTracker.swift */,
 				8EFF94DA2CB8891400E77E3F /* StatsEntry.swift */,
 				8EFF94D62CB8829000E77E3F /* StatsType.swift */,
-				8EFF94D82CB885F000E77E3F /* StatsTracker.swift */,
+				177728F62CBA75FD00BE814C /* ChallengeStats.swift */,
 				8EFF94DE2CB88C8600E77E3F /* SavingStats.swift */,
 			);
 			path = Stats;
@@ -534,6 +540,7 @@
 				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				8EFF94D92CB885F000E77E3F /* StatsTracker.swift in Sources */,
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
+				177728F72CBA75FD00BE814C /* ChallengeStats.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
 				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
@@ -542,6 +549,7 @@
 				173760892CA413BC0062CB83 /* ChallengeProgressBarView.swift in Sources */,
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
+				1703E9212CB9B5AC00A89242 /* ChallengeEditScreen.swift in Sources */,
 				174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */,
 				8EFF94E12CB963CC00E77E3F /* ChallengeManager.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
@@ -685,7 +693,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Savy/Preview Content\"";
-				DEVELOPMENT_TEAM = 52W6SH3HGQ;
+				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Savy/Info.plist;
@@ -715,7 +723,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Savy/Preview Content\"";
-				DEVELOPMENT_TEAM = 52W6SH3HGQ;
+				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Savy/Info.plist;

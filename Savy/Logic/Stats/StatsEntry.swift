@@ -14,10 +14,12 @@ class StatsEntry {
     var type: StatsType
     var date: Date
     var savingStats: SavingStats?
+    var challengeStats: ChallengeStats?
     
-    init(type: StatsType, date: Date, savingStats: SavingStats? = nil) {
+    init(type: StatsType, date: Date, savingStats: SavingStats? = nil, challengeStats: ChallengeStats? = nil) {
         self.type = type
         self.date = date
         self.savingStats = savingStats
+        self.challengeStats = challengeStats
     }
 }

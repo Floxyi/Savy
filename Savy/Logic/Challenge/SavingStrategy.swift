@@ -6,7 +6,7 @@
 //
 
 
-enum SavingStrategy: String, CaseIterable {
+enum SavingStrategy: String, CaseIterable, Codable {
     case Weekly
     case Monthly
 }

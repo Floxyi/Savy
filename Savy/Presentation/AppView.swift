@@ -44,9 +44,16 @@ struct AppView: View {
 #Preview() {
     let container = try! ModelContainer(for: ChallengeManager.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "HomePod", icon: "homepod", startDate: Date(), endDate: endDate, targetAmount: 300, strategy: .Monthly, calculation: .Amount, savingAmount: 12))
-    ChallengeManager.shared.addChallenge(challenge: Challenge(name: "AirPods", icon: "airpods.gen3", startDate: Date(), endDate: endDate, targetAmount: 250, strategy: .Monthly, calculation: .Date))
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
+        startDate: Date(),
+        strategy: .Monthly,
+        calculation: .Amount,
+        cycleAmount: 12
+    )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     
     return AppView()
         .modelContainer(container)

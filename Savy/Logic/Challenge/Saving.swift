@@ -26,12 +26,7 @@ final class Saving {
     
     func toggleDone() {
         done.toggle()
-        if done {
-            StatsTracker.shared.addMoneySavedStatsEntry(id: id, amount: amount, date: date)
-        } else {
-            StatsTracker.shared.deleteStatsEntry(id: id)
-        }
-        
+        done ? StatsTracker.shared.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date) : StatsTracker.shared.deleteStatsEntry(savingId: id)
     }
     
     func setAmount(amount: Int) {

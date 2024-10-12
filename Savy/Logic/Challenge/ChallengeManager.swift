@@ -16,20 +16,25 @@ class ChallengeManager {
     init() {}
     
     func getChallengeById(id: UUID) -> Challenge? {
-        return ChallengeManager.shared.challenges.first(where: { $0.id == id })
+        return challenges.first(where: { $0.id == id })
     }
     
-    func addChallenge(challenge: Challenge) {
-        ChallengeManager.shared.challenges.append(challenge)
+    func addChallenge(challengeConfiguration: ChallengeConfiguration) {
+        let challenge = Challenge(challengeConfiguration: challengeConfiguration)
+        StatsTracker.shared.addChallengeStartedStatsEntry(challengeId: challenge.id)
+        challenges.append(challenge)
     }
     
-    func deleteChallenge(id: UUID) {
-        ChallengeManager.shared.challenges.removeAll(where: { $0.id == id })
+    func removeChallenge(id: UUID) {
+        challenges.removeAll(where: { $0.id == id })
+        let hasFinished = challenges.first(where: { $0.id == id })!.remainingAmount() == 0
+        hasFinished ? StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: id) : StatsTracker.shared.deleteStatsEntry(challengeId: id)
     }
     
-    func sortedChallenges() -> [Challenge] {
+    func sortChallenges() -> [Challenge] {
         let calendar = Calendar.current
-        return ChallengeManager.shared.challenges.sorted { challenge1, challenge2 in
+
+        let sortedChallenges = challenges.sorted { (challenge1: Challenge, challenge2: Challenge) -> Bool in
             let nextSaving1 = challenge1.getNextSaving(at: 1)
             let nextSaving2 = challenge2.getNextSaving(at: 1)
             
@@ -51,15 +56,15 @@ class ChallengeManager {
             let remainingSavings2 = challenge2.remainingSavings()
             
             if remainingSavings1 == 0 && remainingSavings2 == 0 {
-                return challenge1.endDate < challenge2.endDate
+                return challenge1.challengeConfiguration.endDate < challenge2.challengeConfiguration.endDate
             }
             
             if remainingSavings1 == 0 { return false }
             if remainingSavings2 == 0 { return true }
             
-            return date1 == date2
-            ? nextSaving1.amount < nextSaving2.amount
-            : date1 < date2
+            return date1 == date2 ? nextSaving1.amount < nextSaving2.amount : date1 < date2
         }
+        
+        return sortedChallenges
     }
 }

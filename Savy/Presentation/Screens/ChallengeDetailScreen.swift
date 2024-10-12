@@ -11,7 +11,8 @@ import SwiftUI
 struct ChallengeDetailScreen: View {
     let challenge: Challenge
     
-    @State private var showPopover = false
+    @State private var showDetailsPopover = false
+    @State private var showEditPopover = false
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -25,7 +26,7 @@ struct ChallengeDetailScreen: View {
         NavigationView {
             VStack() {
                 HeaderView(
-                    title: challenge.name,
+                    title: challenge.challengeConfiguration.name,
                     size: 32,
                     dismiss: {
                         dismiss()
@@ -85,10 +86,10 @@ struct ChallengeDetailScreen: View {
                             ChallengeDetailsButtonView(
                                 title: "View all",
                                 icon: "chevron.up",
-                                showPopover: $showPopover
+                                showPopover: $showDetailsPopover
                             )
-                            .popover(isPresented: $showPopover) {
-                                ChallengeDetailsListScreen(challenge: challenge, showPopover: $showPopover)
+                            .popover(isPresented: $showDetailsPopover) {
+                                ChallengeDetailsListScreen(challenge: challenge, showPopover: $showDetailsPopover)
                             }
                         }
                     }
@@ -105,7 +106,6 @@ struct ChallengeDetailScreen: View {
                                 .padding(.vertical, 20)
                             Button(role: .destructive, action: {
                                 removeChallenge()
-                                StatsTracker.shared.addChallengeCompletedStatsEntry()
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -123,56 +123,37 @@ struct ChallengeDetailScreen: View {
         .background(currentSchema.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
+        .popover(isPresented: $showEditPopover) {
+            ChallengeEditScreen(challenge: challenge, showPopover: $showEditPopover)
+        }
     }
     
     private func editChallenge() {
+        showEditPopover = true
     }
     
     private func removeChallenge() {
-        ChallengeManager.shared.deleteChallenge(id: challenge.id)
+        ChallengeManager.shared.removeChallenge(id: challenge.id)
         dismiss()
         TabBarManager.shared.show()
     }
 }
 
-#Preview("Running") {
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(
-        name: "MacBook",
-        icon: "macbook",
+#Preview() {
+    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
         startDate: Date(),
-        endDate: endDate,
-        targetAmount: 200,
         strategy: .Monthly,
         calculation: .Amount,
-        savingAmount: 12
+        cycleAmount: 12
     )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    container.mainContext.insert(challenge)
-    
-    return ChallengeDetailScreen(challenge: challenge)
-        .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
-}
-
-#Preview("Finished") {
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(
-        name: "MacBook",
-        icon: "macbook",
-        startDate: Date(),
-        endDate: endDate,
-        targetAmount: 200,
-        strategy: .Monthly,
-        calculation: .Amount,
-        savingAmount: 12
-    )
-    
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    container.mainContext.insert(challenge)
-    
-    return ChallengeDetailScreen(challenge: challenge)
+    return ChallengeDetailScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
 }

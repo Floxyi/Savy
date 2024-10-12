@@ -1,14 +1,16 @@
 //
-//  ChallengeAddScreen.swift
+//  ChallengeEditView.swift
 //  Savy
 //
-//  Created by Florian Winkler on 22.08.24.
+//  Created by Florian Winkler on 11.10.24.
 //
 
 import SwiftUI
 import SwiftData
 
-struct ChallengeAddScreen: View {
+struct ChallengeEditScreen: View {
+    var challenge: Challenge
+    
     @Binding var showPopover: Bool
     
     @State private var icon: String?
@@ -142,7 +144,7 @@ struct ChallengeAddScreen: View {
                             showPopover: $showPopover,
                             title: "Done",
                             isValid: { isValid() },
-                            onDoneAction: { ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration) }
+                            onDoneAction: { }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {
@@ -181,7 +183,20 @@ struct ChallengeAddScreen: View {
                     IconPickerOverlay(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
                 }
             }
+            .onAppear {
+                loadChallengeData()
+            }
         }
+    }
+    
+    private func loadChallengeData() {
+        icon = challenge.challengeConfiguration.icon
+        name = challenge.challengeConfiguration.name
+        amount = challenge.challengeConfiguration.amount
+        endDate = challenge.challengeConfiguration.endDate
+        strategy = challenge.challengeConfiguration.strategy
+        calculation = challenge.challengeConfiguration.calculation
+        cycleAmount = challenge.challengeConfiguration.cycleAmount
     }
     
     private func updateEndDate() {
@@ -202,9 +217,23 @@ struct ChallengeAddScreen: View {
 #Preview {
     @Previewable @State var showPopover: Bool = true
     
+    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
+        startDate: Date(),
+        strategy: .Monthly,
+        calculation: .Amount,
+        cycleAmount: 12
+    )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    
     return Spacer()
         .popover(isPresented: $showPopover) {
-            ChallengeAddScreen(showPopover: $showPopover)
+            ChallengeEditScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
         }
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(container)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
 }
