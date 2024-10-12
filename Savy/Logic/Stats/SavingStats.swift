@@ -17,6 +17,6 @@ class SavingStats {
     init(savingId: UUID, amount: Int, expectedDate: Date) {
         self.savingId = savingId
         self.amount = amount
-        self.expectedDate = expectedDate
+        self.expectedDate = Calendar.current.startOfDay(for: expectedDate)
     }
 }

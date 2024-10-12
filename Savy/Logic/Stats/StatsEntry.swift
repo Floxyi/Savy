@@ -18,7 +18,7 @@ class StatsEntry {
     
     init(type: StatsType, date: Date, savingStats: SavingStats? = nil, challengeStats: ChallengeStats? = nil) {
         self.type = type
-        self.date = date
+        self.date = Calendar.current.startOfDay(for: date)
         self.savingStats = savingStats
         self.challengeStats = challengeStats
     }
