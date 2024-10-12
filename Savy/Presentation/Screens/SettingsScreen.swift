@@ -14,8 +14,6 @@ struct SettingsScreen: View {
     @State private var selectedMode: ColorSchemeMode = .light
     @State private var toggledDarkMode: Bool = false
     @State private var toggledColorMode: Bool = false
-    @State private var toggledNotifications: Bool = false
-    @State private var toggledEachNotification: Bool = false
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -51,13 +49,6 @@ struct SettingsScreen: View {
                             withAnimation {
                                 updateSchemaForSelectedMode()
                             }
-                        }
-                    }
-                    
-                    SettingsTileView(image: "bell.fill", text: "Notifications") {
-                        SettingsBarView(text: "Enable Notifications", toggle: $toggledNotifications)
-                        if toggledNotifications {
-                            SettingsBarView(text: "Enable for each Challenge", toggle: $toggledEachNotification)
                         }
                     }
                 }
