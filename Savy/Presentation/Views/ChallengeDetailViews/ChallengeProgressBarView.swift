@@ -28,7 +28,7 @@ struct ChallengeProgressBarView: View {
                     .frame(width: geometry.size.width * progress, height: geometry.size.height)
                 
                 HStack {
-                    Image(systemName: challenge.icon)
+                    Image(systemName: challenge.challengeConfiguration.icon)
                         .foregroundColor(currentSchema.accent2)
                     
                     Spacer()
@@ -39,7 +39,7 @@ struct ChallengeProgressBarView: View {
                     
                     Spacer()
                     
-                    Text("\(challenge.targetAmount)€")
+                    Text("\(challenge.challengeConfiguration.amount)€")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(currentSchema.accent2)
                 }
@@ -51,22 +51,20 @@ struct ChallengeProgressBarView: View {
 }
 
 #Preview {
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(
-        name: "MacBook",
-        icon: "macbook",
+    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
         startDate: Date(),
-        endDate: endDate,
-        targetAmount: 1500,
         strategy: .Monthly,
         calculation: .Amount,
-        savingAmount: 12
+        cycleAmount: 12
     )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    container.mainContext.insert(challenge)
-    
-    return ChallengeProgressBarView(challenge: challenge)
+    return ChallengeProgressBarView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .padding()
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))

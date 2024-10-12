@@ -32,14 +32,14 @@ struct ChallengeDetailsListScreen: View {
                     Text("Start:")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font)
-                    Text(challenge.startDate.formatted(.dateTime.day().month().year()))
+                    Text(challenge.challengeConfiguration.startDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
                         .foregroundColor(currentSchema.font)
                     Spacer()
                     Text("End:")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font)
-                    Text(challenge.endDate.formatted(.dateTime.day().month().year()))
+                    Text(challenge.challengeConfiguration.endDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
                         .foregroundColor(currentSchema.font)
                 }
@@ -70,21 +70,20 @@ struct ChallengeDetailsListScreen: View {
 #Preview {
     @Previewable @State var showPopover: Bool = true
     
-    let endDate = Calendar.current.date(byAdding: .month, value: 48, to: Date())!
-    let challenge: Challenge = Challenge(
-        name: "MacBook",
-        icon: "macbook",
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
         startDate: Date(),
-        endDate: endDate,
-        targetAmount: 200,
         strategy: .Monthly,
         calculation: .Amount,
-        savingAmount: 12
+        cycleAmount: 12
     )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     
     return Spacer()
         .popover(isPresented: $showPopover) {
-            ChallengeDetailsListScreen(challenge: challenge, showPopover: $showPopover)
+            ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
         }
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

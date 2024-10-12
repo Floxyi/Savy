@@ -18,6 +18,7 @@ struct LeaderboardScreen: View {
         
         VStack {
             HeaderView(title: "Leaderboard")
+            Text(StatsTracker.shared.totalMoneySaved().description)
             HStack {
                 List(users) { user in
                     Text(user.username ?? "Unknown")

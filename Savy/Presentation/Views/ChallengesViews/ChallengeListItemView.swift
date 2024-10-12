@@ -36,7 +36,7 @@ private struct HeadlineView: View {
         HStack {
             IconAndNameView(challenge: challenge)
             Spacer()
-            DateView(date: challenge.endDate)
+            DateView(date: challenge.challengeConfiguration.endDate)
         }
     }
 }
@@ -47,9 +47,9 @@ private struct IconAndNameView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: challenge.icon)
+            Image(systemName: challenge.challengeConfiguration.icon)
                 .fontWeight(.bold)
-            Text(challenge.name)
+            Text(challenge.challengeConfiguration.name)
                 .fontWeight(.bold)
         }
         .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
@@ -199,7 +199,7 @@ private struct AmountView: View {
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
                 .padding(.trailing, 7)
-            Text("/ \(challenge.targetAmount)€")
+            Text("/ \(challenge.challengeConfiguration.amount)€")
                 .font(.system(size: 10, weight: .bold))
                 .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
                 .offset(y: -3)
@@ -211,22 +211,20 @@ private struct AmountView: View {
 }
 
 #Preview {
-    let endDate = Calendar.current.date(byAdding: .month, value: 24, to: Date())!
-    let challenge: Challenge = Challenge(
-        name: "MacBook",
-        icon: "macbook",
+    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
         startDate: Date(),
-        endDate: endDate,
-        targetAmount: 1500,
         strategy: .Monthly,
         calculation: .Amount,
-        savingAmount: 12
+        cycleAmount: 12
     )
+    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    container.mainContext.insert(challenge)
-    
-    return ChallengeListItemView(challenge: challenge)
+    return ChallengeListItemView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
 }

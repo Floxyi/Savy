@@ -6,7 +6,7 @@
 //
 
 
-enum SavingCalculation: String {
+enum SavingCalculation: String, Codable {
     case Date = "Until Date"
     case Amount = "With Amount"
 }
