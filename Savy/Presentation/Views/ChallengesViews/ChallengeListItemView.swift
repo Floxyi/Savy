@@ -36,7 +36,7 @@ private struct HeadlineView: View {
         HStack {
             IconAndNameView(challenge: challenge)
             Spacer()
-            DateView(date: challenge.challengeConfiguration.endDate)
+            DateView(date: challenge.savings.last!.date)
         }
     }
 }
