@@ -11,33 +11,27 @@ import SwiftUI
 struct LeaderboardScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
-    @State var users: [Profile] = []
+    @State var showsPersonalStats: Bool = false
     
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         
         VStack {
-            HeaderView(title: "Leaderboard")
-            Text(StatsTracker.shared.totalMoneySaved().description)
-            HStack {
-                List(users) { user in
-                    Text(user.username ?? "Unknown")
-                }
-                .scrollContentBackground(.hidden)
-                .overlay {
-                    if users.isEmpty {
-                        ProgressView()
-                    }
-                }
-                .task {
-                    do {
-                        users = try await AuthManager.shared.client.from("profiles").select().execute().value
-                    } catch {
-                        dump(error)
-                    }
-                }
+            if showsPersonalStats {
+                HeaderView(title: "Personal Stats")
             }
+            
+            if !showsPersonalStats {
+                LeaderboardView()
+            }
+            
             Spacer()
+            LeaderboardSwitchButton(showsPersonalStats: $showsPersonalStats)
+                .padding(.bottom, 100)
+            
+            HStack {
+                Spacer()
+            }
         }
         .padding()
         .background(currentSchema.background)
