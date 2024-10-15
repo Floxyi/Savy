@@ -46,7 +46,7 @@ struct ChallengeDetailsListScreen: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 1)
                 
-                ScrollView {
+                ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(sortedSavings, id: \.id) { saving in
                             SavingItemView(saving: saving)
