@@ -18,26 +18,7 @@ struct LeaderboardScreen: View {
         
         VStack {
             HeaderView(title: "Leaderboard")
-            Text(StatsTracker.shared.totalMoneySaved().description)
-            HStack {
-                List(users) { user in
-                    Text(user.username ?? "Unknown")
-                }
-                .scrollContentBackground(.hidden)
-                .overlay {
-                    if users.isEmpty {
-                        ProgressView()
-                    }
-                }
-                .task {
-                    do {
-                        users = try await AuthManager.shared.client.from("profiles").select().execute().value
-                    } catch {
-                        dump(error)
-                    }
-                }
-            }
-            Spacer()
+            AllTimeStatsView()
         }
         .padding()
         .background(currentSchema.background)

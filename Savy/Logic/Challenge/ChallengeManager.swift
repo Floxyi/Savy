@@ -26,8 +26,6 @@ class ChallengeManager {
     }
     
     func removeChallenge(id: UUID) {
-        let hasFinished = challenges.first(where: { $0.id == id })!.remainingAmount() == 0
-        hasFinished ? StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: id) : StatsTracker.shared.deleteStatsEntry(challengeId: id)
         challenges.removeAll(where: { $0.id == id })
     }
     

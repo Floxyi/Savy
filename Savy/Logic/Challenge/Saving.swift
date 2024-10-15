@@ -27,6 +27,18 @@ final class Saving {
     func toggleDone() {
         done.toggle()
         done ? StatsTracker.shared.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date) : StatsTracker.shared.deleteStatsEntry(savingId: id)
+        
+        let wasCompleted = StatsTracker.shared.entries.contains { (entry: StatsEntry) in
+            entry.type == StatsType.challenged_completed && entry.challengeStats?.challengeId == challengeId
+        }
+        if wasCompleted && !done {
+            StatsTracker.shared.deleteStatsEntry(challengeId: challengeId, statsType: .challenged_completed)
+        }
+        
+        let isCompleted = ChallengeManager.shared.getChallengeById(id: challengeId)?.remainingAmount() == 0
+        if isCompleted && done {
+            StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: challengeId)
+        }
     }
     
     func setAmount(amount: Int) {

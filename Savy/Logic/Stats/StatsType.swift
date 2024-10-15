@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum StatsType: String, Codable {
-    case money_saved
-    case challenged_started
-    case challenged_completed
+enum StatsType: String, CaseIterable, Codable {
+    case money_saved = "Money saved"
+    case challenged_started = "Challenged started"
+    case challenged_completed = "Challenged completed"
 }

@@ -28,6 +28,10 @@ class StatsTracker {
         entries.removeAll(where: { $0.challengeStats?.challengeId == challengeId })
     }
     
+    func deleteStatsEntry(challengeId: UUID, statsType: StatsType) {
+        entries.removeAll(where: { $0.challengeStats?.challengeId == challengeId && $0.type == statsType })
+    }
+    
     func addMoneySavedStatsEntry(savingId: UUID, amount: Int, date: Date) {
         let savingStats = SavingStats(savingId: savingId, amount: amount, expectedDate: date)
         let entry = StatsEntry(type: .money_saved, date: Date(), savingStats: savingStats)
@@ -65,10 +69,17 @@ class StatsTracker {
             .count
     }
     
-    func allTimePunctuality() -> Double {
+    func allTimePunctuality() -> Int? {
         let allSavings = entries.filter { $0.type == .money_saved }
+        if allSavings.isEmpty {
+            return nil
+        }
+        
         let punctualSavings = allSavings.filter { $0.date <= $0.savingStats!.expectedDate }
-        return Double(punctualSavings.count) / Double(allSavings.count)
+        if punctualSavings.isEmpty {
+            return nil
+        }
+        return Int(Double(punctualSavings.count) / Double(allSavings.count) * 100.rounded())
     }
     
     func averageSavedSinceFirstSavingEntry() -> Double {
@@ -81,16 +92,20 @@ class StatsTracker {
         
         return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
     }
-
-
+    
+    
     func timeRangeCalculation(startDate: Date, endDate: Date, statsType: StatsType) -> [StatsEntry] {
         return entries.filter { entry in
-            entry.date >= startDate && entry.date <= endDate && entry.type == statsType
+            Calendar.current.startOfDay(for: entry.date) >= Calendar.current.startOfDay(for: startDate) && Calendar.current.startOfDay(for: entry.date) <= Calendar.current.startOfDay(for: endDate) && entry.type == statsType
         }
     }
     
     func timeRangeMoneySaved(startDate: Date, endDate: Date) -> Int {
         return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved).reduce(0) { $0 + $1.savingStats!.amount }
+    }
+    
+    func timeRangeSavingCount(startDate: Date, endDate: Date) -> Int {
+        return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved).count
     }
     
     func timeRangeChallengesCompleted(startDate: Date, endDate: Date) -> Int {
@@ -101,17 +116,33 @@ class StatsTracker {
         return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_started).count
     }
     
-    func timeRangePunctuality(startDate: Date, endDate: Date) -> Double {
+    func timeRangePunctuality(startDate: Date, endDate: Date) -> Double? {
         let allSavings = timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved)
+        if allSavings.isEmpty {
+            return nil
+        }
+        
         let punctualSavings = allSavings.filter { $0.date <= $0.savingStats!.expectedDate }
         return Double(punctualSavings.count) / Double(allSavings.count)
     }
     
     func averageSavedTimeRange(startDate: Date, endDate: Date) -> Double {
         let totalAmount = timeRangeMoneySaved(startDate: startDate, endDate: endDate)
-        
         let numberOfDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
-        
+        let allSaving = StatsTracker.shared.entries.filter { $0.type == .money_saved }
+
+        if Calendar.current.isDate(startDate, inSameDayAs: endDate) {
+            let savingsForDate = allSaving
+                .filter { Calendar.current.isDate($0.date, inSameDayAs: startDate) }
+                .compactMap { $0.savingStats?.amount }
+                .reduce(0, +)
+            return Double(savingsForDate)
+        }
+
+        if numberOfDays == 0 && !allSaving.isEmpty {
+            return Double(StatsTracker.shared.totalMoneySaved())
+        }
+
         return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
     }
 }
