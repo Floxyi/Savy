@@ -18,7 +18,7 @@ struct LeaderboardScreen: View {
         
         VStack {
             if showsPersonalStats {
-                AllTimeStatsView()
+                PersonalStatsView()
             }
             
             if !showsPersonalStats {

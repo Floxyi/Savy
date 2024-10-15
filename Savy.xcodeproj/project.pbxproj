@@ -70,9 +70,9 @@
 		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
 		17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */; };
 		17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A22C7770D20012FCF7 /* HeaderView.swift */; };
-		8E0726F82CBDA3BF007DAB6A /* StatsTypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0726F72CBDA3BF007DAB6A /* StatsTypeSelector.swift */; };
+		8E33160D2CBE0DF1000547A5 /* StatsTypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33160C2CBE0DF1000547A5 /* StatsTypeSelector.swift */; };
+		8E33160E2CBE0DF1000547A5 /* PersonalStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33160B2CBE0DF1000547A5 /* PersonalStatsView.swift */; };
 		8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */; };
-		8E6F7B0A2CBC0059002A1392 /* AllTimeStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6F7B092CBC0059002A1392 /* AllTimeStatsView.swift */; };
 		8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */; };
 		8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */; };
 		8EFF94D72CB8829000E77E3F /* StatsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF94D62CB8829000E77E3F /* StatsType.swift */; };
@@ -147,6 +147,8 @@
 		17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddScreen.swift; sourceTree = "<group>"; };
 		17FF01A22C7770D20012FCF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		8E0726F72CBDA3BF007DAB6A /* StatsTypeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTypeSelector.swift; sourceTree = "<group>"; };
+		8E33160B2CBE0DF1000547A5 /* PersonalStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalStatsView.swift; sourceTree = "<group>"; };
+		8E33160C2CBE0DF1000547A5 /* StatsTypeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTypeSelector.swift; sourceTree = "<group>"; };
 		8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		8E6F7B092CBC0059002A1392 /* AllTimeStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTimeStatsView.swift; sourceTree = "<group>"; };
 		8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAccountStyle.swift; sourceTree = "<group>"; };
@@ -216,6 +218,8 @@
 		176135B92CBD8AF100AB3AF9 /* LeaderboardViews */ = {
 			isa = PBXGroup;
 			children = (
+				8E33160B2CBE0DF1000547A5 /* PersonalStatsView.swift */,
+				8E33160C2CBE0DF1000547A5 /* StatsTypeSelector.swift */,
 				176135BA2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift */,
 				176135BC2CBD984500AB3AF9 /* LeaderboardView.swift */,
 			);
@@ -374,6 +378,7 @@
 				17FB1CEF2C74E38900E1C6F4 /* Savy */,
 				17FB1CEE2C74E38900E1C6F4 /* Products */,
 				17530FA12C811276003D768C /* Frameworks */,
+				8E33160A2CBE0DCC000547A5 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -436,13 +441,13 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		8E6F7B062CBC0008002A1392 /* PersonalStatsViews */ = {
+		8E33160A2CBE0DCC000547A5 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				8E6F7B092CBC0059002A1392 /* AllTimeStatsView.swift */,
 				8E0726F72CBDA3BF007DAB6A /* StatsTypeSelector.swift */,
 			);
-			path = PersonalStatsViews;
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		8EFF94D32CB881CC00E77E3F /* Stats */ = {
@@ -538,7 +543,6 @@
 				172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */,
 				8EFF94DB2CB8891400E77E3F /* StatsEntry.swift in Sources */,
 				17F290202CA9DC72007382CD /* SavingStrategy.swift in Sources */,
-				8E6F7B0A2CBC0059002A1392 /* AllTimeStatsView.swift in Sources */,
 				17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */,
 				17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
@@ -563,6 +567,8 @@
 				17B246692C7B0A570036C534 /* ColorSchemas.swift in Sources */,
 				17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */,
 				176135BD2CBD984500AB3AF9 /* LeaderboardView.swift in Sources */,
+				8E33160D2CBE0DF1000547A5 /* StatsTypeSelector.swift in Sources */,
+				8E33160E2CBE0DF1000547A5 /* PersonalStatsView.swift in Sources */,
 				17B2466B2C7B0A930036C534 /* ColorSchemeMode.swift in Sources */,
 				17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */,
 				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
@@ -595,7 +601,6 @@
 				176135BB2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift in Sources */,
 				8EFF94E12CB963CC00E77E3F /* ChallengeManager.swift in Sources */,
 				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
-				8E0726F82CBDA3BF007DAB6A /* StatsTypeSelector.swift in Sources */,
 				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
 				8EFF94D72CB8829000E77E3F /* StatsType.swift in Sources */,
 				8EFF94DF2CB88C8600E77E3F /* SavingStats.swift in Sources */,

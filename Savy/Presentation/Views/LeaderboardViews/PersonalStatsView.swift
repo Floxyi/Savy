@@ -1,5 +1,5 @@
 //
-//  AllTimeStatsView.swift
+//  PersonalStatsView.swift
 //  Savy
 //
 //  Created by Nadine Schatz on 13.10.24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct AllTimeStatsView: View {
+struct PersonalStatsView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     
     @State private var statsType: StatsType = .money_saved
@@ -241,7 +241,6 @@ struct AllTimeStatsView: View {
                                 .background(currentSchema.bar)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .padding(.top, 24)
-                                .padding(.bottom, 100)
                                 .padding()
                                 .shadow(radius: 5)
                                 .onChange(of: startDate) {
@@ -274,13 +273,13 @@ struct AllTimeStatsView: View {
     StatsTracker.shared.addChallengeStartedStatsEntry(challengeId: UUID())
     StatsTracker.shared.addChallengeStartedStatsEntry(challengeId: UUID())
     
-    return AllTimeStatsView()
+    return PersonalStatsView()
         .padding()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
 
 #Preview("Empty") {
-    AllTimeStatsView()
+    PersonalStatsView()
         .padding()
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
