@@ -16,7 +16,6 @@ class StatsEntry {
     var savingStats: SavingStats?
     var challengeStats: ChallengeStats?
     
-    // Initializes a new stats entry with type, date, and optional stats
     init(type: StatsType, date: Date, savingStats: SavingStats? = nil, challengeStats: ChallengeStats? = nil) {
         self.type = type
         self.date = Calendar.current.startOfDay(for: date)
