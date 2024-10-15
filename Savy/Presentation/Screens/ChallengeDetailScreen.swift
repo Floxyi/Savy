@@ -83,11 +83,15 @@ struct ChallengeDetailScreen: View {
                                     SavingItemView(saving: sortedSavings.last!)
                                 }
                             }
+                            
+                            Spacer()
+                            
                             ChallengeDetailsButtonView(
                                 title: "View all",
                                 icon: "chevron.up",
                                 showPopover: $showDetailsPopover
                             )
+                            .padding(.bottom, 24)
                             .popover(isPresented: $showDetailsPopover) {
                                 ChallengeDetailsListScreen(challenge: challenge, showPopover: $showDetailsPopover)
                             }

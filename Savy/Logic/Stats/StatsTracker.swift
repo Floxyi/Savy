@@ -12,7 +12,8 @@ import SwiftData
 class StatsTracker {
     static let shared = StatsTracker()
     
-    private(set) var entries: [ StatsEntry] = []
+    private(set) var entries: [StatsEntry] = []
+    private(set) var accountUUID: UUID?
     
     init() { }
     
@@ -22,16 +23,23 @@ class StatsTracker {
     
     func deleteStatsEntry(savingId: UUID) {
         entries.removeAll(where: { $0.savingStats?.savingId == savingId })
+        updateSavingAmountInDatabase()
     }
     
     func deleteStatsEntry(challengeId: UUID) {
         entries.removeAll(where: { $0.challengeStats?.challengeId == challengeId })
     }
     
+    func removeAllEntries() {
+        entries.removeAll()
+        updateSavingAmountInDatabase()
+    }
+    
     func addMoneySavedStatsEntry(savingId: UUID, amount: Int, date: Date) {
         let savingStats = SavingStats(savingId: savingId, amount: amount, expectedDate: date)
         let entry = StatsEntry(type: .money_saved, date: Date(), savingStats: savingStats)
         addStatsEntry(entry: entry)
+        updateSavingAmountInDatabase()
     }
     
     func addChallengeCompletedStatsEntry(challengeId: UUID) {
@@ -113,5 +121,37 @@ class StatsTracker {
         let numberOfDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
         
         return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
+    }
+    
+    func getSavingsAmountFromDatabase(id: UUID) async throws -> Int {
+        let users: [Profile] = try await AuthManager.shared.client.from("profiles").select().execute().value
+        let savings: [Savings] = try await AuthManager.shared.client.from("savings").select().execute().value
+        let user = users.first { $0.id == id }
+        let saving = savings.first { $0.profileId == user?.id }
+        return saving?.amount ?? 0
+    }
+    
+    func updateSavingAmountInDatabase() {
+        Task {
+            do {
+                let profileId = AuthManager.shared.profile?.id
+                let savings: [Savings] = try await AuthManager.shared.client.from("savings").select().execute().value
+                var savingsEntry = savings.first { $0.profileId == profileId }
+                if savingsEntry == nil {
+                    return
+                }
+                savingsEntry?.amount = totalMoneySaved()
+                try await AuthManager.shared.client.from("savings").update(savingsEntry).eq("profile_id", value: profileId).execute()
+            } catch { print(error) }
+        }
+    }
+    
+    func setAccountUUID(uuid: UUID?, sameAccount: Bool = true) {
+        let hasRegisteredBefore = accountUUID != nil
+        self.accountUUID = uuid
+        if hasRegisteredBefore && sameAccount {
+            self.removeAllEntries()
+            ChallengeManager.shared.removeAllChallenges()
+        }
     }
 }
