@@ -58,7 +58,7 @@ struct PersonalStatsView: View {
                                 .fontWeight(.bold)
                                 .font(.system(size: 24))
                             Spacer()
-                            Text("\(StatsTracker.shared.entries.first(where: { $0.type == .money_saved })?.date.formatted(.dateTime.year().month().day()) ?? "")")
+                            Text("\(StatsTracker.shared.entries.first?.date.formatted(.dateTime.year().month().day()) ?? "")")
                                 .foregroundStyle(currentSchema.font)
                             Image(systemName: "calendar")
                                 .foregroundStyle(currentSchema.font)
