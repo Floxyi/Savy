@@ -39,48 +39,6 @@ class ChallengeConfiguration {
         self.cycleAmount = cycleAmount
     }
     
-    //func generateSavings(challenge: Challenge, startDate: Date? = nil, preSavedAmount: Int = 0) {
-    //    let calendar = Calendar.current
-    //    var date = startDate != nil ? startDate! : nextDate(from: self.startDate, strategy: strategy, calendar: calendar)!
-    //
-    //    let targetAmount = amount - preSavedAmount
-    //
-    //    if calculation == .Amount {
-    //        if startDate == nil {
-    //            self.endDate = calculateEndDateByAmount(challenge: challenge, startDate: date)
-    //        } else {
-    //            self.endDate = calculateEndDateByAmount(challenge: challenge, startDate: previousDate(from: date, strategy: strategy, calendar: calendar)!)
-    //        }
-    //    }
-    //
-    //  let numberOfCycles = strategy == .Monthly ? numberOfMonths(startDate: date, endDate: endDate) : numberOfWeeks(startDate: date, endDate: endDate)
-    //  let amountPerCycle = calculation == .Date ? targetAmount / numberOfCycles : cycleAmount!
-    //
-    //  while startOfDay(for: date) <= startOfDay(for: endDate) {
-    //      challenge.addSaving(saving: Saving(challengeId: challenge.id, amount: amountPerCycle, date: date))
-    //      date = nextDate(from: date, strategy: strategy, calendar: calendar)!
-    //  }
-    //
-    //  let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount }
-    //
-    //  if savedAmount > amount {
-    //      let overflow = savedAmount - amount
-    //      let lastSaving = challenge.savings.last!
-    //
-    //      if lastSaving.amount - overflow > 0 {
-    //          lastSaving.setAmount(amount: lastSaving.amount - overflow)
-    //          challenge.updateSaving(saving: lastSaving)
-    //      } else if lastSaving.amount - overflow == 0 {
-    //          challenge.removeSaving(saving: lastSaving)
-    //      } else {
-    //          challenge.removeSaving(saving: lastSaving)
-    //          let secondLastSaving = challenge.savings.last!
-    //          secondLastSaving.setAmount(amount: secondLastSaving.amount - overflow)
-    //          challenge.updateSaving(saving: secondLastSaving)
-    //      }
-    //  }
-    //}
-    
     func generateSavings(challenge: Challenge, amount: Int, startDate: Date, presaved: Int = 0) {
         if calculation == .Date {
             generateSavingsByDate(challenge: challenge, amount: amount, startDate: startDate, presaved: presaved)

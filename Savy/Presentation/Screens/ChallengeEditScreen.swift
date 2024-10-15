@@ -102,7 +102,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
                         
-                        Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.endDate)) €")
+                        Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()
@@ -172,7 +172,7 @@ struct ChallengeEditScreen: View {
                         )
                         
                         HStack {
-                            Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.endDate)) €")
+                            Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentSchema.font)
                                 .padding(8)

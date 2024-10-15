@@ -36,6 +36,7 @@ struct AppView: View {
         .onAppear {
             Task {
                 try await AuthManager.shared.getCurrentSession()
+                StatsTracker.shared.setAccountUUID(uuid: AuthManager.shared.profile?.id)
             }
         }
     }
