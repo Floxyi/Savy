@@ -29,7 +29,7 @@ struct ChallengeInfoView: View {
                     Image(systemName: "calendar.badge.checkmark")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundStyle(currentSchema.accent2)
-                    Text("End: \(challenge.challengeConfiguration.endDate.formatted(.dateTime.year().month(.twoDigits).day()))")
+                    Text("End: \(challenge.savings.last!.date.formatted(.dateTime.year().month(.twoDigits).day()))")
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
                 }

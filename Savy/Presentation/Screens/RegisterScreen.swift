@@ -32,8 +32,11 @@ struct RegisterScreen: View {
     
     @Binding var isSignedIn: Bool
     
+    @State private var showConfirmationDialog = false
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
+        let hasRegestiredPreviously = StatsTracker.shared.accountUUID != nil
         
         VStack {
             HeaderView(title: "Register", dismiss: {
@@ -90,25 +93,56 @@ struct RegisterScreen: View {
                     Text("This email address is already registered.")
                         .foregroundStyle(authError ? Color.red : currentSchema.background)
                     
-                    ActionButton(
-                        content: HStack {
-                            if isLoading {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
-                                    .frame(width: 20, height: 20)
-                            } else {
-                                Text("Register")
-                                    .font(.system(size: 26))
-                                    .fontWeight(.bold)
-                                Image(systemName: "arrow.right")
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 20))
+                    if hasRegestiredPreviously {
+                        ActionButton(
+                            content: HStack {
+                                if isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Text("Register")
+                                        .font(.system(size: 26))
+                                        .fontWeight(.bold)
+                                    Image(systemName: "arrow.right")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 20))
+                                }
+                            },
+                            isEnabled: isUsernameValid && isEmailValid && isPasswordValid && !isLoading,
+                            action: { showConfirmationDialog = true }
+                        )
+                        .padding(.top, 72)
+                        .confirmationDialog("If you proceed, you will loose all your personal stats.", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                            Button("Bestätigen", role: .destructive) {
+                                withAnimation {
+                                    signUpButtonPressed()
+                                }
                             }
-                        },
-                        isEnabled: isUsernameValid && isEmailValid && isPasswordValid && !isLoading,
-                        action: signUpButtonPressed
-                    )
-                    .padding(.top, 72)
+                            Button("Abbrechen", role: .cancel) { }
+                        }
+                    }
+                    
+                    if !hasRegestiredPreviously {
+                        ActionButton(
+                            content: HStack {
+                                if isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Text("Register")
+                                        .font(.system(size: 26))
+                                        .fontWeight(.bold)
+                                    Image(systemName: "arrow.right")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 20))
+                                }
+                            },
+                            isEnabled: isUsernameValid && isEmailValid && isPasswordValid && !isLoading,
+                            action: signUpButtonPressed
+                        )
+                    }
                 }
             }
             

@@ -20,8 +20,11 @@ struct LoginScreen: View {
     
     @Binding var isSignedIn: Bool
     
+    @State private var showConfirmationDialog = false
+    
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
+        let hasLoggedInPreviously = StatsTracker.shared.accountUUID != nil
         
         VStack {
             HeaderView(title: "Login", dismiss: {
@@ -56,25 +59,57 @@ struct LoginScreen: View {
                         .foregroundStyle(authError ? Color.red : currentSchema.background)
                         .multilineTextAlignment(.center)
                     
-                    ActionButton(
-                        content: HStack {
-                            if isLoading {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
-                                    .frame(width: 20, height: 20)
-                            } else {
-                                Text("Login")
-                                    .font(.system(size: 26))
-                                    .fontWeight(.bold)
-                                Image(systemName: "arrow.right")
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 20))
+                    if hasLoggedInPreviously {
+                        ActionButton(
+                            content: HStack {
+                                if isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Text("Login")
+                                        .font(.system(size: 26))
+                                        .fontWeight(.bold)
+                                    Image(systemName: "arrow.right")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 20))
+                                }
+                            },
+                            isEnabled: !email.isEmpty && !password.isEmpty && !isLoading,
+                            action: { showConfirmationDialog = true }
+                        )
+                        .padding(.top, 72)
+                        .confirmationDialog("If you proceed, you will loose all your data when loggin in to a new account.", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                            Button("Bestätigen", role: .destructive) {
+                                withAnimation {
+                                    signInButtonPressed()
+                                }
                             }
-                        },
-                        isEnabled: !email.isEmpty && !password.isEmpty && !isLoading,
-                        action: signInButtonPressed
-                    )
-                    .padding(.top, 72)
+                            Button("Abbrechen", role: .cancel) { }
+                        }
+                    }
+                    
+                    if !hasLoggedInPreviously {
+                        ActionButton(
+                            content: HStack {
+                                if isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Text("Login")
+                                        .font(.system(size: 26))
+                                        .fontWeight(.bold)
+                                    Image(systemName: "arrow.right")
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 20))
+                                }
+                            },
+                            isEnabled: !email.isEmpty && !password.isEmpty && !isLoading,
+                            action: signInButtonPressed
+                        )
+                        .padding(.top, 72)
+                    }
                 }
             }
             
@@ -110,7 +145,9 @@ struct LoginScreen: View {
             defer { isLoading = false }
             do {
                 if validateEmail() && validatePassword() {
-                    isSignedIn = try await AuthManager.shared.signInWithEmail(email: email, password: password)
+                    let oldId = StatsTracker.shared.accountUUID
+                    let newSignIn = await oldId == nil ? false : try AuthManager.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
+                    isSignedIn = try await AuthManager.shared.signInWithEmail(email: email, password: password, sameAccount: newSignIn)
                 } else {
                     authError = true
                 }

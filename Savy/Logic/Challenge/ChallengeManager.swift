@@ -29,6 +29,10 @@ class ChallengeManager {
         challenges.removeAll(where: { $0.id == id })
     }
     
+    func removeAllChallenges() {
+        challenges.removeAll()
+    }
+    
     func updateChallenge(id: UUID, challengeConfiguration: ChallengeConfiguration) {
         let challenge = challenges.first(where: { $0.id == id })!
         challenge.updateConfiguration(challengeConfiguration: challengeConfiguration)

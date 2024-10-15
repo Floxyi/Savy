@@ -39,53 +39,67 @@ class ChallengeConfiguration {
         self.cycleAmount = cycleAmount
     }
     
-    func generateSavings(challenge: Challenge, startDate: Date? = nil) {
-        let calendar = Calendar.current
-        var date = startDate ?? nextDate(from: self.startDate, strategy: strategy, calendar: calendar)!
+    func generateSavings(challenge: Challenge, amount: Int, startDate: Date, presaved: Int = 0) {
+        if calculation == .Date {
+            generateSavingsByDate(challenge: challenge, amount: amount, startDate: startDate, presaved: presaved)
+        } else if calculation == .Amount {
+            generateSavingsByAmount(challenge: challenge, amount: amount, startDate: startDate, presaved: presaved)
+        }
+    }
+    
+    func generateSavingsByDate(challenge: Challenge, amount: Int, startDate: Date, presaved: Int) {
+        let numberOfCycles = strategy == .Weekly ? numberOfWeeks(startDate: startDate, endDate: endDate) : numberOfMonths(startDate: startDate, endDate: endDate)
+        var amountPerSaving = amount / numberOfCycles
+        let isComplete = numberOfCycles * amountPerSaving == amount
         
-        let finishedSavings = challenge.savings.filter { $0.done }
-        let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
-        let targetAmount = amount - preSavedAmount
-        
-        if calculation == .Amount {
-            if startDate != nil {
-                self.endDate = calculateEndDateByAmount(challenge: challenge, startDate: startDate)
-            } else {
-                self.endDate = calculateEndDateByAmount(challenge: challenge)
-            }
+        if !isComplete {
+            amountPerSaving += 1
         }
         
-        let numberOfCycles = strategy == .Monthly ? numberOfMonths(startDate: date, endDate: endDate) : numberOfWeeks(startDate: date, endDate: endDate)
-        let amountPerCycle = calculation == .Date ? targetAmount / numberOfCycles : cycleAmount!
-        
-        while startOfDay(for: date) <= startOfDay(for: endDate) {
-            challenge.addSaving(saving: Saving(challengeId: challenge.id, amount: amountPerCycle, date: date))
-            date = nextDate(from: date, strategy: strategy, calendar: calendar)!
+        var currentDate = startDate
+        for _ in 0..<numberOfCycles {
+            let saving = Saving(challengeId: challenge.id, amount: amountPerSaving, date: currentDate)
+            challenge.addSaving(saving: saving)
+            currentDate = nextDate(from: currentDate, strategy: strategy, calendar: Calendar.current)!
         }
         
-        let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount }
-        
-        if savedAmount > amount {
-            let overflow = savedAmount - amount
+        if !isComplete {
             let lastSaving = challenge.savings.last!
-            
-            if lastSaving.amount - overflow > 0 {
-                lastSaving.setAmount(amount: lastSaving.amount - overflow)
+            let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount } - presaved
+            let lastSavingAmount = lastSaving.amount - (savedAmount - amount)
+            if lastSavingAmount > 0 {
+                lastSaving.setAmount(amount: lastSavingAmount)
                 challenge.updateSaving(saving: lastSaving)
-            } else if lastSaving.amount - overflow == 0 {
-                challenge.removeSaving(saving: lastSaving)
             } else {
                 challenge.removeSaving(saving: lastSaving)
-                let secondLastSaving = challenge.savings.last!
-                secondLastSaving.setAmount(amount: secondLastSaving.amount - overflow)
-                challenge.updateSaving(saving: secondLastSaving)
             }
         }
+    }
+    
+    func generateSavingsByAmount(challenge: Challenge, amount: Int, startDate: Date, presaved: Int) {
+        let savingsAmount = amount / cycleAmount!
+        let isComplete = savingsAmount * cycleAmount! == amount
+        let savingsCount = isComplete ? savingsAmount : savingsAmount + 1
         
-        if challenge.savings.last!.amount < 0 {
+        var currentDate = startDate
+        for _ in 0..<savingsCount {
+            let saving = Saving(challengeId: challenge.id, amount: cycleAmount!, date: currentDate)
+            challenge.addSaving(saving: saving)
+            currentDate = nextDate(from: currentDate, strategy: strategy, calendar: Calendar.current)!
+        }
+        
+        self.endDate = challenge.savings.last!.date
+        
+        if !isComplete {
             let lastSaving = challenge.savings.last!
-            lastSaving.setAmount(amount: lastSaving.amount + cycleAmount!)
-            challenge.updateSaving(saving: lastSaving)
+            let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount } - presaved
+            let lastSavingAmount = lastSaving.amount - (savedAmount - amount)
+            if lastSavingAmount > 0 {
+                lastSaving.setAmount(amount: lastSavingAmount)
+                challenge.updateSaving(saving: lastSaving)
+            } else {
+                challenge.removeSaving(saving: lastSaving)
+            }
         }
     }
     
@@ -96,12 +110,10 @@ class ChallengeConfiguration {
         
         let lastDate = challenge.savings.count > 0 ? challenge.savings.last!.date : self.startDate
         let nextDate = nextDate(from: lastDate, strategy: strategy, calendar: Calendar.current)!
-        generateSavings(challenge: challenge, startDate: nextDate)
-    }
-    
-    private func startOfDay(for date: Date) -> Date {
-        let calendar = Calendar.current
-        return calendar.startOfDay(for: date)
+        
+        let finishedSavings = challenge.savings.filter { $0.done }
+        let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
+        generateSavings(challenge: challenge, amount: amount - preSavedAmount, startDate: nextDate, presaved: preSavedAmount)
     }
     
     private func nextDate(from date: Date, strategy: SavingStrategy, calendar: Calendar) -> Date? {
@@ -142,9 +154,8 @@ class ChallengeConfiguration {
         return yearDifference + weekDifference
     }
     
-    func calculateEndDateByAmount(challenge: Challenge? = nil, startDate: Date? = nil) -> Date {
+    func calculateEndDateByAmount(challenge: Challenge? = nil, startDate: Date) -> Date {
         var targetAmount = amount
-        let date = startDate != nil ? startDate! : self.startDate
         
         if challenge != nil {
             let finishedSavings = challenge!.savings.filter { $0.done }
@@ -153,7 +164,7 @@ class ChallengeConfiguration {
         }
         
         if cycleAmount == nil {
-            return date
+            return startDate
         }
         
         let numberOfCycles = targetAmount / cycleAmount!
@@ -161,22 +172,24 @@ class ChallengeConfiguration {
         let endDate = Calendar.current.date(
             byAdding: strategy == .Monthly ? .month : .weekOfYear,
             value: numberOfCycles * cycleAmount! == targetAmount ? numberOfCycles : numberOfCycles + 1,
-            to: date
-        ) ?? date
+            to: startDate
+        ) ?? startDate
         
         return endDate
     }
     
-    func calculateCycleAmount() -> Int? {
-        let duration: Int
-
-        if strategy == .Monthly {
-            duration = numberOfMonths(startDate: startDate, endDate: endDate)
-        } else {
-            duration = numberOfWeeks(startDate: startDate, endDate: endDate)
+    func calculateCycleAmount(amount: Int, startDate: Date) -> Int {
+        if amount <= 0 {
+            return amount
         }
         
-        let numberOfCyles = duration != 0 ? duration : nil
-        return numberOfCyles != nil ? (amount + numberOfCyles! - 1) / numberOfCyles! : nil
+        let numberOfCycles = strategy == .Weekly ? numberOfWeeks(startDate: startDate, endDate: endDate) : numberOfMonths(startDate: startDate, endDate: endDate)
+        var amountPerSaving = amount / numberOfCycles
+        let isComplete = numberOfCycles * amountPerSaving == amount
+        
+        if !isComplete {
+            amountPerSaving += 1
+        }
+        return amountPerSaving
     }
 }

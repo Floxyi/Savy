@@ -99,7 +99,7 @@ struct ChallengeAddScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
                         
-                        Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount() ?? 0) €")
+                        Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()
@@ -123,7 +123,7 @@ struct ChallengeAddScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
                         
-                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount().formatted(.dateTime.day().month().year()))")
+                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount(startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()
@@ -166,7 +166,7 @@ struct ChallengeAddScreen: View {
                         )
                         
                         HStack {
-                            Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount() ?? 0) €")
+                            Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentSchema.font)
                                 .padding(8)

@@ -19,7 +19,7 @@ class Challenge {
         self.id = UUID()
         self.challengeConfiguration = challengeConfiguration
         self.savings = []
-        challengeConfiguration.generateSavings(challenge: self)
+        challengeConfiguration.generateSavings(challenge: self, amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)
     }
     
     func addSaving(saving: Saving) {

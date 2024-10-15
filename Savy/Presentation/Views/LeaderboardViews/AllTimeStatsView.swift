@@ -28,6 +28,8 @@ struct AllTimeStatsView: View {
         let challengesStartedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .challenged_started }) != nil
         let challengesCompletedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .challenged_completed }) != nil
         
+        HeaderView(title: "Personal Stats")
+
         if !moneySavedStatsEntries && !challengesStartedStatsEntries && !challengesCompletedStatsEntries {
             VStack() {
                 Text("There are no stats yet! Start saving money to see your progress.")
