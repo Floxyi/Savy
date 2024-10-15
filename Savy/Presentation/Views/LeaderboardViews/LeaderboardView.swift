@@ -41,6 +41,7 @@ struct LeaderboardView: View {
                                 Text("2. \(savingsArray[1].profile.username ?? "Unknown")")
                                     .font(.system(size: 18, weight: savingsArray[1].profile.id == StatsTracker.shared.accountUUID ? .black : .regular))
                                     .foregroundColor(currentSchema.font)
+                                    .multilineTextAlignment(.center)
                             }
                             .padding(.bottom, 12)
                             .padding(.top, 16)
@@ -61,6 +62,7 @@ struct LeaderboardView: View {
                                     Text("1. \(savingsArray[0].profile.username ?? "Unknown")")
                                         .font(.system(size: 22, weight: savingsArray[0].profile.id == StatsTracker.shared.accountUUID ? .black : .regular))
                                         .foregroundColor(currentSchema.font)
+                                        .multilineTextAlignment(.center)
                                 }
                             }
                             .padding(.bottom, 12)
@@ -76,6 +78,7 @@ struct LeaderboardView: View {
                                 Text("3. \(savingsArray[2].profile.username ?? "Unknown")")
                                     .font(.system(size: 16, weight: savingsArray[2].profile.id == StatsTracker.shared.accountUUID ? .black : .regular))
                                     .foregroundColor(currentSchema.font)
+                                    .multilineTextAlignment(.center)
                             }
                             .padding(.bottom, 12)
                             .padding(.top, 12)
