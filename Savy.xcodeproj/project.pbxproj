@@ -51,6 +51,9 @@
 		17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08C2C7A488500B28A04 /* Color+HSL.swift */; };
 		17B5D08F2C7A4AA500B28A04 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */; };
 		17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BFBA462C7A941200E19D10 /* Color+HexString.swift */; };
+		17C98CBE2CC6C305005CACA8 /* ChallengeActionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C98CBD2CC6C305005CACA8 /* ChallengeActionMenu.swift */; };
+		17C98CC02CC6C511005CACA8 /* SavingsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C98CBF2CC6C511005CACA8 /* SavingsGridView.swift */; };
+		17C98CC22CC6C535005CACA8 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C98CC12CC6C535005CACA8 /* CompletionView.swift */; };
 		17DB38872CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */; };
 		17DB38892CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */; };
 		17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */; };
@@ -126,6 +129,9 @@
 		17B5D08C2C7A488500B28A04 /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
 		17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		17BFBA462C7A941200E19D10 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
+		17C98CBD2CC6C305005CACA8 /* ChallengeActionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeActionMenu.swift; sourceTree = "<group>"; };
+		17C98CBF2CC6C511005CACA8 /* SavingsGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGridView.swift; sourceTree = "<group>"; };
+		17C98CC12CC6C535005CACA8 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
 		17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsListScreen.swift; sourceTree = "<group>"; };
 		17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsButtonView.swift; sourceTree = "<group>"; };
 		17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeConfiguration.swift; sourceTree = "<group>"; };
@@ -278,6 +284,9 @@
 		17A38E852C87029C000F8A70 /* ChallengeDetailViews */ = {
 			isa = PBXGroup;
 			children = (
+				17C98CC12CC6C535005CACA8 /* CompletionView.swift */,
+				17C98CBF2CC6C511005CACA8 /* SavingsGridView.swift */,
+				17C98CBD2CC6C305005CACA8 /* ChallengeActionMenu.swift */,
 				173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */,
 				17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */,
 				172E54C82C89D98300F521C4 /* SavingItemView.swift */,
@@ -557,10 +566,12 @@
 				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
 				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
 				178530AA2C850FA4003426CD /* Saving.swift in Sources */,
+				17C98CBE2CC6C305005CACA8 /* ChallengeActionMenu.swift in Sources */,
 				17444A1B2CA18BD200D3E14E /* RegistrationTextFieldView.swift in Sources */,
 				176135C02CBDA77200AB3AF9 /* Savings.swift in Sources */,
 				171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */,
 				17DB38872CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift in Sources */,
+				17C98CC22CC6C535005CACA8 /* CompletionView.swift in Sources */,
 				17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */,
 				17B5D08F2C7A4AA500B28A04 /* ColorScheme.swift in Sources */,
 				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
@@ -597,6 +608,7 @@
 				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
 				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
 				1703E9212CB9B5AC00A89242 /* ChallengeEditScreen.swift in Sources */,
+				17C98CC02CC6C511005CACA8 /* SavingsGridView.swift in Sources */,
 				174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */,
 				176135BB2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift in Sources */,
 				8EFF94E12CB963CC00E77E3F /* ChallengeManager.swift in Sources */,

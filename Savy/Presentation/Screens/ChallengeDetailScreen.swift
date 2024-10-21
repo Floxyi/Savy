@@ -21,7 +21,6 @@ struct ChallengeDetailScreen: View {
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
-        let sortedSavings = challenge.savings.filter { !$0.done }.sorted(by: { $0.date < $1.date })
         
         NavigationView {
             VStack() {
@@ -33,22 +32,10 @@ struct ChallengeDetailScreen: View {
                         TabBarManager.shared.show()
                     },
                     actionView: AnyView(
-                        Menu {
-                            Button(action: {
-                                editChallenge()
-                            }) {
-                                Label("Edit", systemImage: "pencil")
-                            }
-                            Button(role: .destructive, action: {
-                                removeChallenge()
-                            }) {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        } label: {
-                            Image(systemName: "slider.horizontal.3")
-                                .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(currentSchema.font)
-                        }
+                        ChallengeActionMenu(
+                            editChallenge: editChallenge,
+                            removeChallenge: removeChallenge
+                        )
                     )
                 )
                 .padding(.bottom, 44)
@@ -59,49 +46,11 @@ struct ChallengeDetailScreen: View {
                 
                 VStack {
                     if challenge.remainingAmount() > 0 {
-                        VStack {
-                            LazyVGrid(columns: columns, spacing: 16) {
-                                ForEach(sortedSavings.prefix(15), id: \.id) { saving in
-                                    SavingItemView(saving: saving)
-                                }
-                                if sortedSavings.count - 15 > 1 {
-                                    VStack {
-                                        Text("\(sortedSavings.count - 15)")
-                                            .font(.system(size: 24, weight: .bold))
-                                            .foregroundStyle(currentSchema.barIcons)
-                                        Text("more")
-                                            .font(.system(size: 18, weight: .bold))
-                                            .foregroundStyle(currentSchema.barIcons)
-                                    }
-                                    .frame(width: 80, height: 80)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
-                                            .foregroundColor(currentSchema.barIcons)
-                                    )
-                                } else if sortedSavings.count - 15 == 1 {
-                                    SavingItemView(saving: sortedSavings.last!)
-                                }
-                            }
-                        }
+                        SavingsGridView(savings: challenge.savings, columns: columns)
                     }
                     
                     if challenge.remainingAmount() == 0 {
-                        VStack {
-                            Image(systemName: "flag.pattern.checkered.2.crossed")
-                                .font(.system(size: 100, weight: .bold))
-                                .foregroundStyle(currentSchema.font)
-                            Text("Congratulations! \nYou've reached your goal!")
-                                .font(.system(size: 24))
-                                .foregroundStyle(currentSchema.font)
-                                .multilineTextAlignment(.center)
-                                .padding(.vertical, 20)
-                            Button(role: .destructive, action: {
-                                removeChallenge()
-                            }) {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
+                        CompletionView(removeChallenge: removeChallenge)
                     }
                     
                     Spacer()
@@ -116,6 +65,7 @@ struct ChallengeDetailScreen: View {
                         ChallengeDetailsListScreen(challenge: challenge, showPopover: $showDetailsPopover)
                     }
                 }
+
                 Spacer()
             }
             .background(currentSchema.background)
