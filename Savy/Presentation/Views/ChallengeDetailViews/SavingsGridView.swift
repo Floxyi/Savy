@@ -14,7 +14,10 @@ struct SavingsGridView: View {
 
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        let sortedSavings = savings.filter { !$0.done }.sorted(by: { $0.date < $1.date })
+        let sortedSavings = savings.filter {
+            !$0.done
+        }
+        .sorted(by: { $0.date < $1.date })
 
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(sortedSavings.prefix(15), id: \.id) { saving in

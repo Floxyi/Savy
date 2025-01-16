@@ -15,7 +15,8 @@ class StatsTracker {
     private(set) var entries: [StatsEntry] = []
     private(set) var accountUUID: UUID?
 
-    init() { }
+    init() {
+    }
 
     private func addStatsEntry(entry: StatsEntry) {
         entries.append(entry)
@@ -59,31 +60,43 @@ class StatsTracker {
     }
 
     func totalMoneySaved() -> Int {
-        return entries
-            .filter { $0.type == .money_saved }
-            .compactMap { $0.savingStats?.amount }
-            .reduce(0, +)
+        entries
+        .filter {
+            $0.type == .money_saved
+        }
+        .compactMap {
+            $0.savingStats?.amount
+        }
+        .reduce(0, +)
     }
 
     func totalChallengesCompleted() -> Int {
-        return entries
-            .filter { $0.type == .challenged_completed }
-            .count
+        entries
+        .filter {
+            $0.type == .challenged_completed
+        }
+        .count
     }
 
     func totalChallengesStarted() -> Int {
-        return entries
-            .filter { $0.type == .challenged_started }
-            .count
+        entries
+        .filter {
+            $0.type == .challenged_started
+        }
+        .count
     }
 
     func allTimePunctuality() -> Int? {
-        let allSavings = entries.filter { $0.type == .money_saved }
+        let allSavings = entries.filter {
+            $0.type == .money_saved
+        }
         if allSavings.isEmpty {
             return nil
         }
 
-        let punctualSavings = allSavings.filter { $0.date <= $0.savingStats!.expectedDate }
+        let punctualSavings = allSavings.filter {
+            $0.date <= $0.savingStats!.expectedDate
+        }
         if punctualSavings.isEmpty {
             return nil
         }
@@ -103,25 +116,27 @@ class StatsTracker {
 
 
     func timeRangeCalculation(startDate: Date, endDate: Date, statsType: StatsType) -> [StatsEntry] {
-        return entries.filter { entry in
+        entries.filter { entry in
             Calendar.current.startOfDay(for: entry.date) >= Calendar.current.startOfDay(for: startDate) && Calendar.current.startOfDay(for: entry.date) <= Calendar.current.startOfDay(for: endDate) && entry.type == statsType
         }
     }
 
     func timeRangeMoneySaved(startDate: Date, endDate: Date) -> Int {
-        return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved).reduce(0) { $0 + $1.savingStats!.amount }
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved).reduce(0) {
+            $0 + $1.savingStats!.amount
+        }
     }
 
     func timeRangeSavingCount(startDate: Date, endDate: Date) -> Int {
-        return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved).count
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved).count
     }
 
     func timeRangeChallengesCompleted(startDate: Date, endDate: Date) -> Int {
-        return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_completed).count
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_completed).count
     }
 
     func timeRangeChallengesStarted(startDate: Date, endDate: Date) -> Int {
-        return timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_started).count
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_started).count
     }
 
     func timeRangePunctuality(startDate: Date, endDate: Date) -> Double? {
@@ -130,20 +145,28 @@ class StatsTracker {
             return nil
         }
 
-        let punctualSavings = allSavings.filter { $0.date <= $0.savingStats!.expectedDate }
+        let punctualSavings = allSavings.filter {
+            $0.date <= $0.savingStats!.expectedDate
+        }
         return Double(punctualSavings.count) / Double(allSavings.count)
     }
 
     func averageSavedTimeRange(startDate: Date, endDate: Date) -> Double {
         let totalAmount = timeRangeMoneySaved(startDate: startDate, endDate: endDate)
         let numberOfDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
-        let allSaving = StatsTracker.shared.entries.filter { $0.type == .money_saved }
+        let allSaving = StatsTracker.shared.entries.filter {
+            $0.type == .money_saved
+        }
 
         if Calendar.current.isDate(startDate, inSameDayAs: endDate) {
             let savingsForDate = allSaving
-                .filter { Calendar.current.isDate($0.date, inSameDayAs: startDate) }
-                .compactMap { $0.savingStats?.amount }
-                .reduce(0, +)
+            .filter {
+                Calendar.current.isDate($0.date, inSameDayAs: startDate)
+            }
+            .compactMap {
+                $0.savingStats?.amount
+            }
+            .reduce(0, +)
             return Double(savingsForDate)
         }
 
@@ -157,8 +180,12 @@ class StatsTracker {
     func getSavingsAmountFromDatabase(id: UUID) async throws -> Int {
         let users: [Profile] = try await AuthManager.shared.client.from("profiles").select().execute().value
         let savings: [Savings] = try await AuthManager.shared.client.from("savings").select().execute().value
-        let user = users.first { $0.id == id }
-        let saving = savings.first { $0.profileId == user?.id }
+        let user = users.first {
+            $0.id == id
+        }
+        let saving = savings.first {
+            $0.profileId == user?.id
+        }
         return saving?.amount ?? 0
     }
 
@@ -167,13 +194,17 @@ class StatsTracker {
             do {
                 let profileId = AuthManager.shared.profile?.id
                 let savings: [Savings] = try await AuthManager.shared.client.from("savings").select().execute().value
-                var savingsEntry = savings.first { $0.profileId == profileId }
+                var savingsEntry = savings.first {
+                    $0.profileId == profileId
+                }
                 if savingsEntry == nil {
                     return
                 }
                 savingsEntry?.amount = totalMoneySaved()
                 try await AuthManager.shared.client.from("savings").update(savingsEntry).eq("profile_id", value: profileId).execute()
-            } catch { print(error) }
+            } catch {
+                print(error)
+            }
         }
     }
 

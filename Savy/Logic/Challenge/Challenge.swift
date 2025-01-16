@@ -40,23 +40,36 @@ class Challenge {
     }
 
     func currentSavedAmount() -> Int {
-        return savings.filter { $0.done }.reduce(0) { $0 + $1.amount }
+        savings.filter {
+            $0.done
+        }
+        .reduce(0) {
+            $0 + $1.amount
+        }
     }
 
     func progressPercentage() -> Double {
-        return Double(currentSavedAmount()) / Double(challengeConfiguration.amount)
+        Double(currentSavedAmount()) / Double(challengeConfiguration.amount)
     }
 
     func remainingAmount() -> Int {
-        return max(challengeConfiguration.amount - currentSavedAmount(), 0)
+        max(challengeConfiguration.amount - currentSavedAmount(), 0)
     }
 
     func remainingSavings() -> Int {
-        return savings.filter { !$0.done }.count
+        savings.filter {
+            !$0.done
+        }
+        .count
     }
 
     func getNextSaving(at n: Int) -> Saving {
-        let undoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
+        let undoneSavings = savings.sorted {
+            $0.date < $1.date
+        }
+        .filter {
+            !$0.done
+        }
         return undoneSavings.count >= n ? undoneSavings[n - 1] : savings.first!
     }
 }

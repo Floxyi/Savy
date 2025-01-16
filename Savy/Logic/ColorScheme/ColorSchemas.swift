@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorSchemes {
     static func lightMode() -> ColorScheme {
-        return ColorScheme(
+        ColorScheme(
             mode: .light,
             background: Color(hue: 0, saturation: 0, lightness: 95),
             bar: Color(hue: 0, saturation: 0, lightness: 84),
@@ -21,7 +21,7 @@ struct ColorSchemes {
     }
 
     static func darkMode() -> ColorScheme {
-        return ColorScheme(
+        ColorScheme(
             mode: .dark,
             background: Color(hue: 0, saturation: 0, lightness: 22),
             bar: Color(hue: 0, saturation: 0, lightness: 20),
@@ -33,7 +33,7 @@ struct ColorSchemes {
     }
 
     static func coloredLightMode(hue: Double) -> ColorScheme {
-        return ColorScheme(
+        ColorScheme(
             mode: .coloredLight,
             background: Color(hue: hue, saturation: 27, lightness: 45),
             bar: Color(hue: hue, saturation: 30, lightness: 33),
@@ -45,7 +45,7 @@ struct ColorSchemes {
     }
 
     static func coloredDarkMode(hue: Double) -> ColorScheme {
-        return ColorScheme(
+        ColorScheme(
             mode: .coloredDark,
             background: Color(hue: hue, saturation: 29, lightness: 33),
             bar: Color(hue: hue, saturation: 27, lightness: 45),

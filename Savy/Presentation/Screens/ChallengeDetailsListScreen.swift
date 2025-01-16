@@ -82,8 +82,8 @@ struct ChallengeDetailsListScreen: View {
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
 
     return Spacer()
-        .popover(isPresented: $showPopover) {
-            ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
-        }
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .popover(isPresented: $showPopover) {
+        ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
+    }
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

@@ -23,7 +23,7 @@ struct ChallengeDetailScreen: View {
         let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
 
         NavigationView {
-            VStack() {
+            VStack {
                 HeaderView(
                     title: challenge.challengeConfiguration.name,
                     size: 32,
@@ -60,10 +60,10 @@ struct ChallengeDetailScreen: View {
                         icon: "chevron.up",
                         showPopover: $showDetailsPopover
                     )
-                    .padding(.bottom, 24)
-                    .popover(isPresented: $showDetailsPopover) {
-                        ChallengeDetailsListScreen(challenge: challenge, showPopover: $showDetailsPopover)
-                    }
+                        .padding(.bottom, 24)
+                        .popover(isPresented: $showDetailsPopover) {
+                            ChallengeDetailsListScreen(challenge: challenge, showPopover: $showDetailsPopover)
+                        }
                 }
 
                 Spacer()
@@ -93,7 +93,7 @@ struct ChallengeDetailScreen: View {
     }
 }
 
-#Preview() {
+#Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
 
     let challengeConfiguration = ChallengeConfiguration(

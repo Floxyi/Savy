@@ -17,15 +17,15 @@ class AuthManager {
 
     private init() {
         let (url, key) = AppEnvironment.current == .production
-        ? (DotEnv.PROD_SUPABASE_URL, DotEnv.PROD_SUPABASE_ANON_KEY)
-        : (DotEnv.DEV_SUPABASE_URL, DotEnv.DEV_SUPABASE_ANON_KEY)
+            ? (DotEnv.PROD_SUPABASE_URL, DotEnv.PROD_SUPABASE_ANON_KEY)
+            : (DotEnv.DEV_SUPABASE_URL, DotEnv.DEV_SUPABASE_ANON_KEY)
         self.client = SupabaseClient(supabaseURL: URL(string: url)!, supabaseKey: key)
         self.supabaseAccount = nil
         self.profile = nil
     }
 
     func isSignedIn() -> Bool {
-        return supabaseAccount != nil && profile != nil
+        supabaseAccount != nil && profile != nil
     }
 
     func getCurrentSession() async throws {
@@ -73,7 +73,7 @@ class AuthManager {
     }
 
     func getProfile(uuid: UUID) async throws -> Profile? {
-        return try await client.from("profiles").select().eq("uuid", value: uuid).single().execute().value
+        try await client.from("profiles").select().eq("uuid", value: uuid).single().execute().value
     }
 
     func createProfile(uuid: UUID, username: String) async throws -> Profile {

@@ -21,7 +21,6 @@ struct PersonalStatsView: View {
 
     let minDate = StatsTracker.shared.entries.first?.date ?? Date()
     let maxDate = Date()
-    //let maxDate: Date = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
 
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
@@ -32,8 +31,8 @@ struct PersonalStatsView: View {
         HeaderView(title: "Personal Stats")
 
         if !moneySavedStatsEntries && !challengesStartedStatsEntries && !challengesCompletedStatsEntries {
-            VStack() {
-                Text("There are no stats yet! Start saving money to see your progress.")
+            VStack {
+                Text("There are no stats yet! \nStart saving money to see your progress.")
                     .multilineTextAlignment(.center)
                     .foregroundStyle(currentSchema.font)
                     .fontWeight(.bold)

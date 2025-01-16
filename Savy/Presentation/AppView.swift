@@ -42,7 +42,7 @@ struct AppView: View {
     }
 }
 
-#Preview() {
+#Preview {
     let container = try! ModelContainer(for: ChallengeManager.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
 
     let challengeConfiguration = ChallengeConfiguration(

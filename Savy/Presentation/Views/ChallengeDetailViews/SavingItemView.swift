@@ -45,7 +45,8 @@ struct SavingItemView: View {
                     saving.toggleDone()
                 }
             }
-            Button("Abbrechen", role: .cancel) { }
+            Button("Abbrechen", role: .cancel) {
+            }
         }
     }
 }

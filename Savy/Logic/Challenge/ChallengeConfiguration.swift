@@ -65,7 +65,9 @@ class ChallengeConfiguration {
 
         if !isComplete {
             let lastSaving = challenge.savings.last!
-            let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount } - presaved
+            let savedAmount = challenge.savings.reduce(0) {
+                $0 + $1.amount
+            } - presaved
             let lastSavingAmount = lastSaving.amount - (savedAmount - amount)
             if lastSavingAmount > 0 {
                 lastSaving.setAmount(amount: lastSavingAmount)
@@ -92,7 +94,9 @@ class ChallengeConfiguration {
 
         if !isComplete {
             let lastSaving = challenge.savings.last!
-            let savedAmount = challenge.savings.reduce(0) { $0 + $1.amount } - presaved
+            let savedAmount = challenge.savings.reduce(0) {
+                $0 + $1.amount
+            } - presaved
             let lastSavingAmount = lastSaving.amount - (savedAmount - amount)
             if lastSavingAmount > 0 {
                 lastSaving.setAmount(amount: lastSavingAmount)
@@ -104,20 +108,27 @@ class ChallengeConfiguration {
     }
 
     func regenerateSavings(challenge: Challenge) {
-        challenge.savings.filter { !$0.done }.forEach { saving in
+        challenge.savings.filter {
+            !$0.done
+        }
+        .forEach { saving in
             challenge.removeSaving(saving: saving)
         }
 
         let lastDate = challenge.savings.count > 0 ? challenge.savings.last!.date : self.startDate
         let nextDate = nextDate(from: lastDate, strategy: strategy, calendar: Calendar.current)!
 
-        let finishedSavings = challenge.savings.filter { $0.done }
-        let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
+        let finishedSavings = challenge.savings.filter {
+            $0.done
+        }
+        let preSavedAmount = finishedSavings.reduce(0) {
+            $0 + $1.amount
+        }
         generateSavings(challenge: challenge, amount: amount - preSavedAmount, startDate: nextDate, presaved: preSavedAmount)
     }
 
     private func nextDate(from date: Date, strategy: SavingStrategy, calendar: Calendar) -> Date? {
-        return calendar.date(byAdding: strategy == .Weekly ? .weekOfYear : .month, value: 1, to: date)
+        calendar.date(byAdding: strategy == .Weekly ? .weekOfYear : .month, value: 1, to: date)
     }
 
     private func numberOfMonths(startDate: Date, endDate: Date) -> Int {
@@ -158,8 +169,12 @@ class ChallengeConfiguration {
         var targetAmount = amount
 
         if challenge != nil {
-            let finishedSavings = challenge!.savings.filter { $0.done }
-            let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
+            let finishedSavings = challenge!.savings.filter {
+                $0.done
+            }
+            let preSavedAmount = finishedSavings.reduce(0) {
+                $0 + $1.amount
+            }
             targetAmount -= preSavedAmount
         }
 

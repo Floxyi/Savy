@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 
-
 private let buttonDimen: CGFloat = 55
 
 struct BottomTabBarView: View {
@@ -20,32 +19,32 @@ struct BottomTabBarView: View {
 
         HStack {
             TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
-                .frame(width: buttonDimen, height: buttonDimen)
-                .onTapGesture {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    currentTab = .challenges
-                }
-                .padding(.horizontal, 16)
+            .frame(width: buttonDimen, height: buttonDimen)
+            .onTapGesture {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                currentTab = .challenges
+            }
+            .padding(.horizontal, 16)
 
             Spacer()
 
             TabBarButton(imageName: Tab.leaderboard.rawValue, active: currentTab == Tab.leaderboard)
-                .frame(width: buttonDimen, height: buttonDimen)
-                .onTapGesture {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    currentTab = .leaderboard
-                }
-                .padding(.horizontal, 16)
+            .frame(width: buttonDimen, height: buttonDimen)
+            .onTapGesture {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                currentTab = .leaderboard
+            }
+            .padding(.horizontal, 16)
 
             Spacer()
 
             TabBarButton(imageName: Tab.settings.rawValue, active: currentTab == Tab.settings)
-                .frame(width: buttonDimen, height: buttonDimen)
-                .onTapGesture {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    currentTab = .settings
-                }
-                .padding(.horizontal, 16)
+            .frame(width: buttonDimen, height: buttonDimen)
+            .onTapGesture {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                currentTab = .settings
+            }
+            .padding(.horizontal, 16)
 
         }
         .frame(width: 300, height: 70)

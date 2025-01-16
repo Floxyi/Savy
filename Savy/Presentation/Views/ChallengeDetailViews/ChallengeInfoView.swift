@@ -16,7 +16,7 @@ struct ChallengeInfoView: View {
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
 
-        VStack() {
+        VStack {
             VStack {
                 HStack {
                     Image(systemName: "calendar")

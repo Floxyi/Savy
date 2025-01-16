@@ -15,7 +15,9 @@ struct SettingsBarView<Content: View>: View {
 
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
-    init(text: String, toggle: Binding<Bool>, @ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
+    init(text: String, toggle: Binding<Bool>, @ViewBuilder content: @escaping () -> Content = {
+        EmptyView()
+    }) {
         self.text = text
         self._toggle = toggle
         self.content = content

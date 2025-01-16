@@ -45,8 +45,12 @@ struct RegistrationTextFieldView: View {
                             .padding(.trailing, 34)
                             .gesture(
                                 DragGesture(minimumDistance: 0)
-                                    .onChanged { _ in showPopup = true }
-                                    .onEnded { _ in showPopup = false }
+                                .onChanged { _ in
+                                    showPopup = true
+                                }
+                                .onEnded { _ in
+                                    showPopup = false
+                                }
                             )
                     } else {
                         Image(systemName: "x.circle.fill")
@@ -56,8 +60,12 @@ struct RegistrationTextFieldView: View {
                             .padding(.trailing, 34)
                             .gesture(
                                 DragGesture(minimumDistance: 0)
-                                    .onChanged { _ in showPopup = true }
-                                    .onEnded { _ in showPopup = false }
+                                .onChanged { _ in
+                                    showPopup = true
+                                }
+                                .onEnded { _ in
+                                    showPopup = false
+                                }
                             )
                     }
                 }
@@ -69,8 +77,12 @@ struct RegistrationTextFieldView: View {
                         .padding(.trailing, 34)
                         .gesture(
                             DragGesture(minimumDistance: 0)
-                                .onChanged { _ in showPopup = true }
-                                .onEnded { _ in showPopup = false }
+                            .onChanged { _ in
+                                showPopup = true
+                            }
+                            .onEnded { _ in
+                                showPopup = false
+                            }
                         )
                 }
             }
@@ -113,7 +125,7 @@ struct RegistrationTextFieldView: View {
 
         func validateEmail() {
             let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+            let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
             isEmailValid = emailPredicate.evaluate(with: email)
             emailError = email.isEmpty
         }

@@ -13,10 +13,11 @@ class ChallengeManager {
     static let shared = ChallengeManager()
     private(set) var challenges: [Challenge] = []
 
-    init() {}
+    init() {
+    }
 
     func getChallengeById(id: UUID) -> Challenge? {
-        return challenges.first(where: { $0.id == id })
+        challenges.first(where: { $0.id == id })
     }
 
     func addChallenge(challengeConfiguration: ChallengeConfiguration) {
@@ -68,8 +69,12 @@ class ChallengeManager {
                 return challenge1.challengeConfiguration.endDate < challenge2.challengeConfiguration.endDate
             }
 
-            if remainingSavings1 == 0 { return false }
-            if remainingSavings2 == 0 { return true }
+            if remainingSavings1 == 0 {
+                return false
+            }
+            if remainingSavings2 == 0 {
+                return true
+            }
 
             return date1 == date2 ? nextSaving1.amount < nextSaving2.amount : date1 < date2
         }

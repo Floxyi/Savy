@@ -25,6 +25,8 @@ struct LeaderboardScreen: View {
                 LeaderboardView()
             }
 
+            Spacer()
+
             LeaderboardSwitchButton(showsPersonalStats: $showsPersonalStats)
                 .padding(.bottom, 100)
 

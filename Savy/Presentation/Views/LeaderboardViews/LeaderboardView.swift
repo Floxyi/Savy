@@ -132,8 +132,11 @@ struct LeaderboardView: View {
                     let amount = try await StatsTracker.shared.getSavingsAmountFromDatabase(id: user.id)
                     savingsArray.append((profile: user, amount: amount))
                 }
-                savingsArray.sort { $0.amount > $1.amount }
-            } catch { }
+                savingsArray.sort {
+                    $0.amount > $1.amount
+                }
+            } catch {
+            }
             isLoading = false
         }
     }

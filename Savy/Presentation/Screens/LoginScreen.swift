@@ -85,7 +85,8 @@ struct LoginScreen: View {
                                     signInButtonPressed()
                                 }
                             }
-                            Button("Abbrechen", role: .cancel) { }
+                            Button("Abbrechen", role: .cancel) {
+                            }
                         }
                     }
 
@@ -135,14 +136,16 @@ struct LoginScreen: View {
     }
 
     func validatePassword() -> Bool {
-        return password.count >= 8
+        password.count >= 8
     }
 
     func signInButtonPressed() {
         isLoading = true
         authError = false
         Task {
-            defer { isLoading = false }
+            defer {
+                isLoading = false
+            }
             do {
                 if validateEmail() && validatePassword() {
                     let oldId = StatsTracker.shared.accountUUID

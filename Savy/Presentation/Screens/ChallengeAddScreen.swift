@@ -47,19 +47,19 @@ struct ChallengeAddScreen: View {
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font.opacity(0.4)))
                         .textInputAutocapitalization(.never)
-                    .textFieldStyle(CustomTextFieldStyle())
-                    .onChange(of: name) { _, newValue in
-                        if newValue.count > 12 {
-                            name = String(newValue.prefix(12))
+                        .textFieldStyle(CustomTextFieldStyle())
+                        .onChange(of: name) { _, newValue in
+                            if newValue.count > 12 {
+                                name = String(newValue.prefix(12))
+                            }
                         }
-                    }
 
                     HStack {
                         TextField("", value: $amount, format: .number, prompt: Text(verbatim: "Amount")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font.opacity(0.4)))
-                        .textFieldStyle(CustomTextFieldStyle())
-                        .keyboardType(.numberPad)
+                            .textFieldStyle(CustomTextFieldStyle())
+                            .keyboardType(.numberPad)
                         Text("€")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundStyle(currentSchema.font)
@@ -90,7 +90,7 @@ struct ChallengeAddScreen: View {
                                 selection: $endDate,
                                 displayedComponents: [.date]
                             )
-                            .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
+                                .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -111,8 +111,8 @@ struct ChallengeAddScreen: View {
                                 TextField("", value: $cycleAmount, format: .number, prompt: Text(verbatim: "\(strategy) Amount")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(currentSchema.font.opacity(0.4)))
-                                .textFieldStyle(CustomTextFieldStyle())
-                                .keyboardType(.numberPad)
+                                    .textFieldStyle(CustomTextFieldStyle())
+                                    .keyboardType(.numberPad)
                                 Text("€")
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundStyle(currentSchema.font)
@@ -203,8 +203,8 @@ struct ChallengeAddScreen: View {
     @Previewable @State var showPopover: Bool = true
 
     return Spacer()
-        .popover(isPresented: $showPopover) {
-            ChallengeAddScreen(showPopover: $showPopover)
-        }
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .popover(isPresented: $showPopover) {
+        ChallengeAddScreen(showPopover: $showPopover)
+    }
+    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
