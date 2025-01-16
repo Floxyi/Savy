@@ -12,7 +12,7 @@ import SwiftData
 @Model
 class ChallengeStats {
     var challengeId: UUID
-    
+
     init(challengeId: UUID) {
         self.challengeId = challengeId
     }

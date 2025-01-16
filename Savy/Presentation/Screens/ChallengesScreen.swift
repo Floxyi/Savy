@@ -10,10 +10,10 @@ import SwiftUI
 
 struct ChallengesScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         NavigationView {
             VStack {
                 HeaderView(title: "Challenges")

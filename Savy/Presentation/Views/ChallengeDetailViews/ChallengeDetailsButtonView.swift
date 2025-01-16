@@ -12,12 +12,12 @@ struct ChallengeDetailsButtonView: View {
     var title: String
     var icon: String
     @Binding var showPopover: Bool
-        
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack {
             Image(systemName: icon)
                 .font(.system(size: 16, weight: .bold))
@@ -40,7 +40,7 @@ struct ChallengeDetailsButtonView: View {
 
 #Preview {
     @Previewable @State var showPopover: Bool = true
-    
+
     return ChallengeDetailsButtonView(title: "View all", icon: "chevron.up", showPopover: $showPopover)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

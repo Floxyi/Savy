@@ -10,18 +10,18 @@ import SwiftUI
 
 struct ChallengeDetailScreen: View {
     let challenge: Challenge
-    
+
     @State private var showDetailsPopover = false
     @State private var showEditPopover = false
-    
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
-        
+
         NavigationView {
             VStack() {
                 HeaderView(
@@ -39,22 +39,22 @@ struct ChallengeDetailScreen: View {
                     )
                 )
                 .padding(.bottom, 44)
-                
+
                 ChallengeInfoView(challenge: challenge)
                     .padding(.top, -18)
                     .padding(.bottom, 48)
-                
+
                 VStack {
                     if challenge.remainingAmount() > 0 {
                         SavingsGridView(savings: challenge.savings, columns: columns)
                     }
-                    
+
                     if challenge.remainingAmount() == 0 {
                         CompletionView(removeChallenge: removeChallenge)
                     }
-                    
+
                     Spacer()
-                    
+
                     ChallengeDetailsButtonView(
                         title: "View all",
                         icon: "chevron.up",
@@ -81,11 +81,11 @@ struct ChallengeDetailScreen: View {
             ChallengeEditScreen(challenge: challenge, showPopover: $showEditPopover)
         }
     }
-    
+
     private func editChallenge() {
         showEditPopover = true
     }
-    
+
     private func removeChallenge() {
         ChallengeManager.shared.removeChallenge(id: challenge.id)
         dismiss()
@@ -95,7 +95,7 @@ struct ChallengeDetailScreen: View {
 
 #Preview() {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -106,7 +106,7 @@ struct ChallengeDetailScreen: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return ChallengeDetailScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))

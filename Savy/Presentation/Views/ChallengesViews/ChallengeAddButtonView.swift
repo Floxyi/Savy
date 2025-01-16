@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ChallengeAddButtonView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @Binding var showPopover: Bool
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Button(action: {
             showPopover = true
         }) {

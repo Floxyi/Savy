@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ChallengeInfoView: View {
     let challenge: Challenge
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack() {
             VStack {
                 HStack {
@@ -33,16 +33,16 @@ struct ChallengeInfoView: View {
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
                 }
-                
+
                 ChallengeProgressBarView(challenge: challenge)
-                
+
                 HStack {
                     Spacer()
                     Text("\(challenge.remainingSavings()) savings to go")
                         .font(.system(size: 12))
                         .foregroundStyle(currentSchema.font)
                 }
-                
+
             }
             .padding(16)
             .background(currentSchema.bar)
@@ -53,7 +53,7 @@ struct ChallengeInfoView: View {
 
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -64,7 +64,7 @@ struct ChallengeInfoView: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return ChallengeInfoView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .padding()
         .modelContainer(container)

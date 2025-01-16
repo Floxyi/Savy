@@ -10,7 +10,7 @@ import Foundation
 struct Savings: Codable {
     let profileId: UUID
     var amount: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case profileId = "profile_id"
         case amount

@@ -19,21 +19,21 @@ struct SavyApp: App {
             ColorManager.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-        
+
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-    
+
     @StateObject private var colorManagerVM: ColorManagerViewModel
-    
+
     init() {
         let context = sharedModelContainer.mainContext
         _colorManagerVM = StateObject(wrappedValue: ColorManagerViewModel(modelContext: context))
     }
-    
+
     var body: some Scene {
         WindowGroup {
             AppView()

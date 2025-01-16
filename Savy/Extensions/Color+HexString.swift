@@ -31,7 +31,7 @@ extension Color {
             opacity: Double(a) / 255
         )
     }
-    
+
     var hexString: String {
         let components = self.cgColor?.components ?? [0, 0, 0, 1]
         let r = Float(components[0])

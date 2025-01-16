@@ -13,7 +13,7 @@ class SavingStats {
     var savingId: UUID
     var amount: Int
     var expectedDate: Date
-    
+
     init(savingId: UUID, amount: Int, expectedDate: Date) {
         self.savingId = savingId
         self.amount = amount

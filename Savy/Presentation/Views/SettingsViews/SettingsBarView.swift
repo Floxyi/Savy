@@ -12,18 +12,18 @@ struct SettingsBarView<Content: View>: View {
     var text: String
     @Binding var toggle: Bool
     let content: () -> Content
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     init(text: String, toggle: Binding<Bool>, @ViewBuilder content: @escaping () -> Content = { EmptyView() }) {
         self.text = text
         self._toggle = toggle
         self.content = content
     }
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             HStack {
                 Toggle(isOn: $toggle, label: {

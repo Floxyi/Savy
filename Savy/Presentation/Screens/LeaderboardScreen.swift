@@ -10,24 +10,24 @@ import SwiftUI
 
 struct LeaderboardScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State var showsPersonalStats: Bool = false
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             if showsPersonalStats {
                 PersonalStatsView()
             }
-            
+
             if !showsPersonalStats {
                 LeaderboardView()
             }
-            
+
             LeaderboardSwitchButton(showsPersonalStats: $showsPersonalStats)
                 .padding(.bottom, 100)
-            
+
             HStack {
                 Spacer()
             }

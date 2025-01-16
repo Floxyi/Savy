@@ -10,12 +10,12 @@ import SwiftData
 
 struct LeaderboardSwitchButton: View {
     @Binding var showsPersonalStats: Bool
-        
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack {
             Image(systemName: "arrow.left.arrow.right")
                 .font(.system(size: 16, weight: .bold))
@@ -38,7 +38,7 @@ struct LeaderboardSwitchButton: View {
 
 #Preview {
     @Previewable @State var showsPersonalStats: Bool = true
-    
+
     return LeaderboardSwitchButton(showsPersonalStats: $showsPersonalStats)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

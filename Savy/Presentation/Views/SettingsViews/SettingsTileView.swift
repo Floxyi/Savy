@@ -12,18 +12,18 @@ struct SettingsTileView<Content: View>: View {
     let image: String
     let text: String
     let content: Content
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     init(image: String, text: String, @ViewBuilder content: () -> Content) {
         self.image = image
         self.text = text
         self.content = content()
     }
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             HStack {
                 Image(systemName: image)
@@ -38,7 +38,7 @@ struct SettingsTileView<Content: View>: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
-            
+
             VStack {
                 content
                     .padding(.bottom, 4)

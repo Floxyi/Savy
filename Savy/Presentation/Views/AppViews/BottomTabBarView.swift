@@ -14,10 +14,10 @@ private let buttonDimen: CGFloat = 55
 struct BottomTabBarView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
     @Binding var currentTab: Tab
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack {
             TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
                 .frame(width: buttonDimen, height: buttonDimen)
@@ -26,9 +26,9 @@ struct BottomTabBarView: View {
                     currentTab = .challenges
                 }
                 .padding(.horizontal, 16)
-            
+
             Spacer()
-            
+
             TabBarButton(imageName: Tab.leaderboard.rawValue, active: currentTab == Tab.leaderboard)
                 .frame(width: buttonDimen, height: buttonDimen)
                 .onTapGesture {
@@ -36,9 +36,9 @@ struct BottomTabBarView: View {
                     currentTab = .leaderboard
                 }
                 .padding(.horizontal, 16)
-            
+
             Spacer()
-            
+
             TabBarButton(imageName: Tab.settings.rawValue, active: currentTab == Tab.settings)
                 .frame(width: buttonDimen, height: buttonDimen)
                 .onTapGesture {
@@ -46,7 +46,7 @@ struct BottomTabBarView: View {
                     currentTab = .settings
                 }
                 .padding(.horizontal, 16)
-            
+
         }
         .frame(width: 300, height: 70)
         .tint(Color.black)
@@ -55,18 +55,18 @@ struct BottomTabBarView: View {
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
-    
+
 }
 
 private struct TabBarButton: View {
     let imageName: String
     let active: Bool
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Image(systemName: imageName)
             .renderingMode(.template)
             .foregroundStyle(active ? currentSchema.font : currentSchema.barIcons)

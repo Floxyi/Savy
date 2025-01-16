@@ -9,14 +9,14 @@ import SwiftUI
 
 struct CustomDatePickerStyle: DatePickerStyle {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var date: Date
     var text: String
     @Binding var isDatePickerVisible: Bool
-    
+
     func makeBody(configuration: Configuration) -> some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack {
             Text(text)
                 .font(.system(size: 16, weight: .bold))
@@ -41,12 +41,12 @@ struct CustomDatePickerStyle: DatePickerStyle {
 struct CustomDatePickerOverlay: View {
     @Binding var date: Date
     var startDate: Date
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         DatePicker("", selection: $date, in: startDate..., displayedComponents: .date)
             .datePickerStyle(.graphical)
             .accentColor(currentSchema.accent2)

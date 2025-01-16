@@ -11,23 +11,23 @@ import SwiftData
 struct ChallengeDetailsListScreen: View {
     let challenge: Challenge
     @Binding var showPopover: Bool
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         let columns = Array(repeating: GridItem(.flexible()), count: 4)
         let sortedSavings = challenge.savings.sorted(by: { $0.date < $1.date })
-        
+
         NavigationStack {
             VStack {
                 ChallengeDetailsButtonView(title: "Hide", icon: "chevron.down", showPopover: $showPopover)
                     .padding(.top, -36)
                     .padding(.bottom, 4)
-                
+
                 HeaderView(title: "Savings Overview", size: 38)
                     .padding(.bottom, -1)
-                
+
                 HStack {
                     Text("Start:")
                         .font(.system(size: 16, weight: .bold))
@@ -45,7 +45,7 @@ struct ChallengeDetailsListScreen: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 1)
-                
+
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(sortedSavings, id: \.id) { saving in
@@ -55,7 +55,7 @@ struct ChallengeDetailsListScreen: View {
                 }
                 .padding(.top, 20)
                 .background(currentSchema.background)
-                
+
                 Spacer()
                 HStack {
                     Spacer()
@@ -69,7 +69,7 @@ struct ChallengeDetailsListScreen: View {
 
 #Preview {
     @Previewable @State var showPopover: Bool = true
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -80,7 +80,7 @@ struct ChallengeDetailsListScreen: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return Spacer()
         .popover(isPresented: $showPopover) {
             ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)

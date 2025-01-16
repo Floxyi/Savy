@@ -10,7 +10,7 @@ import Foundation
 struct Profile: Codable, Identifiable {
     let id: UUID
     let username: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "uuid"
         case username

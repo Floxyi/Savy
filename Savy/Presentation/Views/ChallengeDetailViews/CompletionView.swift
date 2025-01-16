@@ -8,12 +8,12 @@ import SwiftUI
 
 struct CompletionView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var removeChallenge: () -> Void
 
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             Image(systemName: "flag.pattern.checkered.2.crossed")
                 .font(.system(size: 100, weight: .bold))

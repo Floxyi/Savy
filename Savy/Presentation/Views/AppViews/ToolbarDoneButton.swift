@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ToolbarDoneButton: View {
     @Binding var showPopover: Bool
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     let title: String
     let isValid: () -> Bool
     let onDoneAction: () -> Void
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Button(action: {
             if isValid() {
                 onDoneAction()

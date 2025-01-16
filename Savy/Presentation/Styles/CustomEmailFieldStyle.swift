@@ -9,10 +9,10 @@ import SwiftUI
 
 struct CustomEmailFieldStyle: TextFieldStyle {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     func _body(configuration: TextField<Self._Label>) -> some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
             configuration
                 .keyboardType(.emailAddress)
                 .padding(4)

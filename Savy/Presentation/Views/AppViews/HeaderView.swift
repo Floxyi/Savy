@@ -13,12 +13,12 @@ struct HeaderView: View {
     var size: CGFloat = 44
     var dismiss: (() -> Void)? = nil
     var actionView: AnyView? = nil
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         ZStack {
             HStack {
                 Text(title)
@@ -26,7 +26,7 @@ struct HeaderView: View {
                     .font(.custom("Shrikhand-Regular", size: size))
                     .foregroundStyle(currentSchema.font)
             }
-            
+
             if let dismiss = dismiss {
                 HStack {
                     Button {
@@ -41,7 +41,7 @@ struct HeaderView: View {
                     Spacer()
                 }
             }
-            
+
             if let actionView = actionView {
                 HStack {
                     Spacer()

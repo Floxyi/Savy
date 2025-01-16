@@ -10,9 +10,9 @@ import SwiftData
 
 struct ChallengeEditScreen: View {
     var challenge: Challenge
-    
+
     @Binding var showPopover: Bool
-    
+
     @State private var icon: String?
     @State private var name: String = ""
     @State private var amount: Int?
@@ -20,17 +20,17 @@ struct ChallengeEditScreen: View {
     @State private var calculation: SavingCalculation = .Date
     @State private var cycleAmount: Int?
     @State private var endDate: Date = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date()) ?? Date()
-    
+
     @State private var isDatePickerVisible = false
     @State private var isIconPickerVisible = false
-    
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         let challengeConfiguration = ChallengeConfiguration(
             icon: icon ?? "square.dashed",
             name: name,
@@ -40,12 +40,12 @@ struct ChallengeEditScreen: View {
             calculation: calculation,
             cycleAmount: cycleAmount
         )
-        
+
         NavigationStack {
             ZStack {
                 VStack {
                     IconPicker(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
-                    
+
                     TextField("", text: $name, prompt: Text(verbatim: "Name")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentSchema.font.opacity(0.4)))
@@ -56,7 +56,7 @@ struct ChallengeEditScreen: View {
                             name = String(newValue.prefix(12))
                         }
                     }
-                    
+
                     HStack {
                         TextField("", value: $amount, format: .number, prompt: Text(verbatim: "Amount")
                             .font(.system(size: 16, weight: .bold))
@@ -68,24 +68,24 @@ struct ChallengeEditScreen: View {
                             .foregroundStyle(currentSchema.font)
                             .padding(.trailing, 32)
                     }
-                    
+
                     HStack {
                         Text("Strategy")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font.opacity(0.4))
                             .padding(.leading, 8)
-                        
+
                         Spacer()
-                        
+
                         StrategySelector(selectedStrategy: $strategy, onChangeAction: { updateEndDate() })
                     }
                     .frame(height: 38)
                     .background(currentSchema.bar)
                     .cornerRadius(8)
                     .padding(.horizontal, 16)
-                    
+
                     CalculationSelector(selectedCalculation: $calculation)
-                    
+
                     if calculation == .Date {
                         HStack {
                             DatePicker(
@@ -101,13 +101,13 @@ struct ChallengeEditScreen: View {
                         .cornerRadius(8)
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
-                        
+
                         Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()
                     }
-                    
+
                     if calculation == .Amount {
                         VStack {
                             HStack {
@@ -125,13 +125,13 @@ struct ChallengeEditScreen: View {
                         .frame(height: 38)
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
-                        
+
                         Text("End Date: \(challengeConfiguration.calculateEndDateByAmount(challenge: challenge, startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentSchema.font)
                             .padding()
                     }
-                    
+
                     Spacer()
                     HStack {
                         Spacer()
@@ -155,11 +155,11 @@ struct ChallengeEditScreen: View {
                         ToolbarCancelButton(showPopover: $showPopover)
                     }
                 }
-                
+
                 if isDatePickerVisible || isIconPickerVisible {
                     DismissableOverlay(bindings: [$isDatePickerVisible, $isIconPickerVisible])
                 }
-                
+
                 if isDatePickerVisible {
                     VStack {
                         CustomDatePickerOverlay(
@@ -170,7 +170,7 @@ struct ChallengeEditScreen: View {
                                 to: Date()
                             ) ?? Date()
                         )
-                        
+
                         HStack {
                             Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                                 .font(.system(size: 20, weight: .bold))
@@ -182,7 +182,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 22)
                     }
                 }
-                
+
                 if isIconPickerVisible {
                     IconPickerOverlay(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
                 }
@@ -192,7 +192,7 @@ struct ChallengeEditScreen: View {
             }
         }
     }
-    
+
     private func loadChallengeData() {
         icon = challenge.challengeConfiguration.icon
         name = challenge.challengeConfiguration.name
@@ -202,17 +202,17 @@ struct ChallengeEditScreen: View {
         calculation = challenge.challengeConfiguration.calculation
         cycleAmount = challenge.challengeConfiguration.cycleAmount
     }
-    
+
     private func updateEndDate() {
         let newEndDate = Calendar.current.date(
             byAdding: strategy == .Weekly ? .weekOfYear : .month,
             value: 1,
             to: Date()
         ) ?? Date()
-        
+
         endDate = newEndDate > endDate ? newEndDate : endDate
     }
-    
+
     private func isValid() -> Bool {
         return icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
@@ -220,9 +220,9 @@ struct ChallengeEditScreen: View {
 
 #Preview {
     @Previewable @State var showPopover: Bool = true
-    
+
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -233,7 +233,7 @@ struct ChallengeEditScreen: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return Spacer()
         .popover(isPresented: $showPopover) {
             ChallengeEditScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)

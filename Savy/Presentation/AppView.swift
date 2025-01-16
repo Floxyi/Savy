@@ -9,25 +9,25 @@ import SwiftData
 import SwiftUI
 
 struct AppView: View {
-    
+
     @ObservedObject private var tabBarManager = TabBarManager.shared
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $tabBarManager.selectedTab) {
                 ChallengesScreen()
                     .tag(Tab.challenges)
-                
+
                 LeaderboardScreen()
                     .tag(Tab.leaderboard)
-                
+
                 SettingsScreen()
                     .tag(Tab.settings)
             }
             .onAppear {
                 UITabBar.appearance().isHidden = true
             }
-            
+
             if tabBarManager.isShown {
                 BottomTabBarView(currentTab: $tabBarManager.selectedTab)
                     .padding(.bottom)
@@ -44,7 +44,7 @@ struct AppView: View {
 
 #Preview() {
     let container = try! ModelContainer(for: ChallengeManager.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -55,7 +55,7 @@ struct AppView: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return AppView()
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))

@@ -11,14 +11,14 @@ import SwiftUI
 
 struct ActionButton<Content: View>: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     let content: Content
     let isEnabled: Bool
     let action: () -> Void
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack {
             content
                 .foregroundStyle(isEnabled ? currentSchema.font : currentSchema.accent1)

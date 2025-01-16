@@ -10,15 +10,15 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State private var showConfirmationDialog = false
     @State private var isLoading = false
-    
+
     @State private var isSignedIn = false
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack {
             if isSignedIn {
                 VStack(alignment: .leading) {
@@ -31,9 +31,9 @@ struct AccountView: View {
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
                 }
-                
+
                 Spacer()
-                
+
                 HStack {
                     if isLoading {
                         ProgressView()
@@ -67,7 +67,7 @@ struct AccountView: View {
                 .padding(.trailing, 4)
             } else {
                 Spacer()
-                
+
                 HStack {
                     NavigationLink(destination: RegisterScreen(isSignedIn: $isSignedIn)) {
                         Text("Register")
@@ -78,15 +78,15 @@ struct AccountView: View {
                             .background(currentSchema.background)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    
+
                     Spacer()
-                    
+
                     Text("or")
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .foregroundStyle(currentSchema.font)
-                    
+
                     Spacer()
-                    
+
                     NavigationLink(destination: LoginScreen(isSignedIn: $isSignedIn)) {
                         Text("Login")
                             .fontWeight(.bold)
@@ -97,10 +97,10 @@ struct AccountView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                 }
-                
+
                 Spacer()
             }
-            
+
         }
         .frame(height: 44)
         .onAppear {
@@ -109,7 +109,7 @@ struct AccountView: View {
             }
         }
     }
-    
+
     func signOutButtonPressed() {
         isLoading = true
         Task {

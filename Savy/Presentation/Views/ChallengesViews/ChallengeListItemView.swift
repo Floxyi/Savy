@@ -11,7 +11,7 @@ import SwiftUI
 struct ChallengeListItemView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         NavigationLink(destination: ChallengeDetailScreen(challenge: challenge)) {
             VStack(spacing: 12) {
@@ -31,7 +31,7 @@ struct ChallengeListItemView: View {
 private struct HeadlineView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack {
             IconAndNameView(challenge: challenge)
@@ -44,7 +44,7 @@ private struct HeadlineView: View {
 private struct IconAndNameView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack {
             Image(systemName: challenge.challengeConfiguration.icon)
@@ -59,7 +59,7 @@ private struct IconAndNameView: View {
 private struct DateView: View {
     let date: Date
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack {
             Text(date.formatted(.dateTime.month(.twoDigits).day().year()))
@@ -73,7 +73,7 @@ private struct DateView: View {
 private struct ProgressView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack {
             if challenge.remainingSavings() != 0 {
@@ -90,11 +90,11 @@ private struct ProgressView: View {
 private struct SavingsProgressView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack(spacing: -8) {
             NextSavingView(saving: challenge.getNextSaving(at: 1), isNext: true)
-            
+
             if challenge.remainingSavings() >= 2 {
                 Divider()
                     .frame(width: 16, height: 2)
@@ -102,7 +102,7 @@ private struct SavingsProgressView: View {
                     .padding(.horizontal, 8)
                 NextSavingView(saving: challenge.getNextSaving(at: 2), isNext: false)
             }
-            
+
             if challenge.remainingSavings() == 3 {
                 Divider()
                     .frame(width: 16, height: 2)
@@ -110,7 +110,7 @@ private struct SavingsProgressView: View {
                     .padding(.horizontal, 8)
                 NextSavingView(saving: challenge.getNextSaving(at: 3), isNext: false)
             }
-            
+
             if challenge.remainingSavings() != 3 {
                 Divider()
                     .frame(width: 16, height: 2)
@@ -126,7 +126,7 @@ private struct NextSavingView: View {
     let saving: Saving
     let isNext: Bool
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         VStack {
             Text("\(saving.amount.formatted())€")
@@ -151,7 +151,7 @@ private struct NextSavingView: View {
 private struct RemainingView: View {
     let remainingSavings: Int
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         VStack {
             if remainingSavings > 2 {
@@ -177,7 +177,7 @@ private struct RemainingView: View {
 
 private struct FinishedView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack {
             Image(systemName: "flag.pattern.checkered.2.crossed")
@@ -192,7 +192,7 @@ private struct FinishedView: View {
 private struct AmountView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         HStack(alignment: .bottom, spacing: -4) {
             Text("\(challenge.currentSavedAmount())€")
@@ -212,7 +212,7 @@ private struct AmountView: View {
 
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -223,7 +223,7 @@ private struct AmountView: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return ChallengeListItemView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))

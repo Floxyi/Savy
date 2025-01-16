@@ -10,17 +10,17 @@ import SwiftUI
 
 struct LoginTextFieldView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @Binding var text: String
-    
+
     let placeholder: String
     let isSecure: Bool
     let keyboardType: UIKeyboardType
     let contentType: UITextContentType
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack(alignment: .trailing) {
             if isSecure {
                 SecureField("", text: $text, prompt: Text(verbatim: placeholder)

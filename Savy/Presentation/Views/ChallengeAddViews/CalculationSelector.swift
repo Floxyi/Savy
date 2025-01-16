@@ -9,12 +9,12 @@ import SwiftUI
 
 struct CalculationSelector: View {
     @Binding var selectedCalculation: SavingCalculation
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         HStack(spacing: 0) {
             Button(action: {
                 selectedCalculation = .Date
@@ -28,7 +28,7 @@ struct CalculationSelector: View {
                     .clipShape(Capsule())
                     .frame(maxWidth: .infinity)
             }
-            
+
             Button(action: {
                 selectedCalculation = .Amount
             }) {

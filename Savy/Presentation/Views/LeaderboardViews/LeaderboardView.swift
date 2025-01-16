@@ -10,17 +10,17 @@ import SwiftData
 
 struct LeaderboardView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State var users: [Profile] = []
     @State private var savingsArray: [(profile: Profile, amount: Int)] = []
     @State private var isLoading = true
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             HeaderView(title: "Leaderboard")
-            
+
             if isLoading {
                 ProgressView()
             } else {
@@ -48,7 +48,7 @@ struct LeaderboardView: View {
                             .frame(width: 110)
                             .background(currentSchema.bar)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
-                            
+
                             VStack {
                                 Image(systemName: "crown.fill")
                                     .font(.system(size: 26, weight: .bold))
@@ -70,7 +70,7 @@ struct LeaderboardView: View {
                             .frame(width: 110)
                             .background(currentSchema.bar)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
-                            
+
                             VStack {
                                 Text("\(savingsArray[2].amount) €")
                                     .font(.system(size: 16, weight: .black))
@@ -87,7 +87,7 @@ struct LeaderboardView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                     }
-                    
+
                     if savingsArray.count > 3 {
                         ScrollView {
                             ForEach(0..<savingsArray.dropFirst(3).count, id: \.self) { index in

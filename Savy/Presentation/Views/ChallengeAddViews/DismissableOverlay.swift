@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DismissableOverlay: View {
     var bindings: [Binding<Bool>]
-    
+
     public var body: some View {
         VStack {
             Spacer()

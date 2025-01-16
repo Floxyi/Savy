@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ToolbarCancelButton: View {
     @Binding var showPopover: Bool
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Button("Cancel") {
             showPopover = false
         }

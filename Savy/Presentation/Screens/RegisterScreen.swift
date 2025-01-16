@@ -11,44 +11,44 @@ import SwiftUI
 struct RegisterScreen: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State private var username = ""
     @State private var isUsernameValid = false
     @State private var usernameError = true
     @State private var showUsernamePopup = false
-    
+
     @State private var email = ""
     @State private var isEmailValid = false
     @State private var emailError = true
     @State private var showEmailPopup = false
-    
+
     @State private var password = ""
     @State private var isPasswordValid = false
     @State private var passwordError = true
     @State private var showPasswordPopup = false
-    
+
     @State private var authError = false
     @State private var isLoading = false
-    
+
     @Binding var isSignedIn: Bool
-    
+
     @State private var showConfirmationDialog = false
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         let hasRegestiredPreviously = StatsTracker.shared.accountUUID != nil
-        
+
         VStack {
             HeaderView(title: "Register", dismiss: {
                 dismiss()
                 TabBarManager.shared.show()
             })
             .padding(.bottom, 88)
-            
+
             if AuthManager.shared.isSignedIn() {
                 Text("You are now registered.")
             }
-            
+
             if !AuthManager.shared.isSignedIn() {
                 VStack {
                     RegistrationTextFieldView(
@@ -63,7 +63,7 @@ struct RegisterScreen: View {
                         keyboardType: .default,
                         contentType: .username
                     )
-                    
+
                     RegistrationTextFieldView(
                         text: $email,
                         isValid: $isEmailValid,
@@ -76,7 +76,7 @@ struct RegisterScreen: View {
                         keyboardType: .emailAddress,
                         contentType: .emailAddress
                     )
-                    
+
                     RegistrationTextFieldView(
                         text: $password,
                         isValid: $isPasswordValid,
@@ -89,10 +89,10 @@ struct RegisterScreen: View {
                         keyboardType: .default,
                         contentType: .password
                     )
-                    
+
                     Text("This email address is already registered.")
                         .foregroundStyle(authError ? Color.red : currentSchema.background)
-                    
+
                     if hasRegestiredPreviously {
                         ActionButton(
                             content: HStack {
@@ -122,7 +122,7 @@ struct RegisterScreen: View {
                             Button("Abbrechen", role: .cancel) { }
                         }
                     }
-                    
+
                     if !hasRegestiredPreviously {
                         ActionButton(
                             content: HStack {
@@ -145,7 +145,7 @@ struct RegisterScreen: View {
                     }
                 }
             }
-            
+
             Spacer()
             HStack {
                 Spacer()
@@ -160,12 +160,12 @@ struct RegisterScreen: View {
             TabBarManager.shared.hide()
         })
     }
-    
+
     func validateuUsername() {
         isUsernameValid = username.count >= 5
         usernameError = username.isEmpty
     }
-    
+
     func validateEmail() {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -173,12 +173,12 @@ struct RegisterScreen: View {
         emailError = email.isEmpty
         authError = false
     }
-    
+
     func validatePassword() {
         isPasswordValid = password.count >= 8
         passwordError = password.isEmpty
     }
-    
+
     func signUpButtonPressed() {
         isLoading = true
         Task {
@@ -195,12 +195,12 @@ struct RegisterScreen: View {
 #Preview {
     struct PreviewWrapper: View {
         @State private var isSignedIn: Bool = false
-        
+
         var body: some View {
             RegisterScreen(isSignedIn: $isSignedIn)
         }
     }
-    
+
     return PreviewWrapper()
         .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))

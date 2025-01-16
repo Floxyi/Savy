@@ -10,22 +10,22 @@ import SwiftUI
 
 struct RegistrationTextFieldView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @Binding var text: String
     @Binding var isValid: Bool
     @Binding var showPopup: Bool
     @Binding var error: Bool
-    
+
     let placeholder: String
     let isSecure: Bool
     let validationFunction: () -> Void
     let popupText: String
     let keyboardType: UIKeyboardType
     let contentType: UITextContentType
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         ZStack(alignment: .trailing) {
             if isSecure {
                 SecureField("", text: $text, prompt: Text(verbatim: placeholder)
@@ -34,7 +34,7 @@ struct RegistrationTextFieldView: View {
                 TextField("", text: $text, prompt: Text(verbatim: placeholder)
                     .foregroundColor(currentSchema.font.opacity(0.4)))
             }
-            
+
             HStack {
                 if !isValid {
                     if error {
@@ -110,7 +110,7 @@ struct RegistrationTextFieldView: View {
                 contentType: .emailAddress
             )
         }
-        
+
         func validateEmail() {
             let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
             let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
@@ -145,7 +145,7 @@ struct RegistrationTextFieldView: View {
                 contentType: .password
             )
         }
-        
+
         func validatePassword() {
             isPasswordValid = password.count >= 8
             passwordError = password.isEmpty

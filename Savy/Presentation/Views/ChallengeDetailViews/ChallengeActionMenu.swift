@@ -8,13 +8,13 @@ import SwiftUI
 
 struct ChallengeActionMenu: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var editChallenge: () -> Void
     var removeChallenge: () -> Void
 
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Menu {
             Button(action: {
                 editChallenge()

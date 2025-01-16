@@ -11,32 +11,32 @@ import SwiftUI
 struct LoginScreen: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State private var email = ""
     @State private var password = ""
-    
+
     @State private var authError = false
     @State private var isLoading = false
-    
+
     @Binding var isSignedIn: Bool
-    
+
     @State private var showConfirmationDialog = false
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
         let hasLoggedInPreviously = StatsTracker.shared.accountUUID != nil
-        
+
         VStack {
             HeaderView(title: "Login", dismiss: {
                 dismiss()
                 TabBarManager.shared.show()
             })
             .padding(.bottom, 88)
-            
+
             if AuthManager.shared.isSignedIn() {
                 Text("You are now logged in.")
             }
-            
+
             if !AuthManager.shared.isSignedIn() {
                 VStack {
                     LoginTextFieldView(
@@ -46,7 +46,7 @@ struct LoginScreen: View {
                         keyboardType: .emailAddress,
                         contentType: .emailAddress
                     )
-                    
+
                     LoginTextFieldView(
                         text: $password,
                         placeholder: "password",
@@ -54,11 +54,11 @@ struct LoginScreen: View {
                         keyboardType: .default,
                         contentType: .password
                     )
-                    
+
                     Text("The account does not exist or the password is incorrect.")
                         .foregroundStyle(authError ? Color.red : currentSchema.background)
                         .multilineTextAlignment(.center)
-                    
+
                     if hasLoggedInPreviously {
                         ActionButton(
                             content: HStack {
@@ -88,7 +88,7 @@ struct LoginScreen: View {
                             Button("Abbrechen", role: .cancel) { }
                         }
                     }
-                    
+
                     if !hasLoggedInPreviously {
                         ActionButton(
                             content: HStack {
@@ -112,7 +112,7 @@ struct LoginScreen: View {
                     }
                 }
             }
-            
+
             Spacer()
             HStack {
                 Spacer()
@@ -127,17 +127,17 @@ struct LoginScreen: View {
             TabBarManager.shared.hide()
         })
     }
-    
+
     func validateEmail() -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
     }
-    
+
     func validatePassword() -> Bool {
         return password.count >= 8
     }
-    
+
     func signInButtonPressed() {
         isLoading = true
         authError = false
@@ -161,12 +161,12 @@ struct LoginScreen: View {
 #Preview {
     struct PreviewWrapper: View {
         @State private var isSignedIn: Bool = false
-        
+
         var body: some View {
             LoginScreen(isSignedIn: $isSignedIn)
         }
     }
-    
+
     return PreviewWrapper()
         .modelContainer(for: [ColorManager.self])
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))

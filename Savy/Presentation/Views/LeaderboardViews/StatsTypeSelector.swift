@@ -9,12 +9,12 @@ import SwiftUI
 
 struct StatsTypeSelector: View {
     @Binding var selectedStatsType: StatsType
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Menu {
             ForEach(StatsType.allCases.prefix(1), id: \.self) { statsType in
                 Button(action: {

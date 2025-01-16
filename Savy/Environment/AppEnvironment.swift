@@ -10,7 +10,7 @@ import Foundation
 enum AppEnvironment {
     case development
     case production
-    
+
     static let current: AppEnvironment = {
 #if DEBUG
         return .development

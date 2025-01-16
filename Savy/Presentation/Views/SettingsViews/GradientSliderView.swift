@@ -11,19 +11,19 @@ import SwiftUI
 struct GradientSliderView: View {
     @Binding var value: Double
     var range: ClosedRange<Double>
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State private var isDragging = false
     @FocusState var isInputActive: Bool
-    
+
     private let gradientColors: [Color] = [.red, .yellow, .green, .cyan, .blue, .purple, .red]
     private let thumbSize: CGFloat = 28
     private let trackHeight: CGFloat = 8
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             HStack {
                 Text(String(format: "%.0f", value))
@@ -32,13 +32,13 @@ struct GradientSliderView: View {
                     .font(.system(size: 14))
                     .padding(.horizontal, 4)
                     .frame(width: 38, alignment: .trailing)
-                
+
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: trackHeight / 2)
                             .fill(LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .leading, endPoint: .trailing))
                             .frame(height: trackHeight)
-                        
+
                         Circle()
                             .fill(Color.white)
                             .frame(width: thumbSize, height: thumbSize)
@@ -48,7 +48,7 @@ struct GradientSliderView: View {
                     }
                 }
                 .frame(height: thumbSize)
-                
+
                 Text("360")
                     .foregroundStyle(currentSchema.font)
                     .fontWeight(.bold)
@@ -57,12 +57,12 @@ struct GradientSliderView: View {
             }
         }
     }
-    
+
     private func thumbPosition(in width: CGFloat) -> CGFloat {
         let percent = (value - range.lowerBound) / (range.upperBound - range.lowerBound)
         return (width - thumbSize) * CGFloat(percent)
     }
-    
+
     private func dragGesture(in width: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { drag in

@@ -10,9 +10,9 @@ import SwiftData
 
 struct ChallengesListView: View {
     @Environment(\.modelContext) private var modelContext
-    
+
     @State private var showPopover = false
-    
+
     var body: some View {
         VStack(alignment: .center) {
             ScrollView(.vertical, showsIndicators: false) {
@@ -30,7 +30,7 @@ struct ChallengesListView: View {
 
 #Preview {
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -41,7 +41,7 @@ struct ChallengesListView: View {
         cycleAmount: 12
     )
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-    
+
     return ChallengesListView()
         .padding(.top, 80)
         .modelContainer(container)

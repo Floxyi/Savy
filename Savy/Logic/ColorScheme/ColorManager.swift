@@ -13,7 +13,7 @@ import SwiftUI
 class ColorManager {
     public var hue: Double
     public var currentSchemaData: Data
-    
+
     public var currentSchema: ColorScheme {
         get {
             do {
@@ -30,7 +30,7 @@ class ColorManager {
             }
         }
     }
-    
+
     public init(hue: Double, currentSchema: ColorScheme) {
         self.hue = hue
         do {
@@ -40,7 +40,7 @@ class ColorManager {
             self.currentSchemaData = Data()
         }
     }
-    
+
     func updateSchema(schema: ColorScheme) {
         self.currentSchema = schema
     }
@@ -49,12 +49,12 @@ class ColorManager {
 class ColorManagerViewModel: ObservableObject {
     @Published var colorManager: ColorManager
     private var modelContext: ModelContext
-    
+
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         self.colorManager = ColorManagerViewModel.getOrCreateColorManager(in: modelContext)
     }
-    
+
     static func getOrCreateColorManager(in context: ModelContext) -> ColorManager {
         let fetchDescriptor = FetchDescriptor<ColorManager>()
         if let existingManager = try? context.fetch(fetchDescriptor).first {

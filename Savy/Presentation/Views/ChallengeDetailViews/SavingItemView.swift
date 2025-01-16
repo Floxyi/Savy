@@ -10,14 +10,14 @@ import SwiftUI
 
 struct SavingItemView: View {
     let saving: Saving
-    
+
     @State private var showConfirmationDialog = false
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
                 .font(.system(size: 14, weight: .bold))
@@ -27,7 +27,7 @@ struct SavingItemView: View {
                 .background(currentSchema.background)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.bottom, -6)
-            
+
             Text("\(saving.amount)€")
                 .font(.system(size: 26, weight: .bold))
                 .foregroundStyle(currentSchema.font)
@@ -52,10 +52,10 @@ struct SavingItemView: View {
 
 #Preview {
     let saving: Saving = Saving(challengeId: UUID(), amount: 30, date: Date())
-    
+
     let container = try! ModelContainer(for: Saving.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(saving)
-    
+
     return SavingItemView(saving: saving)
         .modelContainer(container)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))

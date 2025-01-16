@@ -10,23 +10,23 @@ import SwiftUI
 
 struct SettingsScreen: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @State private var selectedMode: ColorSchemeMode = .light
     @State private var toggledDarkMode: Bool = false
     @State private var toggledColorMode: Bool = false
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         NavigationView {
             VStack {
                 HeaderView(title: "Settings")
-                
+
                 ScrollView(.vertical, showsIndicators: false) {
                     SettingsTileView(image: "person.fill", text: "Account") {
                         AccountView()
                     }
-                    
+
                     SettingsTileView(image: "paintbrush.fill", text: "Design") {
                         SettingsBarView(text: "Theme", toggle: $toggledDarkMode)
                             .onChange(of: toggledDarkMode) {
@@ -52,7 +52,7 @@ struct SettingsScreen: View {
                         }
                     }
                 }
-                
+
                 Spacer()
             }
             .padding()
@@ -66,20 +66,20 @@ struct SettingsScreen: View {
             }
         }
     }
-    
+
     private func updateSchemaForSelectedMode() {
         if toggledDarkMode && !toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.darkMode())
         }
-        
+
         if !toggledDarkMode && !toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.lightMode())
         }
-        
+
         if !toggledDarkMode && toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredLightMode(hue: colorManagerVM.colorManager.hue))
         }
-        
+
         if toggledDarkMode && toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredDarkMode(hue: colorManagerVM.colorManager.hue))
         }

@@ -10,12 +10,12 @@ import SwiftUI
 struct StrategySelector: View {
     @Binding var selectedStrategy: SavingStrategy
     let onChangeAction: () -> Void
-    
+
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         Menu {
             ForEach(SavingStrategy.allCases, id: \.self) { strategy in
                 Button(action: {

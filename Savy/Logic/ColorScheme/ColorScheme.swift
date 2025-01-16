@@ -15,11 +15,11 @@ struct ColorScheme: Codable, Equatable {
     let accent1: Color
     let accent2: Color
     let font: Color
-    
+
     enum CodingKeys: String, CodingKey {
         case mode, background, bar, barIcons, accent1, accent2, font
     }
-    
+
     init(mode: ColorSchemeMode, background: Color, bar: Color, barIcons: Color, accent1: Color, accent2: Color, font: Color) {
         self.mode = mode
         self.background = background
@@ -29,7 +29,7 @@ struct ColorScheme: Codable, Equatable {
         self.accent2 = accent2
         self.font = font
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         mode = try container.decode(ColorSchemeMode.self, forKey: .mode)
@@ -40,7 +40,7 @@ struct ColorScheme: Codable, Equatable {
         accent2 = Color(hexString: try container.decode(String.self, forKey: .accent2)) ?? .clear
         font = Color(hexString: try container.decode(String.self, forKey: .font)) ?? .clear
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(mode, forKey: .mode)

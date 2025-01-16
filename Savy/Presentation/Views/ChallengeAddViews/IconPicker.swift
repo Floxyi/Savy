@@ -9,13 +9,13 @@ import SwiftUI
 
 struct IconPicker: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @Binding var selectedIcon: String?
     @Binding var isIconPickerVisible: Bool
-    
+
     public var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             if selectedIcon == nil {
                 Text("Choose icon")
@@ -46,21 +46,21 @@ struct IconPicker: View {
 
 struct IconPickerOverlay: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
-    
+
     @Binding var selectedIcon: String?
     @Binding var isIconPickerVisible: Bool
-    
+
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
-    
+
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        
+
         VStack {
             Text("Pick an icon:")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(currentSchema.font)
                 .padding(.top)
-            
+
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(iconPickerList, id: \.self) { iconName in

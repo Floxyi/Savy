@@ -19,7 +19,7 @@ struct ColorSchemes {
             font: Color(hue: 0, saturation: 0, lightness: 45)
         )
     }
-    
+
     static func darkMode() -> ColorScheme {
         return ColorScheme(
             mode: .dark,
@@ -31,7 +31,7 @@ struct ColorSchemes {
             font: Color(hue: 0, saturation: 0, lightness: 100)
         )
     }
-    
+
     static func coloredLightMode(hue: Double) -> ColorScheme {
         return ColorScheme(
             mode: .coloredLight,
@@ -43,7 +43,7 @@ struct ColorSchemes {
             font: Color(hue: hue, saturation: 62, lightness: 93)
         )
     }
-    
+
     static func coloredDarkMode(hue: Double) -> ColorScheme {
         return ColorScheme(
             mode: .coloredDark,
