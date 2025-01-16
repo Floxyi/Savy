@@ -11,13 +11,15 @@ import SwiftData
 @main
 struct SavyApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            ChallengeManager.self,
-            StatsTracker.self,
-            SavingStats.self,
-            StatsEntry.self,
-            ColorManager.self,
-        ])
+        let schema = Schema(
+            [
+                ChallengeManager.self,
+                StatsTracker.self,
+                SavingStats.self,
+                StatsEntry.self,
+                ColorManager.self,
+            ]
+        )
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
