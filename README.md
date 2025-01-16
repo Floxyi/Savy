@@ -3,16 +3,17 @@
 **Savy** is an innovative iOS app that transforms saving money into an exciting challenge for you and your friends!
 
 ## Table of Contents
+
 - [Savy](#savy)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-  - [Development](#development)
-    - [Environment Setup](#environment-setup)
-    - [Supabase Management](#supabase-management)
-    - [Xcode Run Configurations](#xcode-run-configurations)
+    - [Table of Contents](#table-of-contents)
+    - [Features](#features)
+    - [Getting Started](#getting-started)
+        - [Prerequisites](#prerequisites)
+        - [Installation](#installation)
+    - [Development](#development)
+        - [Environment Setup](#environment-setup)
+        - [Supabase Management](#supabase-management)
+        - [Xcode Run Configurations](#xcode-run-configurations)
 
 ## Features
 
@@ -60,7 +61,7 @@ Before you begin, ensure you have the following installed:
 
 1. Create your environment configuration:
    ```bash
-   cp .example.env .env
+   cp .env.mock .env
    ```
 
 2. Open and edit the `.env` file with your preferred text editor:
