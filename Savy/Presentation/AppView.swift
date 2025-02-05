@@ -9,7 +9,6 @@ import SwiftData
 import SwiftUI
 
 struct AppView: View {
-
     @ObservedObject private var tabBarManager = TabBarManager.shared
 
     var body: some View {

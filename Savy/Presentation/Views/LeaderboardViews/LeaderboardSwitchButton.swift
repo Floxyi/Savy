@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 14.10.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct LeaderboardSwitchButton: View {
     @Binding var showsPersonalStats: Bool
@@ -37,7 +37,7 @@ struct LeaderboardSwitchButton: View {
 }
 
 #Preview {
-    @Previewable @State var showsPersonalStats: Bool = true
+    @Previewable @State var showsPersonalStats = true
 
     return LeaderboardSwitchButton(showsPersonalStats: $showsPersonalStats)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))

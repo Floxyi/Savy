@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 22.08.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ChallengeAddScreen: View {
     @Binding var showPopover: Bool
@@ -90,7 +90,7 @@ struct ChallengeAddScreen: View {
                                 selection: $endDate,
                                 displayedComponents: [.date]
                             )
-                                .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
+                            .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -195,16 +195,16 @@ struct ChallengeAddScreen: View {
     }
 
     private func isValid() -> Bool {
-        return icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
+        icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
 }
 
 #Preview {
-    @Previewable @State var showPopover: Bool = true
+    @Previewable @State var showPopover = true
 
     return Spacer()
-    .popover(isPresented: $showPopover) {
-        ChallengeAddScreen(showPopover: $showPopover)
-    }
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .popover(isPresented: $showPopover) {
+            ChallengeAddScreen(showPopover: $showPopover)
+        }
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

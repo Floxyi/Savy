@@ -27,7 +27,7 @@ struct HeaderView: View {
                     .foregroundStyle(currentSchema.font)
             }
 
-            if let dismiss = dismiss {
+            if let dismiss {
                 HStack {
                     Button {
                         dismiss()
@@ -42,7 +42,7 @@ struct HeaderView: View {
                 }
             }
 
-            if let actionView = actionView {
+            if let actionView {
                 HStack {
                     Spacer()
                     actionView

@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 11.10.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ChallengeDetailsButtonView: View {
     var title: String
@@ -39,7 +39,7 @@ struct ChallengeDetailsButtonView: View {
 }
 
 #Preview {
-    @Previewable @State var showPopover: Bool = true
+    @Previewable @State var showPopover = true
 
     return ChallengeDetailsButtonView(title: "View all", icon: "chevron.up", showPopover: $showPopover)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))

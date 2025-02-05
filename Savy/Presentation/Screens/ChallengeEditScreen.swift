@@ -1,12 +1,12 @@
 //
-//  ChallengeEditView.swift
+//  ChallengeEditScreen.swift
 //  Savy
 //
 //  Created by Florian Winkler on 11.10.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ChallengeEditScreen: View {
     var challenge: Challenge
@@ -93,7 +93,7 @@ struct ChallengeEditScreen: View {
                                 selection: $endDate,
                                 displayedComponents: [.date]
                             )
-                                .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
+                            .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -219,7 +219,7 @@ struct ChallengeEditScreen: View {
 }
 
 #Preview {
-    @Previewable @State var showPopover: Bool = true
+    @Previewable @State var showPopover = true
 
     let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
 
@@ -235,9 +235,9 @@ struct ChallengeEditScreen: View {
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
 
     return Spacer()
-    .popover(isPresented: $showPopover) {
-        ChallengeEditScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
-    }
-    .modelContainer(container)
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .popover(isPresented: $showPopover) {
+            ChallengeEditScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
+        }
+        .modelContainer(container)
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
 }

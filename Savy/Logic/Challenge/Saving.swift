@@ -17,11 +17,11 @@ final class Saving {
     private(set) var done: Bool
 
     init(challengeId: UUID, amount: Int, date: Date) {
-        self.id = UUID()
+        id = UUID()
         self.challengeId = challengeId
         self.amount = amount
         self.date = date
-        self.done = false
+        done = false
     }
 
     func toggleDone() {
@@ -31,12 +31,12 @@ final class Saving {
         let wasCompleted = StatsTracker.shared.entries.contains { (entry: StatsEntry) in
             entry.type == StatsType.challenged_completed && entry.challengeStats?.challengeId == challengeId
         }
-        if wasCompleted && !done {
+        if wasCompleted, !done {
             StatsTracker.shared.deleteStatsEntry(challengeId: challengeId, statsType: .challenged_completed)
         }
 
         let isCompleted = ChallengeManager.shared.getChallengeById(id: challengeId)?.remainingAmount() == 0
-        if isCompleted && done {
+        if isCompleted, done {
             StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: challengeId)
         }
     }

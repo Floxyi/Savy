@@ -57,7 +57,7 @@ class ChallengeConfiguration {
         }
 
         var currentDate = startDate
-        for _ in 0..<numberOfCycles {
+        for _ in 0 ..< numberOfCycles {
             let saving = Saving(challengeId: challenge.id, amount: amountPerSaving, date: currentDate)
             challenge.addSaving(saving: saving)
             currentDate = nextDate(from: currentDate, strategy: strategy, calendar: Calendar.current)!
@@ -84,13 +84,13 @@ class ChallengeConfiguration {
         let savingsCount = isComplete ? savingsAmount : savingsAmount + 1
 
         var currentDate = startDate
-        for _ in 0..<savingsCount {
+        for _ in 0 ..< savingsCount {
             let saving = Saving(challengeId: challenge.id, amount: cycleAmount!, date: currentDate)
             challenge.addSaving(saving: saving)
             currentDate = nextDate(from: currentDate, strategy: strategy, calendar: Calendar.current)!
         }
 
-        self.endDate = challenge.savings.last!.date
+        endDate = challenge.savings.last!.date
 
         if !isComplete {
             let lastSaving = challenge.savings.last!
@@ -115,12 +115,10 @@ class ChallengeConfiguration {
             challenge.removeSaving(saving: saving)
         }
 
-        let lastDate = challenge.savings.count > 0 ? challenge.savings.last!.date : self.startDate
+        let lastDate = challenge.savings.count > 0 ? challenge.savings.last!.date : startDate
         let nextDate = nextDate(from: lastDate, strategy: strategy, calendar: Calendar.current)!
 
-        let finishedSavings = challenge.savings.filter {
-            $0.done
-        }
+        let finishedSavings = challenge.savings.filter(\.done)
         let preSavedAmount = finishedSavings.reduce(0) {
             $0 + $1.amount
         }
@@ -169,9 +167,7 @@ class ChallengeConfiguration {
         var targetAmount = amount
 
         if challenge != nil {
-            let finishedSavings = challenge!.savings.filter {
-                $0.done
-            }
+            let finishedSavings = challenge!.savings.filter(\.done)
             let preSavedAmount = finishedSavings.reduce(0) {
                 $0 + $1.amount
             }

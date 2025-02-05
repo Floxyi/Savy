@@ -15,8 +15,7 @@ class StatsTracker {
     private(set) var entries: [StatsEntry] = []
     private(set) var accountUUID: UUID?
 
-    init() {
-    }
+    init() {}
 
     private func addStatsEntry(entry: StatsEntry) {
         entries.append(entry)
@@ -61,29 +60,29 @@ class StatsTracker {
 
     func totalMoneySaved() -> Int {
         entries
-        .filter {
-            $0.type == .money_saved
-        }
-        .compactMap {
-            $0.savingStats?.amount
-        }
-        .reduce(0, +)
+            .filter {
+                $0.type == .money_saved
+            }
+            .compactMap {
+                $0.savingStats?.amount
+            }
+            .reduce(0, +)
     }
 
     func totalChallengesCompleted() -> Int {
         entries
-        .filter {
-            $0.type == .challenged_completed
-        }
-        .count
+            .filter {
+                $0.type == .challenged_completed
+            }
+            .count
     }
 
     func totalChallengesStarted() -> Int {
         entries
-        .filter {
-            $0.type == .challenged_started
-        }
-        .count
+            .filter {
+                $0.type == .challenged_started
+            }
+            .count
     }
 
     func allTimePunctuality() -> Int? {
@@ -113,7 +112,6 @@ class StatsTracker {
 
         return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
     }
-
 
     func timeRangeCalculation(startDate: Date, endDate: Date, statsType: StatsType) -> [StatsEntry] {
         entries.filter { entry in
@@ -160,17 +158,17 @@ class StatsTracker {
 
         if Calendar.current.isDate(startDate, inSameDayAs: endDate) {
             let savingsForDate = allSaving
-            .filter {
-                Calendar.current.isDate($0.date, inSameDayAs: startDate)
-            }
-            .compactMap {
-                $0.savingStats?.amount
-            }
-            .reduce(0, +)
+                .filter {
+                    Calendar.current.isDate($0.date, inSameDayAs: startDate)
+                }
+                .compactMap {
+                    $0.savingStats?.amount
+                }
+                .reduce(0, +)
             return Double(savingsForDate)
         }
 
-        if numberOfDays == 0 && !allSaving.isEmpty {
+        if numberOfDays == 0, !allSaving.isEmpty {
             return Double(StatsTracker.shared.totalMoneySaved())
         }
 
@@ -210,9 +208,9 @@ class StatsTracker {
 
     func setAccountUUID(uuid: UUID?, sameAccount: Bool = true) {
         let hasRegisteredBefore = accountUUID != nil
-        self.accountUUID = uuid
-        if hasRegisteredBefore && sameAccount {
-            self.removeAllEntries()
+        accountUUID = uuid
+        if hasRegisteredBefore, sameAccount {
+            removeAllEntries()
             ChallengeManager.shared.removeAllChallenges()
         }
     }

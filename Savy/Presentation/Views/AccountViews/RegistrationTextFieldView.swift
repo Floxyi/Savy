@@ -1,5 +1,5 @@
 //
-//  InputFieldComponent.swift
+//  RegistrationTextFieldView.swift
 //  Savy
 //
 //  Created by Florian Winkler on 23.09.24.
@@ -45,12 +45,12 @@ struct RegistrationTextFieldView: View {
                             .padding(.trailing, 34)
                             .gesture(
                                 DragGesture(minimumDistance: 0)
-                                .onChanged { _ in
-                                    showPopup = true
-                                }
-                                .onEnded { _ in
-                                    showPopup = false
-                                }
+                                    .onChanged { _ in
+                                        showPopup = true
+                                    }
+                                    .onEnded { _ in
+                                        showPopup = false
+                                    }
                             )
                     } else {
                         Image(systemName: "x.circle.fill")
@@ -60,12 +60,12 @@ struct RegistrationTextFieldView: View {
                             .padding(.trailing, 34)
                             .gesture(
                                 DragGesture(minimumDistance: 0)
-                                .onChanged { _ in
-                                    showPopup = true
-                                }
-                                .onEnded { _ in
-                                    showPopup = false
-                                }
+                                    .onChanged { _ in
+                                        showPopup = true
+                                    }
+                                    .onEnded { _ in
+                                        showPopup = false
+                                    }
                             )
                     }
                 }
@@ -77,12 +77,12 @@ struct RegistrationTextFieldView: View {
                         .padding(.trailing, 34)
                         .gesture(
                             DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                showPopup = true
-                            }
-                            .onEnded { _ in
-                                showPopup = false
-                            }
+                                .onChanged { _ in
+                                    showPopup = true
+                                }
+                                .onEnded { _ in
+                                    showPopup = false
+                                }
                         )
                 }
             }

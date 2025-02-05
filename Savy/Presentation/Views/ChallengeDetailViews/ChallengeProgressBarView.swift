@@ -1,5 +1,5 @@
 //
-//  ProgressBar.swift
+//  ChallengeProgressBarView.swift
 //  Savy
 //
 //  Created by Florian Winkler on 25.09.24.
@@ -18,14 +18,29 @@ struct ChallengeProgressBarView: View {
         let progress = CGFloat(challenge.progressPercentage())
 
         GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: geometry.size.height / 2)
-                    .fill(currentSchema.accent1)
-                    .frame(height: geometry.size.height)
+            ZStack {
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: geometry.size.height / 2)
+                        .fill(currentSchema.accent1)
+                        .frame(
+                            width: geometry.size.width,
+                            height: geometry.size.height
+                        )
 
-                RoundedRectangle(cornerRadius: geometry.size.height / 2)
-                    .fill(currentSchema.barIcons)
-                    .frame(width: geometry.size.width * progress, height: geometry.size.height)
+                    Rectangle()
+                        .fill(currentSchema.barIcons)
+                        .frame(
+                            width: geometry.size.width * progress,
+                            height: geometry.size.height
+                        )
+                }
+                .mask(
+                    RoundedRectangle(cornerRadius: geometry.size.height / 2)
+                        .frame(
+                            width: geometry.size.width,
+                            height: geometry.size.height
+                        )
+                )
 
                 HStack {
                     Image(systemName: challenge.challengeConfiguration.icon)
@@ -51,21 +66,31 @@ struct ChallengeProgressBarView: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(
+        for: Challenge.self, ColorManager.self,
+        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+    )
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
-        amount: 300,
+        amount: 1000,
         startDate: Date(),
         strategy: .Monthly,
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
 
-    return ChallengeProgressBarView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
+    let challenge = Challenge(challengeConfiguration: challengeConfiguration)
+    challenge.getNextSaving(at: 1).toggleDone()
+
+    ChallengeManager.shared.addChallenge(
+        challengeConfiguration: challengeConfiguration
+    )
+
+    return ChallengeProgressBarView(challenge: challenge)
         .padding()
         .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(
+            ColorManagerViewModel(modelContext: ModelContext(container)))
 }

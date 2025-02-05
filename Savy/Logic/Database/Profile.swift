@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Profile.swift
 //  Savy
 //
 //  Created by Florian Winkler on 29.08.24.

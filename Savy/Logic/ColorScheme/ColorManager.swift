@@ -34,15 +34,15 @@ class ColorManager {
     public init(hue: Double, currentSchema: ColorScheme) {
         self.hue = hue
         do {
-            self.currentSchemaData = try JSONEncoder().encode(currentSchema)
+            currentSchemaData = try JSONEncoder().encode(currentSchema)
         } catch {
             print("Failed to encode initial ColorScheme: \(error)")
-            self.currentSchemaData = Data()
+            currentSchemaData = Data()
         }
     }
 
     func updateSchema(schema: ColorScheme) {
-        self.currentSchema = schema
+        currentSchema = schema
     }
 }
 
@@ -52,7 +52,7 @@ class ColorManagerViewModel: ObservableObject {
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
-        self.colorManager = ColorManagerViewModel.getOrCreateColorManager(in: modelContext)
+        colorManager = ColorManagerViewModel.getOrCreateColorManager(in: modelContext)
     }
 
     static func getOrCreateColorManager(in context: ModelContext) -> ColorManager {

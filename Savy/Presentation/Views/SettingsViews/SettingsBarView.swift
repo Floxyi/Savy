@@ -19,7 +19,7 @@ struct SettingsBarView<Content: View>: View {
         EmptyView()
     }) {
         self.text = text
-        self._toggle = toggle
+        _toggle = toggle
         self.content = content
     }
 
@@ -48,7 +48,7 @@ struct SettingsBarView<Content: View>: View {
 }
 
 #Preview {
-    @Previewable @State var toggle: Bool = true
+    @Previewable @State var toggle = true
     return VStack {
         SettingsBarView(text: "Toggle", toggle: $toggle)
         SettingsBarView(text: "Toggle", toggle: $toggle) {

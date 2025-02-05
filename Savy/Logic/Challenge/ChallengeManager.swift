@@ -13,8 +13,7 @@ class ChallengeManager {
     static let shared = ChallengeManager()
     private(set) var challenges: [Challenge] = []
 
-    init() {
-    }
+    init() {}
 
     func getChallengeById(id: UUID) -> Challenge? {
         challenges.first(where: { $0.id == id })
@@ -65,7 +64,7 @@ class ChallengeManager {
             let remainingSavings1 = challenge1.remainingSavings()
             let remainingSavings2 = challenge2.remainingSavings()
 
-            if remainingSavings1 == 0 && remainingSavings2 == 0 {
+            if remainingSavings1 == 0, remainingSavings2 == 0 {
                 return challenge1.challengeConfiguration.endDate < challenge2.challengeConfiguration.endDate
             }
 

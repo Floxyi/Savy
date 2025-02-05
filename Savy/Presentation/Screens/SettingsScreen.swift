@@ -37,12 +37,12 @@ struct SettingsScreen: View {
                         SettingsBarView(text: "Color Mode", toggle: $toggledColorMode) {
                             if toggledColorMode {
                                 GradientSliderView(value: Binding(
-                                    get: { self.colorManagerVM.colorManager.hue },
+                                    get: { colorManagerVM.colorManager.hue },
                                     set: { newValue in
-                                        self.colorManagerVM.colorManager.hue = newValue
-                                        self.updateSchemaForSelectedMode()
+                                        colorManagerVM.colorManager.hue = newValue
+                                        updateSchemaForSelectedMode()
                                     }
-                                ), range: 0...360)
+                                ), range: 0 ... 360)
                             }
                         }
                         .onChange(of: toggledColorMode) {
@@ -68,19 +68,19 @@ struct SettingsScreen: View {
     }
 
     private func updateSchemaForSelectedMode() {
-        if toggledDarkMode && !toggledColorMode {
+        if toggledDarkMode, !toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.darkMode())
         }
 
-        if !toggledDarkMode && !toggledColorMode {
+        if !toggledDarkMode, !toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.lightMode())
         }
 
-        if !toggledDarkMode && toggledColorMode {
+        if !toggledDarkMode, toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredLightMode(hue: colorManagerVM.colorManager.hue))
         }
 
-        if toggledDarkMode && toggledColorMode {
+        if toggledDarkMode, toggledColorMode {
             colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredDarkMode(hue: colorManagerVM.colorManager.hue))
         }
     }

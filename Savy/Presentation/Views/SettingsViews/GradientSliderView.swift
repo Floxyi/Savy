@@ -65,20 +65,20 @@ struct GradientSliderView: View {
 
     private func dragGesture(in width: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 0)
-        .onChanged { drag in
-            isDragging = true
-            let dragLocation = drag.location.x
-            let percent = max(0, min(1, dragLocation / (width - thumbSize)))
-            value = range.lowerBound + (range.upperBound - range.lowerBound) * Double(percent)
-        }
-        .onEnded { _ in
-            isDragging = false
-        }
+            .onChanged { drag in
+                isDragging = true
+                let dragLocation = drag.location.x
+                let percent = max(0, min(1, dragLocation / (width - thumbSize)))
+                value = range.lowerBound + (range.upperBound - range.lowerBound) * Double(percent)
+            }
+            .onEnded { _ in
+                isDragging = false
+            }
     }
 }
 
 #Preview {
     @Previewable @State var value: Double = 0
-    return GradientSliderView(value: $value, range: 0...360)
+    return GradientSliderView(value: $value, range: 0 ... 360)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
