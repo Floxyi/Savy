@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 14.10.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct LeaderboardView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
@@ -90,7 +90,7 @@ struct LeaderboardView: View {
 
                     if savingsArray.count > 3 {
                         ScrollView {
-                            ForEach(0..<savingsArray.dropFirst(3).count, id: \.self) { index in
+                            ForEach(0 ..< savingsArray.dropFirst(3).count, id: \.self) { index in
                                 let user = savingsArray[index + 3]
                                 let profileId = StatsTracker.shared.accountUUID
                                 let isCurrentUser = user.profile.id == profileId
@@ -135,8 +135,7 @@ struct LeaderboardView: View {
                 savingsArray.sort {
                     $0.amount > $1.amount
                 }
-            } catch {
-            }
+            } catch {}
             isLoading = false
         }
     }

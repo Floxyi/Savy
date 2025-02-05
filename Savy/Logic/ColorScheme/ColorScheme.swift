@@ -33,12 +33,12 @@ struct ColorScheme: Codable, Equatable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         mode = try container.decode(ColorSchemeMode.self, forKey: .mode)
-        background = Color(hexString: try container.decode(String.self, forKey: .background)) ?? .clear
-        bar = Color(hexString: try container.decode(String.self, forKey: .bar)) ?? .clear
-        barIcons = Color(hexString: try container.decode(String.self, forKey: .barIcons)) ?? .clear
-        accent1 = Color(hexString: try container.decode(String.self, forKey: .accent1)) ?? .clear
-        accent2 = Color(hexString: try container.decode(String.self, forKey: .accent2)) ?? .clear
-        font = Color(hexString: try container.decode(String.self, forKey: .font)) ?? .clear
+        background = try Color(hexString: container.decode(String.self, forKey: .background)) ?? .clear
+        bar = try Color(hexString: container.decode(String.self, forKey: .bar)) ?? .clear
+        barIcons = try Color(hexString: container.decode(String.self, forKey: .barIcons)) ?? .clear
+        accent1 = try Color(hexString: container.decode(String.self, forKey: .accent1)) ?? .clear
+        accent2 = try Color(hexString: container.decode(String.self, forKey: .accent2)) ?? .clear
+        font = try Color(hexString: container.decode(String.self, forKey: .font)) ?? .clear
     }
 
     func encode(to encoder: Encoder) throws {

@@ -1,5 +1,5 @@
 //
-//  TabEnum.swift
+//  Tab.swift
 //  Savy
 //
 //  Created by Florian Winkler on 29.09.24.

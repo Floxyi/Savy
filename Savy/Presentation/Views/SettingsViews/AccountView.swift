@@ -41,20 +41,19 @@ struct AccountView: View {
                             .frame(width: 20, height: 20)
                     } else {
                         Text("Log Out")
-                        .foregroundStyle(currentSchema.font)
-                        .font(.system(size: 14))
-                        .fontWeight(.bold)
-                        .padding(.leading, 4)
-                        .onTapGesture {
-                            showConfirmationDialog = true
-                        }
-                        .confirmationDialog("Are you sure you want to log out?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
-                            Button("Log Out", role: .destructive) {
-                                signOutButtonPressed()
+                            .foregroundStyle(currentSchema.font)
+                            .font(.system(size: 14))
+                            .fontWeight(.bold)
+                            .padding(.leading, 4)
+                            .onTapGesture {
+                                showConfirmationDialog = true
                             }
-                            Button("Cancel", role: .cancel) {
+                            .confirmationDialog("Are you sure you want to log out?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                                Button("Log Out", role: .destructive) {
+                                    signOutButtonPressed()
+                                }
+                                Button("Cancel", role: .cancel) {}
                             }
-                        }
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                             .foregroundStyle(currentSchema.font)
                             .fontWeight(.bold)
@@ -83,7 +82,7 @@ struct AccountView: View {
                     Spacer()
 
                     Text("or")
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(/*@START_MENU_TOKEN@*/ .bold/*@END_MENU_TOKEN@*/)
                         .foregroundStyle(currentSchema.font)
 
                     Spacer()
@@ -101,7 +100,6 @@ struct AccountView: View {
 
                 Spacer()
             }
-
         }
         .frame(height: 44)
         .onAppear {

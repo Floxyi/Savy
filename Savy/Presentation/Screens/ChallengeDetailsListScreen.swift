@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 11.10.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ChallengeDetailsListScreen: View {
     let challenge: Challenge
@@ -68,7 +68,7 @@ struct ChallengeDetailsListScreen: View {
 }
 
 #Preview {
-    @Previewable @State var showPopover: Bool = true
+    @Previewable @State var showPopover = true
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -82,8 +82,8 @@ struct ChallengeDetailsListScreen: View {
     ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
 
     return Spacer()
-    .popover(isPresented: $showPopover) {
-        ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
-    }
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .popover(isPresented: $showPopover) {
+            ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
+        }
+        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }

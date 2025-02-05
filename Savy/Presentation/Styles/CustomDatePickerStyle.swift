@@ -14,7 +14,7 @@ struct CustomDatePickerStyle: DatePickerStyle {
     var text: String
     @Binding var isDatePickerVisible: Bool
 
-    func makeBody(configuration: Configuration) -> some View {
+    func makeBody(configuration _: Configuration) -> some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
 
         HStack {
@@ -54,7 +54,8 @@ struct CustomDatePickerOverlay: View {
             .padding(.horizontal)
             .background(
                 currentSchema.mode == .light ? currentSchema.background : currentSchema.barIcons,
-                in: RoundedRectangle(cornerRadius: 20))
+                in: RoundedRectangle(cornerRadius: 20)
+            )
             .shadow(radius: 10)
             .frame(width: 300)
             .frame(maxWidth: .infinity)

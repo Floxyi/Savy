@@ -20,7 +20,9 @@ struct ChallengeDetailScreen: View {
 
     var body: some View {
         let currentSchema = colorManagerVM.colorManager.currentSchema
-        let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
+        let columns: [GridItem] = Array(
+            repeating: GridItem(.flexible(), spacing: 16), count: 4
+        )
 
         NavigationView {
             VStack {
@@ -46,7 +48,9 @@ struct ChallengeDetailScreen: View {
 
                 VStack {
                     if challenge.remainingAmount() > 0 {
-                        SavingsGridView(savings: challenge.savings, columns: columns)
+                        SavingsGridView(
+                            savings: challenge.savings, columns: columns
+                        )
                     }
 
                     if challenge.remainingAmount() == 0 {
@@ -60,10 +64,13 @@ struct ChallengeDetailScreen: View {
                         icon: "chevron.up",
                         showPopover: $showDetailsPopover
                     )
-                        .padding(.bottom, 24)
-                        .popover(isPresented: $showDetailsPopover) {
-                            ChallengeDetailsListScreen(challenge: challenge, showPopover: $showDetailsPopover)
-                        }
+                    .padding(.bottom, 24)
+                    .popover(isPresented: $showDetailsPopover) {
+                        ChallengeDetailsListScreen(
+                            challenge: challenge,
+                            showPopover: $showDetailsPopover
+                        )
+                    }
                 }
 
                 Spacer()
@@ -78,7 +85,9 @@ struct ChallengeDetailScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .popover(isPresented: $showEditPopover) {
-            ChallengeEditScreen(challenge: challenge, showPopover: $showEditPopover)
+            ChallengeEditScreen(
+                challenge: challenge, showPopover: $showEditPopover
+            )
         }
     }
 
@@ -94,7 +103,10 @@ struct ChallengeDetailScreen: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(
+        for: Challenge.self, ColorManager.self,
+        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+    )
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -105,9 +117,13 @@ struct ChallengeDetailScreen: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    ChallengeManager.shared.addChallenge(
+        challengeConfiguration: challengeConfiguration)
 
-    return ChallengeDetailScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration))
-        .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+    return ChallengeDetailScreen(
+        challenge: Challenge(challengeConfiguration: challengeConfiguration)
+    )
+    .modelContainer(container)
+    .environmentObject(
+        ColorManagerViewModel(modelContext: ModelContext(container)))
 }

@@ -1,5 +1,5 @@
 //
-//  AppUser.swift
+//  SupabaseAccount.swift
 //  Savy
 //
 //  Created by Florian Winkler on 21.09.24.

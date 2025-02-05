@@ -100,7 +100,9 @@ private struct SavingsProgressView: View {
                     .frame(width: 16, height: 2)
                     .background(colorManagerVM.colorManager.currentSchema.font)
                     .padding(.horizontal, 8)
-                NextSavingView(saving: challenge.getNextSaving(at: 2), isNext: false)
+                NextSavingView(
+                    saving: challenge.getNextSaving(at: 2), isNext: false
+                )
             }
 
             if challenge.remainingSavings() == 3 {
@@ -108,7 +110,9 @@ private struct SavingsProgressView: View {
                     .frame(width: 16, height: 2)
                     .background(colorManagerVM.colorManager.currentSchema.font)
                     .padding(.horizontal, 8)
-                NextSavingView(saving: challenge.getNextSaving(at: 3), isNext: false)
+                NextSavingView(
+                    saving: challenge.getNextSaving(at: 3), isNext: false
+                )
             }
 
             if challenge.remainingSavings() != 3 {
@@ -136,8 +140,14 @@ private struct NextSavingView: View {
         }
         .frame(width: 42, height: 42)
         .padding(4)
-        .background(isNext ? colorManagerVM.colorManager.currentSchema.font : .clear)
-        .foregroundStyle(isNext ? colorManagerVM.colorManager.currentSchema.background : colorManagerVM.colorManager.currentSchema.font)
+        .background(
+            isNext ? colorManagerVM.colorManager.currentSchema.font : .clear
+        )
+        .foregroundStyle(
+            isNext
+                ? colorManagerVM.colorManager.currentSchema.background
+                : colorManagerVM.colorManager.currentSchema.font
+        )
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
@@ -201,7 +211,9 @@ private struct AmountView: View {
                 .padding(.trailing, 7)
             Text("/ \(challenge.challengeConfiguration.amount)€")
                 .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+                .foregroundStyle(
+                    colorManagerVM.colorManager.currentSchema.accent2
+                )
                 .offset(y: -3)
         }
         .padding(8)
@@ -211,7 +223,10 @@ private struct AmountView: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(
+        for: Challenge.self, ColorManager.self,
+        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+    )
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -222,9 +237,13 @@ private struct AmountView: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    ChallengeManager.shared.addChallenge(
+        challengeConfiguration: challengeConfiguration)
 
-    return ChallengeListItemView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
-        .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+    return ChallengeListItemView(
+        challenge: Challenge(challengeConfiguration: challengeConfiguration)
+    )
+    .modelContainer(container)
+    .environmentObject(
+        ColorManagerViewModel(modelContext: ModelContext(container)))
 }

@@ -1,5 +1,5 @@
 //
-//  ChallengeAddButton.swift
+//  ChallengeAddButtonView.swift
 //  Savy
 //
 //  Created by Florian Winkler on 25.09.24.

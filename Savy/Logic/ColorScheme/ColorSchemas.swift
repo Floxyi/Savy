@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ColorSchemes {
+enum ColorSchemes {
     static func lightMode() -> ColorScheme {
         ColorScheme(
             mode: .light,

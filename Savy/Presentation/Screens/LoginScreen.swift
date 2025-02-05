@@ -85,8 +85,7 @@ struct LoginScreen: View {
                                     signInButtonPressed()
                                 }
                             }
-                            Button("Abbrechen", role: .cancel) {
-                            }
+                            Button("Abbrechen", role: .cancel) {}
                         }
                     }
 
@@ -147,7 +146,7 @@ struct LoginScreen: View {
                 isLoading = false
             }
             do {
-                if validateEmail() && validatePassword() {
+                if validateEmail(), validatePassword() {
                     let oldId = StatsTracker.shared.accountUUID
                     let newSignIn = await oldId == nil ? false : try AuthManager.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
                     isSignedIn = try await AuthManager.shared.signInWithEmail(email: email, password: password, sameAccount: newSignIn)

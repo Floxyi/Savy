@@ -1,0 +1,10 @@
+#!/bin/sh
+
+swiftformat . --swiftversion 6.0.3
+
+if ! git diff --quiet; then
+    echo "SwiftFormat modified some files. Please review and stage the changes before committing."
+    exit 1
+fi
+
+exit 0

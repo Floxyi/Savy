@@ -1,5 +1,5 @@
 //
-//  LoginScreen.swift
+//  RegisterScreen.swift
 //  Savy
 //
 //  Created by Nadine Schatz on 20.08.24.
@@ -119,8 +119,7 @@ struct RegisterScreen: View {
                                     signUpButtonPressed()
                                 }
                             }
-                            Button("Abbrechen", role: .cancel) {
-                            }
+                            Button("Abbrechen", role: .cancel) {}
                         }
                     }
 

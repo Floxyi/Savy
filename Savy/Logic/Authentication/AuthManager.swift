@@ -19,9 +19,9 @@ class AuthManager {
         let (url, key) = AppEnvironment.current == .production
             ? (DotEnv.PROD_SUPABASE_URL, DotEnv.PROD_SUPABASE_ANON_KEY)
             : (DotEnv.DEV_SUPABASE_URL, DotEnv.DEV_SUPABASE_ANON_KEY)
-        self.client = SupabaseClient(supabaseURL: URL(string: url)!, supabaseKey: key)
-        self.supabaseAccount = nil
-        self.profile = nil
+        client = SupabaseClient(supabaseURL: URL(string: url)!, supabaseKey: key)
+        supabaseAccount = nil
+        profile = nil
     }
 
     func isSignedIn() -> Bool {
@@ -30,22 +30,22 @@ class AuthManager {
 
     func getCurrentSession() async throws {
         let session = try await client.auth.session
-        self.profile = try await getProfile(uuid: session.user.id)
-        self.supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
+        profile = try await getProfile(uuid: session.user.id)
+        supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
     }
 
     func registerWithEmail(username: String, email: String, password: String) async throws -> Bool {
         let session = try await client.auth.signUp(email: email, password: password)
-        self.profile = try await createProfile(uuid: session.user.id, username: username)
-        self.supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
+        profile = try await createProfile(uuid: session.user.id, username: username)
+        supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
         StatsTracker.shared.setAccountUUID(uuid: profile?.id)
         return isSignedIn()
     }
 
     func signInWithEmail(email: String, password: String, sameAccount: Bool) async throws -> Bool {
         let session = try await client.auth.signIn(email: email, password: password)
-        self.profile = try await getProfile(uuid: session.user.id)
-        self.supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
+        profile = try await getProfile(uuid: session.user.id)
+        supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
         StatsTracker.shared.setAccountUUID(uuid: profile?.id, sameAccount: sameAccount)
         return isSignedIn()
     }
@@ -67,8 +67,8 @@ class AuthManager {
 
     func signOut() async throws -> Bool {
         try await client.auth.signOut()
-        self.profile = nil
-        self.supabaseAccount = nil
+        profile = nil
+        supabaseAccount = nil
         return isSignedIn()
     }
 

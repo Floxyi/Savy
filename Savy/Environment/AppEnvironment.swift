@@ -13,9 +13,9 @@ enum AppEnvironment {
 
     static let current: AppEnvironment = {
         #if DEBUG
-        .development
+            .development
         #else
-        return .production
+            return .production
         #endif
     }()
 }

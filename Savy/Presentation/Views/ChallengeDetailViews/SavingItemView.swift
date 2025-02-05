@@ -45,14 +45,13 @@ struct SavingItemView: View {
                     saving.toggleDone()
                 }
             }
-            Button("Abbrechen", role: .cancel) {
-            }
+            Button("Abbrechen", role: .cancel) {}
         }
     }
 }
 
 #Preview {
-    let saving: Saving = Saving(challengeId: UUID(), amount: 30, date: Date())
+    let saving = Saving(challengeId: UUID(), amount: 30, date: Date())
 
     let container = try! ModelContainer(for: Saving.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(saving)

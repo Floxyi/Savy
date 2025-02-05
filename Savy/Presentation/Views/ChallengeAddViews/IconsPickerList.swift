@@ -1,5 +1,5 @@
 //
-//  IconPickerList.swift
+//  IconsPickerList.swift
 //  Savy
 //
 //  Created by Florian Winkler on 29.09.24.
@@ -26,5 +26,5 @@ public let iconPickerList = [
     "dumbbell", "sportscourt", "figure.walk",
     "hammer", "screwdriver", "wrench",
     "graduationcap", "backpack",
-    "globe", "map"
+    "globe", "map",
 ]

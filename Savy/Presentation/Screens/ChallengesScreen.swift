@@ -32,5 +32,11 @@ struct ChallengesScreen: View {
 #Preview {
     ChallengesScreen()
         .modelContainer(for: [Challenge.self, ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(
+            ColorManagerViewModel(
+                modelContext: ModelContext(
+                    try! ModelContainer(for: ColorManager.self)
+                )
+            )
+        )
 }

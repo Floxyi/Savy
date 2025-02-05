@@ -1,5 +1,5 @@
 //
-//  Saving.swift
+//  Savings.swift
 //  Savy
 //
 //  Created by Florian Winkler on 14.10.24.

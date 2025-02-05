@@ -5,15 +5,15 @@
 //  Created by Nadine Schatz on 13.10.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct PersonalStatsView: View {
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
     @State private var statsType: StatsType = .money_saved
-    @State private var startDate: Date = Date()
-    @State private var endDate: Date = Date()
+    @State private var startDate: Date = .init()
+    @State private var endDate: Date = .init()
 
     @State private var showDatePicker = false
     @State private var isPickingStartDate = true
@@ -136,7 +136,6 @@ struct PersonalStatsView: View {
                         ZStack(alignment: .top) {
                             VStack(alignment: .leading) {
                                 HStack {
-
                                     Button(action: {
                                         isPickingStartDate = true
                                         showDatePicker.toggle()
@@ -234,7 +233,7 @@ struct PersonalStatsView: View {
                                 DatePicker(
                                     "Select Date",
                                     selection: isPickingStartDate ? $startDate : $endDate,
-                                    in: minDate...maxDate,
+                                    in: minDate ... maxDate,
                                     displayedComponents: [.date]
                                 )
                                 .datePickerStyle(.graphical)

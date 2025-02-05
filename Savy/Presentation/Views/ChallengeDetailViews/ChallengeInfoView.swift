@@ -42,7 +42,6 @@ struct ChallengeInfoView: View {
                         .font(.system(size: 12))
                         .foregroundStyle(currentSchema.font)
                 }
-
             }
             .padding(16)
             .background(currentSchema.bar)

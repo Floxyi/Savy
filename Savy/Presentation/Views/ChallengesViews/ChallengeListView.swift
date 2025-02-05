@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 22.08.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ChallengesListView: View {
     @Environment(\.modelContext) private var modelContext

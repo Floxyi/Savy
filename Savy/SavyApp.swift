@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 20.08.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct SavyApp: App {

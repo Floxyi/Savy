@@ -33,7 +33,7 @@ extension Color {
     }
 
     var hexString: String {
-        let components = self.cgColor?.components ?? [0, 0, 0, 1]
+        let components = cgColor?.components ?? [0, 0, 0, 1]
         let r = Float(components[0])
         let g = Float(components[1])
         let b = Float(components[2])

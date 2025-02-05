@@ -11,8 +11,9 @@
         - [Prerequisites](#prerequisites)
         - [Installation](#installation)
     - [Development](#development)
+        - [Development Setup](#development-setup)
         - [Environment Setup](#environment-setup)
-        - [Supabase Management](#supabase-management)
+        - [Supabase Setup](#supabase-setup)
         - [Xcode Run Configurations](#xcode-run-configurations)
 
 ## Features
@@ -35,78 +36,92 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/savy.git
-   cd savy
-   ```
+
+    ```bash
+    git clone https://github.com/yourusername/savy.git
+    cd savy
+    ```
 
 2. Install Docker Desktop (if not already installed):
-   ```bash
-   brew install --cask docker
-   ```
+
+    ```bash
+    brew install --cask docker
+    ```
 
 3. Install Supabase CLI:
-   ```bash
-   brew install supabase/tap/supabase
-   ```
-
-4. Verify Supabase CLI installation:
-   ```bash
-   supabase --version
-   ```
+    ```bash
+    brew install supabase/tap/supabase
+    supabase --version # verify installation
+    ```
 
 ## Development
+
+### Development Setup
+
+Setup the needed project configuration:
+
+```bash
+sh setup.sh
+```
 
 ### Environment Setup
 
 1. Create your environment configuration:
-   ```bash
-   cp .env.mock .env
-   ```
+
+    ```bash
+    cp .env.mock .env
+    ```
 
 2. Open and edit the `.env` file with your preferred text editor:
-   ```bash
-   code .env  # for Visual Studio Code
-   nano .env  # for terminal-based editing
-   ```
+
+    ```bash
+    code .env  # for Visual Studio Code
+    nano .env  # for terminal-based editing
+    ```
 
 3. Generate the Swift Enum:
-   ```bash
-   sh env.sh
-   ```
+    ```bash
+    sh env.sh
+    ```
 
-### Supabase Management
+### Supabase Setup
 
 - Link to the Production instance:
-   ```bash
-   supabase link --project-ref dttigamyidncuoomgkpo
-  ```
+
+    ```bash
+    supabase link --project-ref dttigamyidncuoomgkpo
+    ```
 
 - Start the local Supabase instance:
-  ```bash
-  supabase start
-  ```
-  **Note:** Ensure Docker is running before executing this command.
+
+    ```bash
+    supabase start
+    ```
+
+    **Note:** Ensure Docker is running before executing this command.
 
 - Apply newest migrations:
-  ```bash
-   supabase migration up
-   ```
+
+    ```bash
+     supabase migration up
+    ```
 
 - Stop the local Supabase instance:
-  ```bash
-  supabase stop
-  ```
+
+    ```bash
+    supabase stop
+    ```
 
 - Pull the changes from Production:
-   ```bash
-   supabase db pull
-  ```
+
+    ```bash
+    supabase db pull
+    ```
 
 - Push the local changes to Production:
-   ```bash
-   supabase db push
-  ```
+    ```bash
+    supabase db push
+    ```
 
 ### Xcode Run Configurations
 

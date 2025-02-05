@@ -5,9 +5,9 @@
 //  Created by Florian Winkler on 20.08.24.
 //
 
+import CoreData
 import Foundation
 import SwiftData
-import CoreData
 
 @Model
 class Challenge {
@@ -16,10 +16,13 @@ class Challenge {
     private(set) var savings: [Saving]
 
     init(challengeConfiguration: ChallengeConfiguration) {
-        self.id = UUID()
+        id = UUID()
         self.challengeConfiguration = challengeConfiguration
-        self.savings = []
-        challengeConfiguration.generateSavings(challenge: self, amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)
+        savings = []
+        challengeConfiguration.generateSavings(
+            challenge: self, amount: challengeConfiguration.amount,
+            startDate: challengeConfiguration.startDate
+        )
     }
 
     func addSaving(saving: Saving) {
@@ -36,16 +39,15 @@ class Challenge {
     }
 
     func updateSaving(saving: Saving) {
-        savings.first(where: { $0.id == saving.id })?.setAmount(amount: saving.amount)
+        savings.first(where: { $0.id == saving.id })?.setAmount(
+            amount: saving.amount)
     }
 
     func currentSavedAmount() -> Int {
-        savings.filter {
-            $0.done
-        }
-        .reduce(0) {
-            $0 + $1.amount
-        }
+        savings.filter(\.done)
+            .reduce(0) {
+                $0 + $1.amount
+            }
     }
 
     func progressPercentage() -> Double {

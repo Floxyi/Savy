@@ -17,4 +17,3 @@ struct CustomPromptTextStyle: TextFieldStyle {
             .foregroundColor(currentSchema.font.opacity(0.4))
     }
 }
-

@@ -5,8 +5,8 @@
 //  Created by Florian Winkler on 25.08.24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 private let buttonDimen: CGFloat = 55
 
@@ -19,33 +19,32 @@ struct BottomTabBarView: View {
 
         HStack {
             TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
-            .frame(width: buttonDimen, height: buttonDimen)
-            .onTapGesture {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                currentTab = .challenges
-            }
-            .padding(.horizontal, 16)
+                .frame(width: buttonDimen, height: buttonDimen)
+                .onTapGesture {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    currentTab = .challenges
+                }
+                .padding(.horizontal, 16)
 
             Spacer()
 
             TabBarButton(imageName: Tab.leaderboard.rawValue, active: currentTab == Tab.leaderboard)
-            .frame(width: buttonDimen, height: buttonDimen)
-            .onTapGesture {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                currentTab = .leaderboard
-            }
-            .padding(.horizontal, 16)
+                .frame(width: buttonDimen, height: buttonDimen)
+                .onTapGesture {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    currentTab = .leaderboard
+                }
+                .padding(.horizontal, 16)
 
             Spacer()
 
             TabBarButton(imageName: Tab.settings.rawValue, active: currentTab == Tab.settings)
-            .frame(width: buttonDimen, height: buttonDimen)
-            .onTapGesture {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                currentTab = .settings
-            }
-            .padding(.horizontal, 16)
-
+                .frame(width: buttonDimen, height: buttonDimen)
+                .onTapGesture {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    currentTab = .settings
+                }
+                .padding(.horizontal, 16)
         }
         .frame(width: 300, height: 70)
         .tint(Color.black)
@@ -54,7 +53,6 @@ struct BottomTabBarView: View {
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
-
 }
 
 private struct TabBarButton: View {
@@ -76,7 +74,7 @@ private struct TabBarButton: View {
 }
 
 #Preview {
-    @Previewable @State var selectedTab: Tab = Tab.challenges
+    @Previewable @State var selectedTab = Tab.challenges
     return BottomTabBarView(currentTab: $selectedTab)
         .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
 }
