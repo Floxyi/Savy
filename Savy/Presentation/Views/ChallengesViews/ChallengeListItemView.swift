@@ -203,22 +203,49 @@ private struct AmountView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
 
+    @State private var textWidth: CGFloat = 0
+
     var body: some View {
-        HStack(alignment: .bottom, spacing: -4) {
-            Text("\(challenge.currentSavedAmount())€")
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
-                .padding(.trailing, 7)
-            Text("/ \(challenge.challengeConfiguration.amount)€")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(
-                    colorManagerVM.colorManager.currentSchema.accent2
-                )
-                .offset(y: -3)
+        let progress = CGFloat(challenge.progressPercentage())
+        let calculatedWidth = min(textWidth + 10, 140)
+
+        ZStack {
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(colorManagerVM.colorManager.currentSchema.accent1)
+                    .frame(width: calculatedWidth, height: 30)
+
+                Rectangle()
+                    .fill(colorManagerVM.colorManager.currentSchema.barIcons)
+                    .frame(width: calculatedWidth * progress, height: 30)
+            }
+            .mask(
+                RoundedRectangle(cornerRadius: 15)
+                    .frame(width: calculatedWidth, height: 30)
+            )
+
+            HStack(alignment: .bottom, spacing: -4) {
+                Text("\(challenge.currentSavedAmount())€")
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+                    .padding(.trailing, 7)
+                Text("/ \(challenge.challengeConfiguration.amount)€")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+                    .offset(y: -3)
+            }
+            .padding(8)
+            .clipShape(RoundedRectangle(cornerRadius: 25))
+            .background(
+                GeometryReader { geometry in
+                    Color.clear
+                        .onAppear {
+                            textWidth = geometry.size.width
+                        }
+                }
+            )
         }
-        .padding(8)
-        .background(colorManagerVM.colorManager.currentSchema.accent1)
-        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .frame(height: 30)
     }
 }
 
