@@ -24,7 +24,7 @@ enum ColorSchemes {
         ColorScheme(
             mode: .dark,
             background: Color(hue: 0, saturation: 0, lightness: 22),
-            bar: Color(hue: 0, saturation: 0, lightness: 20),
+            bar: Color(hue: 0, saturation: 0, lightness: 15),
             barIcons: Color(hue: 0, saturation: 0, lightness: 42),
             accent1: Color(hue: 0, saturation: 0, lightness: 31),
             accent2: Color(hue: 0, saturation: 0, lightness: 80),
