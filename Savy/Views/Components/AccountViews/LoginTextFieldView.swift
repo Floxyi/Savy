@@ -54,7 +54,6 @@ struct LoginTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorService.self])
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
@@ -74,6 +73,5 @@ struct LoginTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorService.self])
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

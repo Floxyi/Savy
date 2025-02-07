@@ -48,7 +48,6 @@ struct ActionButton<Content: View>: View {
         isEnabled: true,
         action: {}
     )
-    .modelContainer(for: [ColorService.self])
     .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
@@ -62,6 +61,5 @@ struct ActionButton<Content: View>: View {
         isEnabled: true,
         action: {}
     )
-    .modelContainer(for: [ColorService.self])
     .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

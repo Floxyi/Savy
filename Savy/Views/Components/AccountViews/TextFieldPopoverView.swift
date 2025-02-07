@@ -92,6 +92,5 @@ struct SpeechBubbleShape: Shape {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorService.self])
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

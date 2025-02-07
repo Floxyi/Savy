@@ -41,6 +41,5 @@ struct LeaderboardScreen: View {
 
 #Preview {
     LeaderboardScreen()
-        .modelContainer(for: [ColorService.self])
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

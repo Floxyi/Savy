@@ -132,7 +132,6 @@ struct RegistrationTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorService.self])
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
@@ -165,6 +164,5 @@ struct RegistrationTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorService.self])
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
