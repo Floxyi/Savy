@@ -12,10 +12,10 @@ struct ChallengeDetailsListScreen: View {
     let challenge: Challenge
     @Binding var showPopover: Bool
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
         let columns = Array(repeating: GridItem(.flexible()), count: 4)
         let sortedSavings = challenge.savings.sorted(by: { $0.date < $1.date })
 
@@ -31,17 +31,17 @@ struct ChallengeDetailsListScreen: View {
                 HStack {
                     Text("Start:")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(currentSchema.font)
+                        .foregroundColor(currentScheme.font)
                     Text(challenge.challengeConfiguration.startDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
-                        .foregroundColor(currentSchema.font)
+                        .foregroundColor(currentScheme.font)
                     Spacer()
                     Text("End:")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(currentSchema.font)
+                        .foregroundColor(currentScheme.font)
                     Text(challenge.challengeConfiguration.endDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
-                        .foregroundColor(currentSchema.font)
+                        .foregroundColor(currentScheme.font)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 1)
@@ -54,7 +54,7 @@ struct ChallengeDetailsListScreen: View {
                     }
                 }
                 .padding(.top, 20)
-                .background(currentSchema.background)
+                .background(currentScheme.background)
 
                 Spacer()
                 HStack {
@@ -62,7 +62,7 @@ struct ChallengeDetailsListScreen: View {
                 }
             }
             .padding()
-            .background(currentSchema.background)
+            .background(currentScheme.background)
         }
     }
 }
@@ -85,5 +85,5 @@ struct ChallengeDetailsListScreen: View {
         .popover(isPresented: $showPopover) {
             ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
         }
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

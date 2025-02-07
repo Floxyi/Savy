@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct TextFieldPopoverView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @Binding var showPopup: Bool
 
@@ -18,13 +18,13 @@ struct TextFieldPopoverView: View {
     let text: String
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Group {
             if showPopup {
                 VStack {
                     Text(text)
-                        .foregroundColor(isValid ? .green : error ? currentSchema.font : .red)
+                        .foregroundColor(isValid ? .green : error ? currentScheme.font : .red)
                         .font(.caption)
                         .fontWeight(.bold)
                         .padding()
@@ -32,7 +32,7 @@ struct TextFieldPopoverView: View {
                         .cornerRadius(8)
                         .background(
                             SpeechBubbleShape()
-                                .fill(currentSchema.background)
+                                .fill(currentScheme.background)
                                 .shadow(radius: 4)
                         )
                 }
@@ -92,6 +92,6 @@ struct SpeechBubbleShape: Shape {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

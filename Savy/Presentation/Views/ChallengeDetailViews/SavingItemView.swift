@@ -13,27 +13,27 @@ struct SavingItemView: View {
 
     @State private var showConfirmationDialog = false
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
                 .font(.system(size: 14, weight: .bold))
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
                 .frame(width: 50)
                 .padding(4)
-                .background(currentSchema.background)
+                .background(currentScheme.background)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.bottom, -6)
 
             Text("\(saving.amount)€")
                 .font(.system(size: 26, weight: .bold))
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
         }
         .frame(width: 80, height: 80)
-        .background(currentSchema.bar)
+        .background(currentScheme.bar)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .opacity(saving.done ? 0.3 : 1)
         .onTapGesture {
@@ -53,10 +53,10 @@ struct SavingItemView: View {
 #Preview {
     let saving = Saving(challengeId: UUID(), amount: 30, date: Date())
 
-    let container = try! ModelContainer(for: Saving.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(for: Saving.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     container.mainContext.insert(saving)
 
     return SavingItemView(saving: saving)
         .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
 }

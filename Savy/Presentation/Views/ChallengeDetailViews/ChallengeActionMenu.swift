@@ -7,13 +7,13 @@
 import SwiftUI
 
 struct ChallengeActionMenu: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var editChallenge: () -> Void
     var removeChallenge: () -> Void
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Menu {
             Button(action: {
@@ -29,7 +29,7 @@ struct ChallengeActionMenu: View {
         } label: {
             Image(systemName: "slider.horizontal.3")
                 .font(.system(size: 24, weight: .bold))
-                .foregroundColor(currentSchema.font)
+                .foregroundColor(currentScheme.font)
         }
     }
 }

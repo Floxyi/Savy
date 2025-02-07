@@ -14,17 +14,17 @@ class ColorServiceViewModel: ObservableObject {
 
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
-        colorService = ColorServiceViewModel.getOrCreateColorManager(in: modelContext)
+        colorService = ColorServiceViewModel.getOrCreateColorService(in: modelContext)
     }
 
-    static func getOrCreateColorManager(in context: ModelContext) -> ColorService {
+    static func getOrCreateColorService(in context: ModelContext) -> ColorService {
         let fetchDescriptor = FetchDescriptor<ColorService>()
-        if let existingManager = try? context.fetch(fetchDescriptor).first {
-            return existingManager
+        if let existingService = try? context.fetch(fetchDescriptor).first {
+            return existingService
         } else {
-            let newManager = ColorService(hue: 180, currentSchema: ColorSchemes.lightMode())
-            context.insert(newManager)
-            return newManager
+            let newService = ColorService(hue: 180, currentScheme: ColorSchemes.lightMode())
+            context.insert(newService)
+            return newService
         }
     }
 }

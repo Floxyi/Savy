@@ -13,7 +13,7 @@ struct SettingsTileView<Content: View>: View {
     let text: String
     let content: Content
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     init(image: String, text: String, @ViewBuilder content: () -> Content) {
         self.image = image
@@ -22,16 +22,16 @@ struct SettingsTileView<Content: View>: View {
     }
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             HStack {
                 Image(systemName: image)
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
                     .fontWeight(.bold)
                     .font(.system(size: 16))
                 Text(text)
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
                     .fontWeight(.bold)
                     .font(.system(size: 16))
                 Spacer()
@@ -46,7 +46,7 @@ struct SettingsTileView<Content: View>: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 12)
         }
-        .background(currentSchema.bar)
+        .background(currentScheme.bar)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.bottom, 24)
     }
@@ -58,5 +58,5 @@ struct SettingsTileView<Content: View>: View {
         SettingsBarView(text: "Toggle", toggle: $toggle)
     }
     .padding()
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

@@ -26,10 +26,10 @@ struct ChallengeEditScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         let challengeConfiguration = ChallengeConfiguration(
             icon: icon ?? "square.dashed",
@@ -48,7 +48,7 @@ struct ChallengeEditScreen: View {
 
                     TextField("", text: $name, prompt: Text(verbatim: "Name")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(currentSchema.font.opacity(0.4)))
+                        .foregroundColor(currentScheme.font.opacity(0.4)))
                         .textInputAutocapitalization(.never)
                         .textFieldStyle(CustomTextFieldStyle())
                         .onChange(of: name) { _, newValue in
@@ -60,19 +60,19 @@ struct ChallengeEditScreen: View {
                     HStack {
                         TextField("", value: $amount, format: .number, prompt: Text(verbatim: "Amount")
                             .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentSchema.font.opacity(0.4)))
+                            .foregroundColor(currentScheme.font.opacity(0.4)))
                             .textFieldStyle(CustomTextFieldStyle())
                             .keyboardType(.numberPad)
                         Text("€")
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundStyle(currentSchema.font)
+                            .foregroundStyle(currentScheme.font)
                             .padding(.trailing, 32)
                     }
 
                     HStack {
                         Text("Strategy")
                             .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentSchema.font.opacity(0.4))
+                            .foregroundColor(currentScheme.font.opacity(0.4))
                             .padding(.leading, 8)
 
                         Spacer()
@@ -80,7 +80,7 @@ struct ChallengeEditScreen: View {
                         StrategySelector(selectedStrategy: $strategy, onChangeAction: { updateEndDate() })
                     }
                     .frame(height: 38)
-                    .background(currentSchema.bar)
+                    .background(currentScheme.bar)
                     .cornerRadius(8)
                     .padding(.horizontal, 16)
 
@@ -97,14 +97,14 @@ struct ChallengeEditScreen: View {
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
-                        .background(currentSchema.bar)
+                        .background(currentScheme.bar)
                         .cornerRadius(8)
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
 
                         Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                             .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentSchema.font)
+                            .foregroundColor(currentScheme.font)
                             .padding()
                     }
 
@@ -113,12 +113,12 @@ struct ChallengeEditScreen: View {
                             HStack {
                                 TextField("", value: $cycleAmount, format: .number, prompt: Text(verbatim: "\(strategy) Amount")
                                     .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(currentSchema.font.opacity(0.4)))
+                                    .foregroundColor(currentScheme.font.opacity(0.4)))
                                     .textFieldStyle(CustomTextFieldStyle())
                                     .keyboardType(.numberPad)
                                 Text("€")
                                     .font(.system(size: 24, weight: .bold))
-                                    .foregroundStyle(currentSchema.font)
+                                    .foregroundStyle(currentScheme.font)
                                     .padding(.trailing, 32)
                             }
                         }
@@ -128,7 +128,7 @@ struct ChallengeEditScreen: View {
 
                         Text("End Date: \(challengeConfiguration.calculateEndDateByAmount(challenge: challenge, startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
                             .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentSchema.font)
+                            .foregroundColor(currentScheme.font)
                             .padding()
                     }
 
@@ -138,7 +138,7 @@ struct ChallengeEditScreen: View {
                     }
                 }
                 .padding()
-                .background(currentSchema.background)
+                .background(currentScheme.background)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         ToolbarDoneButton(
@@ -174,10 +174,10 @@ struct ChallengeEditScreen: View {
                         HStack {
                             Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                                 .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(currentSchema.font)
+                                .foregroundColor(currentScheme.font)
                                 .padding(8)
                         }
-                        .background(currentSchema.background)
+                        .background(currentScheme.background)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding(.top, 22)
                     }
@@ -221,7 +221,7 @@ struct ChallengeEditScreen: View {
 #Preview {
     @Previewable @State var showPopover = true
 
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(for: Challenge.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -239,5 +239,5 @@ struct ChallengeEditScreen: View {
             ChallengeEditScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
         }
         .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
 }

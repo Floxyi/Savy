@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct TextFieldAccountStyle: TextFieldStyle {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     func _body(configuration: TextField<Self._Label>) -> some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         configuration
             .padding(8)
-            .background(currentSchema.bar)
+            .background(currentScheme.bar)
             .cornerRadius(10)
-            .foregroundColor(currentSchema.font)
+            .foregroundColor(currentScheme.font)
             .font(.system(size: 20))
             .padding(.vertical, 4)
             .padding(.horizontal, 24)

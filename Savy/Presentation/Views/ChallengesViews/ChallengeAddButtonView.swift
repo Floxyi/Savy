@@ -9,25 +9,25 @@ import SwiftData
 import SwiftUI
 
 struct ChallengeAddButtonView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @Binding var showPopover: Bool
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Button(action: {
             showPopover = true
         }) {
             Image(systemName: "plus")
                 .font(.system(size: 28, weight: .bold))
-                .foregroundColor(currentSchema.barIcons)
+                .foregroundColor(currentScheme.barIcons)
                 .padding()
                 .frame(width: 220, height: 50)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [6]))
-                        .foregroundColor(currentSchema.barIcons)
+                        .foregroundColor(currentScheme.barIcons)
                 )
         }
         .background(.clear)
@@ -37,5 +37,5 @@ struct ChallengeAddButtonView: View {
 
 #Preview {
     ChallengeAddButtonView(showPopover: .constant(false))
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

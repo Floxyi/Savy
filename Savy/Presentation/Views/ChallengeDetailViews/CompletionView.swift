@@ -7,20 +7,20 @@
 import SwiftUI
 
 struct CompletionView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var removeChallenge: () -> Void
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             Image(systemName: "flag.pattern.checkered.2.crossed")
                 .font(.system(size: 100, weight: .bold))
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
             Text("Congratulations! \nYou've reached your goal!")
                 .font(.system(size: 24))
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
                 .multilineTextAlignment(.center)
                 .padding(.vertical, 20)
             Button(role: .destructive, action: {

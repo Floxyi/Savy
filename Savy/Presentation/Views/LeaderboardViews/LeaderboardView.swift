@@ -9,13 +9,13 @@ import SwiftData
 import SwiftUI
 
 struct LeaderboardView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var profiles: [ProfileWithSavings] = []
     @State private var isLoading = true
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             HeaderView(title: "Leaderboard")
@@ -24,14 +24,14 @@ struct LeaderboardView: View {
                 ProgressView()
             } else {
                 if profiles.isEmpty {
-                    emptyStateView(currentSchema: currentSchema)
+                    emptyStateView(currentSchema: currentScheme)
                 } else {
-                    topProfilesView(currentSchema: currentSchema)
-                    remainingProfilesView(currentSchema: currentSchema)
+                    topProfilesView(currentSchema: currentScheme)
+                    remainingProfilesView(currentSchema: currentScheme)
                 }
             }
         }
-        .background(currentSchema.background)
+        .background(currentScheme.background)
         .task {
             do {
                 let fetchedProfiles = try await ProfileService.shared.getAllProfilesWithSavings()
@@ -145,6 +145,6 @@ struct LeaderboardView: View {
 
 #Preview {
     LeaderboardView()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

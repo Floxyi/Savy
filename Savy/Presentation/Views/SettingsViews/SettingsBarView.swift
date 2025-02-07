@@ -13,7 +13,7 @@ struct SettingsBarView<Content: View>: View {
     @Binding var toggle: Bool
     let content: () -> Content
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     init(text: String, toggle: Binding<Bool>, @ViewBuilder content: @escaping () -> Content = {
         EmptyView()
@@ -24,13 +24,13 @@ struct SettingsBarView<Content: View>: View {
     }
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             HStack {
                 Toggle(isOn: $toggle, label: {
                     Text(text)
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
                         .fontWeight(.bold)
                         .font(.system(size: 14))
                         .padding(.horizontal, 4)
@@ -42,7 +42,7 @@ struct SettingsBarView<Content: View>: View {
                 .padding(.horizontal, 8)
                 .padding(.bottom, 8)
         }
-        .background(currentSchema.background)
+        .background(currentScheme.background)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
@@ -56,5 +56,5 @@ struct SettingsBarView<Content: View>: View {
         }
     }
     .padding()
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

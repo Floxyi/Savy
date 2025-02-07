@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CustomToggleStyle: ToggleStyle {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     func makeBody(configuration: Configuration) -> some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
             configuration.label
@@ -20,11 +20,11 @@ struct CustomToggleStyle: ToggleStyle {
 
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(currentSchema.bar)
+                    .fill(currentScheme.bar)
                     .frame(width: 51, height: 31)
 
                 Circle()
-                    .fill(currentSchema.background)
+                    .fill(currentScheme.background)
                     .frame(width: 27, height: 27)
                     .offset(x: configuration.isOn ? 10 : -10)
                     .animation(.easeInOut(duration: 0.2), value: configuration.isOn)

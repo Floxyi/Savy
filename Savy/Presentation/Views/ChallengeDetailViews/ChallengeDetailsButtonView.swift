@@ -13,23 +13,23 @@ struct ChallengeDetailsButtonView: View {
     var icon: String
     @Binding var showPopover: Bool
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
             Image(systemName: icon)
                 .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
             Text(title)
                 .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
                 .padding(.trailing, 2)
         }
         .padding(.horizontal, 8)
         .padding(8)
-        .background(currentSchema.bar)
+        .background(currentScheme.bar)
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .padding(.top, 40)
         .onTapGesture {
@@ -42,5 +42,5 @@ struct ChallengeDetailsButtonView: View {
     @Previewable @State var showPopover = true
 
     return ChallengeDetailsButtonView(title: "View all", icon: "chevron.up", showPopover: $showPopover)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

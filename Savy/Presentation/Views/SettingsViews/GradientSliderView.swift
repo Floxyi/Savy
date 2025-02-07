@@ -12,7 +12,7 @@ struct GradientSliderView: View {
     @Binding var value: Double
     var range: ClosedRange<Double>
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var isDragging = false
     @FocusState var isInputActive: Bool
@@ -22,12 +22,12 @@ struct GradientSliderView: View {
     private let trackHeight: CGFloat = 8
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             HStack {
                 Text(String(format: "%.0f", value))
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
                     .fontWeight(.bold)
                     .font(.system(size: 14))
                     .padding(.horizontal, 4)
@@ -50,7 +50,7 @@ struct GradientSliderView: View {
                 .frame(height: thumbSize)
 
                 Text("360")
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
                     .fontWeight(.bold)
                     .font(.system(size: 14))
                     .padding(.horizontal, 4)
@@ -80,5 +80,5 @@ struct GradientSliderView: View {
 #Preview {
     @Previewable @State var value: Double = 0
     return GradientSliderView(value: $value, range: 0 ... 360)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

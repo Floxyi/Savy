@@ -11,11 +11,11 @@ import SwiftUI
 private let buttonDimen: CGFloat = 55
 
 struct BottomTabBarView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
     @Binding var currentTab: Tab
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
             TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
@@ -49,7 +49,7 @@ struct BottomTabBarView: View {
         .frame(width: 300, height: 70)
         .tint(Color.black)
         .padding(.vertical, 2.5)
-        .background(currentSchema.bar)
+        .background(currentScheme.bar)
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
@@ -59,14 +59,14 @@ private struct TabBarButton: View {
     let imageName: String
     let active: Bool
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Image(systemName: imageName)
             .renderingMode(.template)
-            .foregroundStyle(active ? currentSchema.font : currentSchema.barIcons)
+            .foregroundStyle(active ? currentScheme.font : currentScheme.barIcons)
             .fontWeight(.bold)
             .font(.system(size: active ? 40 : 24))
             .animation(.easeInOut, value: active)
@@ -76,5 +76,5 @@ private struct TabBarButton: View {
 #Preview {
     @Previewable @State var selectedTab = Tab.challenges
     return BottomTabBarView(currentTab: $selectedTab)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

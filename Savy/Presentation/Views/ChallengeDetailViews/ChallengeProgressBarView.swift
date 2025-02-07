@@ -9,26 +9,26 @@ import SwiftData
 import SwiftUI
 
 struct ChallengeProgressBarView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     let challenge: Challenge
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
         let progress = CGFloat(challenge.progressPercentage())
 
         GeometryReader { geometry in
             ZStack {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: geometry.size.height / 2)
-                        .fill(currentSchema.accent1)
+                        .fill(currentScheme.accent1)
                         .frame(
                             width: geometry.size.width,
                             height: geometry.size.height
                         )
 
                     Rectangle()
-                        .fill(currentSchema.barIcons)
+                        .fill(currentScheme.barIcons)
                         .frame(
                             width: geometry.size.width * progress,
                             height: geometry.size.height
@@ -44,19 +44,19 @@ struct ChallengeProgressBarView: View {
 
                 HStack {
                     Image(systemName: challenge.challengeConfiguration.icon)
-                        .foregroundColor(currentSchema.accent2)
+                        .foregroundColor(currentScheme.accent2)
 
                     Spacer()
 
                     Text("\(challenge.currentSavedAmount())€")
                         .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
+                        .foregroundStyle(currentScheme.accent2)
 
                     Spacer()
 
                     Text("\(challenge.challengeConfiguration.amount)€")
                         .font(.system(size: 12, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
+                        .foregroundStyle(currentScheme.accent2)
                 }
                 .padding(.horizontal, 10)
             }
@@ -67,7 +67,7 @@ struct ChallengeProgressBarView: View {
 
 #Preview {
     let container = try! ModelContainer(
-        for: Challenge.self, ColorManager.self,
+        for: Challenge.self, ColorService.self,
         configurations: ModelConfiguration(isStoredInMemoryOnly: true)
     )
 
@@ -92,5 +92,5 @@ struct ChallengeProgressBarView: View {
         .padding()
         .modelContainer(container)
         .environmentObject(
-            ColorManagerViewModel(modelContext: ModelContext(container)))
+            ColorServiceViewModel(modelContext: ModelContext(container)))
 }

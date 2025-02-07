@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RegisterScreen: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var username = ""
     @State private var isUsernameValid = false
@@ -35,7 +35,7 @@ struct RegisterScreen: View {
     @State private var showConfirmationDialog = false
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
         let hasRegestiredPreviously = StatsTracker.shared.accountUUID != nil
 
         VStack {
@@ -91,7 +91,7 @@ struct RegisterScreen: View {
                     )
 
                     Text("This email address is already registered.")
-                        .foregroundStyle(authError ? Color.red : currentSchema.background)
+                        .foregroundStyle(authError ? Color.red : currentScheme.background)
 
                     if hasRegestiredPreviously {
                         ActionButton(
@@ -153,7 +153,7 @@ struct RegisterScreen: View {
         }
         .padding(.top, 92)
         .padding(.bottom, 112)
-        .background(currentSchema.background)
+        .background(currentScheme.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .onAppear(perform: {
@@ -204,6 +204,6 @@ struct RegisterScreen: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

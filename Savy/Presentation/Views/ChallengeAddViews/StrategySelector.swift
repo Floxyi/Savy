@@ -11,10 +11,10 @@ struct StrategySelector: View {
     @Binding var selectedStrategy: SavingStrategy
     let onChangeAction: () -> Void
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     public var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Menu {
             ForEach(SavingStrategy.allCases, id: \.self) { strategy in
@@ -29,13 +29,13 @@ struct StrategySelector: View {
             HStack {
                 Text(selectedStrategy.rawValue)
                     .font(.system(size: 16))
-                    .foregroundColor(currentSchema.font)
+                    .foregroundColor(currentScheme.font)
                 Image(systemName: "chevron.down")
                     .font(.system(size: 16))
-                    .foregroundColor(currentSchema.font)
+                    .foregroundColor(currentScheme.font)
             }
             .padding(.horizontal, 8)
-            .background(currentSchema.bar)
+            .background(currentScheme.bar)
         }
     }
 }

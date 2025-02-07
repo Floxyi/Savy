@@ -9,10 +9,10 @@ import SwiftData
 import SwiftUI
 
 struct ChallengesScreen: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         NavigationView {
             VStack {
@@ -24,18 +24,18 @@ struct ChallengesScreen: View {
             }
             .padding(.top)
             .padding(.bottom, 112)
-            .background(currentSchema.background)
+            .background(currentScheme.background)
         }
     }
 }
 
 #Preview {
     ChallengesScreen()
-        .modelContainer(for: [Challenge.self, ColorManager.self])
+        .modelContainer(for: [Challenge.self, ColorService.self])
         .environmentObject(
-            ColorManagerViewModel(
+            ColorServiceViewModel(
                 modelContext: ModelContext(
-                    try! ModelContainer(for: ColorManager.self)
+                    try! ModelContainer(for: ColorService.self)
                 )
             )
         )

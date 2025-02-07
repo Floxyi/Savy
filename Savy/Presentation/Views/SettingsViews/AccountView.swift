@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct AccountView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var showConfirmationDialog = false
     @State private var isLoading = false
@@ -17,7 +17,7 @@ struct AccountView: View {
     @State private var isSignedIn = false
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
             if isSignedIn {
@@ -25,11 +25,11 @@ struct AccountView: View {
                     Text(AuthService.shared.profile?.username ?? "Unkown")
                         .fontWeight(.bold)
                         .font(.system(size: 14))
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
                     Text(AuthService.shared.supabaseAccount?.email ?? "error")
                         .fontWeight(.bold)
                         .font(.system(size: 14))
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
                 }
 
                 Spacer()
@@ -41,7 +41,7 @@ struct AccountView: View {
                             .frame(width: 20, height: 20)
                     } else {
                         Text("Log Out")
-                            .foregroundStyle(currentSchema.font)
+                            .foregroundStyle(currentScheme.font)
                             .font(.system(size: 14))
                             .fontWeight(.bold)
                             .padding(.leading, 4)
@@ -55,14 +55,14 @@ struct AccountView: View {
                                 Button("Cancel", role: .cancel) {}
                             }
                         Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .foregroundStyle(currentSchema.font)
+                            .foregroundStyle(currentScheme.font)
                             .fontWeight(.bold)
                             .font(.system(size: 16))
                     }
                 }
                 .padding(8)
                 .frame(width: 110)
-                .background(currentSchema.background)
+                .background(currentScheme.background)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding(.trailing, 4)
             } else {
@@ -72,10 +72,10 @@ struct AccountView: View {
                     NavigationLink(destination: RegisterScreen(isSignedIn: $isSignedIn)) {
                         Text("Register")
                             .fontWeight(.bold)
-                            .foregroundStyle(currentSchema.font)
+                            .foregroundStyle(currentScheme.font)
                             .frame(width: 80)
                             .padding(12)
-                            .background(currentSchema.background)
+                            .background(currentScheme.background)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
 
@@ -83,17 +83,17 @@ struct AccountView: View {
 
                     Text("or")
                         .fontWeight(/*@START_MENU_TOKEN@*/ .bold/*@END_MENU_TOKEN@*/)
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
 
                     Spacer()
 
                     NavigationLink(destination: LoginScreen(isSignedIn: $isSignedIn)) {
                         Text("Login")
                             .fontWeight(.bold)
-                            .foregroundStyle(currentSchema.font)
+                            .foregroundStyle(currentScheme.font)
                             .frame(width: 80)
                             .padding(12)
-                            .background(currentSchema.background)
+                            .background(currentScheme.background)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                 }
@@ -125,5 +125,5 @@ struct AccountView: View {
         AccountView()
     }
     .padding()
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

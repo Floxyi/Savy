@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct IconPicker: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @Binding var selectedIcon: String?
     @Binding var isIconPickerVisible: Bool
 
     public var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             if selectedIcon == nil {
                 Text("Choose icon")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(currentSchema.font)
+                    .foregroundColor(currentScheme.font)
                     .multilineTextAlignment(.center)
             } else {
                 Image(systemName: selectedIcon!)
                     .font(.system(size: 30))
-                    .foregroundColor(currentSchema.font)
+                    .foregroundColor(currentScheme.font)
                     .frame(width: 50, height: 50)
-                    .background(currentSchema.background)
+                    .background(currentScheme.background)
                     .cornerRadius(10)
             }
         }
@@ -38,14 +38,14 @@ struct IconPicker: View {
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [5]))
-                .foregroundColor(currentSchema.font)
+                .foregroundColor(currentScheme.font)
         )
         .padding(.bottom, 16)
     }
 }
 
 struct IconPickerOverlay: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @Binding var selectedIcon: String?
     @Binding var isIconPickerVisible: Bool
@@ -53,12 +53,12 @@ struct IconPickerOverlay: View {
     let columns = Array(repeating: GridItem(.flexible()), count: 5)
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             Text("Pick an icon:")
                 .font(.system(size: 16, weight: .bold))
-                .foregroundColor(currentSchema.font)
+                .foregroundColor(currentScheme.font)
                 .padding(.top)
 
             ScrollView {
@@ -66,9 +66,9 @@ struct IconPickerOverlay: View {
                     ForEach(iconPickerList, id: \.self) { iconName in
                         Image(systemName: iconName)
                             .font(.system(size: 30))
-                            .foregroundColor(currentSchema.font)
+                            .foregroundColor(currentScheme.font)
                             .frame(width: 50, height: 50)
-                            .background(currentSchema.background)
+                            .background(currentScheme.background)
                             .cornerRadius(10)
                             .onTapGesture {
                                 selectedIcon = iconName
@@ -80,7 +80,7 @@ struct IconPickerOverlay: View {
             }
         }
         .frame(maxHeight: 500)
-        .background(currentSchema.background)
+        .background(currentScheme.background)
         .cornerRadius(12)
         .padding(32)
         .onTapGesture {

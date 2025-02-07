@@ -9,12 +9,12 @@ import SwiftData
 import SwiftUI
 
 struct LeaderboardScreen: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State var showsPersonalStats: Bool = false
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             if showsPersonalStats {
@@ -35,12 +35,12 @@ struct LeaderboardScreen: View {
             }
         }
         .padding()
-        .background(currentSchema.background)
+        .background(currentScheme.background)
     }
 }
 
 #Preview {
     LeaderboardScreen()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct CustomDatePickerStyle: DatePickerStyle {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var date: Date
     var text: String
     @Binding var isDatePickerVisible: Bool
 
     func makeBody(configuration _: Configuration) -> some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
             Text(text)
                 .font(.system(size: 16, weight: .bold))
-                .foregroundColor(currentSchema.font.opacity(0.4))
+                .foregroundColor(currentScheme.font.opacity(0.4))
             Spacer()
             Text(date, formatter: DateFormatter.customFormatter)
-                .foregroundStyle(currentSchema.font)
+                .foregroundStyle(currentScheme.font)
                 .font(.body)
                 .padding(4)
                 .padding(.horizontal, 6)
-                .background(currentSchema.accent1)
+                .background(currentScheme.accent1)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .onTapGesture {
                     withAnimation {
@@ -42,18 +42,18 @@ struct CustomDatePickerOverlay: View {
     @Binding var date: Date
     var startDate: Date
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     public var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         DatePicker("", selection: $date, in: startDate..., displayedComponents: .date)
             .datePickerStyle(.graphical)
-            .accentColor(currentSchema.accent2)
+            .accentColor(currentScheme.accent2)
             .labelsHidden()
             .padding(.horizontal)
             .background(
-                currentSchema.mode == .light ? currentSchema.background : currentSchema.barIcons,
+                currentScheme.mode == .light ? currentScheme.background : currentScheme.barIcons,
                 in: RoundedRectangle(cornerRadius: 20)
             )
             .shadow(radius: 10)

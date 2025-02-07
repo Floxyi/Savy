@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginScreen: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var email = ""
     @State private var password = ""
@@ -23,7 +23,7 @@ struct LoginScreen: View {
     @State private var showConfirmationDialog = false
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
         let hasLoggedInPreviously = StatsTracker.shared.accountUUID != nil
 
         VStack {
@@ -56,7 +56,7 @@ struct LoginScreen: View {
                     )
 
                     Text("The account does not exist or the password is incorrect.")
-                        .foregroundStyle(authError ? Color.red : currentSchema.background)
+                        .foregroundStyle(authError ? Color.red : currentScheme.background)
                         .multilineTextAlignment(.center)
 
                     if hasLoggedInPreviously {
@@ -120,7 +120,7 @@ struct LoginScreen: View {
         }
         .padding(.top, 92)
         .padding(.bottom, 112)
-        .background(currentSchema.background)
+        .background(currentScheme.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .onAppear(perform: {
@@ -170,6 +170,6 @@ struct LoginScreen: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

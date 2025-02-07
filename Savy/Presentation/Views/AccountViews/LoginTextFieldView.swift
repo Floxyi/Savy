@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct LoginTextFieldView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @Binding var text: String
 
@@ -19,15 +19,15 @@ struct LoginTextFieldView: View {
     let contentType: UITextContentType
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack(alignment: .trailing) {
             if isSecure {
                 SecureField("", text: $text, prompt: Text(verbatim: placeholder)
-                    .foregroundColor(currentSchema.font.opacity(0.4)))
+                    .foregroundColor(currentScheme.font.opacity(0.4)))
             } else {
                 TextField("", text: $text, prompt: Text(verbatim: placeholder)
-                    .foregroundColor(currentSchema.font.opacity(0.4)))
+                    .foregroundColor(currentScheme.font.opacity(0.4)))
             }
         }
         .textFieldStyle(TextFieldAccountStyle())
@@ -54,8 +54,8 @@ struct LoginTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
 #Preview("Password TextField") {
@@ -74,6 +74,6 @@ struct LoginTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

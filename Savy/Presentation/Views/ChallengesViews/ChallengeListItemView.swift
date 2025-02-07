@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChallengeListItemView: View {
     let challenge: Challenge
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         NavigationLink(destination: ChallengeDetailScreen(challenge: challenge)) {
@@ -19,7 +19,7 @@ struct ChallengeListItemView: View {
                 ProgressView(challenge: challenge)
             }
             .padding(16)
-            .background(colorManagerVM.colorManager.currentSchema.bar)
+            .background(colorServiceVM.colorService.currentScheme.bar)
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .listRowBackground(Color(.secondarySystemBackground))
@@ -30,7 +30,7 @@ struct ChallengeListItemView: View {
 
 private struct HeadlineView: View {
     let challenge: Challenge
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         HStack {
@@ -43,7 +43,7 @@ private struct HeadlineView: View {
 
 private struct IconAndNameView: View {
     let challenge: Challenge
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         HStack {
@@ -52,13 +52,13 @@ private struct IconAndNameView: View {
             Text(challenge.challengeConfiguration.name)
                 .fontWeight(.bold)
         }
-        .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+        .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
     }
 }
 
 private struct DateView: View {
     let date: Date
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         HStack {
@@ -66,13 +66,13 @@ private struct DateView: View {
             Image(systemName: "calendar")
         }
         .font(.system(size: 13, weight: .bold))
-        .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+        .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
     }
 }
 
 private struct ProgressView: View {
     let challenge: Challenge
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         HStack {
@@ -89,7 +89,7 @@ private struct ProgressView: View {
 
 private struct SavingsProgressView: View {
     let challenge: Challenge
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         HStack(spacing: -8) {
@@ -98,7 +98,7 @@ private struct SavingsProgressView: View {
             if challenge.remainingSavings() >= 2 {
                 Divider()
                     .frame(width: 16, height: 2)
-                    .background(colorManagerVM.colorManager.currentSchema.font)
+                    .background(colorServiceVM.colorService.currentScheme.font)
                     .padding(.horizontal, 8)
                 NextSavingView(
                     saving: challenge.getNextSaving(at: 2), isNext: false
@@ -108,7 +108,7 @@ private struct SavingsProgressView: View {
             if challenge.remainingSavings() == 3 {
                 Divider()
                     .frame(width: 16, height: 2)
-                    .background(colorManagerVM.colorManager.currentSchema.font)
+                    .background(colorServiceVM.colorService.currentScheme.font)
                     .padding(.horizontal, 8)
                 NextSavingView(
                     saving: challenge.getNextSaving(at: 3), isNext: false
@@ -118,7 +118,7 @@ private struct SavingsProgressView: View {
             if challenge.remainingSavings() != 3 {
                 Divider()
                     .frame(width: 16, height: 2)
-                    .background(colorManagerVM.colorManager.currentSchema.font)
+                    .background(colorServiceVM.colorService.currentScheme.font)
                     .padding(.horizontal, 8)
                 RemainingView(remainingSavings: challenge.remainingSavings())
             }
@@ -129,7 +129,7 @@ private struct SavingsProgressView: View {
 private struct NextSavingView: View {
     let saving: Saving
     let isNext: Bool
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         VStack {
@@ -141,18 +141,18 @@ private struct NextSavingView: View {
         .frame(width: 42, height: 42)
         .padding(4)
         .background(
-            isNext ? colorManagerVM.colorManager.currentSchema.font : .clear
+            isNext ? colorServiceVM.colorService.currentScheme.font : .clear
         )
         .foregroundStyle(
             isNext
-                ? colorManagerVM.colorManager.currentSchema.background
-                : colorManagerVM.colorManager.currentSchema.font
+                ? colorServiceVM.colorService.currentScheme.background
+                : colorServiceVM.colorService.currentScheme.font
         )
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(style: StrokeStyle(lineWidth: 2))
-                .foregroundColor(colorManagerVM.colorManager.currentSchema.font)
+                .foregroundColor(colorServiceVM.colorService.currentScheme.font)
                 .opacity(isNext ? 0 : 1)
         )
     }
@@ -160,7 +160,7 @@ private struct NextSavingView: View {
 
 private struct RemainingView: View {
     let remainingSavings: Int
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         VStack {
@@ -175,18 +175,18 @@ private struct RemainingView: View {
         .font(.system(size: 14))
         .frame(width: 42, height: 42)
         .padding(4)
-        .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+        .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                .foregroundColor(colorManagerVM.colorManager.currentSchema.font)
+                .foregroundColor(colorServiceVM.colorService.currentScheme.font)
         )
     }
 }
 
 private struct FinishedView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         HStack {
@@ -195,13 +195,13 @@ private struct FinishedView: View {
             Image(systemName: "flag.pattern.checkered.2.crossed")
         }
         .font(.system(size: 18))
-        .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+        .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
     }
 }
 
 private struct AmountView: View {
     let challenge: Challenge
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var textWidth: CGFloat = 0
 
@@ -212,11 +212,11 @@ private struct AmountView: View {
         ZStack {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 15)
-                    .fill(colorManagerVM.colorManager.currentSchema.accent1)
+                    .fill(colorServiceVM.colorService.currentScheme.accent1)
                     .frame(width: calculatedWidth, height: 30)
 
                 Rectangle()
-                    .fill(colorManagerVM.colorManager.currentSchema.barIcons)
+                    .fill(colorServiceVM.colorService.currentScheme.barIcons)
                     .frame(width: calculatedWidth * progress, height: 30)
             }
             .mask(
@@ -227,11 +227,11 @@ private struct AmountView: View {
             HStack(alignment: .bottom, spacing: -4) {
                 Text("\(challenge.currentSavedAmount())€")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.font)
+                    .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
                     .padding(.trailing, 7)
                 Text("/ \(challenge.challengeConfiguration.amount)€")
                     .font(.system(size: 10, weight: .bold))
-                    .foregroundStyle(colorManagerVM.colorManager.currentSchema.accent2)
+                    .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
                     .offset(y: -3)
             }
             .padding(8)
@@ -251,7 +251,7 @@ private struct AmountView: View {
 
 #Preview {
     let container = try! ModelContainer(
-        for: Challenge.self, ColorManager.self,
+        for: Challenge.self, ColorService.self,
         configurations: ModelConfiguration(isStoredInMemoryOnly: true)
     )
 
@@ -272,5 +272,5 @@ private struct AmountView: View {
     )
     .modelContainer(container)
     .environmentObject(
-        ColorManagerViewModel(modelContext: ModelContext(container)))
+        ColorServiceViewModel(modelContext: ModelContext(container)))
 }

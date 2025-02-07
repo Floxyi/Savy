@@ -16,10 +16,10 @@ struct ChallengeDetailScreen: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
         let columns: [GridItem] = Array(
             repeating: GridItem(.flexible(), spacing: 16), count: 4
         )
@@ -75,13 +75,13 @@ struct ChallengeDetailScreen: View {
 
                 Spacer()
             }
-            .background(currentSchema.background)
+            .background(currentScheme.background)
         }
         .onAppear(perform: {
             TabBarManager.shared.hide()
         })
         .padding()
-        .background(currentSchema.background)
+        .background(currentScheme.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .popover(isPresented: $showEditPopover) {
@@ -104,7 +104,7 @@ struct ChallengeDetailScreen: View {
 
 #Preview {
     let container = try! ModelContainer(
-        for: Challenge.self, ColorManager.self,
+        for: Challenge.self, ColorService.self,
         configurations: ModelConfiguration(isStoredInMemoryOnly: true)
     )
 
@@ -125,5 +125,5 @@ struct ChallengeDetailScreen: View {
     )
     .modelContainer(container)
     .environmentObject(
-        ColorManagerViewModel(modelContext: ModelContext(container)))
+        ColorServiceViewModel(modelContext: ModelContext(container)))
 }

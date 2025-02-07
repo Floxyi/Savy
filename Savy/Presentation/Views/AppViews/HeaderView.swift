@@ -14,17 +14,17 @@ struct HeaderView: View {
     var dismiss: (() -> Void)? = nil
     var actionView: AnyView? = nil
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         ZStack {
             HStack {
                 Text(title)
                     .fontWeight(.bold)
                     .font(.custom("Shrikhand-Regular", size: size))
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
             }
 
             if let dismiss {
@@ -34,7 +34,7 @@ struct HeaderView: View {
                     } label: {
                         Image(systemName: "chevron.backward")
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(currentSchema.font)
+                            .foregroundColor(currentScheme.font)
                     }
                     .padding(.leading, 16)
                     .padding(.bottom, 4)
@@ -68,5 +68,5 @@ struct HeaderView: View {
         ))
         Spacer()
     }
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

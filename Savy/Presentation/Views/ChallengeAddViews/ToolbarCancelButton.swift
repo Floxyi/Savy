@@ -10,15 +10,15 @@ import SwiftUI
 struct ToolbarCancelButton: View {
     @Binding var showPopover: Bool
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     public var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Button("Cancel") {
             showPopover = false
         }
         .font(.system(size: 16))
-        .foregroundStyle(currentSchema.barIcons)
+        .foregroundStyle(currentScheme.barIcons)
     }
 }

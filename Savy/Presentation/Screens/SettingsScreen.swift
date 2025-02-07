@@ -9,14 +9,14 @@ import SwiftData
 import SwiftUI
 
 struct SettingsScreen: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var selectedMode: ColorSchemeMode = .light
     @State private var toggledDarkMode: Bool = false
     @State private var toggledColorMode: Bool = false
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         NavigationView {
             VStack {
@@ -37,9 +37,9 @@ struct SettingsScreen: View {
                         SettingsBarView(text: "Color Mode", toggle: $toggledColorMode) {
                             if toggledColorMode {
                                 GradientSliderView(value: Binding(
-                                    get: { colorManagerVM.colorManager.hue },
+                                    get: { colorServiceVM.colorService.hue },
                                     set: { newValue in
-                                        colorManagerVM.colorManager.hue = newValue
+                                        colorServiceVM.colorService.hue = newValue
                                         updateSchemaForSelectedMode()
                                     }
                                 ), range: 0 ... 360)
@@ -57,36 +57,36 @@ struct SettingsScreen: View {
             }
             .padding()
             .padding(.bottom, 80)
-            .background(currentSchema.background)
+            .background(currentScheme.background)
             .onAppear {
                 TabBarManager.shared.show()
-                selectedMode = currentSchema.mode
-                toggledDarkMode = currentSchema.mode == .dark || currentSchema.mode == .coloredDark
-                toggledColorMode = currentSchema.mode == .coloredLight || currentSchema.mode == .coloredDark
+                selectedMode = currentScheme.mode
+                toggledDarkMode = currentScheme.mode == .dark || currentScheme.mode == .coloredDark
+                toggledColorMode = currentScheme.mode == .coloredLight || currentScheme.mode == .coloredDark
             }
         }
     }
 
     private func updateSchemaForSelectedMode() {
         if toggledDarkMode, !toggledColorMode {
-            colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.darkMode())
+            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.darkMode())
         }
 
         if !toggledDarkMode, !toggledColorMode {
-            colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.lightMode())
+            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.lightMode())
         }
 
         if !toggledDarkMode, toggledColorMode {
-            colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredLightMode(hue: colorManagerVM.colorManager.hue))
+            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.coloredLightMode(hue: colorServiceVM.colorService.hue))
         }
 
         if toggledDarkMode, toggledColorMode {
-            colorManagerVM.colorManager.updateSchema(schema: ColorSchemes.coloredDarkMode(hue: colorManagerVM.colorManager.hue))
+            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.coloredDarkMode(hue: colorServiceVM.colorService.hue))
         }
     }
 }
 
 #Preview {
     SettingsScreen()
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

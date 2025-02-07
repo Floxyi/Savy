@@ -11,27 +11,27 @@ import SwiftUI
 struct ChallengeInfoView: View {
     let challenge: Challenge
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
             VStack {
                 HStack {
                     Image(systemName: "calendar")
                         .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
+                        .foregroundStyle(currentScheme.accent2)
                     Text("Start: \(challenge.challengeConfiguration.startDate.formatted(.dateTime.year().month(.twoDigits).day()))")
                         .font(.system(size: 14))
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
                     Spacer()
                     Image(systemName: "calendar.badge.checkmark")
                         .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(currentSchema.accent2)
+                        .foregroundStyle(currentScheme.accent2)
                     Text("End: \(challenge.savings.last!.date.formatted(.dateTime.year().month(.twoDigits).day()))")
                         .font(.system(size: 14))
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
                 }
 
                 ChallengeProgressBarView(challenge: challenge)
@@ -40,18 +40,18 @@ struct ChallengeInfoView: View {
                     Spacer()
                     Text("\(challenge.remainingSavings()) savings to go")
                         .font(.system(size: 12))
-                        .foregroundStyle(currentSchema.font)
+                        .foregroundStyle(currentScheme.font)
                 }
             }
             .padding(16)
-            .background(currentSchema.bar)
+            .background(currentScheme.bar)
             .clipShape(RoundedRectangle(cornerRadius: 18))
         }
     }
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(for: Challenge.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -67,5 +67,5 @@ struct ChallengeInfoView: View {
     return ChallengeInfoView(challenge: Challenge(challengeConfiguration: challengeConfiguration))
         .padding()
         .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
 }

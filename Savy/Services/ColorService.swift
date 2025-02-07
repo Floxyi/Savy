@@ -12,36 +12,36 @@ import SwiftUI
 @Model
 class ColorService {
     public var hue: Double
-    public var currentSchemaData: Data
+    public var currentSchemeData: Data
 
-    public var currentSchema: ColorScheme {
+    public var currentScheme: ColorScheme {
         get {
             do {
-                return try JSONDecoder().decode(ColorScheme.self, from: currentSchemaData)
+                return try JSONDecoder().decode(ColorScheme.self, from: currentSchemeData)
             } catch {
                 return ColorSchemes.lightMode()
             }
         }
         set {
             do {
-                currentSchemaData = try JSONEncoder().encode(newValue)
+                currentSchemeData = try JSONEncoder().encode(newValue)
             } catch {
                 print("Failed to encode ColorScheme: \(error)")
             }
         }
     }
 
-    public init(hue: Double, currentSchema: ColorScheme) {
+    public init(hue: Double, currentScheme: ColorScheme) {
         self.hue = hue
         do {
-            currentSchemaData = try JSONEncoder().encode(currentSchema)
+            currentSchemeData = try JSONEncoder().encode(currentScheme)
         } catch {
             print("Failed to encode initial ColorScheme: \(error)")
-            currentSchemaData = Data()
+            currentSchemeData = Data()
         }
     }
 
-    func updateSchema(schema: ColorScheme) {
-        currentSchema = schema
+    func updateScheme(schema: ColorScheme) {
+        currentScheme = schema
     }
 }

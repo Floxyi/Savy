@@ -9,23 +9,23 @@ import SwiftData
 import SwiftUI
 
 struct ActionButton<Content: View>: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     let content: Content
     let isEnabled: Bool
     let action: () -> Void
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
             content
-                .foregroundStyle(isEnabled ? currentSchema.font : currentSchema.accent1)
+                .foregroundStyle(isEnabled ? currentScheme.font : currentScheme.accent1)
         }
         .frame(width: 140)
         .padding(.vertical, 16)
         .padding(.horizontal, 28)
-        .background(currentSchema.bar)
+        .background(currentScheme.bar)
         .cornerRadius(12)
         .onTapGesture {
             if isEnabled {
@@ -48,8 +48,8 @@ struct ActionButton<Content: View>: View {
         isEnabled: true,
         action: {}
     )
-    .modelContainer(for: [ColorManager.self])
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .modelContainer(for: [ColorService.self])
+    .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
 #Preview("Loading Button") {
@@ -62,6 +62,6 @@ struct ActionButton<Content: View>: View {
         isEnabled: true,
         action: {}
     )
-    .modelContainer(for: [ColorManager.self])
-    .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+    .modelContainer(for: [ColorService.self])
+    .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

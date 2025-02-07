@@ -17,7 +17,7 @@ struct SavyApp: App {
                 StatsTracker.self,
                 SavingStats.self,
                 StatsEntry.self,
-                ColorManager.self,
+                ColorService.self,
             ]
         )
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -29,17 +29,17 @@ struct SavyApp: App {
         }
     }()
 
-    @StateObject private var colorManagerVM: ColorManagerViewModel
+    @StateObject private var colorServiceViewModel: ColorServiceViewModel
 
     init() {
         let context = sharedModelContainer.mainContext
-        _colorManagerVM = StateObject(wrappedValue: ColorManagerViewModel(modelContext: context))
+        _colorServiceViewModel = StateObject(wrappedValue: ColorServiceViewModel(modelContext: context))
     }
 
     var body: some Scene {
         WindowGroup {
             AppView()
-                .environmentObject(colorManagerVM)
+                .environmentObject(colorServiceViewModel)
         }
         .modelContainer(sharedModelContainer)
     }

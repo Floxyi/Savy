@@ -10,10 +10,10 @@ import SwiftUI
 struct StatsTypeSelector: View {
     @Binding var selectedStatsType: StatsType
 
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     public var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         Menu {
             ForEach(StatsType.allCases.prefix(1), id: \.self) { statsType in
@@ -27,13 +27,13 @@ struct StatsTypeSelector: View {
             HStack {
                 Text(selectedStatsType.rawValue)
                     .font(.system(size: 16))
-                    .foregroundColor(currentSchema.font)
+                    .foregroundColor(currentScheme.font)
                 Image(systemName: "chevron.down")
                     .font(.system(size: 16))
-                    .foregroundColor(currentSchema.font)
+                    .foregroundColor(currentScheme.font)
             }
             .padding(.horizontal, 8)
-            .background(currentSchema.bar)
+            .background(currentScheme.bar)
         }
     }
 }

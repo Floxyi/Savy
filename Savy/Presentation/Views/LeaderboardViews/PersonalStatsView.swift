@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct PersonalStatsView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @State private var statsType: StatsType = .money_saved
     @State private var startDate: Date = .init()
@@ -23,7 +23,7 @@ struct PersonalStatsView: View {
     let maxDate = Date()
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
         let moneySavedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .money_saved }) != nil
         let challengesStartedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .challenged_started }) != nil
         let challengesCompletedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .challenged_completed }) != nil
@@ -34,16 +34,16 @@ struct PersonalStatsView: View {
             VStack {
                 Text("There are no stats yet! \nStart saving money to see your progress.")
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
                     .fontWeight(.bold)
                     .font(.system(size: 22))
                     .padding(.bottom, 12)
                 Image(systemName: "chart.line.uptrend.xyaxis")
-                    .foregroundStyle(currentSchema.font)
+                    .foregroundStyle(currentScheme.font)
                     .font(.system(size: 44))
             }
             .padding(12)
-            .background(currentSchema.bar)
+            .background(currentScheme.bar)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .padding(.bottom, 24)
         }
@@ -54,14 +54,14 @@ struct PersonalStatsView: View {
                     VStack {
                         HStack {
                             Text("All time stats")
-                                .foregroundStyle(currentSchema.font)
+                                .foregroundStyle(currentScheme.font)
                                 .fontWeight(.bold)
                                 .font(.system(size: 24))
                             Spacer()
                             Text("\(StatsTracker.shared.entries.first?.date.formatted(.dateTime.year().month().day()) ?? "")")
-                                .foregroundStyle(currentSchema.font)
+                                .foregroundStyle(currentScheme.font)
                             Image(systemName: "calendar")
-                                .foregroundStyle(currentSchema.font)
+                                .foregroundStyle(currentScheme.font)
                                 .fontWeight(.bold)
                                 .font(.system(size: 16))
                         }
@@ -72,43 +72,43 @@ struct PersonalStatsView: View {
                             VStack(alignment: .leading) {
                                 HStack {
                                     Text("Total money saved:")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                     Text("\(StatsTracker.shared.totalMoneySaved()) €")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                 }
 
                                 HStack {
                                     Text("Challenges started:")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                     Text("\(StatsTracker.shared.totalChallengesStarted())")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                 }
 
                                 HStack {
                                     Text("Challenges completed:")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                     Text("\(StatsTracker.shared.totalChallengesCompleted())")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                 }
                                 if StatsTracker.shared.allTimePunctuality() == nil {
                                     HStack {
                                         Text("Punctuality:")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                             .fontWeight(.bold)
                                         Text("Not available")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                     }
                                 }
                                 if StatsTracker.shared.allTimePunctuality() != nil {
                                     HStack {
                                         Text("Punctuality:")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                             .fontWeight(.bold)
                                         Text("\(StatsTracker.shared.allTimePunctuality() ?? 0) %")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                     }
                                 }
                             }
@@ -117,7 +117,7 @@ struct PersonalStatsView: View {
                         .padding(.leading, 16)
                         .padding(.bottom, 12)
                     }
-                    .background(currentSchema.bar)
+                    .background(currentScheme.bar)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .padding(.bottom, 24)
 
@@ -126,7 +126,7 @@ struct PersonalStatsView: View {
                             StatsTypeSelector(selectedStatsType: $statsType)
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 4)
-                                .background(currentSchema.bar)
+                                .background(currentScheme.bar)
                                 .clipShape(RoundedRectangle(cornerRadius: 6))
 
                             Spacer()
@@ -148,14 +148,14 @@ struct PersonalStatsView: View {
                                             Image(systemName: "chevron.down")
                                                 .font(.system(size: 14))
                                         }
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                         .font(.system(size: 16))
                                         .padding(.trailing, -4)
                                     }
 
                                     Text(" - ")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                         .font(.system(size: 20))
 
@@ -170,7 +170,7 @@ struct PersonalStatsView: View {
                                                 .padding(.trailing, -6)
                                             Image(systemName: "chevron.down")
                                         }
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                         .font(.system(size: 14))
                                         .padding(.leading, -4)
@@ -180,53 +180,53 @@ struct PersonalStatsView: View {
                                 }
                                 HStack {
                                     Text("Money saved:")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                     Text("\(StatsTracker.shared.timeRangeMoneySaved(startDate: startDate, endDate: endDate)) €")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                 }
 
                                 HStack {
                                     Text("Saving count:")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                     Text("\(StatsTracker.shared.timeRangeSavingCount(startDate: startDate, endDate: endDate))")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                 }
 
                                 if StatsTracker.shared.timeRangePunctuality(startDate: startDate, endDate: endDate) == nil {
                                     HStack {
                                         Text("Punctuality:")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                             .fontWeight(.bold)
                                         Text("Not available")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                     }
                                 }
                                 if StatsTracker.shared.timeRangePunctuality(startDate: startDate, endDate: endDate) != nil {
                                     HStack {
                                         Text("Punctuality:")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                             .fontWeight(.bold)
                                         Text("\(StatsTracker.shared.allTimePunctuality() ?? 0) %")
-                                            .foregroundStyle(currentSchema.font)
+                                            .foregroundStyle(currentScheme.font)
                                     }
                                 }
 
                                 HStack {
                                     Text("Average saved per day:")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
                                     Text(String(format: "%.2f", StatsTracker.shared.averageSavedTimeRange(startDate: startDate, endDate: endDate)))
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                     Text("€")
-                                        .foregroundStyle(currentSchema.font)
+                                        .foregroundStyle(currentScheme.font)
                                         .padding(.leading, -4)
                                 }
                             }
                             .padding(.vertical, 12)
                             .padding(.horizontal, 16)
-                            .background(currentSchema.bar)
+                            .background(currentScheme.bar)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
 
                             if showDatePicker {
@@ -237,7 +237,7 @@ struct PersonalStatsView: View {
                                     displayedComponents: [.date]
                                 )
                                 .datePickerStyle(.graphical)
-                                .background(currentSchema.bar)
+                                .background(currentScheme.bar)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .padding(.top, 24)
                                 .padding()
@@ -274,11 +274,11 @@ struct PersonalStatsView: View {
 
     return PersonalStatsView()
         .padding()
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
 #Preview("Empty") {
     PersonalStatsView()
         .padding()
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

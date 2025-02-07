@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct RegistrationTextFieldView: View {
-    @EnvironmentObject private var colorManagerVM: ColorManagerViewModel
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     @Binding var text: String
     @Binding var isValid: Bool
@@ -24,22 +24,22 @@ struct RegistrationTextFieldView: View {
     let contentType: UITextContentType
 
     var body: some View {
-        let currentSchema = colorManagerVM.colorManager.currentSchema
+        let currentScheme = colorServiceVM.colorService.currentScheme
 
         ZStack(alignment: .trailing) {
             if isSecure {
                 SecureField("", text: $text, prompt: Text(verbatim: placeholder)
-                    .foregroundColor(currentSchema.font.opacity(0.4)))
+                    .foregroundColor(currentScheme.font.opacity(0.4)))
             } else {
                 TextField("", text: $text, prompt: Text(verbatim: placeholder)
-                    .foregroundColor(currentSchema.font.opacity(0.4)))
+                    .foregroundColor(currentScheme.font.opacity(0.4)))
             }
 
             HStack {
                 if !isValid {
                     if error {
                         Image(systemName: "questionmark.circle.fill")
-                            .foregroundStyle(currentSchema.font)
+                            .foregroundStyle(currentScheme.font)
                             .fontWeight(.bold)
                             .font(.system(size: 20))
                             .padding(.trailing, 34)
@@ -132,8 +132,8 @@ struct RegistrationTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }
 
 #Preview("Password TextField") {
@@ -165,6 +165,6 @@ struct RegistrationTextFieldView: View {
     }
 
     return PreviewWrapper()
-        .modelContainer(for: [ColorManager.self])
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorManager.self))))
+        .modelContainer(for: [ColorService.self])
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

@@ -29,7 +29,7 @@ struct ChallengesListView: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Challenge.self, ColorManager.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let container = try! ModelContainer(for: Challenge.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -45,5 +45,5 @@ struct ChallengesListView: View {
     return ChallengesListView()
         .padding(.top, 80)
         .modelContainer(container)
-        .environmentObject(ColorManagerViewModel(modelContext: ModelContext(container)))
+        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
 }
