@@ -1,5 +1,5 @@
 //
-//  ColorSchemas.swift
+//  ColorSchemes.swift
 //  Savy
 //
 //  Created by Florian Winkler on 25.08.24.
