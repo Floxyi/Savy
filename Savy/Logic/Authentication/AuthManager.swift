@@ -16,9 +16,7 @@ class AuthManager {
     var profile: Profile?
 
     private init() {
-        let (url, key) = AppEnvironment.current == .production
-            ? (DotEnv.PROD_SUPABASE_URL, DotEnv.PROD_SUPABASE_ANON_KEY)
-            : (DotEnv.DEV_SUPABASE_URL, DotEnv.DEV_SUPABASE_ANON_KEY)
+        let (url, key) = (DotEnv.SUPABASE_URL, DotEnv.SUPABASE_ANON_KEY)
         client = SupabaseClient(supabaseURL: URL(string: url)!, supabaseKey: key)
         supabaseAccount = nil
         profile = nil

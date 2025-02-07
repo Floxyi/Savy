@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,13 +35,10 @@
 		176135C02CBDA77200AB3AF9 /* Savings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176135BF2CBDA77000AB3AF9 /* Savings.swift */; };
 		1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */; };
 		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
-		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
-		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
 		176F63982C877261004437C1 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63972C877261004437C1 /* TabBarManager.swift */; };
 		176F639A2C8778F4004437C1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63992C8778F4004437C1 /* AccountView.swift */; };
 		177728F72CBA75FD00BE814C /* ChallengeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177728F62CBA75FD00BE814C /* ChallengeStats.swift */; };
 		178530AA2C850FA4003426CD /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178530A92C850FA4003426CD /* Saving.swift */; };
-		17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */; };
 		17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */; };
 		17B2464E2C7A9E630036C534 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464D2C7A9E630036C534 /* AppView.swift */; };
 		17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */; };
@@ -65,9 +62,7 @@
 		17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290212CA9DC9B007382CD /* SavingCalculation.swift */; };
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
-		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
 		17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Challenge.swift */; };
-		17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */; };
 		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
 		17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */; };
 		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
@@ -112,14 +107,10 @@
 		176135BF2CBDA77000AB3AF9 /* Savings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savings.swift; sourceTree = "<group>"; };
 		1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBarView.swift; sourceTree = "<group>"; };
 		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
-		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
-		176EAE212C8290F9007CBABE /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		176F63972C877261004437C1 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 		176F63992C8778F4004437C1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		177728F62CBA75FD00BE814C /* ChallengeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStats.swift; sourceTree = "<group>"; };
 		178530A92C850FA4003426CD /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
-		17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
-		17A876D02C7F389700A47AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListItemView.swift; sourceTree = "<group>"; };
 		17B2464D2C7A9E630036C534 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarView.swift; sourceTree = "<group>"; };
@@ -144,9 +135,7 @@
 		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavyApp.swift; sourceTree = "<group>"; };
 		17FB1CF42C74E38900E1C6F4 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
-		17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfoView.swift; sourceTree = "<group>"; };
 		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
@@ -163,6 +152,21 @@
 		8EFF94DE2CB88C8600E77E3F /* SavingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingStats.swift; sourceTree = "<group>"; };
 		8EFF94E02CB963CC00E77E3F /* ChallengeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1721D43C2D56351A0074E672 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 17FB1CEC2C74E38900E1C6F4 /* Savy */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1721D4382D5633400074E672 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1721D43C2D56351A0074E672 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
+		1721D43B2D5635090074E672 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		17FB1CEA2C74E38900E1C6F4 /* Frameworks */ = {
@@ -239,15 +243,6 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
-		176EAE202C8290DA007CBABE /* Environment */ = {
-			isa = PBXGroup;
-			children = (
-				176EAE1E2C828DD2007CBABE /* DotEnv.swift */,
-				176EAE212C8290F9007CBABE /* AppEnvironment.swift */,
-			);
-			path = Environment;
-			sourceTree = "<group>";
-		};
 		17A38E822C87020A000F8A70 /* AppViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,14 +286,6 @@
 				17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */,
 			);
 			path = ChallengeDetailViews;
-			sourceTree = "<group>";
-		};
-		17A876CE2C7F388D00A47AB6 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		17B5D0882C7A466B00B28A04 /* Logic */ = {
@@ -399,11 +386,8 @@
 		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
 			isa = PBXGroup;
 			children = (
-				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
-				17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */,
-				17A876D02C7F389700A47AB6 /* Info.plist */,
-				17A876CE2C7F388D00A47AB6 /* Fonts */,
-				176EAE202C8290DA007CBABE /* Environment */,
+				1721D43B2D5635090074E672 /* App */,
+				1721D4382D5633400074E672 /* Resources */,
 				17B5D08B2C7A487D00B28A04 /* Extensions */,
 				17B5D0882C7A466B00B28A04 /* Logic */,
 				17FF019A2C776E090012FCF7 /* Presentation */,
@@ -475,6 +459,10 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				1721D4382D5633400074E672 /* Resources */,
+				1721D43B2D5635090074E672 /* App */,
+			);
 			name = Savy;
 			packageProductDependencies = (
 				17530F9D2C8111F8003D768C /* PostgREST */,
@@ -526,8 +514,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */,
-				17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */,
-				17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +553,6 @@
 				17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */,
 				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
 				171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */,
-				176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */,
 				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
 				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
 				17F2901E2CA9DBF9007382CD /* Tab.swift in Sources */,
@@ -606,12 +591,10 @@
 				174B17692C9F288000851BC4 /* Profile.swift in Sources */,
 				171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */,
 				173760872CA413130062CB83 /* ChallengeAddButtonView.swift in Sources */,
-				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
 				8EFF94D92CB885F000E77E3F /* StatsTracker.swift in Sources */,
 				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
 				177728F72CBA75FD00BE814C /* ChallengeStats.swift in Sources */,
 				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
-				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
 				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
 				174B17672C9F273D00851BC4 /* SupabaseAccount.swift in Sources */,
 				176F63982C877261004437C1 /* TabBarManager.swift in Sources */,
@@ -689,6 +672,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -746,6 +730,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -767,7 +752,7 @@
 				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Savy/Info.plist;
+				INFOPLIST_FILE = Savy/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Savy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -802,7 +787,7 @@
 				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Savy/Info.plist;
+				INFOPLIST_FILE = Savy/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Savy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
