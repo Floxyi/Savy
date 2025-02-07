@@ -63,7 +63,6 @@
 		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
 		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
 		17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Challenge.swift */; };
-		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
 		17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */; };
 		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
 		17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */; };
@@ -136,7 +135,6 @@
 		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FB1CF42C74E38900E1C6F4 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
-		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfoView.swift; sourceTree = "<group>"; };
 		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
 		17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddScreen.swift; sourceTree = "<group>"; };
@@ -214,13 +212,6 @@
 				17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */,
 			);
 			path = AccountViews;
-			sourceTree = "<group>";
-		};
-		17530FA12C811276003D768C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		176135B92CBD8AF100AB3AF9 /* LeaderboardViews */ = {
@@ -371,7 +362,6 @@
 			children = (
 				17FB1CEF2C74E38900E1C6F4 /* Savy */,
 				17FB1CEE2C74E38900E1C6F4 /* Products */,
-				17530FA12C811276003D768C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -391,17 +381,8 @@
 				17B5D08B2C7A487D00B28A04 /* Extensions */,
 				17B5D0882C7A466B00B28A04 /* Logic */,
 				17FF019A2C776E090012FCF7 /* Presentation */,
-				17FB1CF82C74E38A00E1C6F4 /* Preview Content */,
 			);
 			path = Savy;
-			sourceTree = "<group>";
-		};
-		17FB1CF82C74E38A00E1C6F4 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		17FF019A2C776E090012FCF7 /* Presentation */ = {
@@ -513,7 +494,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,7 +728,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Savy/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -783,7 +763,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Savy/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
