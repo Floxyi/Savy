@@ -25,3 +25,9 @@ class TabBarManager: ObservableObject {
         selectedTab = tab
     }
 }
+
+enum Tab: String, Hashable, CaseIterable {
+    case challenges = "calendar"
+    case leaderboard = "trophy"
+    case settings = "gear"
+}

@@ -1,5 +1,5 @@
 //
-//  StatsEntry 2.swift
+//  StatsEntry.swift
 //  Savy
 //
 //  Created by Nadine Schatz on 11.10.24.

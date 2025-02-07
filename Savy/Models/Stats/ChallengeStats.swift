@@ -1,5 +1,5 @@
 //
-//  SavingStats 2.swift
+//  ChallengeStats.swift
 //  Savy
 //
 //  Created by Florian Winkler on 12.10.24.
