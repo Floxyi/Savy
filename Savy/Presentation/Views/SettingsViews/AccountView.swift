@@ -22,11 +22,11 @@ struct AccountView: View {
         HStack {
             if isSignedIn {
                 VStack(alignment: .leading) {
-                    Text(AuthManager.shared.profile?.username ?? "Unkown")
+                    Text(AuthService.shared.profile?.username ?? "Unkown")
                         .fontWeight(.bold)
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
-                    Text(AuthManager.shared.supabaseAccount?.email ?? "error")
+                    Text(AuthService.shared.supabaseAccount?.email ?? "error")
                         .fontWeight(.bold)
                         .font(.system(size: 14))
                         .foregroundStyle(currentSchema.font)
@@ -104,7 +104,7 @@ struct AccountView: View {
         .frame(height: 44)
         .onAppear {
             Task {
-                isSignedIn = AuthManager.shared.isSignedIn()
+                isSignedIn = AuthService.shared.isSignedIn()
             }
         }
     }
@@ -115,7 +115,7 @@ struct AccountView: View {
             defer {
                 isLoading = false
             }
-            isSignedIn = try await AuthManager.shared.signOut()
+            isSignedIn = try await AuthService.shared.signOut()
         }
     }
 }

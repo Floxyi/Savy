@@ -175,34 +175,12 @@ class StatsTracker {
         return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
     }
 
-    func getSavingsAmountFromDatabase(id: UUID) async throws -> Int {
-        let users: [Profile] = try await AuthManager.shared.client.from("profiles").select().execute().value
-        let savings: [Savings] = try await AuthManager.shared.client.from("savings").select().execute().value
-        let user = users.first {
-            $0.id == id
-        }
-        let saving = savings.first {
-            $0.profileId == user?.id
-        }
-        return saving?.amount ?? 0
-    }
-
     func updateSavingAmountInDatabase() {
         Task {
+            guard let profileId = AuthService.shared.profile?.id else { return }
             do {
-                let profileId = AuthManager.shared.profile?.id
-                let savings: [Savings] = try await AuthManager.shared.client.from("savings").select().execute().value
-                var savingsEntry = savings.first {
-                    $0.profileId == profileId
-                }
-                if savingsEntry == nil {
-                    return
-                }
-                savingsEntry?.amount = totalMoneySaved()
-                try await AuthManager.shared.client.from("savings").update(savingsEntry).eq("profile_id", value: profileId).execute()
-            } catch {
-                print(error)
-            }
+                try await SavingsService.shared.updateSavingsAmount(amount: totalMoneySaved(), profileId: profileId)
+            } catch {}
         }
     }
 

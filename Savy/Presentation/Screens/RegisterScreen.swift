@@ -45,11 +45,11 @@ struct RegisterScreen: View {
             })
             .padding(.bottom, 88)
 
-            if AuthManager.shared.isSignedIn() {
+            if AuthService.shared.isSignedIn() {
                 Text("You are now registered.")
             }
 
-            if !AuthManager.shared.isSignedIn() {
+            if !AuthService.shared.isSignedIn() {
                 VStack {
                     RegistrationTextFieldView(
                         text: $username,
@@ -186,7 +186,7 @@ struct RegisterScreen: View {
                 isLoading = false
             }
             do {
-                isSignedIn = try await AuthManager.shared.registerWithEmail(username: username, email: email, password: password)
+                isSignedIn = try await AuthService.shared.registerWithEmail(username: username, email: email, password: password)
             } catch {
                 authError = true
             }

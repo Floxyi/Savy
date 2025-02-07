@@ -33,11 +33,11 @@ struct LoginScreen: View {
             })
             .padding(.bottom, 88)
 
-            if AuthManager.shared.isSignedIn() {
+            if AuthService.shared.isSignedIn() {
                 Text("You are now logged in.")
             }
 
-            if !AuthManager.shared.isSignedIn() {
+            if !AuthService.shared.isSignedIn() {
                 VStack {
                     LoginTextFieldView(
                         text: $email,
@@ -148,8 +148,8 @@ struct LoginScreen: View {
             do {
                 if validateEmail(), validatePassword() {
                     let oldId = StatsTracker.shared.accountUUID
-                    let newSignIn = await oldId == nil ? false : try AuthManager.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
-                    isSignedIn = try await AuthManager.shared.signInWithEmail(email: email, password: password, sameAccount: newSignIn)
+                    let newSignIn = await oldId == nil ? false : try AuthService.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
+                    isSignedIn = try await AuthService.shared.signInWithEmail(email: email, password: password, sameAccount: newSignIn)
                 } else {
                     authError = true
                 }

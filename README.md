@@ -89,7 +89,7 @@ sh setup.sh
 - Link to the Production instance:
 
     ```bash
-    supabase link --project-ref dttigamyidncuoomgkpo
+    supabase link --project-ref rtategdquaxplqrpshsq
     ```
 
 - Start the local Supabase instance:
@@ -104,6 +104,12 @@ sh setup.sh
 
     ```bash
      supabase migration up
+    ```
+
+- Create new migration:
+
+    ```bash
+     supabase migration new <name>
     ```
 
 - Stop the local Supabase instance:
