@@ -13,8 +13,9 @@
     - [Development](#development)
         - [Development Setup](#development-setup)
         - [Environment Setup](#environment-setup)
+        - [Xcode Setup](#xcode-setup)
         - [Supabase Setup](#supabase-setup)
-        - [Xcode Run Configurations](#xcode-run-configurations)
+    - [Supabase Workflow](#supabase-workflow)
 
 ## Features
 
@@ -84,13 +85,14 @@ sh setup.sh
     sh env.sh
     ```
 
+### Xcode Setup
+
+The Savy Xcode project comes with two run configurations:
+
+1. **Savy**: Use this for local development
+2. **Savy - Release**: Use this for testing in a production-like environment
+
 ### Supabase Setup
-
-- Link to the Production instance:
-
-    ```bash
-    supabase link --project-ref rtategdquaxplqrpshsq
-    ```
 
 - Start the local Supabase instance:
 
@@ -99,6 +101,20 @@ sh setup.sh
     ```
 
     **Note:** Ensure Docker is running before executing this command.
+
+- Link to the Production instance:
+
+    ```bash
+    supabase link --project-ref rtategdquaxplqrpshsq
+    ```
+
+- Pull the changes from Production:
+
+    ```bash
+    supabase db pull
+    ```
+
+## Supabase Workflow
 
 - Apply newest migrations:
 
@@ -112,26 +128,14 @@ sh setup.sh
      supabase migration new <name>
     ```
 
+- Push the local changes to Production:
+
+    ```bash
+    supabase db push
+    ```
+
 - Stop the local Supabase instance:
 
     ```bash
     supabase stop
     ```
-
-- Pull the changes from Production:
-
-    ```bash
-    supabase db pull
-    ```
-
-- Push the local changes to Production:
-    ```bash
-    supabase db push
-    ```
-
-### Xcode Run Configurations
-
-The Savy Xcode project comes with two run configurations:
-
-1. **Savy**: Use this for local development.
-2. **Savy - Release**: Use this for testing in a production-like environment.
