@@ -24,11 +24,8 @@ class ChallengeAddViewModel: ObservableObject {
     }
 
     func updateEndDate() {
-        let newEndDate = Calendar.current.date(
-            byAdding: strategy == .Weekly ? .weekOfYear : .month,
-            value: 1,
-            to: Date()
-        ) ?? Date()
+        let timespan = strategy == .Weekly ? Calendar.Component.weekOfYear : Calendar.Component.month
+        let newEndDate = Calendar.current.date(byAdding: timespan, value: 1, to: Date()) ?? Date()
         endDate = newEndDate > endDate ? newEndDate : endDate
     }
 
@@ -36,7 +33,7 @@ class ChallengeAddViewModel: ObservableObject {
         icon != nil && !name.isEmpty && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
 
-    func challengeConfiguration() -> ChallengeConfiguration {
+    func getChallengeConfiguration() -> ChallengeConfiguration {
         ChallengeConfiguration(
             icon: icon ?? "square.dashed",
             name: name,
@@ -46,5 +43,10 @@ class ChallengeAddViewModel: ObservableObject {
             calculation: calculation,
             cycleAmount: cycleAmount
         )
+    }
+
+    func addChallenge() {
+        let challengeConfiguration = getChallengeConfiguration()
+        ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
     }
 }

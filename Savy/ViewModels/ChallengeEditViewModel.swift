@@ -59,4 +59,14 @@ class ChallengeEditViewModel: ObservableObject {
         let calculatedDate = challenge.challengeConfiguration.calculateEndDateByAmount(challenge: challenge, startDate: challenge.challengeConfiguration.startDate)
         return calculatedDate.formatted(.dateTime.day().month().year())
     }
+
+    func getUpdatedChallengeConfiguration() -> ChallengeConfiguration {
+        ChallengeConfiguration(icon: icon!, name: name, amount: amount!, endDate: endDate, strategy: strategy, calculation: calculation, cycleAmount: cycleAmount ?? 0)
+    }
+
+    func updateChallenge() {
+        let id = challenge.id
+        let challengeConfiguration = getUpdatedChallengeConfiguration()
+        ChallengeManager.shared.updateChallenge(id: id, challengeConfiguration: challengeConfiguration)
+    }
 }

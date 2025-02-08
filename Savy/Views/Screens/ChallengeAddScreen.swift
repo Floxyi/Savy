@@ -20,7 +20,7 @@ struct ChallengeAddScreen: View {
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
-        let challengeConfiguration = vm.challengeConfiguration()
+        let challengeConfiguration = vm.getChallengeConfiguration()
 
         NavigationStack {
             ZStack {

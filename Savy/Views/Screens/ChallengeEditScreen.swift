@@ -13,6 +13,7 @@ struct ChallengeEditScreen: View {
     @Binding var showPopover: Bool
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @Environment(\.modelContext) private var modelContext
 
     init(challenge: Challenge, showPopover: Binding<Bool>) {
         _vm = StateObject(wrappedValue: ChallengeEditViewModel(challenge: challenge))
@@ -128,7 +129,7 @@ struct ChallengeEditScreen: View {
                             isValid: { vm.isValid() },
                             onDoneAction: {
                                 dismiss()
-                                ChallengeManager.shared.updateChallenge(id: vm.challenge.id, challengeConfiguration: vm.challenge.challengeConfiguration)
+                                vm.updateChallenge()
                             }
                         )
                     }

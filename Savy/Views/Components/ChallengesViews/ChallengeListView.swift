@@ -9,8 +9,6 @@ import SwiftData
 import SwiftUI
 
 struct ChallengesListView: View {
-    @Environment(\.modelContext) private var modelContext
-
     @State private var showPopover = false
 
     var body: some View {

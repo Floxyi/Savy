@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ChallengeAddButtonView: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @Environment(\.modelContext) private var modelContext
 
     @Binding var showPopover: Bool
 
