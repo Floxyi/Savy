@@ -9,22 +9,18 @@ import SwiftData
 import SwiftUI
 
 struct LoginScreen: View {
+    @Binding var isSignedIn: Bool
+    @StateObject private var vm: LoginViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
-    @State private var email = ""
-    @State private var password = ""
-
-    @State private var authError = false
-    @State private var isLoading = false
-
-    @Binding var isSignedIn: Bool
-
-    @State private var showConfirmationDialog = false
+    init(isSignedIn: Binding<Bool>) {
+        _vm = StateObject(wrappedValue: LoginViewModel(isSignedIn: isSignedIn))
+        _isSignedIn = isSignedIn
+    }
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
-        let hasLoggedInPreviously = StatsTracker.shared.accountUUID != nil
 
         VStack {
             HeaderView(title: "Login", dismiss: {
@@ -40,7 +36,7 @@ struct LoginScreen: View {
             if !AuthService.shared.isSignedIn() {
                 VStack {
                     LoginTextFieldView(
-                        text: $email,
+                        text: $vm.email,
                         placeholder: "someone@example.com",
                         isSecure: false,
                         keyboardType: .emailAddress,
@@ -48,7 +44,7 @@ struct LoginScreen: View {
                     )
 
                     LoginTextFieldView(
-                        text: $password,
+                        text: $vm.password,
                         placeholder: "password",
                         isSecure: true,
                         keyboardType: .default,
@@ -56,13 +52,13 @@ struct LoginScreen: View {
                     )
 
                     Text("The account does not exist or the password is incorrect.")
-                        .foregroundStyle(authError ? Color.red : currentScheme.background)
+                        .foregroundStyle(vm.authError ? Color.red : currentScheme.background)
                         .multilineTextAlignment(.center)
 
-                    if hasLoggedInPreviously {
+                    if StatsTracker.shared.accountUUID != nil {
                         ActionButton(
                             content: HStack {
-                                if isLoading {
+                                if vm.isLoading {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle())
                                         .frame(width: 20, height: 20)
@@ -75,24 +71,24 @@ struct LoginScreen: View {
                                         .font(.system(size: 20))
                                 }
                             },
-                            isEnabled: !email.isEmpty && !password.isEmpty && !isLoading,
-                            action: { showConfirmationDialog = true }
+                            isEnabled: !vm.email.isEmpty && !vm.password.isEmpty && !vm.isLoading,
+                            action: { vm.onShowConfirmationDialogChanged() }
                         )
                         .padding(.top, 72)
-                        .confirmationDialog("If you proceed, you will loose all your data when loggin in to a new account.", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                        .confirmationDialog("If you proceed, you will lose all your data when logging in to a new account.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
                             Button("Bestätigen", role: .destructive) {
                                 withAnimation {
-                                    signInButtonPressed()
+                                    vm.signInButtonPressed()
                                 }
                             }
                             Button("Abbrechen", role: .cancel) {}
                         }
                     }
 
-                    if !hasLoggedInPreviously {
+                    if StatsTracker.shared.accountUUID == nil {
                         ActionButton(
                             content: HStack {
-                                if isLoading {
+                                if vm.isLoading {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle())
                                         .frame(width: 20, height: 20)
@@ -105,8 +101,8 @@ struct LoginScreen: View {
                                         .font(.system(size: 20))
                                 }
                             },
-                            isEnabled: !email.isEmpty && !password.isEmpty && !isLoading,
-                            action: signInButtonPressed
+                            isEnabled: !vm.email.isEmpty && !vm.password.isEmpty && !vm.isLoading,
+                            action: vm.signInButtonPressed
                         )
                         .padding(.top, 72)
                     }
@@ -126,37 +122,6 @@ struct LoginScreen: View {
         .onAppear(perform: {
             TabBarManager.shared.hide()
         })
-    }
-
-    func validateEmail() -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailPredicate.evaluate(with: email)
-    }
-
-    func validatePassword() -> Bool {
-        password.count >= 8
-    }
-
-    func signInButtonPressed() {
-        isLoading = true
-        authError = false
-        Task {
-            defer {
-                isLoading = false
-            }
-            do {
-                if validateEmail(), validatePassword() {
-                    let oldId = StatsTracker.shared.accountUUID
-                    let newSignIn = await oldId == nil ? false : try AuthService.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
-                    isSignedIn = try await AuthService.shared.signInWithEmail(email: email, password: password, sameAccount: newSignIn)
-                } else {
-                    authError = true
-                }
-            } catch {
-                authError = true
-            }
-        }
     }
 }
 

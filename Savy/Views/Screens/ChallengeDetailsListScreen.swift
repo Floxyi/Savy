@@ -9,15 +9,17 @@ import SwiftData
 import SwiftUI
 
 struct ChallengeDetailsListScreen: View {
-    let challenge: Challenge
     @Binding var showPopover: Bool
-
+    @StateObject private var vm: ChallengeDetailsListViewModel
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+
+    init(challenge: Challenge, showPopover: Binding<Bool>) {
+        _vm = StateObject(wrappedValue: ChallengeDetailsListViewModel(challenge: challenge))
+        _showPopover = showPopover
+    }
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
-        let columns = Array(repeating: GridItem(.flexible()), count: 4)
-        let sortedSavings = challenge.savings.sorted(by: { $0.date < $1.date })
 
         NavigationStack {
             VStack {
@@ -32,14 +34,14 @@ struct ChallengeDetailsListScreen: View {
                     Text("Start:")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentScheme.font)
-                    Text(challenge.challengeConfiguration.startDate.formatted(.dateTime.day().month().year()))
+                    Text(vm.challenge.challengeConfiguration.startDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
                         .foregroundColor(currentScheme.font)
                     Spacer()
                     Text("End:")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentScheme.font)
-                    Text(challenge.challengeConfiguration.endDate.formatted(.dateTime.day().month().year()))
+                    Text(vm.challenge.challengeConfiguration.endDate.formatted(.dateTime.day().month().year()))
                         .font(.system(size: 16))
                         .foregroundColor(currentScheme.font)
                 }
@@ -47,8 +49,8 @@ struct ChallengeDetailsListScreen: View {
                 .padding(.top, 1)
 
                 ScrollView(.vertical, showsIndicators: false) {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(sortedSavings, id: \.id) { saving in
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 20) {
+                        ForEach(vm.sortedSavings, id: \.id) { saving in
                             SavingItemView(saving: saving)
                         }
                     }

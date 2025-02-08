@@ -10,52 +10,36 @@ import SwiftUI
 
 struct ChallengeAddScreen: View {
     @Binding var showPopover: Bool
-
-    @State private var icon: String?
-    @State private var name: String = ""
-    @State private var amount: Int?
-    @State private var strategy: SavingStrategy = .Weekly
-    @State private var calculation: SavingCalculation = .Date
-    @State private var cycleAmount: Int?
-    @State private var endDate: Date = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date()) ?? Date()
-
-    @State private var isDatePickerVisible = false
-    @State private var isIconPickerVisible = false
-
-    @Environment(\.modelContext) private var modelContext
+    @StateObject private var vm: ChallengeAddViewModel
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+
+    init(showPopover: Binding<Bool>) {
+        _showPopover = showPopover
+        _vm = StateObject(wrappedValue: ChallengeAddViewModel())
+    }
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
-
-        let challengeConfiguration = ChallengeConfiguration(
-            icon: icon ?? "square.dashed",
-            name: name,
-            amount: amount ?? 0,
-            endDate: endDate,
-            strategy: strategy,
-            calculation: calculation,
-            cycleAmount: cycleAmount
-        )
+        let challengeConfiguration = vm.challengeConfiguration()
 
         NavigationStack {
             ZStack {
                 VStack {
-                    IconPicker(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
+                    IconPicker(selectedIcon: $vm.icon, isIconPickerVisible: $vm.isIconPickerVisible)
 
-                    TextField("", text: $name, prompt: Text(verbatim: "Name")
+                    TextField("", text: $vm.name, prompt: Text(verbatim: "Name")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentScheme.font.opacity(0.4)))
                         .textInputAutocapitalization(.never)
                         .textFieldStyle(CustomTextFieldStyle())
-                        .onChange(of: name) { _, newValue in
+                        .onChange(of: vm.name) { _, newValue in
                             if newValue.count > 12 {
-                                name = String(newValue.prefix(12))
+                                vm.name = String(newValue.prefix(12))
                             }
                         }
 
                     HStack {
-                        TextField("", value: $amount, format: .number, prompt: Text(verbatim: "Amount")
+                        TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: "Amount")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font.opacity(0.4)))
                             .textFieldStyle(CustomTextFieldStyle())
@@ -74,23 +58,23 @@ struct ChallengeAddScreen: View {
 
                         Spacer()
 
-                        StrategySelector(selectedStrategy: $strategy, onChangeAction: { updateEndDate() })
+                        StrategySelector(selectedStrategy: $vm.strategy, onChangeAction: { vm.updateEndDate() })
                     }
                     .frame(height: 38)
                     .background(currentScheme.bar)
                     .cornerRadius(8)
                     .padding(.horizontal, 16)
 
-                    CalculationSelector(selectedCalculation: $calculation)
+                    CalculationSelector(selectedCalculation: $vm.calculation)
 
-                    if calculation == .Date {
+                    if vm.calculation == .Date {
                         HStack {
                             DatePicker(
                                 "",
-                                selection: $endDate,
+                                selection: $vm.endDate,
                                 displayedComponents: [.date]
                             )
-                            .datePickerStyle(CustomDatePickerStyle(date: endDate, text: "End date:", isDatePickerVisible: $isDatePickerVisible))
+                            .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: "End date:", isDatePickerVisible: $vm.isDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -99,16 +83,16 @@ struct ChallengeAddScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
 
-                        Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
+                        Text("\(vm.strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font)
                             .padding()
                     }
 
-                    if calculation == .Amount {
+                    if vm.calculation == .Amount {
                         VStack {
                             HStack {
-                                TextField("", value: $cycleAmount, format: .number, prompt: Text(verbatim: "\(strategy) Amount")
+                                TextField("", value: $vm.cycleAmount, format: .number, prompt: Text(verbatim: "\(vm.strategy) Amount")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(currentScheme.font.opacity(0.4)))
                                     .textFieldStyle(CustomTextFieldStyle())
@@ -141,7 +125,7 @@ struct ChallengeAddScreen: View {
                         ToolbarDoneButton(
                             showPopover: $showPopover,
                             title: "Done",
-                            isValid: { isValid() },
+                            isValid: { vm.isValid() },
                             onDoneAction: { ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration) }
                         )
                     }
@@ -150,23 +134,23 @@ struct ChallengeAddScreen: View {
                     }
                 }
 
-                if isDatePickerVisible || isIconPickerVisible {
-                    DismissableOverlay(bindings: [$isDatePickerVisible, $isIconPickerVisible])
+                if vm.isDatePickerVisible || vm.isIconPickerVisible {
+                    DismissableOverlay(bindings: [$vm.isDatePickerVisible, $vm.isIconPickerVisible])
                 }
 
-                if isDatePickerVisible {
+                if vm.isDatePickerVisible {
                     VStack {
                         CustomDatePickerOverlay(
-                            date: $endDate,
+                            date: $vm.endDate,
                             startDate: Calendar.current.date(
-                                byAdding: strategy == .Weekly ? .weekOfYear : .month,
+                                byAdding: vm.strategy == .Weekly ? .weekOfYear : .month,
                                 value: 1,
                                 to: Date()
                             ) ?? Date()
                         )
 
                         HStack {
-                            Text("\(strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
+                            Text("\(vm.strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentScheme.font)
                                 .padding(8)
@@ -177,25 +161,11 @@ struct ChallengeAddScreen: View {
                     }
                 }
 
-                if isIconPickerVisible {
-                    IconPickerOverlay(selectedIcon: $icon, isIconPickerVisible: $isIconPickerVisible)
+                if vm.isIconPickerVisible {
+                    IconPickerOverlay(selectedIcon: $vm.icon, isIconPickerVisible: $vm.isIconPickerVisible)
                 }
             }
         }
-    }
-
-    private func updateEndDate() {
-        let newEndDate = Calendar.current.date(
-            byAdding: strategy == .Weekly ? .weekOfYear : .month,
-            value: 1,
-            to: Date()
-        ) ?? Date()
-
-        endDate = newEndDate > endDate ? newEndDate : endDate
-    }
-
-    private func isValid() -> Bool {
-        icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
     }
 }
 

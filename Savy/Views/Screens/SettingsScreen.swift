@@ -9,15 +9,14 @@ import SwiftData
 import SwiftUI
 
 struct SettingsScreen: View {
+    @StateObject private var vm: SettingsViewModel
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
-    @State private var selectedMode: ColorSchemeMode = .light
-    @State private var toggledDarkMode: Bool = false
-    @State private var toggledColorMode: Bool = false
+    init() {
+        _vm = StateObject(wrappedValue: SettingsViewModel())
+    }
 
     var body: some View {
-        let currentScheme = colorServiceVM.colorService.currentScheme
-
         NavigationView {
             VStack {
                 HeaderView(title: "Settings")
@@ -28,27 +27,23 @@ struct SettingsScreen: View {
                     }
 
                     SettingsTileView(image: "paintbrush.fill", text: "Design") {
-                        SettingsBarView(text: "Theme", toggle: $toggledDarkMode)
-                            .onChange(of: toggledDarkMode) {
-                                withAnimation {
-                                    updateSchemaForSelectedMode()
-                                }
+                        SettingsBarView(text: "Theme", toggle: $vm.toggledDarkMode)
+                            .onChange(of: vm.toggledDarkMode) { _, _ in
+                                vm.onToggleModeChanged()
                             }
-                        SettingsBarView(text: "Color Mode", toggle: $toggledColorMode) {
-                            if toggledColorMode {
+                        SettingsBarView(text: "Color Mode", toggle: $vm.toggledColorMode) {
+                            if vm.toggledColorMode {
                                 GradientSliderView(value: Binding(
                                     get: { colorServiceVM.colorService.hue },
                                     set: { newValue in
                                         colorServiceVM.colorService.hue = newValue
-                                        updateSchemaForSelectedMode()
+                                        vm.updateSchemaForSelectedMode()
                                     }
                                 ), range: 0 ... 360)
                             }
                         }
-                        .onChange(of: toggledColorMode) {
-                            withAnimation {
-                                updateSchemaForSelectedMode()
-                            }
+                        .onChange(of: vm.toggledColorMode) { _, _ in
+                            vm.onToggleModeChanged()
                         }
                     }
                 }
@@ -57,31 +52,11 @@ struct SettingsScreen: View {
             }
             .padding()
             .padding(.bottom, 80)
-            .background(currentScheme.background)
+            .background(vm.currentScheme.background)
             .onAppear {
                 TabBarManager.shared.show()
-                selectedMode = currentScheme.mode
-                toggledDarkMode = currentScheme.mode == .dark || currentScheme.mode == .coloredDark
-                toggledColorMode = currentScheme.mode == .coloredLight || currentScheme.mode == .coloredDark
+                vm.setColorService(colorServiceVM)
             }
-        }
-    }
-
-    private func updateSchemaForSelectedMode() {
-        if toggledDarkMode, !toggledColorMode {
-            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.darkMode())
-        }
-
-        if !toggledDarkMode, !toggledColorMode {
-            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.lightMode())
-        }
-
-        if !toggledDarkMode, toggledColorMode {
-            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.coloredLightMode(hue: colorServiceVM.colorService.hue))
-        }
-
-        if toggledDarkMode, toggledColorMode {
-            colorServiceVM.colorService.updateScheme(schema: ColorSchemes.coloredDarkMode(hue: colorServiceVM.colorService.hue))
         }
     }
 }

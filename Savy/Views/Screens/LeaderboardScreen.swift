@@ -10,12 +10,9 @@ import SwiftUI
 
 struct LeaderboardScreen: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
-
     @State var showsPersonalStats: Bool = false
 
     var body: some View {
-        let currentScheme = colorServiceVM.colorService.currentScheme
-
         VStack {
             if showsPersonalStats {
                 PersonalStatsView()
@@ -35,7 +32,7 @@ struct LeaderboardScreen: View {
             }
         }
         .padding()
-        .background(currentScheme.background)
+        .background(colorServiceVM.colorService.currentScheme.background)
     }
 }
 

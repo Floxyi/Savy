@@ -12,8 +12,6 @@ struct ChallengesScreen: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
-        let currentScheme = colorServiceVM.colorService.currentScheme
-
         NavigationView {
             VStack {
                 HeaderView(title: "Challenges")
@@ -24,19 +22,15 @@ struct ChallengesScreen: View {
             }
             .padding(.top)
             .padding(.bottom, 112)
-            .background(currentScheme.background)
+            .background(colorServiceVM.colorService.currentScheme.background)
         }
     }
 }
 
 #Preview {
-    ChallengesScreen()
+    let modelContext = ModelContext(try! ModelContainer(for: ColorService.self))
+
+    return ChallengesScreen()
         .modelContainer(for: [Challenge.self, ColorService.self])
-        .environmentObject(
-            ColorServiceViewModel(
-                modelContext: ModelContext(
-                    try! ModelContainer(for: ColorService.self)
-                )
-            )
-        )
+        .environmentObject(ColorServiceViewModel(modelContext: modelContext))
 }
