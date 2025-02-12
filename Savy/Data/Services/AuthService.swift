@@ -27,19 +27,19 @@ class AuthService {
         supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
     }
 
-    func registerWithEmail(username: String, email: String, password: String) async throws -> Bool {
+    func registerWithEmail(username: String, email: String, password: String, statsService: StatsService, challengeService: ChallengeService) async throws -> Bool {
         let session = try await client.auth.signUp(email: email, password: password)
-        profile = try await ProfileService.shared.createProfile(uuid: session.user.id, username: username)
+        profile = try await ProfileService.shared.createProfile(uuid: session.user.id, username: username, statsService: statsService)
         supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
-        StatsTracker.shared.setAccountUUID(uuid: profile?.id)
+        statsService.setAccountUUID(uuid: profile?.id, challengeService: challengeService)
         return isSignedIn()
     }
 
-    func signInWithEmail(email: String, password: String, sameAccount: Bool) async throws -> Bool {
+    func signInWithEmail(email: String, password: String, sameAccount: Bool, statsService: StatsService, challengeService: ChallengeService) async throws -> Bool {
         let session = try await client.auth.signIn(email: email, password: password)
         profile = try await ProfileService.shared.getProfile(uuid: session.user.id)
         supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
-        StatsTracker.shared.setAccountUUID(uuid: profile?.id, sameAccount: sameAccount)
+        statsService.setAccountUUID(uuid: profile?.id, sameAccount: sameAccount, challengeService: challengeService)
         return isSignedIn()
     }
 

@@ -9,6 +9,9 @@ import SwiftData
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
+
     @Published var email = ""
     @Published var password = ""
     @Published var authError = false
@@ -44,9 +47,15 @@ class LoginViewModel: ObservableObject {
 
             do {
                 if validateEmail(), validatePassword() {
-                    let oldId = StatsTracker.shared.accountUUID
+                    let oldId = statsServiceVM.statsService.accountUUID
                     let newSignIn = await oldId == nil ? false : try AuthService.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
-                    let signInResult = try await AuthService.shared.signInWithEmail(email: email, password: password, sameAccount: newSignIn)
+                    let signInResult = try await AuthService.shared.signInWithEmail(
+                        email: email,
+                        password: password,
+                        sameAccount: newSignIn,
+                        statsService: statsServiceVM.statsService,
+                        challengeService: challengeServiceVM.challengeService
+                    )
                     self.isSignedIn.wrappedValue = signInResult
                 } else {
                     self.authError = true

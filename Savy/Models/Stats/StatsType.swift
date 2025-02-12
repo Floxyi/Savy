@@ -9,6 +9,6 @@ import Foundation
 
 enum StatsType: String, CaseIterable, Codable {
     case money_saved = "Money saved"
-    case challenged_started = "Challenged started"
-    case challenged_completed = "Challenged completed"
+    case challenge_started = "Challenged started"
+    case challenge_completed = "Challenged completed"
 }

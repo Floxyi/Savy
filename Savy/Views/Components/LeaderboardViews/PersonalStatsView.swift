@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PersonalStatsView: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     @State private var statsType: StatsType = .money_saved
     @State private var startDate: Date = .init()
@@ -19,14 +20,16 @@ struct PersonalStatsView: View {
     @State private var isPickingStartDate = true
     @State private var scrollToEnd = false
 
-    let minDate = StatsTracker.shared.entries.first?.date ?? Date()
-    let maxDate = Date()
-
     var body: some View {
+        let statsService = statsServiceVM.statsService
+
+        let minDate = statsServiceVM.statsService.entries.first?.date ?? Date()
+        let maxDate = Date()
+
         let currentScheme = colorServiceVM.colorService.currentScheme
-        let moneySavedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .money_saved }) != nil
-        let challengesStartedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .challenged_started }) != nil
-        let challengesCompletedStatsEntries: Bool = StatsTracker.shared.entries.first(where: { $0.type == .challenged_completed }) != nil
+        let moneySavedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.money_saved }) != nil
+        let challengesStartedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_started }) != nil
+        let challengesCompletedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_completed }) != nil
 
         HeaderView(title: "Personal Stats")
 
@@ -58,7 +61,7 @@ struct PersonalStatsView: View {
                                 .fontWeight(.bold)
                                 .font(.system(size: 24))
                             Spacer()
-                            Text("\(StatsTracker.shared.entries.first?.date.formatted(.dateTime.year().month().day()) ?? "")")
+                            Text("\(statsService.entries.first?.date.formatted(.dateTime.year().month().day()) ?? "")")
                                 .foregroundStyle(currentScheme.font)
                             Image(systemName: "calendar")
                                 .foregroundStyle(currentScheme.font)
@@ -74,7 +77,7 @@ struct PersonalStatsView: View {
                                     Text("Total money saved:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(StatsTracker.shared.totalMoneySaved()) €")
+                                    Text("\(statsService.totalMoneySaved()) €")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
@@ -82,7 +85,7 @@ struct PersonalStatsView: View {
                                     Text("Challenges started:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(StatsTracker.shared.totalChallengesStarted())")
+                                    Text("\(statsService.totalChallengesStarted())")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
@@ -90,10 +93,10 @@ struct PersonalStatsView: View {
                                     Text("Challenges completed:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(StatsTracker.shared.totalChallengesCompleted())")
+                                    Text("\(statsService.totalChallengesCompleted())")
                                         .foregroundStyle(currentScheme.font)
                                 }
-                                if StatsTracker.shared.allTimePunctuality() == nil {
+                                if statsServiceVM.statsService.allTimePunctuality() == nil {
                                     HStack {
                                         Text("Punctuality:")
                                             .foregroundStyle(currentScheme.font)
@@ -102,12 +105,12 @@ struct PersonalStatsView: View {
                                             .foregroundStyle(currentScheme.font)
                                     }
                                 }
-                                if StatsTracker.shared.allTimePunctuality() != nil {
+                                if statsService.allTimePunctuality() != nil {
                                     HStack {
                                         Text("Punctuality:")
                                             .foregroundStyle(currentScheme.font)
                                             .fontWeight(.bold)
-                                        Text("\(StatsTracker.shared.allTimePunctuality() ?? 0) %")
+                                        Text("\(statsService.allTimePunctuality() ?? 0) %")
                                             .foregroundStyle(currentScheme.font)
                                     }
                                 }
@@ -182,7 +185,7 @@ struct PersonalStatsView: View {
                                     Text("Money saved:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(StatsTracker.shared.timeRangeMoneySaved(startDate: startDate, endDate: endDate)) €")
+                                    Text("\(statsService.timeRangeMoneySaved(startDate: startDate, endDate: endDate)) €")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
@@ -190,11 +193,11 @@ struct PersonalStatsView: View {
                                     Text("Saving count:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(StatsTracker.shared.timeRangeSavingCount(startDate: startDate, endDate: endDate))")
+                                    Text("\(statsService.timeRangeSavingCount(startDate: startDate, endDate: endDate))")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
-                                if StatsTracker.shared.timeRangePunctuality(startDate: startDate, endDate: endDate) == nil {
+                                if statsService.timeRangePunctuality(startDate: startDate, endDate: endDate) == nil {
                                     HStack {
                                         Text("Punctuality:")
                                             .foregroundStyle(currentScheme.font)
@@ -203,12 +206,12 @@ struct PersonalStatsView: View {
                                             .foregroundStyle(currentScheme.font)
                                     }
                                 }
-                                if StatsTracker.shared.timeRangePunctuality(startDate: startDate, endDate: endDate) != nil {
+                                if statsService.timeRangePunctuality(startDate: startDate, endDate: endDate) != nil {
                                     HStack {
                                         Text("Punctuality:")
                                             .foregroundStyle(currentScheme.font)
                                             .fontWeight(.bold)
-                                        Text("\(StatsTracker.shared.allTimePunctuality() ?? 0) %")
+                                        Text("\(statsServiceVM.statsService.allTimePunctuality() ?? 0) %")
                                             .foregroundStyle(currentScheme.font)
                                     }
                                 }
@@ -217,7 +220,7 @@ struct PersonalStatsView: View {
                                     Text("Average saved per day:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text(String(format: "%.2f", StatsTracker.shared.averageSavedTimeRange(startDate: startDate, endDate: endDate)))
+                                    Text(String(format: "%.2f", statsService.averageSavedTimeRange(startDate: startDate, endDate: endDate)))
                                         .foregroundStyle(currentScheme.font)
                                     Text("€")
                                         .foregroundStyle(currentScheme.font)
@@ -265,16 +268,40 @@ struct PersonalStatsView: View {
 }
 
 #Preview("Filled") {
-    StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: UUID())
-    StatsTracker.shared.addMoneySavedStatsEntry(savingId: UUID(), amount: 20, date: Date())
-    StatsTracker.shared.addMoneySavedStatsEntry(savingId: UUID(), amount: 50, date: Date())
-    StatsTracker.shared.addMoneySavedStatsEntry(savingId: UUID(), amount: 20, date: Date())
-    StatsTracker.shared.addChallengeStartedStatsEntry(challengeId: UUID())
-    StatsTracker.shared.addChallengeStartedStatsEntry(challengeId: UUID())
+    let schema = Schema([ChallengeService.self, ColorService.self, StatsService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
+    let statsServiceViewModel = StatsServiceViewModel(modelContext: context)
+
+    let statsService = statsServiceViewModel.statsService
+
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
+        startDate: Date(),
+        strategy: .Monthly,
+        calculation: .Amount,
+        cycleAmount: 12
+    )
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsService)
+
+    statsService.addChallengeCompletedStatsEntry(challengeId: UUID())
+    statsService.addMoneySavedStatsEntry(savingId: UUID(), amount: 20, date: Date())
+    statsService.addMoneySavedStatsEntry(savingId: UUID(), amount: 50, date: Date())
+    statsService.addMoneySavedStatsEntry(savingId: UUID(), amount: 20, date: Date())
+    statsService.addChallengeStartedStatsEntry(challengeId: UUID())
+    statsService.addChallengeStartedStatsEntry(challengeId: UUID())
 
     return PersonalStatsView()
         .padding()
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
+        .modelContainer(container)
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
+        .environmentObject(statsServiceViewModel)
 }
 
 #Preview("Empty") {

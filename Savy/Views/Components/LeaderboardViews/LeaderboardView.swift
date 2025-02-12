@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LeaderboardView: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     @State private var profiles: [ProfileWithSavings] = []
     @State private var isLoading = true
@@ -69,7 +70,7 @@ struct LeaderboardView: View {
                 ScrollView {
                     ForEach(0 ..< profiles.dropFirst(3).count, id: \.self) { index in
                         let profile = profiles[index + 3]
-                        let profileId = StatsTracker.shared.accountUUID
+                        let profileId = statsServiceVM.statsService.accountUUID
                         let isCurrentUser = profile.id == profileId
                         HStack {
                             Text("\(index + 4).")
@@ -107,7 +108,7 @@ struct LeaderboardView: View {
                 .foregroundColor(currentSchema.font)
                 .padding(1)
             Text("\(rank). \(profile.username)")
-                .font(.system(size: 18, weight: profile.id == StatsTracker.shared.accountUUID ? .black : .regular))
+                .font(.system(size: 18, weight: profile.id == statsServiceVM.statsService.accountUUID ? .black : .regular))
                 .foregroundColor(currentSchema.font)
                 .multilineTextAlignment(.center)
         }
@@ -130,7 +131,7 @@ struct LeaderboardView: View {
                     .padding(.top, 2)
                     .padding(.bottom, 4)
                 Text("\(rank). \(profile.username)")
-                    .font(.system(size: 22, weight: profile.id == StatsTracker.shared.accountUUID ? .black : .regular))
+                    .font(.system(size: 22, weight: profile.id == statsServiceVM.statsService.accountUUID ? .black : .regular))
                     .foregroundColor(currentSchema.font)
                     .multilineTextAlignment(.center)
             }

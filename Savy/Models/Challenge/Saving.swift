@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Saving {
@@ -24,22 +25,22 @@ final class Saving {
         done = false
     }
 
-    func toggleDone() {
+    func toggleDone(statsService: StatsService) {
         done.toggle()
-        done ? markCompleted() : markNotCompleted()
+        done ? markCompleted(statsService: statsService) : markNotCompleted(statsService: statsService)
     }
 
-    private func markCompleted() {
-        StatsTracker.shared.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date)
+    private func markCompleted(statsService: StatsService) {
+        statsService.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date)
         if challenge.remainingAmount() == 0 {
-            StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: challenge.id)
+            statsService.addChallengeCompletedStatsEntry(challengeId: challenge.id)
         }
     }
 
-    private func markNotCompleted() {
-        StatsTracker.shared.deleteStatsEntry(savingId: id)
-        if StatsTracker.shared.isChallengeCompleted(challengeId: challenge.id) {
-            StatsTracker.shared.deleteStatsEntry(challengeId: challenge.id, statsType: StatsType.challenged_completed)
+    private func markNotCompleted(statsService: StatsService) {
+        statsService.deleteStatsEntry(savingId: id)
+        if statsService.isChallengeCompleted(challengeId: challenge.id) {
+            statsService.deleteStatsEntry(challengeId: challenge.id, statsType: StatsType.challenge_completed)
         }
     }
 }

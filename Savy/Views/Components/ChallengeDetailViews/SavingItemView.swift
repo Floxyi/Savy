@@ -14,6 +14,7 @@ struct SavingItemView: View {
     @State private var showConfirmationDialog = false
 
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
@@ -42,7 +43,7 @@ struct SavingItemView: View {
         .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
             Button("Bestätigen", role: .destructive) {
                 withAnimation {
-                    saving.toggleDone()
+                    saving.toggleDone(statsService: statsServiceVM.statsService)
                 }
             }
             Button("Abbrechen", role: .cancel) {}
@@ -51,12 +52,13 @@ struct SavingItemView: View {
 }
 
 #Preview {
-    let schema = Schema([ChallengeService.self, ColorService.self])
+    let schema = Schema([ChallengeService.self, ColorService.self, StatsService.self])
     let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let context = container.mainContext
 
     let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
     let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
+    let statsServiceViewModel = StatsServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -67,11 +69,12 @@ struct SavingItemView: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsServiceViewModel.statsService)
     let challenge = challengeServiceViewModel.challengeService.challenges.first!
 
     return SavingItemView(saving: challenge.savings.first!)
         .modelContainer(container)
         .environmentObject(colorServiceViewModel)
         .environmentObject(challengeServiceViewModel)
+        .environmentObject(statsServiceViewModel)
 }

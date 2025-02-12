@@ -45,8 +45,8 @@ class ChallengeAddViewModel: ObservableObject {
         )
     }
 
-    func addChallenge(using challengeService: ChallengeService) {
+    func addChallenge(challengeService: ChallengeService, statsService: StatsService) {
         let challengeConfiguration = getChallengeConfiguration()
-        challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+        challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsService)
     }
 }

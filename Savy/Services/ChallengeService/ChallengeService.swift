@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 class ChallengeService: ObservableObject {
@@ -18,9 +19,9 @@ class ChallengeService: ObservableObject {
         challenges.first { $0.id == id }
     }
 
-    func addChallenge(challengeConfiguration: ChallengeConfiguration) {
+    func addChallenge(challengeConfiguration: ChallengeConfiguration, statsService: StatsService) {
         let challenge = Challenge(challengeConfiguration: challengeConfiguration)
-        StatsTracker.shared.addChallengeStartedStatsEntry(challengeId: challenge.id)
+        statsService.addChallengeStartedStatsEntry(challengeId: challenge.id)
         challenges.append(challenge)
     }
 

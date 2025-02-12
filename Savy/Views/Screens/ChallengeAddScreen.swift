@@ -13,6 +13,7 @@ struct ChallengeAddScreen: View {
     @StateObject private var vm: ChallengeAddViewModel
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
     @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     init(showPopover: Binding<Bool>) {
         _showPopover = showPopover
@@ -127,7 +128,7 @@ struct ChallengeAddScreen: View {
                             showPopover: $showPopover,
                             title: "Done",
                             isValid: { vm.isValid() },
-                            onDoneAction: { vm.addChallenge(using: challengeServiceVM.challengeService) }
+                            onDoneAction: { vm.addChallenge(challengeService: challengeServiceVM.challengeService, statsService: statsServiceVM.statsService) }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {

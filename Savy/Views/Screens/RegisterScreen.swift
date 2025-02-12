@@ -12,6 +12,7 @@ struct RegisterScreen: View {
     @StateObject private var vm: RegisterViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
     @Binding var isSignedIn: Bool
 
     init(isSignedIn: Binding<Bool>) {
@@ -77,7 +78,7 @@ struct RegisterScreen: View {
                     Text("This email address is already registered.")
                         .foregroundStyle(vm.authError ? Color.red : currentScheme.background)
 
-                    if StatsTracker.shared.accountUUID != nil {
+                    if statsServiceVM.statsService.accountUUID != nil {
                         ActionButton(
                             content: HStack {
                                 if vm.isLoading {
@@ -107,7 +108,7 @@ struct RegisterScreen: View {
                         }
                     }
 
-                    if StatsTracker.shared.accountUUID == nil {
+                    if statsServiceVM.statsService.accountUUID == nil {
                         ActionButton(
                             content: HStack {
                                 if vm.isLoading {
@@ -157,4 +158,5 @@ struct RegisterScreen: View {
 
     return PreviewWrapper()
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
+        .environmentObject(StatsServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: StatsService.self))))
 }

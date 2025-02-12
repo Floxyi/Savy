@@ -14,9 +14,9 @@ class ProfileService {
 
     private init() {}
 
-    func createProfile(uuid: UUID, username: String) async throws -> Profile {
+    func createProfile(uuid: UUID, username: String, statsService: StatsService) async throws -> Profile {
         let profileEntry = Profile(id: uuid, username: username)
-        let savingsEntry = Savings(profileId: uuid, amount: StatsTracker.shared.totalMoneySaved())
+        let savingsEntry = Savings(profileId: uuid, amount: statsService.totalMoneySaved())
 
         try await client.from("profiles").insert(profileEntry).execute()
         try await client.from("savings").insert(savingsEntry).execute()

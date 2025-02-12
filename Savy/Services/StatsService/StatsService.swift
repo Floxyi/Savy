@@ -1,5 +1,5 @@
 //
-//  StatsTracker.swift
+//  StatsService.swift
 //  Savy
 //
 //  Created by Nadine Schatz on 11.10.24.
@@ -7,19 +7,14 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
-class StatsTracker {
-    static let shared = StatsTracker(challengeService: ChallengeService())
-
+class StatsService: ObservableObject {
     private(set) var entries: [StatsEntry] = []
     private(set) var accountUUID: UUID?
 
-    private var challengeService: ChallengeService
-
-    init(challengeService: ChallengeService) {
-        self.challengeService = challengeService
-    }
+    init() {}
 
     private func addStatsEntry(entry: StatsEntry) {
         entries.append(entry)
@@ -47,17 +42,17 @@ class StatsTracker {
 
     func addChallengeCompletedStatsEntry(challengeId: UUID) {
         let challengeStats = ChallengeStats(challengeId: challengeId)
-        let entry = StatsEntry(type: .challenged_completed, date: Date(), challengeStats: challengeStats)
+        let entry = StatsEntry(type: StatsType.challenge_completed, date: Date(), challengeStats: challengeStats)
         addStatsEntry(entry: entry)
     }
 
     func isChallengeCompleted(challengeId: UUID) -> Bool {
-        entries.filter { $0.type == .challenged_completed }.contains(where: { $0.challengeStats?.challengeId == challengeId })
+        entries.filter { $0.type == StatsType.challenge_completed }.contains(where: { $0.challengeStats?.challengeId == challengeId })
     }
 
     func addChallengeStartedStatsEntry(challengeId: UUID) {
         let challengeStats = ChallengeStats(challengeId: challengeId)
-        let entry = StatsEntry(type: .challenged_started, date: Date(), challengeStats: challengeStats)
+        let entry = StatsEntry(type: StatsType.challenge_started, date: Date(), challengeStats: challengeStats)
         addStatsEntry(entry: entry)
     }
 
@@ -75,7 +70,7 @@ class StatsTracker {
     func totalChallengesCompleted() -> Int {
         entries
             .filter {
-                $0.type == .challenged_completed
+                $0.type == StatsType.challenge_completed
             }
             .count
     }
@@ -83,7 +78,7 @@ class StatsTracker {
     func totalChallengesStarted() -> Int {
         entries
             .filter {
-                $0.type == .challenged_started
+                $0.type == StatsType.challenge_started
             }
             .count
     }
@@ -133,11 +128,11 @@ class StatsTracker {
     }
 
     func timeRangeChallengesCompleted(startDate: Date, endDate: Date) -> Int {
-        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_completed).count
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: StatsType.challenge_completed).count
     }
 
     func timeRangeChallengesStarted(startDate: Date, endDate: Date) -> Int {
-        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .challenged_started).count
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: StatsType.challenge_started).count
     }
 
     func timeRangePunctuality(startDate: Date, endDate: Date) -> Double? {
@@ -155,9 +150,7 @@ class StatsTracker {
     func averageSavedTimeRange(startDate: Date, endDate: Date) -> Double {
         let totalAmount = timeRangeMoneySaved(startDate: startDate, endDate: endDate)
         let numberOfDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
-        let allSaving = StatsTracker.shared.entries.filter {
-            $0.type == .money_saved
-        }
+        let allSaving = entries.filter { $0.type == .money_saved }
 
         if Calendar.current.isDate(startDate, inSameDayAs: endDate) {
             let savingsForDate = allSaving
@@ -172,7 +165,7 @@ class StatsTracker {
         }
 
         if numberOfDays == 0, !allSaving.isEmpty {
-            return Double(StatsTracker.shared.totalMoneySaved())
+            return Double(totalMoneySaved())
         }
 
         return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
@@ -187,7 +180,7 @@ class StatsTracker {
         }
     }
 
-    func setAccountUUID(uuid: UUID?, sameAccount: Bool = true) {
+    func setAccountUUID(uuid: UUID?, sameAccount: Bool = true, challengeService: ChallengeService) {
         let hasRegisteredBefore = accountUUID != nil
         accountUUID = uuid
         if hasRegisteredBefore, sameAccount {

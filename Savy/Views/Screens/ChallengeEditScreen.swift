@@ -176,12 +176,13 @@ struct ChallengeEditScreen: View {
 #Preview {
     @Previewable @State var showPopover = true
 
-    let schema = Schema([ChallengeService.self, ColorService.self])
+    let schema = Schema([ChallengeService.self, ColorService.self, StatsService.self])
     let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let context = container.mainContext
 
     let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
     let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
+    let statsServiceViewModel = StatsServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -192,7 +193,7 @@ struct ChallengeEditScreen: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsServiceViewModel.statsService)
 
     return Spacer()
         .popover(isPresented: $showPopover) {
@@ -201,4 +202,5 @@ struct ChallengeEditScreen: View {
         .modelContainer(container)
         .environmentObject(colorServiceViewModel)
         .environmentObject(challengeServiceViewModel)
+        .environmentObject(statsServiceViewModel)
 }

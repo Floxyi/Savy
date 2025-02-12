@@ -9,6 +9,9 @@ import SwiftData
 import SwiftUI
 
 class RegisterViewModel: ObservableObject {
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
+
     @Published var username = ""
     @Published var isUsernameValid = false
     @Published var usernameError = true
@@ -57,7 +60,13 @@ class RegisterViewModel: ObservableObject {
         Task {
             defer { isLoading = false }
             do {
-                isSignedIn.wrappedValue = try await AuthService.shared.registerWithEmail(username: username, email: email, password: password)
+                isSignedIn.wrappedValue = try await AuthService.shared.registerWithEmail(
+                    username: username,
+                    email: email,
+                    password: password,
+                    statsService: statsServiceVM.statsService,
+                    challengeService: challengeServiceVM.challengeService
+                )
             } catch {
                 authError = true
             }
