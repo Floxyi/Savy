@@ -47,7 +47,7 @@ class LoginViewModel: ObservableObject {
 
             do {
                 if validateEmail(), validatePassword() {
-                    let oldId = statsServiceVM.statsService.accountUUID
+                    let oldId = AuthService.shared.accountUUID
                     let newSignIn = await oldId == nil ? false : try AuthService.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
                     let signInResult = try await AuthService.shared.signInWithEmail(
                         email: email,

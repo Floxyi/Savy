@@ -78,7 +78,7 @@ struct RegisterScreen: View {
                     Text("This email address is already registered.")
                         .foregroundStyle(vm.authError ? Color.red : currentScheme.background)
 
-                    if statsServiceVM.statsService.accountUUID != nil {
+                    if AuthService.shared.accountUUID != nil {
                         ActionButton(
                             content: HStack {
                                 if vm.isLoading {
@@ -108,7 +108,7 @@ struct RegisterScreen: View {
                         }
                     }
 
-                    if statsServiceVM.statsService.accountUUID == nil {
+                    if AuthService.shared.accountUUID == nil {
                         ActionButton(
                             content: HStack {
                                 if vm.isLoading {

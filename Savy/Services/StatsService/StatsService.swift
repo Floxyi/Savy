@@ -11,8 +11,7 @@ import SwiftUI
 
 @Model
 class StatsService: ObservableObject {
-    private(set) var entries: [StatsEntry] = []
-    private(set) var accountUUID: UUID?
+    var entries: [StatsEntry] = []
 
     init() {}
 
@@ -177,16 +176,6 @@ class StatsService: ObservableObject {
             do {
                 try await SavingsService.shared.updateSavingsAmount(amount: totalMoneySaved(), profileId: profileId)
             } catch {}
-        }
-    }
-
-    func setAccountUUID(uuid: UUID?, sameAccount: Bool = true, challengeService: ChallengeService) {
-        let hasRegisteredBefore = accountUUID != nil
-        accountUUID = uuid
-        if hasRegisteredBefore, sameAccount {
-            entries.removeAll()
-            updateSavingAmountInDatabase()
-            challengeService.removeAllChallenges()
         }
     }
 }

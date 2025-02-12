@@ -13,7 +13,6 @@ struct LoginScreen: View {
     @StateObject private var vm: LoginViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
-    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     init(isSignedIn: Binding<Bool>) {
         _vm = StateObject(wrappedValue: LoginViewModel(isSignedIn: isSignedIn))
@@ -56,7 +55,7 @@ struct LoginScreen: View {
                         .foregroundStyle(vm.authError ? Color.red : currentScheme.background)
                         .multilineTextAlignment(.center)
 
-                    if statsServiceVM.statsService.accountUUID != nil {
+                    if AuthService.shared.accountUUID != nil {
                         ActionButton(
                             content: HStack {
                                 if vm.isLoading {
@@ -86,7 +85,7 @@ struct LoginScreen: View {
                         }
                     }
 
-                    if statsServiceVM.statsService.accountUUID == nil {
+                    if AuthService.shared.accountUUID == nil {
                         ActionButton(
                             content: HStack {
                                 if vm.isLoading {

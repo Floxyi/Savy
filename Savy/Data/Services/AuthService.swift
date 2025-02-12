@@ -15,6 +15,8 @@ class AuthService {
     var supabaseAccount: SupabaseAccount?
     var profile: Profile?
 
+    private(set) var accountUUID: UUID?
+
     private init() {}
 
     func isSignedIn() -> Bool {
@@ -31,7 +33,7 @@ class AuthService {
         let session = try await client.auth.signUp(email: email, password: password)
         profile = try await ProfileService.shared.createProfile(uuid: session.user.id, username: username, statsService: statsService)
         supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
-        statsService.setAccountUUID(uuid: profile?.id, challengeService: challengeService)
+        setAccountUUID(uuid: profile?.id, challengeService: challengeService, statsService: statsService)
         return isSignedIn()
     }
 
@@ -39,7 +41,7 @@ class AuthService {
         let session = try await client.auth.signIn(email: email, password: password)
         profile = try await ProfileService.shared.getProfile(uuid: session.user.id)
         supabaseAccount = SupabaseAccount(uuid: session.user.id, email: session.user.email)
-        statsService.setAccountUUID(uuid: profile?.id, sameAccount: sameAccount, challengeService: challengeService)
+        setAccountUUID(uuid: profile?.id, sameAccount: sameAccount, challengeService: challengeService, statsService: statsService)
         return isSignedIn()
     }
 
@@ -63,5 +65,15 @@ class AuthService {
         profile = nil
         supabaseAccount = nil
         return isSignedIn()
+    }
+
+    func setAccountUUID(uuid: UUID?, sameAccount: Bool = true, challengeService: ChallengeService, statsService: StatsService) {
+        let hasRegisteredBefore = accountUUID != nil
+        accountUUID = uuid
+        if hasRegisteredBefore, sameAccount {
+            statsService.entries.removeAll()
+            statsService.updateSavingAmountInDatabase()
+            challengeService.removeAllChallenges()
+        }
     }
 }

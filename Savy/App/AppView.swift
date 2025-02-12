@@ -37,7 +37,9 @@ struct AppView: View {
         .onAppear {
             Task {
                 try await AuthService.shared.getCurrentSession()
-                statsServiceVM.statsService.setAccountUUID(uuid: AuthService.shared.profile?.id, challengeService: challengeServiceVM.challengeService)
+                let challengeService = challengeServiceVM.challengeService
+                let statsService = statsServiceVM.statsService
+                AuthService.shared.setAccountUUID(uuid: AuthService.shared.profile?.id, challengeService: challengeService, statsService: statsService)
             }
         }
     }
