@@ -72,6 +72,13 @@ struct ChallengeDetailsListScreen: View {
 #Preview {
     @Previewable @State var showPopover = true
 
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
+
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
@@ -81,11 +88,14 @@ struct ChallengeDetailsListScreen: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+    let challenge = challengeServiceViewModel.challengeService.challenges.first!
 
     return Spacer()
         .popover(isPresented: $showPopover) {
-            ChallengeDetailsListScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
+            ChallengeDetailsListScreen(challenge: challenge, showPopover: $showPopover)
         }
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
+        .modelContainer(container)
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }

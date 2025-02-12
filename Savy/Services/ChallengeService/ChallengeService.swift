@@ -1,5 +1,5 @@
 //
-//  ChallengeManager.swift
+//  ChallengeService.swift
 //  Savy
 //
 //  Created by Nadine Schatz on 11.10.24.
@@ -9,14 +9,13 @@ import Foundation
 import SwiftData
 
 @Model
-class ChallengeManager {
-    static let shared = ChallengeManager()
-    private(set) var challenges: [Challenge] = []
+class ChallengeService: ObservableObject {
+    @Relationship(deleteRule: .cascade) var challenges = [Challenge]()
 
     init() {}
 
     func getChallengeById(id: UUID) -> Challenge? {
-        challenges.first(where: { $0.id == id })
+        challenges.first { $0.id == id }
     }
 
     func addChallenge(challengeConfiguration: ChallengeConfiguration) {

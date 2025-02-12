@@ -42,7 +42,12 @@ struct AppView: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(for: ChallengeManager.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -53,9 +58,10 @@ struct AppView: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
 
     return AppView()
         .modelContainer(container)
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }

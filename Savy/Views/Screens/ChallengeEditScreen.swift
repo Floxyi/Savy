@@ -13,7 +13,7 @@ struct ChallengeEditScreen: View {
     @Binding var showPopover: Bool
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
-    @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
     init(challenge: Challenge, showPopover: Binding<Bool>) {
         _vm = StateObject(wrappedValue: ChallengeEditViewModel(challenge: challenge))
@@ -129,7 +129,7 @@ struct ChallengeEditScreen: View {
                             isValid: { vm.isValid() },
                             onDoneAction: {
                                 dismiss()
-                                vm.updateChallenge()
+                                vm.updateChallenge(challengeService: challengeServiceVM.challengeService)
                             }
                         )
                     }
@@ -176,7 +176,12 @@ struct ChallengeEditScreen: View {
 #Preview {
     @Previewable @State var showPopover = true
 
-    let container = try! ModelContainer(for: Challenge.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -187,12 +192,13 @@ struct ChallengeEditScreen: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
 
     return Spacer()
         .popover(isPresented: $showPopover) {
-            ChallengeEditScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration), showPopover: $showPopover)
+            ChallengeEditScreen(challenge: challengeServiceViewModel.challengeService.challenges.first!, showPopover: $showPopover)
         }
         .modelContainer(container)
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }

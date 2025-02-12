@@ -10,11 +10,12 @@ import SwiftUI
 
 struct ChallengesListView: View {
     @State private var showPopover = false
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
     var body: some View {
         VStack(alignment: .center) {
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(ChallengeManager.shared.sortChallenges()) { challenge in
+                ForEach(challengeServiceVM.challengeService.sortChallenges()) { challenge in
                     ChallengeListItemView(challenge: challenge)
                 }
                 ChallengeAddButtonView(showPopover: $showPopover)
@@ -27,7 +28,12 @@ struct ChallengesListView: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(for: Challenge.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -38,10 +44,11 @@ struct ChallengesListView: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
 
     return ChallengesListView()
         .padding(.top, 80)
         .modelContainer(container)
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }

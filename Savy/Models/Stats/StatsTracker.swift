@@ -10,12 +10,16 @@ import SwiftData
 
 @Model
 class StatsTracker {
-    static let shared = StatsTracker()
+    static let shared = StatsTracker(challengeService: ChallengeService())
 
     private(set) var entries: [StatsEntry] = []
     private(set) var accountUUID: UUID?
 
-    init() {}
+    private var challengeService: ChallengeService
+
+    init(challengeService: ChallengeService) {
+        self.challengeService = challengeService
+    }
 
     private func addStatsEntry(entry: StatsEntry) {
         entries.append(entry)
@@ -28,11 +32,6 @@ class StatsTracker {
 
     func deleteStatsEntry(challengeId: UUID) {
         entries.removeAll(where: { $0.challengeStats?.challengeId == challengeId })
-    }
-
-    func removeAllEntries() {
-        entries.removeAll()
-        updateSavingAmountInDatabase()
     }
 
     func deleteStatsEntry(challengeId: UUID, statsType: StatsType) {
@@ -50,6 +49,10 @@ class StatsTracker {
         let challengeStats = ChallengeStats(challengeId: challengeId)
         let entry = StatsEntry(type: .challenged_completed, date: Date(), challengeStats: challengeStats)
         addStatsEntry(entry: entry)
+    }
+
+    func isChallengeCompleted(challengeId: UUID) -> Bool {
+        entries.filter { $0.type == .challenged_completed }.contains(where: { $0.challengeStats?.challengeId == challengeId })
     }
 
     func addChallengeStartedStatsEntry(challengeId: UUID) {
@@ -188,8 +191,9 @@ class StatsTracker {
         let hasRegisteredBefore = accountUUID != nil
         accountUUID = uuid
         if hasRegisteredBefore, sameAccount {
-            removeAllEntries()
-            ChallengeManager.shared.removeAllChallenges()
+            entries.removeAll()
+            updateSavingAmountInDatabase()
+            challengeService.removeAllChallenges()
         }
     }
 }

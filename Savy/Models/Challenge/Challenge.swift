@@ -11,18 +11,14 @@ import SwiftData
 
 @Model
 class Challenge {
-    private(set) var id: UUID
-    private(set) var challengeConfiguration: ChallengeConfiguration
-    private(set) var savings: [Saving]
+    @Attribute(.unique) var id: UUID
+    @Relationship(deleteRule: .cascade) var savings = [Saving]()
+    @Relationship(deleteRule: .cascade) var challengeConfiguration: ChallengeConfiguration
 
     init(challengeConfiguration: ChallengeConfiguration) {
         id = UUID()
         self.challengeConfiguration = challengeConfiguration
-        savings = []
-        challengeConfiguration.generateSavings(
-            challenge: self, amount: challengeConfiguration.amount,
-            startDate: challengeConfiguration.startDate
-        )
+        challengeConfiguration.generateSavings(challenge: self)
     }
 
     func addSaving(saving: Saving) {
@@ -39,15 +35,14 @@ class Challenge {
     }
 
     func updateSaving(saving: Saving) {
-        savings.first(where: { $0.id == saving.id })?.setAmount(
-            amount: saving.amount)
+        guard let index = savings.firstIndex(where: { $0.id == saving.id }) else { return }
+        savings[index].amount = saving.amount
+        savings[index].date = saving.date
+        savings[index].done = saving.done
     }
 
     func currentSavedAmount() -> Int {
-        savings.filter(\.done)
-            .reduce(0) {
-                $0 + $1.amount
-            }
+        savings.filter(\.done).reduce(0) { $0 + $1.amount }
     }
 
     func progressPercentage() -> Double {
@@ -59,19 +54,11 @@ class Challenge {
     }
 
     func remainingSavings() -> Int {
-        savings.filter {
-            !$0.done
-        }
-        .count
+        savings.filter { !$0.done }.count
     }
 
     func getNextSaving(at n: Int) -> Saving {
-        let undoneSavings = savings.sorted {
-            $0.date < $1.date
-        }
-        .filter {
-            !$0.done
-        }
+        let undoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
         return undoneSavings.count >= n ? undoneSavings[n - 1] : savings.first!
     }
 }

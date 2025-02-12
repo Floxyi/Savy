@@ -11,15 +11,7 @@ import SwiftUI
 @main
 struct SavyApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema(
-            [
-                ChallengeManager.self,
-                StatsTracker.self,
-                SavingStats.self,
-                StatsEntry.self,
-                ColorService.self,
-            ]
-        )
+        let schema = Schema([ColorService.self, ChallengeService.self, StatsTracker.self, SavingStats.self, StatsEntry.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
@@ -30,16 +22,19 @@ struct SavyApp: App {
     }()
 
     @StateObject private var colorServiceViewModel: ColorServiceViewModel
+    @StateObject private var challengeServiceViewModel: ChallengeServiceViewModel
 
     init() {
         let context = sharedModelContainer.mainContext
         _colorServiceViewModel = StateObject(wrappedValue: ColorServiceViewModel(modelContext: context))
+        _challengeServiceViewModel = StateObject(wrappedValue: ChallengeServiceViewModel(modelContext: context))
     }
 
     var body: some Scene {
         WindowGroup {
             AppView()
                 .environmentObject(colorServiceViewModel)
+                .environmentObject(challengeServiceViewModel)
         }
         .modelContainer(sharedModelContainer)
     }

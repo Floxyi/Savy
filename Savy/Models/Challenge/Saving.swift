@@ -10,15 +10,15 @@ import SwiftData
 
 @Model
 final class Saving {
-    private(set) var id: UUID
-    private(set) var challengeId: UUID
-    private(set) var amount: Int
-    private(set) var date: Date
-    private(set) var done: Bool
+    @Attribute(.unique) var id: UUID
+    @Relationship var challenge: Challenge
+    var amount: Int
+    var date: Date
+    var done: Bool
 
-    init(challengeId: UUID, amount: Int, date: Date) {
+    init(challenge: Challenge, amount: Int, date: Date) {
         id = UUID()
-        self.challengeId = challengeId
+        self.challenge = challenge
         self.amount = amount
         self.date = date
         done = false
@@ -26,22 +26,20 @@ final class Saving {
 
     func toggleDone() {
         done.toggle()
-        done ? StatsTracker.shared.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date) : StatsTracker.shared.deleteStatsEntry(savingId: id)
+        done ? markCompleted() : markNotCompleted()
+    }
 
-        let wasCompleted = StatsTracker.shared.entries.contains { (entry: StatsEntry) in
-            entry.type == StatsType.challenged_completed && entry.challengeStats?.challengeId == challengeId
-        }
-        if wasCompleted, !done {
-            StatsTracker.shared.deleteStatsEntry(challengeId: challengeId, statsType: .challenged_completed)
-        }
-
-        let isCompleted = ChallengeManager.shared.getChallengeById(id: challengeId)?.remainingAmount() == 0
-        if isCompleted, done {
-            StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: challengeId)
+    private func markCompleted() {
+        StatsTracker.shared.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date)
+        if challenge.remainingAmount() == 0 {
+            StatsTracker.shared.addChallengeCompletedStatsEntry(challengeId: challenge.id)
         }
     }
 
-    func setAmount(amount: Int) {
-        self.amount = amount
+    private func markNotCompleted() {
+        StatsTracker.shared.deleteStatsEntry(savingId: id)
+        if StatsTracker.shared.isChallengeCompleted(challengeId: challenge.id) {
+            StatsTracker.shared.deleteStatsEntry(challengeId: challenge.id, statsType: StatsType.challenged_completed)
+        }
     }
 }

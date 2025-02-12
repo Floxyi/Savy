@@ -51,12 +51,27 @@ struct SavingItemView: View {
 }
 
 #Preview {
-    let saving = Saving(challengeId: UUID(), amount: 30, date: Date())
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
 
-    let container = try! ModelContainer(for: Saving.self, ColorService.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    container.mainContext.insert(saving)
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
 
-    return SavingItemView(saving: saving)
+    let challengeConfiguration = ChallengeConfiguration(
+        icon: "homepod",
+        name: "HomePod",
+        amount: 300,
+        startDate: Date(),
+        strategy: .Monthly,
+        calculation: .Amount,
+        cycleAmount: 12
+    )
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+    let challenge = challengeServiceViewModel.challengeService.challenges.first!
+
+    return SavingItemView(saving: challenge.savings.first!)
         .modelContainer(container)
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(container)))
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }

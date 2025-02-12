@@ -64,9 +64,9 @@ class ChallengeEditViewModel: ObservableObject {
         ChallengeConfiguration(icon: icon!, name: name, amount: amount!, endDate: endDate, strategy: strategy, calculation: calculation, cycleAmount: cycleAmount ?? 0)
     }
 
-    func updateChallenge() {
+    func updateChallenge(challengeService: ChallengeService) {
         let id = challenge.id
         let challengeConfiguration = getUpdatedChallengeConfiguration()
-        ChallengeManager.shared.updateChallenge(id: id, challengeConfiguration: challengeConfiguration)
+        challengeService.updateChallenge(id: id, challengeConfiguration: challengeConfiguration)
     }
 }

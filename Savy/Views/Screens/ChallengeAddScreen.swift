@@ -12,6 +12,7 @@ struct ChallengeAddScreen: View {
     @Binding var showPopover: Bool
     @StateObject private var vm: ChallengeAddViewModel
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
     init(showPopover: Binding<Bool>) {
         _showPopover = showPopover
@@ -126,7 +127,7 @@ struct ChallengeAddScreen: View {
                             showPopover: $showPopover,
                             title: "Done",
                             isValid: { vm.isValid() },
-                            onDoneAction: { ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration) }
+                            onDoneAction: { vm.addChallenge(using: challengeServiceVM.challengeService) }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {
@@ -172,9 +173,13 @@ struct ChallengeAddScreen: View {
 #Preview {
     @Previewable @State var showPopover = true
 
+    let colorServiceContainer = try! ModelContainer(for: ColorService.self)
+    let challengeServiceContainer = try! ModelContainer(for: ChallengeService.self)
+
     return Spacer()
         .popover(isPresented: $showPopover) {
             ChallengeAddScreen(showPopover: $showPopover)
         }
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
+        .environmentObject(ColorServiceViewModel(modelContext: colorServiceContainer.mainContext))
+        .environmentObject(ChallengeServiceViewModel(modelContext: challengeServiceContainer.mainContext))
 }

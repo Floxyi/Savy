@@ -66,31 +66,28 @@ struct ChallengeProgressBarView: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(
-        for: Challenge.self, ColorService.self,
-        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
-    )
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
-        amount: 1000,
+        amount: 300,
         startDate: Date(),
         strategy: .Monthly,
         calculation: .Amount,
         cycleAmount: 12
     )
-
-    let challenge = Challenge(challengeConfiguration: challengeConfiguration)
-    challenge.getNextSaving(at: 1).toggleDone()
-
-    ChallengeManager.shared.addChallenge(
-        challengeConfiguration: challengeConfiguration
-    )
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+    let challenge = challengeServiceViewModel.challengeService.challenges.first!
 
     return ChallengeProgressBarView(challenge: challenge)
         .padding()
         .modelContainer(container)
-        .environmentObject(
-            ColorServiceViewModel(modelContext: ModelContext(container)))
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }

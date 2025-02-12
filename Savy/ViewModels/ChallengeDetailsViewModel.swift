@@ -34,8 +34,8 @@ class ChallengeDetailsViewModel: ObservableObject {
         showEditPopover = true
     }
 
-    func removeChallenge(dismiss: DismissAction) {
-        ChallengeManager.shared.removeChallenge(id: challenge.id)
+    func removeChallenge(dismiss: DismissAction, challengeService: ChallengeService) {
+        challengeService.removeChallenge(id: challenge.id)
         dismiss()
         TabBarManager.shared.show()
     }

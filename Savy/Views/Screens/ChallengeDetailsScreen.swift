@@ -12,6 +12,7 @@ struct ChallengeDetailScreen: View {
     @StateObject private var vm: ChallengeDetailsViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
     init(challenge: Challenge) {
         _vm = StateObject(wrappedValue: ChallengeDetailsViewModel(challenge: challenge))
@@ -35,10 +36,7 @@ struct ChallengeDetailScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
         .popover(isPresented: $vm.showEditPopover) {
-            ChallengeEditScreen(
-                challenge: vm.challenge,
-                showPopover: $vm.showEditPopover
-            )
+            ChallengeEditScreen(challenge: vm.challenge, showPopover: $vm.showEditPopover)
         }
     }
 
@@ -53,7 +51,7 @@ struct ChallengeDetailScreen: View {
             actionView: AnyView(
                 ChallengeActionMenu(
                     editChallenge: vm.editChallenge,
-                    removeChallenge: { vm.removeChallenge(dismiss: dismiss) }
+                    removeChallenge: { vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService) }
                 )
             )
         )
@@ -73,7 +71,7 @@ struct ChallengeDetailScreen: View {
                     savings: vm.savings, columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
                 )
             } else {
-                CompletionView(removeChallenge: { vm.removeChallenge(dismiss: dismiss) })
+                CompletionView(removeChallenge: { vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService) })
             }
             Spacer()
             detailsButton
@@ -97,10 +95,12 @@ struct ChallengeDetailScreen: View {
 }
 
 #Preview {
-    let container = try! ModelContainer(
-        for: Challenge.self, ColorService.self,
-        configurations: ModelConfiguration(isStoredInMemoryOnly: true)
-    )
+    let schema = Schema([ChallengeService.self, ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
 
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
@@ -111,11 +111,11 @@ struct ChallengeDetailScreen: View {
         calculation: .Amount,
         cycleAmount: 12
     )
+    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration)
+    let challenge = challengeServiceViewModel.challengeService.challenges.first!
 
-    ChallengeManager.shared.addChallenge(challengeConfiguration: challengeConfiguration)
-
-    return ChallengeDetailScreen(challenge: Challenge(challengeConfiguration: challengeConfiguration))
+    return ChallengeDetailScreen(challenge: challenge)
         .modelContainer(container)
-        .environmentObject(
-            ColorServiceViewModel(modelContext: ModelContext(container)))
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
 }
