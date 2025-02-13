@@ -19,7 +19,7 @@ struct CalculationSelector: View {
             Button(action: {
                 selectedCalculation = .Date
             }) {
-                Text(SavingCalculation.Date.rawValue)
+                Text(SavingCalculation.Date.localizedString)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(selectedCalculation == .Date ? currentScheme.font : currentScheme.font.opacity(0.4))
                     .frame(width: 146)
@@ -32,7 +32,7 @@ struct CalculationSelector: View {
             Button(action: {
                 selectedCalculation = .Amount
             }) {
-                Text(SavingCalculation.Amount.rawValue)
+                Text(SavingCalculation.Amount.localizedString)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(selectedCalculation == .Amount ? currentScheme.font : currentScheme.font.opacity(0.4))
                     .frame(width: 146)

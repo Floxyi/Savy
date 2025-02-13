@@ -41,6 +41,6 @@ struct ChallengeDetailsButtonView: View {
 #Preview {
     @Previewable @State var showPopover = true
 
-    return ChallengeDetailsButtonView(title: "View all", icon: "chevron.up", showPopover: $showPopover)
+    return ChallengeDetailsButtonView(title: String(localized: "View all"), icon: "chevron.up", showPopover: $showPopover)
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
 }

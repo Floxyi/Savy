@@ -29,7 +29,7 @@ struct ChallengeAddScreen: View {
                 VStack {
                     IconPicker(selectedIcon: $vm.icon, isIconPickerVisible: $vm.isIconPickerVisible)
 
-                    TextField("", text: $vm.name, prompt: Text(verbatim: "Name")
+                    TextField("", text: $vm.name, prompt: Text(verbatim: String(localized: "Name"))
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentScheme.font.opacity(0.4)))
                         .textInputAutocapitalization(.never)
@@ -41,19 +41,19 @@ struct ChallengeAddScreen: View {
                         }
 
                     HStack {
-                        TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: "Amount")
+                        TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: String(localized: "Amount"))
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font.opacity(0.4)))
                             .textFieldStyle(CustomTextFieldStyle())
                             .keyboardType(.numberPad)
-                        Text("€")
+                        Text("$")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundStyle(currentScheme.font)
                             .padding(.trailing, 32)
                     }
 
                     HStack {
-                        Text("Strategy")
+                        Text(String(localized: "Strategy"))
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font.opacity(0.4))
                             .padding(.leading, 8)
@@ -76,7 +76,7 @@ struct ChallengeAddScreen: View {
                                 selection: $vm.endDate,
                                 displayedComponents: [.date]
                             )
-                            .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: "End date:", isDatePickerVisible: $vm.isDatePickerVisible))
+                            .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: String(localized: "End date"), isDatePickerVisible: $vm.isDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -85,7 +85,7 @@ struct ChallengeAddScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
 
-                        Text("\(vm.strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
+                        Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate))$")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font)
                             .padding()
@@ -94,12 +94,12 @@ struct ChallengeAddScreen: View {
                     if vm.calculation == .Amount {
                         VStack {
                             HStack {
-                                TextField("", value: $vm.cycleAmount, format: .number, prompt: Text(verbatim: "\(vm.strategy) Amount")
+                                TextField("", value: $vm.cycleAmount, format: .number, prompt: Text("\(vm.strategy.localizedString) \(String(localized: "Amount"))")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(currentScheme.font.opacity(0.4)))
                                     .textFieldStyle(CustomTextFieldStyle())
                                     .keyboardType(.numberPad)
-                                Text("€")
+                                Text("$")
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundStyle(currentScheme.font)
                                     .padding(.trailing, 32)
@@ -109,7 +109,7 @@ struct ChallengeAddScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
 
-                        Text("End Date: \(challengeConfiguration.calculateEndDateByAmount(startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
+                        Text("End date: \(challengeConfiguration.calculateEndDateByAmount(startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font)
                             .padding()
@@ -126,7 +126,7 @@ struct ChallengeAddScreen: View {
                     ToolbarItem(placement: .confirmationAction) {
                         ToolbarDoneButton(
                             showPopover: $showPopover,
-                            title: "Done",
+                            title: String(localized: "Done"),
                             isValid: { vm.isValid() },
                             onDoneAction: { vm.addChallenge(challengeService: challengeServiceVM.challengeService, statsService: statsServiceVM.statsService) }
                         )
@@ -152,7 +152,7 @@ struct ChallengeAddScreen: View {
                         )
 
                         HStack {
-                            Text("\(vm.strategy) Amount: \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate)) €")
+                            Text("\(vm.strategy) \(String(localized: "Amount")): \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate))$")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentScheme.font)
                                 .padding(8)

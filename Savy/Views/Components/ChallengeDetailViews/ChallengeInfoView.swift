@@ -38,7 +38,7 @@ struct ChallengeInfoView: View {
 
                 HStack {
                     Spacer()
-                    Text("\(challenge.remainingSavings()) savings to go")
+                    Text("\(challenge.remainingSavings()) savings left")
                         .font(.system(size: 12))
                         .foregroundStyle(currentScheme.font)
                 }

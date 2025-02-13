@@ -24,7 +24,7 @@ struct RegisterScreen: View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
-            HeaderView(title: "Register", dismiss: {
+            HeaderView(title: String(localized: "Register"), dismiss: {
                 dismiss()
                 TabBarManager.shared.show()
             })
@@ -41,7 +41,7 @@ struct RegisterScreen: View {
                         isValid: $vm.isUsernameValid,
                         showPopup: $vm.showUsernamePopup,
                         error: $vm.usernameError,
-                        placeholder: "username",
+                        placeholder: String(localized: "username"),
                         isSecure: false,
                         validationFunction: vm.validateUsername,
                         popupText: vm.isUsernameValid ? "Valid username." : vm.usernameError ? "Please provide a 5 character username." : "This is not 5 characters long.",
@@ -54,7 +54,7 @@ struct RegisterScreen: View {
                         isValid: $vm.isEmailValid,
                         showPopup: $vm.showEmailPopup,
                         error: $vm.emailError,
-                        placeholder: "someone@example.com",
+                        placeholder: String(localized: "someone@example.com"),
                         isSecure: false,
                         validationFunction: vm.validateEmail,
                         popupText: vm.isEmailValid ? "Valid email address." : vm.emailError ? "Please provide a valid email address." : "This is not a valid email address.",
@@ -67,7 +67,7 @@ struct RegisterScreen: View {
                         isValid: $vm.isPasswordValid,
                         showPopup: $vm.showPasswordPopup,
                         error: $vm.passwordError,
-                        placeholder: "password",
+                        placeholder: String(localized: "password"),
                         isSecure: true,
                         validationFunction: vm.validatePassword,
                         popupText: vm.isPasswordValid ? "Valid password." : vm.passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long.",
@@ -99,12 +99,12 @@ struct RegisterScreen: View {
                         )
                         .padding(.top, 72)
                         .confirmationDialog("If you proceed, you will lose all your personal stats.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
-                            Button("Bestätigen", role: .destructive) {
+                            Button("Confirm", role: .destructive) {
                                 withAnimation {
                                     vm.signUpButtonPressed()
                                 }
                             }
-                            Button("Abbrechen", role: .cancel) {}
+                            Button("Cancel", role: .cancel) {}
                         }
                     }
 

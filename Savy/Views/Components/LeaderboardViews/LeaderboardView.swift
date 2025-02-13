@@ -18,7 +18,7 @@ struct LeaderboardView: View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
-            HeaderView(title: "Leaderboard")
+            HeaderView(title: String(localized: "Leaderboard"))
 
             if isLoading {
                 ProgressView()
@@ -44,7 +44,7 @@ struct LeaderboardView: View {
     private func emptyStateView(currentSchema: ColorScheme) -> some View {
         VStack {
             Spacer()
-            Text("There are not enough users yet... :(")
+            Text("There are not enough users yet...")
                 .font(.system(size: 16, weight: .black))
                 .foregroundColor(currentSchema.font)
             Spacer()
@@ -79,12 +79,12 @@ struct LeaderboardView: View {
                                 .font(.system(size: 18, weight: isCurrentUser ? .black : .medium))
                                 .foregroundColor(currentSchema.font)
                             if isCurrentUser {
-                                Text("(Du)")
+                                Text("(You)")
                                     .font(.system(size: 18))
                                     .foregroundColor(currentSchema.font)
                             }
                             Spacer()
-                            Text("\(profile.savings.amount) €")
+                            Text("\(profile.savings.amount) $")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(currentSchema.font)
                         }
@@ -102,7 +102,7 @@ struct LeaderboardView: View {
 
     private func profileView(profile: ProfileWithSavings, rank: Int, currentSchema: ColorScheme) -> some View {
         VStack {
-            Text("\(profile.savings.amount) €")
+            Text("\(profile.savings.amount) $")
                 .font(.system(size: 20, weight: .black))
                 .foregroundColor(currentSchema.font)
                 .padding(1)
@@ -124,7 +124,7 @@ struct LeaderboardView: View {
                 .font(.system(size: 26, weight: .bold))
                 .foregroundColor(currentSchema.font)
             VStack {
-                Text("\(profile.savings.amount) €")
+                Text("\(profile.savings.amount) $")
                     .font(.system(size: 22, weight: .black))
                     .foregroundColor(currentSchema.font)
                     .padding(.top, 2)

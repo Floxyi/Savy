@@ -23,11 +23,11 @@ struct ChallengeDetailsListScreen: View {
 
         NavigationStack {
             VStack {
-                ChallengeDetailsButtonView(title: "Hide", icon: "chevron.down", showPopover: $showPopover)
+                ChallengeDetailsButtonView(title: String(localized: "Hide"), icon: "chevron.down", showPopover: $showPopover)
                     .padding(.top, -36)
                     .padding(.bottom, 4)
 
-                HeaderView(title: "Savings Overview", size: 38)
+                HeaderView(title: String(localized: "Savings Overview"), size: 38)
                     .padding(.bottom, -1)
 
                 HStack {

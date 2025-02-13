@@ -80,7 +80,7 @@ struct ChallengeDetailScreen: View {
 
     private var detailsButton: some View {
         ChallengeDetailsButtonView(
-            title: "View all",
+            title: String(localized: "View all"),
             icon: "chevron.up",
             showPopover: $vm.showDetailsPopover
         )

@@ -20,12 +20,12 @@ struct StatsTypeSelector: View {
                 Button(action: {
                     selectedStatsType = statsType
                 }) {
-                    Text(statsType.rawValue)
+                    Text(statsType.localizedString)
                 }
             }
         } label: {
             HStack {
-                Text(selectedStatsType.rawValue)
+                Text(selectedStatsType.localizedString)
                     .font(.system(size: 16))
                     .foregroundColor(currentScheme.font)
                 Image(systemName: "chevron.down")

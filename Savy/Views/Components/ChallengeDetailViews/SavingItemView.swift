@@ -29,7 +29,7 @@ struct SavingItemView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.bottom, -6)
 
-            Text("\(saving.amount)€")
+            Text("\(saving.amount)$")
                 .font(.system(size: 26, weight: .bold))
                 .foregroundStyle(currentScheme.font)
         }
@@ -40,13 +40,13 @@ struct SavingItemView: View {
         .onTapGesture {
             showConfirmationDialog = true
         }
-        .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)€) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
-            Button("Bestätigen", role: .destructive) {
+        .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)$) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)$) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day()))?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+            Button("Confirm", role: .destructive) {
                 withAnimation {
                     saving.toggleDone(statsService: statsServiceVM.statsService)
                 }
             }
-            Button("Abbrechen", role: .cancel) {}
+            Button("Cancel", role: .cancel) {}
         }
     }
 }

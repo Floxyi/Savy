@@ -133,7 +133,7 @@ private struct NextSavingView: View {
 
     var body: some View {
         VStack {
-            Text("\(saving.amount.formatted())€")
+            Text("\(saving.amount.formatted())$")
                 .font(.system(size: 14, weight: .bold))
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
                 .font(.system(size: 12))
@@ -166,10 +166,10 @@ private struct RemainingView: View {
         VStack {
             if remainingSavings > 2 {
                 Text("\(remainingSavings - 2)x")
-                Text("to go")
+                Text("left")
             } else {
                 Image(systemName: "flag.2.crossed")
-                Text("done")
+                Text("Done")
             }
         }
         .font(.system(size: 14))
@@ -225,11 +225,11 @@ private struct AmountView: View {
             )
 
             HStack(alignment: .bottom, spacing: -4) {
-                Text("\(challenge.currentSavedAmount())€")
+                Text("\(challenge.currentSavedAmount())$")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
                     .padding(.trailing, 7)
-                Text("/ \(challenge.challengeConfiguration.amount)€")
+                Text("/ \(challenge.challengeConfiguration.amount)$")
                     .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
                     .offset(y: -3)
