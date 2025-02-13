@@ -48,15 +48,7 @@ class AuthService {
     func signInAsNewAccount(email: String, password: String, oldId: UUID) async throws -> Bool {
         let session = try await client.auth.signIn(email: email, password: password)
         let profile = try await ProfileService.shared.getProfile(uuid: session.user.id)
-
-        if profile == nil {
-            return false
-        }
-
-        if profile!.id == oldId {
-            return false
-        }
-
+        if profile == nil || profile!.id == oldId { return false }
         return true
     }
 

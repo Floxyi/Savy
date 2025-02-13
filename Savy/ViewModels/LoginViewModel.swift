@@ -47,16 +47,7 @@ class LoginViewModel: ObservableObject {
 
             do {
                 if validateEmail(), validatePassword() {
-                    let oldId = AuthService.shared.accountUUID
-                    let newSignIn = await oldId == nil ? false : try AuthService.shared.signInAsNewAccount(email: email, password: password, oldId: oldId!)
-                    let signInResult = try await AuthService.shared.signInWithEmail(
-                        email: email,
-                        password: password,
-                        sameAccount: newSignIn,
-                        statsService: statsServiceVM.statsService,
-                        challengeService: challengeServiceVM.challengeService
-                    )
-                    self.isSignedIn.wrappedValue = signInResult
+                    self.isSignedIn.wrappedValue = try await signIn()
                 } else {
                     self.authError = true
                 }
@@ -64,6 +55,25 @@ class LoginViewModel: ObservableObject {
                 self.authError = true
             }
         }
+    }
+
+    private func signIn() async throws -> Bool {
+        let statsService = statsServiceVM.statsService
+        let challengeService = challengeServiceVM.challengeService
+        let authService = AuthService.shared
+        let oldId = authService.accountUUID
+        let isSameAccount = oldId == nil ? false : try await authService.signInAsNewAccount(
+            email: email,
+            password: password,
+            oldId: oldId!
+        )
+        return try await authService.signInWithEmail(
+            email: email,
+            password: password,
+            sameAccount: isSameAccount,
+            statsService: statsService,
+            challengeService: challengeService
+        )
     }
 
     func onShowConfirmationDialogChanged() {

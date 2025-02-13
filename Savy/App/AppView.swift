@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct AppView: View {
-    @ObservedObject private var tabBarManager = TabBarManager.shared
+    @StateObject private var tabBarManager = TabBarManager.shared
     @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
     @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
@@ -26,7 +26,7 @@ struct AppView: View {
                     .tag(Tab.settings)
             }
             .onAppear {
-                UITabBar.appearance().isHidden = true
+                hideTabBar()
             }
 
             if tabBarManager.isShown {
@@ -35,12 +35,22 @@ struct AppView: View {
             }
         }
         .onAppear {
-            Task {
-                try await AuthService.shared.getCurrentSession()
-                let challengeService = challengeServiceVM.challengeService
-                let statsService = statsServiceVM.statsService
-                AuthService.shared.setAccountUUID(uuid: AuthService.shared.profile?.id, challengeService: challengeService, statsService: statsService)
-            }
+            setupAuthService()
+        }
+    }
+
+    private func hideTabBar() {
+        UITabBar.appearance().isHidden = true
+    }
+
+    private func setupAuthService() {
+        Task {
+            try await AuthService.shared.getCurrentSession()
+            AuthService.shared.setAccountUUID(
+                uuid: AuthService.shared.profile?.id,
+                challengeService: challengeServiceVM.challengeService,
+                statsService: statsServiceVM.statsService
+            )
         }
     }
 }
@@ -63,7 +73,10 @@ struct AppView: View {
         calculation: .Amount,
         cycleAmount: 12
     )
-    challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsServiceViewModel.statsService)
+    challengeServiceViewModel.challengeService.addChallenge(
+        challengeConfiguration: challengeConfiguration,
+        statsService: statsServiceViewModel.statsService
+    )
 
     return AppView()
         .modelContainer(container)

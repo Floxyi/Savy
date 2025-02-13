@@ -59,17 +59,17 @@ class RegisterViewModel: ObservableObject {
         isLoading = true
         Task {
             defer { isLoading = false }
-            do {
-                isSignedIn.wrappedValue = try await AuthService.shared.registerWithEmail(
-                    username: username,
-                    email: email,
-                    password: password,
-                    statsService: statsServiceVM.statsService,
-                    challengeService: challengeServiceVM.challengeService
-                )
-            } catch {
-                authError = true
-            }
+            do { isSignedIn.wrappedValue = try await register() } catch { authError = true }
         }
+    }
+
+    private func register() async throws -> Bool {
+        try await AuthService.shared.registerWithEmail(
+            username: username,
+            email: email,
+            password: password,
+            statsService: statsServiceVM.statsService,
+            challengeService: challengeServiceVM.challengeService
+        )
     }
 }
