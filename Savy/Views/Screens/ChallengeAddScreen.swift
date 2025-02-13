@@ -35,7 +35,7 @@ struct ChallengeAddScreen: View {
                         .textInputAutocapitalization(.never)
                         .textFieldStyle(CustomTextFieldStyle())
                         .onChange(of: vm.name) { _, newValue in
-                            if newValue.count > 12 {
+                            if newValue.count > 15 {
                                 vm.name = String(newValue.prefix(12))
                             }
                         }
@@ -144,11 +144,7 @@ struct ChallengeAddScreen: View {
                     VStack {
                         CustomDatePickerOverlay(
                             date: $vm.endDate,
-                            startDate: Calendar.current.date(
-                                byAdding: vm.strategy == .Weekly ? .weekOfYear : .month,
-                                value: 1,
-                                to: Date()
-                            ) ?? Date()
+                            startDate: Calendar.current.date(byAdding: vm.strategy.calendarComponent, value: vm.strategy.increment, to: Date()) ?? Date()
                         )
 
                         HStack {
@@ -174,13 +170,20 @@ struct ChallengeAddScreen: View {
 #Preview {
     @Previewable @State var showPopover = true
 
-    let colorServiceContainer = try! ModelContainer(for: ColorService.self)
-    let challengeServiceContainer = try! ModelContainer(for: ChallengeService.self)
+    let schema = Schema([ChallengeService.self, ColorService.self, StatsService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+    let challengeServiceViewModel = ChallengeServiceViewModel(modelContext: context)
+    let statsServiceViewModel = StatsServiceViewModel(modelContext: context)
 
     return Spacer()
         .popover(isPresented: $showPopover) {
             ChallengeAddScreen(showPopover: $showPopover)
         }
-        .environmentObject(ColorServiceViewModel(modelContext: colorServiceContainer.mainContext))
-        .environmentObject(ChallengeServiceViewModel(modelContext: challengeServiceContainer.mainContext))
+        .modelContainer(container)
+        .environmentObject(colorServiceViewModel)
+        .environmentObject(challengeServiceViewModel)
+        .environmentObject(statsServiceViewModel)
 }

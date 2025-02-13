@@ -20,7 +20,7 @@ struct LeaderboardSwitchButton: View {
             Image(systemName: "arrow.left.arrow.right")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(currentScheme.font)
-            Text(showsPersonalStats ? "Leaderboard" : "Personal Stats")
+            Text(showsPersonalStats ? "Leaderboard" : "Statistics")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(currentScheme.font)
                 .padding(.trailing, 2)

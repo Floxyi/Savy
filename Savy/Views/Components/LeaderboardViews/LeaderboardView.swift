@@ -73,22 +73,22 @@ struct LeaderboardView: View {
                         let isCurrentUser = profile.id == profileId
                         HStack {
                             Text("\(index + 4).")
-                                .font(.system(size: 16, weight: .black))
+                                .font(.system(size: 14, weight: .black))
                                 .foregroundColor(currentSchema.font)
                             Text("\(profile.username)")
-                                .font(.system(size: 18, weight: isCurrentUser ? .black : .medium))
+                                .font(.system(size: 14, weight: isCurrentUser ? .bold : .medium))
                                 .foregroundColor(currentSchema.font)
                             if isCurrentUser {
                                 Text("(You)")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 12))
                                     .foregroundColor(currentSchema.font)
                             }
                             Spacer()
-                            Text("\(profile.savings.amount) $")
-                                .font(.system(size: 16, weight: .bold))
+                            Text("$\(NumberFormatterHelper.shared.format(profile.savings.amount))")
+                                .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(currentSchema.font)
                         }
-                        .padding(.horizontal, 18)
+                        .padding(.horizontal, 12)
                         .padding(.vertical, 12)
                         .background(currentSchema.bar)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -101,15 +101,23 @@ struct LeaderboardView: View {
     }
 
     private func profileView(profile: ProfileWithSavings, rank: Int, currentSchema: ColorScheme) -> some View {
-        VStack {
-            Text("\(profile.savings.amount) $")
-                .font(.system(size: 20, weight: .black))
+        let profileId = AuthService.shared.accountUUID
+        let isCurrentUser = profile.id == profileId
+
+        return VStack {
+            Text("$\(NumberFormatterHelper.shared.format(profile.savings.amount))")
+                .font(.system(size: 16, weight: .black))
                 .foregroundColor(currentSchema.font)
                 .padding(1)
             Text("\(rank). \(profile.username)")
-                .font(.system(size: 18, weight: profile.id == AuthService.shared.accountUUID ? .black : .regular))
+                .font(.system(size: 14, weight: profile.id == AuthService.shared.accountUUID ? .black : .regular))
                 .foregroundColor(currentSchema.font)
                 .multilineTextAlignment(.center)
+            if isCurrentUser {
+                Text("(You)")
+                    .font(.system(size: 12))
+                    .foregroundColor(currentSchema.font)
+            }
         }
         .padding(.bottom, 12)
         .padding(.top, 16)
@@ -119,24 +127,33 @@ struct LeaderboardView: View {
     }
 
     private func crownProfileView(profile: ProfileWithSavings, rank: Int, currentSchema: ColorScheme) -> some View {
-        VStack {
+        let profileId = AuthService.shared.accountUUID
+        let isCurrentUser = profile.id == profileId
+
+        return VStack {
             Image(systemName: "crown.fill")
                 .font(.system(size: 26, weight: .bold))
                 .foregroundColor(currentSchema.font)
             VStack {
-                Text("\(profile.savings.amount) $")
-                    .font(.system(size: 22, weight: .black))
+                Text("$\(NumberFormatterHelper.shared.format(profile.savings.amount))")
+                    .font(.system(size: 16, weight: .bold))
                     .foregroundColor(currentSchema.font)
                     .padding(.top, 2)
                     .padding(.bottom, 4)
                 Text("\(rank). \(profile.username)")
-                    .font(.system(size: 22, weight: profile.id == AuthService.shared.accountUUID ? .black : .regular))
+                    .font(.system(size: 14, weight: profile.id == AuthService.shared.accountUUID ? .black : .regular))
                     .foregroundColor(currentSchema.font)
                     .multilineTextAlignment(.center)
+                if isCurrentUser {
+                    Text("(You)")
+                        .font(.system(size: 12))
+                        .foregroundColor(currentSchema.font)
+                }
             }
         }
         .padding(.bottom, 12)
         .padding(.top, 12)
+        .padding(.horizontal, 4)
         .frame(width: 110)
         .background(currentSchema.bar)
         .clipShape(RoundedRectangle(cornerRadius: 12))

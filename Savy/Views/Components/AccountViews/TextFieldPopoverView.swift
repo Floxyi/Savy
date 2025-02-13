@@ -27,37 +27,16 @@ struct TextFieldPopoverView: View {
                         .foregroundColor(isValid ? .green : error ? currentScheme.font : .red)
                         .font(.caption)
                         .fontWeight(.bold)
-                        .padding()
-                        .padding(.trailing, 14)
-                        .cornerRadius(8)
-                        .background(
-                            SpeechBubbleShape()
-                                .fill(currentScheme.background)
-                                .shadow(radius: 4)
-                        )
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(currentScheme.background)
+                        .cornerRadius(10)
+                        .shadow(radius: 12)
                 }
                 .transition(.scale)
                 .animation(.spring(), value: showPopup)
             }
         }
-    }
-}
-
-struct SpeechBubbleShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-
-        let cornerRadius: CGFloat = 8
-        let triangleHeight: CGFloat = 20
-        let triangleWidth: CGFloat = 15
-
-        path.addRoundedRect(in: CGRect(x: 0, y: 0, width: rect.width - triangleWidth, height: rect.height), cornerSize: CGSize(width: cornerRadius, height: cornerRadius))
-
-        path.move(to: CGPoint(x: rect.width - triangleWidth, y: rect.height / 2 - triangleHeight / 2))
-        path.addLine(to: CGPoint(x: rect.width, y: rect.height / 2))
-        path.addLine(to: CGPoint(x: rect.width - triangleWidth, y: rect.height / 2 + triangleHeight / 2))
-
-        return path
     }
 }
 

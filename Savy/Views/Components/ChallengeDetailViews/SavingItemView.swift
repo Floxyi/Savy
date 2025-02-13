@@ -29,7 +29,7 @@ struct SavingItemView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.bottom, -6)
 
-            Text("\(saving.amount)$")
+            Text("$\(NumberFormatterHelper.shared.format(saving.amount))")
                 .font(.system(size: 26, weight: .bold))
                 .foregroundStyle(currentScheme.font)
         }
@@ -40,7 +40,7 @@ struct SavingItemView: View {
         .onTapGesture {
             showConfirmationDialog = true
         }
-        .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item (\(saving.amount)$) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item (\(saving.amount)$) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day()))?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+        .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item ($\(saving.amount)) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item ($\(saving.amount)) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day()))?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
             Button("Confirm", role: .destructive) {
                 withAnimation {
                     saving.toggleDone(statsService: statsServiceVM.statsService)
@@ -63,11 +63,11 @@ struct SavingItemView: View {
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
-        amount: 300,
+        amount: 3000,
         startDate: Date(),
         strategy: .Monthly,
         calculation: .Amount,
-        cycleAmount: 12
+        cycleAmount: 1000
     )
     challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsServiceViewModel.statsService)
     let challenge = challengeServiceViewModel.challengeService.challenges.first!

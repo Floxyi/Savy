@@ -11,6 +11,7 @@ struct ChallengeActionMenu: View {
 
     var editChallenge: () -> Void
     var removeChallenge: () -> Void
+    var iconSize: CGFloat = 24
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
@@ -28,7 +29,7 @@ struct ChallengeActionMenu: View {
             }
         } label: {
             Image(systemName: "slider.horizontal.3")
-                .font(.system(size: 24, weight: .bold))
+                .font(.system(size: iconSize, weight: .bold))
                 .foregroundColor(currentScheme.font)
         }
     }

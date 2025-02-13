@@ -38,7 +38,7 @@ class RegisterViewModel: ObservableObject {
     }
 
     func validateUsername() {
-        isUsernameValid = username.count >= 5
+        isUsernameValid = username.count >= 3 && username.count <= 10
         usernameError = username.isEmpty
     }
 
