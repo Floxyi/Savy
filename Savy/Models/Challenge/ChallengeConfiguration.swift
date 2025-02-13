@@ -121,7 +121,7 @@ class ChallengeConfiguration {
     }
 
     private func nextDate(from date: Date, strategy: SavingStrategy, calendar: Calendar) -> Date? {
-        calendar.date(byAdding: strategy == .Weekly ? .weekOfYear : .month, value: 1, to: date)
+        calendar.date(byAdding: strategy.calendarComponent, value: strategy.increment, to: date)
     }
 
     private func numberOfMonths(startDate: Date) -> Int {
