@@ -3,166 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1703E9212CB9B5AC00A89242 /* ChallengeEditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703E9202CB9B5AC00A89242 /* ChallengeEditScreen.swift */; };
-		171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */; };
-		171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */; };
-		171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */; };
-		171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D42CA5657B008CCBDD /* DismissableOverlay.swift */; };
-		171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969D82CA5679E008CCBDD /* StrategySelector.swift */; };
-		171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969DB2CA567FE008CCBDD /* CalculationSelector.swift */; };
-		171969DE2CA568A2008CCBDD /* IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171969DD2CA568A2008CCBDD /* IconPicker.swift */; };
-		172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA642C750EB80057266F /* ChallengesScreen.swift */; };
-		172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */; };
-		172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E54C82C89D98300F521C4 /* SavingItemView.swift */; };
-		173760872CA413130062CB83 /* ChallengeAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173760862CA413130062CB83 /* ChallengeAddButtonView.swift */; };
-		173760892CA413BC0062CB83 /* ChallengeProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */; };
-		173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DB7532C847832003B30D8 /* GradientSliderView.swift */; };
-		174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */; };
-		17444A1B2CA18BD200D3E14E /* RegistrationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */; };
-		17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */; };
-		17444A202CA18D3900D3E14E /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17444A1F2CA18D3900D3E14E /* ActionButton.swift */; };
-		174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17642C9F0B6200851BC4 /* AuthManager.swift */; };
-		174B17672C9F273D00851BC4 /* SupabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17662C9F273D00851BC4 /* SupabaseAccount.swift */; };
-		174B17692C9F288000851BC4 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174B17682C9F288000851BC4 /* Profile.swift */; };
 		17530F9E2C8111F8003D768C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 17530F9D2C8111F8003D768C /* PostgREST */; };
 		17530FA32C811276003D768C /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 17530FA22C811276003D768C /* Supabase */; };
-		176135BB2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176135BA2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift */; };
-		176135BD2CBD984500AB3AF9 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176135BC2CBD984500AB3AF9 /* LeaderboardView.swift */; };
-		176135C02CBDA77200AB3AF9 /* Savings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176135BF2CBDA77000AB3AF9 /* Savings.swift */; };
-		1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */; };
-		1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */; };
-		176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE1E2C828DD2007CBABE /* DotEnv.swift */; };
-		176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EAE212C8290F9007CBABE /* AppEnvironment.swift */; };
-		176F63982C877261004437C1 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63972C877261004437C1 /* TabBarManager.swift */; };
-		176F639A2C8778F4004437C1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F63992C8778F4004437C1 /* AccountView.swift */; };
-		177728F72CBA75FD00BE814C /* ChallengeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177728F62CBA75FD00BE814C /* ChallengeStats.swift */; };
-		178530AA2C850FA4003426CD /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178530A92C850FA4003426CD /* Saving.swift */; };
-		17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */; };
-		17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */; };
-		17B2464E2C7A9E630036C534 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464D2C7A9E630036C534 /* AppView.swift */; };
-		17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */; };
-		17B246692C7B0A570036C534 /* ColorSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B246682C7B0A570036C534 /* ColorSchemas.swift */; };
-		17B2466B2C7B0A930036C534 /* ColorSchemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2466A2C7B0A930036C534 /* ColorSchemeMode.swift */; };
-		17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D0892C7A468A00B28A04 /* ColorManager.swift */; };
-		17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08C2C7A488500B28A04 /* Color+HSL.swift */; };
-		17B5D08F2C7A4AA500B28A04 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */; };
-		17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BFBA462C7A941200E19D10 /* Color+HexString.swift */; };
-		17C98CBE2CC6C305005CACA8 /* ChallengeActionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C98CBD2CC6C305005CACA8 /* ChallengeActionMenu.swift */; };
-		17C98CC02CC6C511005CACA8 /* SavingsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C98CBF2CC6C511005CACA8 /* SavingsGridView.swift */; };
-		17C98CC22CC6C535005CACA8 /* CompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C98CC12CC6C535005CACA8 /* CompletionView.swift */; };
-		17DB38872CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */; };
-		17DB38892CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */; };
-		17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */; };
-		17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */; };
-		17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290152CA9C317007382CD /* LoginTextFieldView.swift */; };
-		17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290172CA9CDAF007382CD /* IconsPickerList.swift */; };
-		17F2901E2CA9DBF9007382CD /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901D2CA9DBF9007382CD /* Tab.swift */; };
-		17F290202CA9DC72007382CD /* SavingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F2901F2CA9DC72007382CD /* SavingStrategy.swift */; };
-		17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F290212CA9DC9B007382CD /* SavingCalculation.swift */; };
-		17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C172C74F56A00344DBF /* SettingsScreen.swift */; };
-		17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */; };
-		17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */; };
-		17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB1CF42C74E38900E1C6F4 /* Challenge.swift */; };
-		17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */; };
-		17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */; };
-		17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */; };
-		17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */; };
-		17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */; };
-		17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF01A22C7770D20012FCF7 /* HeaderView.swift */; };
-		8E33160D2CBE0DF1000547A5 /* StatsTypeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33160C2CBE0DF1000547A5 /* StatsTypeSelector.swift */; };
-		8E33160E2CBE0DF1000547A5 /* PersonalStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33160B2CBE0DF1000547A5 /* PersonalStatsView.swift */; };
-		8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */; };
-		8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */; };
-		8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */; };
-		8EFF94D72CB8829000E77E3F /* StatsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF94D62CB8829000E77E3F /* StatsType.swift */; };
-		8EFF94D92CB885F000E77E3F /* StatsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF94D82CB885F000E77E3F /* StatsTracker.swift */; };
-		8EFF94DB2CB8891400E77E3F /* StatsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF94DA2CB8891400E77E3F /* StatsEntry.swift */; };
-		8EFF94DF2CB88C8600E77E3F /* SavingStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF94DE2CB88C8600E77E3F /* SavingStats.swift */; };
-		8EFF94E12CB963CC00E77E3F /* ChallengeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFF94E02CB963CC00E77E3F /* ChallengeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1703E9202CB9B5AC00A89242 /* ChallengeEditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeEditScreen.swift; sourceTree = "<group>"; };
-		171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePickerStyle.swift; sourceTree = "<group>"; };
-		171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDoneButton.swift; sourceTree = "<group>"; };
-		171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarCancelButton.swift; sourceTree = "<group>"; };
-		171969D42CA5657B008CCBDD /* DismissableOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableOverlay.swift; sourceTree = "<group>"; };
-		171969D82CA5679E008CCBDD /* StrategySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategySelector.swift; sourceTree = "<group>"; };
-		171969DB2CA567FE008CCBDD /* CalculationSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationSelector.swift; sourceTree = "<group>"; };
-		171969DD2CA568A2008CCBDD /* IconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPicker.swift; sourceTree = "<group>"; };
-		172BFA642C750EB80057266F /* ChallengesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesScreen.swift; sourceTree = "<group>"; };
-		172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailScreen.swift; sourceTree = "<group>"; };
-		172E54C82C89D98300F521C4 /* SavingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingItemView.swift; sourceTree = "<group>"; };
-		173760862CA413130062CB83 /* ChallengeAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddButtonView.swift; sourceTree = "<group>"; };
-		173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeProgressBarView.swift; sourceTree = "<group>"; };
-		173DB7532C847832003B30D8 /* GradientSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientSliderView.swift; sourceTree = "<group>"; };
-		174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
-		17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextFieldView.swift; sourceTree = "<group>"; };
-		17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPopoverView.swift; sourceTree = "<group>"; };
-		17444A1F2CA18D3900D3E14E /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
-		174B17642C9F0B6200851BC4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		174B17662C9F273D00851BC4 /* SupabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAccount.swift; sourceTree = "<group>"; };
-		174B17682C9F288000851BC4 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		176135BA2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardSwitchButton.swift; sourceTree = "<group>"; };
-		176135BC2CBD984500AB3AF9 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
-		176135BF2CBDA77000AB3AF9 /* Savings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Savings.swift; sourceTree = "<group>"; };
-		1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBarView.swift; sourceTree = "<group>"; };
-		1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
-		176EAE1E2C828DD2007CBABE /* DotEnv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotEnv.swift; sourceTree = "<group>"; };
-		176EAE212C8290F9007CBABE /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		176F63972C877261004437C1 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
-		176F63992C8778F4004437C1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		177728F62CBA75FD00BE814C /* ChallengeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStats.swift; sourceTree = "<group>"; };
-		178530A92C850FA4003426CD /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
-		17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shrikhand-Regular.ttf"; sourceTree = "<group>"; };
-		17A876D02C7F389700A47AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListItemView.swift; sourceTree = "<group>"; };
-		17B2464D2C7A9E630036C534 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
-		17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBarView.swift; sourceTree = "<group>"; };
-		17B246682C7B0A570036C534 /* ColorSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemas.swift; sourceTree = "<group>"; };
-		17B2466A2C7B0A930036C534 /* ColorSchemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeMode.swift; sourceTree = "<group>"; };
-		17B5D0892C7A468A00B28A04 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
-		17B5D08C2C7A488500B28A04 /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
-		17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
-		17BFBA462C7A941200E19D10 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
-		17C98CBD2CC6C305005CACA8 /* ChallengeActionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeActionMenu.swift; sourceTree = "<group>"; };
-		17C98CBF2CC6C511005CACA8 /* SavingsGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGridView.swift; sourceTree = "<group>"; };
-		17C98CC12CC6C535005CACA8 /* CompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionView.swift; sourceTree = "<group>"; };
-		17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsListScreen.swift; sourceTree = "<group>"; };
-		17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsButtonView.swift; sourceTree = "<group>"; };
-		17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeConfiguration.swift; sourceTree = "<group>"; };
-		17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTileView.swift; sourceTree = "<group>"; };
-		17F290152CA9C317007382CD /* LoginTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldView.swift; sourceTree = "<group>"; };
-		17F290172CA9CDAF007382CD /* IconsPickerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsPickerList.swift; sourceTree = "<group>"; };
-		17F2901D2CA9DBF9007382CD /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
-		17F2901F2CA9DC72007382CD /* SavingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingStrategy.swift; sourceTree = "<group>"; };
-		17F290212CA9DC9B007382CD /* SavingCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingCalculation.swift; sourceTree = "<group>"; };
-		17F40C172C74F56A00344DBF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
-		17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScreen.swift; sourceTree = "<group>"; };
 		17FB1CED2C74E38900E1C6F4 /* Savy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Savy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavyApp.swift; sourceTree = "<group>"; };
-		17FB1CF42C74E38900E1C6F4 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
-		17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeInfoView.swift; sourceTree = "<group>"; };
-		17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListView.swift; sourceTree = "<group>"; };
-		17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeAddScreen.swift; sourceTree = "<group>"; };
-		17FF01A22C7770D20012FCF7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		8E33160B2CBE0DF1000547A5 /* PersonalStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalStatsView.swift; sourceTree = "<group>"; };
-		8E33160C2CBE0DF1000547A5 /* StatsTypeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTypeSelector.swift; sourceTree = "<group>"; };
-		8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
-		8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAccountStyle.swift; sourceTree = "<group>"; };
-		8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
-		8EFF94D62CB8829000E77E3F /* StatsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsType.swift; sourceTree = "<group>"; };
-		8EFF94D82CB885F000E77E3F /* StatsTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTracker.swift; sourceTree = "<group>"; };
-		8EFF94DA2CB8891400E77E3F /* StatsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsEntry.swift; sourceTree = "<group>"; };
-		8EFF94DE2CB88C8600E77E3F /* SavingStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingStats.swift; sourceTree = "<group>"; };
-		8EFF94E02CB963CC00E77E3F /* ChallengeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1721D5DA2D56D31D0074E672 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = 17FB1CEC2C74E38900E1C6F4 /* Savy */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1721D58B2D56D31D0074E672 /* Savy */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1721D5DA2D56D31D0074E672 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Savy; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		17FB1CEA2C74E38900E1C6F4 /* Frameworks */ = {
@@ -177,214 +42,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		171969CF2CA563DF008CCBDD /* ChallengeAddViews */ = {
-			isa = PBXGroup;
-			children = (
-				17F290172CA9CDAF007382CD /* IconsPickerList.swift */,
-				171969DD2CA568A2008CCBDD /* IconPicker.swift */,
-				171969DB2CA567FE008CCBDD /* CalculationSelector.swift */,
-				171969D82CA5679E008CCBDD /* StrategySelector.swift */,
-				171969D42CA5657B008CCBDD /* DismissableOverlay.swift */,
-				171969D02CA56449008CCBDD /* ToolbarCancelButton.swift */,
-			);
-			path = ChallengeAddViews;
-			sourceTree = "<group>";
-		};
-		174173252C7F3EF400A136A3 /* Styles */ = {
-			isa = PBXGroup;
-			children = (
-				171969CB2CA49F92008CCBDD /* CustomDatePickerStyle.swift */,
-				174173262C7F3F4500A136A3 /* CustomToggleStyle.swift */,
-				8EA4FC002C84C76A0048B984 /* TextFieldAccountStyle.swift */,
-				8EA4FC062C850EF60048B984 /* CustomTextFieldStyle.swift */,
-			);
-			path = Styles;
-			sourceTree = "<group>";
-		};
-		17444A1E2CA18C5800D3E14E /* AccountViews */ = {
-			isa = PBXGroup;
-			children = (
-				17F290152CA9C317007382CD /* LoginTextFieldView.swift */,
-				17444A1F2CA18D3900D3E14E /* ActionButton.swift */,
-				17444A1C2CA18C3600D3E14E /* TextFieldPopoverView.swift */,
-				17444A1A2CA18BD200D3E14E /* RegistrationTextFieldView.swift */,
-			);
-			path = AccountViews;
-			sourceTree = "<group>";
-		};
-		17530FA12C811276003D768C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		176135B92CBD8AF100AB3AF9 /* LeaderboardViews */ = {
-			isa = PBXGroup;
-			children = (
-				8E33160B2CBE0DF1000547A5 /* PersonalStatsView.swift */,
-				8E33160C2CBE0DF1000547A5 /* StatsTypeSelector.swift */,
-				176135BA2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift */,
-				176135BC2CBD984500AB3AF9 /* LeaderboardView.swift */,
-			);
-			path = LeaderboardViews;
-			sourceTree = "<group>";
-		};
-		176135BE2CBDA75E00AB3AF9 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				176135BF2CBDA77000AB3AF9 /* Savings.swift */,
-				174B17682C9F288000851BC4 /* Profile.swift */,
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
-		176EAE202C8290DA007CBABE /* Environment */ = {
-			isa = PBXGroup;
-			children = (
-				176EAE1E2C828DD2007CBABE /* DotEnv.swift */,
-				176EAE212C8290F9007CBABE /* AppEnvironment.swift */,
-			);
-			path = Environment;
-			sourceTree = "<group>";
-		};
-		17A38E822C87020A000F8A70 /* AppViews */ = {
-			isa = PBXGroup;
-			children = (
-				17FF01A22C7770D20012FCF7 /* HeaderView.swift */,
-				17B2464F2C7A9F4F0036C534 /* BottomTabBarView.swift */,
-				171969CD2CA563BC008CCBDD /* ToolbarDoneButton.swift */,
-			);
-			path = AppViews;
-			sourceTree = "<group>";
-		};
-		17A38E832C87021A000F8A70 /* SettingsViews */ = {
-			isa = PBXGroup;
-			children = (
-				173DB7532C847832003B30D8 /* GradientSliderView.swift */,
-				17DF06C12C84A3B000F46E3C /* SettingsTileView.swift */,
-				1767EFD52C84B8B600E2BDFA /* SettingsBarView.swift */,
-				176F63992C8778F4004437C1 /* AccountView.swift */,
-			);
-			path = SettingsViews;
-			sourceTree = "<group>";
-		};
-		17A38E842C87028E000F8A70 /* ChallengesViews */ = {
-			isa = PBXGroup;
-			children = (
-				173760862CA413130062CB83 /* ChallengeAddButtonView.swift */,
-				17FF019E2C776FE30012FCF7 /* ChallengeListView.swift */,
-				17A9EE462C8787610019BFC2 /* ChallengeListItemView.swift */,
-			);
-			path = ChallengesViews;
-			sourceTree = "<group>";
-		};
-		17A38E852C87029C000F8A70 /* ChallengeDetailViews */ = {
-			isa = PBXGroup;
-			children = (
-				17C98CC12CC6C535005CACA8 /* CompletionView.swift */,
-				17C98CBF2CC6C511005CACA8 /* SavingsGridView.swift */,
-				17C98CBD2CC6C305005CACA8 /* ChallengeActionMenu.swift */,
-				173760882CA413BC0062CB83 /* ChallengeProgressBarView.swift */,
-				17FF019C2C776F4B0012FCF7 /* ChallengeInfoView.swift */,
-				172E54C82C89D98300F521C4 /* SavingItemView.swift */,
-				17DB38882CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift */,
-			);
-			path = ChallengeDetailViews;
-			sourceTree = "<group>";
-		};
-		17A876CE2C7F388D00A47AB6 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				17A876CD2C7F388D00A47AB6 /* Shrikhand-Regular.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		17B5D0882C7A466B00B28A04 /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				17F2901C2CA9DBED007382CD /* App */,
-				8EFF94D32CB881CC00E77E3F /* Stats */,
-				17F2901B2CA9DBAE007382CD /* Challenge */,
-				17F2901A2CA9DB8D007382CD /* ColorScheme */,
-				17F290192CA9DB62007382CD /* Authentication */,
-				176135BE2CBDA75E00AB3AF9 /* Database */,
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		17B5D08B2C7A487D00B28A04 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				17B5D08C2C7A488500B28A04 /* Color+HSL.swift */,
-				17BFBA462C7A941200E19D10 /* Color+HexString.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		17F290192CA9DB62007382CD /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				174B17642C9F0B6200851BC4 /* AuthManager.swift */,
-				174B17662C9F273D00851BC4 /* SupabaseAccount.swift */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		17F2901A2CA9DB8D007382CD /* ColorScheme */ = {
-			isa = PBXGroup;
-			children = (
-				17B5D08E2C7A4AA500B28A04 /* ColorScheme.swift */,
-				17B246682C7B0A570036C534 /* ColorSchemas.swift */,
-				17B2466A2C7B0A930036C534 /* ColorSchemeMode.swift */,
-				17B5D0892C7A468A00B28A04 /* ColorManager.swift */,
-			);
-			path = ColorScheme;
-			sourceTree = "<group>";
-		};
-		17F2901B2CA9DBAE007382CD /* Challenge */ = {
-			isa = PBXGroup;
-			children = (
-				8EFF94E02CB963CC00E77E3F /* ChallengeManager.swift */,
-				17FB1CF42C74E38900E1C6F4 /* Challenge.swift */,
-				17DD30732CA44CED00159A4F /* ChallengeConfiguration.swift */,
-				178530A92C850FA4003426CD /* Saving.swift */,
-				17F290212CA9DC9B007382CD /* SavingCalculation.swift */,
-				17F2901F2CA9DC72007382CD /* SavingStrategy.swift */,
-			);
-			path = Challenge;
-			sourceTree = "<group>";
-		};
-		17F2901C2CA9DBED007382CD /* App */ = {
-			isa = PBXGroup;
-			children = (
-				17F2901D2CA9DBF9007382CD /* Tab.swift */,
-				176F63972C877261004437C1 /* TabBarManager.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		17F40C162C74F52800344DBF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				176135B92CBD8AF100AB3AF9 /* LeaderboardViews */,
-				17A38E822C87020A000F8A70 /* AppViews */,
-				17444A1E2CA18C5800D3E14E /* AccountViews */,
-				171969CF2CA563DF008CCBDD /* ChallengeAddViews */,
-				17A38E852C87029C000F8A70 /* ChallengeDetailViews */,
-				17A38E842C87028E000F8A70 /* ChallengesViews */,
-				17A38E832C87021A000F8A70 /* SettingsViews */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		17FB1CE42C74E38900E1C6F4 = {
 			isa = PBXGroup;
 			children = (
-				17FB1CEF2C74E38900E1C6F4 /* Savy */,
+				1721D58B2D56D31D0074E672 /* Savy */,
 				17FB1CEE2C74E38900E1C6F4 /* Products */,
-				17530FA12C811276003D768C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -394,69 +56,6 @@
 				17FB1CED2C74E38900E1C6F4 /* Savy.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		17FB1CEF2C74E38900E1C6F4 /* Savy */ = {
-			isa = PBXGroup;
-			children = (
-				17FB1CF02C74E38900E1C6F4 /* SavyApp.swift */,
-				17FB1CF62C74E38A00E1C6F4 /* Assets.xcassets */,
-				17A876D02C7F389700A47AB6 /* Info.plist */,
-				17A876CE2C7F388D00A47AB6 /* Fonts */,
-				176EAE202C8290DA007CBABE /* Environment */,
-				17B5D08B2C7A487D00B28A04 /* Extensions */,
-				17B5D0882C7A466B00B28A04 /* Logic */,
-				17FF019A2C776E090012FCF7 /* Presentation */,
-				17FB1CF82C74E38A00E1C6F4 /* Preview Content */,
-			);
-			path = Savy;
-			sourceTree = "<group>";
-		};
-		17FB1CF82C74E38A00E1C6F4 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				17FB1CF92C74E38A00E1C6F4 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		17FF019A2C776E090012FCF7 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				17B2464D2C7A9E630036C534 /* AppView.swift */,
-				174173252C7F3EF400A136A3 /* Styles */,
-				17FF019B2C776E150012FCF7 /* Screens */,
-				17F40C162C74F52800344DBF /* Views */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		17FF019B2C776E150012FCF7 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				172BFA642C750EB80057266F /* ChallengesScreen.swift */,
-				17FF01A02C7770350012FCF7 /* ChallengeAddScreen.swift */,
-				1703E9202CB9B5AC00A89242 /* ChallengeEditScreen.swift */,
-				172BFA662C7511C60057266F /* ChallengeDetailScreen.swift */,
-				17DB38862CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift */,
-				17F40C192C74F57F00344DBF /* LeaderboardScreen.swift */,
-				17F40C172C74F56A00344DBF /* SettingsScreen.swift */,
-				1767EFDB2C84F14E00E2BDFA /* RegisterScreen.swift */,
-				8E4B82BE2C851BC2009FCC91 /* LoginScreen.swift */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		8EFF94D32CB881CC00E77E3F /* Stats */ = {
-			isa = PBXGroup;
-			children = (
-				8EFF94D82CB885F000E77E3F /* StatsTracker.swift */,
-				8EFF94DA2CB8891400E77E3F /* StatsEntry.swift */,
-				8EFF94D62CB8829000E77E3F /* StatsType.swift */,
-				177728F62CBA75FD00BE814C /* ChallengeStats.swift */,
-				8EFF94DE2CB88C8600E77E3F /* SavingStats.swift */,
-			);
-			path = Stats;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -474,6 +73,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1721D58B2D56D31D0074E672 /* Savy */,
 			);
 			name = Savy;
 			packageProductDependencies = (
@@ -525,9 +127,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17FB1CFA2C74E38A00E1C6F4 /* Preview Assets.xcassets in Resources */,
-				17A876CF2C7F388D00A47AB6 /* Shrikhand-Regular.ttf in Resources */,
-				17FB1CF72C74E38A00E1C6F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,77 +159,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172BFA652C750EB80057266F /* ChallengesScreen.swift in Sources */,
-				8EFF94DB2CB8891400E77E3F /* StatsEntry.swift in Sources */,
-				17F290202CA9DC72007382CD /* SavingStrategy.swift in Sources */,
-				17FF01A12C7770350012FCF7 /* ChallengeAddScreen.swift in Sources */,
-				17F290222CA9DC9B007382CD /* SavingCalculation.swift in Sources */,
-				17FF019D2C776F4B0012FCF7 /* ChallengeInfoView.swift in Sources */,
-				171969D92CA5679E008CCBDD /* StrategySelector.swift in Sources */,
-				176EAE222C8290F9007CBABE /* AppEnvironment.swift in Sources */,
-				8EA4FC012C84C76A0048B984 /* TextFieldAccountStyle.swift in Sources */,
-				17F40C1A2C74F57F00344DBF /* LeaderboardScreen.swift in Sources */,
-				17F2901E2CA9DBF9007382CD /* Tab.swift in Sources */,
-				17B5D08A2C7A468A00B28A04 /* ColorManager.swift in Sources */,
-				171969DE2CA568A2008CCBDD /* IconPicker.swift in Sources */,
-				8EA4FC072C850EF60048B984 /* CustomTextFieldStyle.swift in Sources */,
-				1767EFD62C84B8B600E2BDFA /* SettingsBarView.swift in Sources */,
-				174173272C7F3F4500A136A3 /* CustomToggleStyle.swift in Sources */,
-				178530AA2C850FA4003426CD /* Saving.swift in Sources */,
-				17C98CBE2CC6C305005CACA8 /* ChallengeActionMenu.swift in Sources */,
-				17444A1B2CA18BD200D3E14E /* RegistrationTextFieldView.swift in Sources */,
-				176135C02CBDA77200AB3AF9 /* Savings.swift in Sources */,
-				171969CE2CA563BC008CCBDD /* ToolbarDoneButton.swift in Sources */,
-				17DB38872CB8F7D80016AB0C /* ChallengeDetailsListScreen.swift in Sources */,
-				17C98CC22CC6C535005CACA8 /* CompletionView.swift in Sources */,
-				17444A1D2CA18C3600D3E14E /* TextFieldPopoverView.swift in Sources */,
-				17B5D08F2C7A4AA500B28A04 /* ColorScheme.swift in Sources */,
-				172BFA672C7511C60057266F /* ChallengeDetailScreen.swift in Sources */,
-				17B246692C7B0A570036C534 /* ColorSchemas.swift in Sources */,
-				17FF01A32C7770D20012FCF7 /* HeaderView.swift in Sources */,
-				176135BD2CBD984500AB3AF9 /* LeaderboardView.swift in Sources */,
-				8E33160D2CBE0DF1000547A5 /* StatsTypeSelector.swift in Sources */,
-				8E33160E2CBE0DF1000547A5 /* PersonalStatsView.swift in Sources */,
-				17B2466B2C7B0A930036C534 /* ColorSchemeMode.swift in Sources */,
-				17BFBA472C7A941200E19D10 /* Color+HexString.swift in Sources */,
-				17FF019F2C776FE30012FCF7 /* ChallengeListView.swift in Sources */,
-				171969D52CA5657B008CCBDD /* DismissableOverlay.swift in Sources */,
-				173DB7542C847832003B30D8 /* GradientSliderView.swift in Sources */,
-				171969DC2CA567FE008CCBDD /* CalculationSelector.swift in Sources */,
-				17DB38892CB8F89A0016AB0C /* ChallengeDetailsButtonView.swift in Sources */,
-				17F290182CA9CDB2007382CD /* IconsPickerList.swift in Sources */,
-				176F639A2C8778F4004437C1 /* AccountView.swift in Sources */,
-				172E54C92C89D98300F521C4 /* SavingItemView.swift in Sources */,
-				17F40C182C74F56A00344DBF /* SettingsScreen.swift in Sources */,
-				17F290162CA9C317007382CD /* LoginTextFieldView.swift in Sources */,
-				174B17692C9F288000851BC4 /* Profile.swift in Sources */,
-				171969CC2CA49F92008CCBDD /* CustomDatePickerStyle.swift in Sources */,
-				173760872CA413130062CB83 /* ChallengeAddButtonView.swift in Sources */,
-				176EAE1F2C828DD2007CBABE /* DotEnv.swift in Sources */,
-				8EFF94D92CB885F000E77E3F /* StatsTracker.swift in Sources */,
-				17DF06C22C84A3B000F46E3C /* SettingsTileView.swift in Sources */,
-				177728F72CBA75FD00BE814C /* ChallengeStats.swift in Sources */,
-				17FB1CF52C74E38900E1C6F4 /* Challenge.swift in Sources */,
-				17FB1CF12C74E38900E1C6F4 /* SavyApp.swift in Sources */,
-				17B2464E2C7A9E630036C534 /* AppView.swift in Sources */,
-				174B17672C9F273D00851BC4 /* SupabaseAccount.swift in Sources */,
-				176F63982C877261004437C1 /* TabBarManager.swift in Sources */,
-				173760892CA413BC0062CB83 /* ChallengeProgressBarView.swift in Sources */,
-				1767EFDC2C84F14E00E2BDFA /* RegisterScreen.swift in Sources */,
-				17A9EE472C8787610019BFC2 /* ChallengeListItemView.swift in Sources */,
-				1703E9212CB9B5AC00A89242 /* ChallengeEditScreen.swift in Sources */,
-				17C98CC02CC6C511005CACA8 /* SavingsGridView.swift in Sources */,
-				174B17652C9F0B6200851BC4 /* AuthManager.swift in Sources */,
-				176135BB2CBD8AF900AB3AF9 /* LeaderboardSwitchButton.swift in Sources */,
-				8EFF94E12CB963CC00E77E3F /* ChallengeManager.swift in Sources */,
-				17B246502C7A9F4F0036C534 /* BottomTabBarView.swift in Sources */,
-				17B5D08D2C7A488500B28A04 /* Color+HSL.swift in Sources */,
-				8EFF94D72CB8829000E77E3F /* StatsType.swift in Sources */,
-				8EFF94DF2CB88C8600E77E3F /* SavingStats.swift in Sources */,
-				8E4B82BF2C851BC2009FCC91 /* LoginScreen.swift in Sources */,
-				17DD30742CA44CED00159A4F /* ChallengeConfiguration.swift in Sources */,
-				17444A202CA18D3900D3E14E /* ActionButton.swift in Sources */,
-				171969D12CA56449008CCBDD /* ToolbarCancelButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +217,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -746,6 +275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -763,11 +293,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Savy/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Savy/Info.plist;
+				INFOPLIST_FILE = Savy/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Savy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -798,11 +328,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Savy/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = RN8RYUV55Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Savy/Info.plist;
+				INFOPLIST_FILE = Savy/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Savy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
