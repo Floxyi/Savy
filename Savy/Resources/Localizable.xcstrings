@@ -31,12 +31,12 @@
         }
       }
     },
-    "/ %lld$" : {
+    "/ $%@" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "/%lld€"
+            "value" : "/ %@ €"
           }
         }
       }
@@ -83,6 +83,22 @@
         }
       }
     },
+    "%@ %@: $%lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@: %3$lld €"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@: $%3$lld"
+          }
+        }
+      }
+    },
     "%@: %@" : {
       "localizations" : {
         "de" : {
@@ -95,16 +111,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@: %2$@"
-          }
-        }
-      }
-    },
-    "%@$" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@€"
           }
         }
       }
@@ -125,16 +131,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld %%"
-          }
-        }
-      }
-    },
-    "%lld $" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld €"
           }
         }
       }
@@ -169,16 +165,6 @@
         }
       }
     },
-    "%lld$" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld €"
-          }
-        }
-      }
-    },
     "%lldx" : {
       "localizations" : {
         "de" : {
@@ -195,6 +181,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " €"
+          }
+        }
+      }
+    },
+    "$%@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ €"
+          }
+        }
+      }
+    },
+    "$%lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld €"
           }
         }
       }
@@ -259,22 +265,34 @@
         }
       }
     },
-    "Are you sure you want to mark this saving item (%lld$) from the %@ as done?" : {
+    "Are you sure you want to mark this saving item ($%lld) from the %@ as done?" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bist du sicher, dass du dieses Ersparnis (%lld €) vom %@ als erledigt markieren?"
+            "value" : "Bist du dir sicher, dass du das Ersparnis (%1$lld €) vom %2$@ erledigen willst?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Are you sure you want to mark this saving item ($%1$lld) from the %2$@ as done?"
           }
         }
       }
     },
-    "Are you sure you want to revert this saving item (%lld$) from the %@?" : {
+    "Are you sure you want to revert this saving item ($%lld) from the %@?" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bist du sicher, dass du das Ersparnis (%1$lld €) vom %2$@ rückgängig machen willst?"
+            "value" : "Bist du dir sicher, dass du das Ersparnis (%1$lld €) vom %2$@ rückgängig machen willst?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Are you sure you want to revert this saving item ($%1$lld) from the %2$@?"
           }
         }
       }
@@ -284,7 +302,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Durchschnitt pro Tag gespart:"
+            "value" : "Durchschnitt pro Tag:"
           }
         }
       }
@@ -530,12 +548,12 @@
         }
       }
     },
-    "If you proceed, you will lose all your personal stats." : {
+    "If you proceed, you will lose all your personal statistics." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wenn du fortfährst, werden alle deine persönlichen Statistiken verloren gehen."
+            "value" : "Wenn du fortfährst, verlierst du alle persönliche Statistiken."
           }
         }
       }
@@ -660,22 +678,42 @@
         }
       }
     },
-    "Personal Stats" : {
+    "Pick an icon" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Persönliche Statistiken"
+            "value" : "Wähle ein Icon"
           }
         }
       }
     },
-    "Pick an icon:" : {
+    "Please provide a 3 to 10 character long username." : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle ein Icon:"
+            "value" : "Bitte gebe einen 3 bis 10 Zeichen langen Nutzernamen ein."
+          }
+        }
+      }
+    },
+    "Please provide a minimum 8 characters long password." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte gebe mindestens ein 8 Zeichen langes Passwort ein."
+          }
+        }
+      }
+    },
+    "Please provide a valid email address." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte gebe eine gültige E-Mail Adresse an."
           }
         }
       }
@@ -715,7 +753,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sparzahl:"
+            "value" : "Anzahl Ersparnisse:"
           }
         }
       }
@@ -780,6 +818,16 @@
         }
       }
     },
+    "Statistics" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistiken"
+          }
+        }
+      }
+    },
     "Strategy" : {
       "localizations" : {
         "de" : {
@@ -830,12 +878,42 @@
         }
       }
     },
+    "This is not a valid email address." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das ist keine gültige E-Mail Adresse."
+          }
+        }
+      }
+    },
+    "This password is not at least 8 characters long." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Passwort ist nicht mindestens 8 Zeichen lang."
+          }
+        }
+      }
+    },
+    "This username is not at least 3 characters long." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Nutzername ist nicht mindestens 3 Zeichen lang."
+          }
+        }
+      }
+    },
     "Total money saved:" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gesamt gespartes Geld:"
+            "value" : "Gespartes Geld:"
           }
         }
       }
@@ -856,6 +934,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nutzername"
+          }
+        }
+      }
+    },
+    "Valid email address." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gültige E-Mail Adresse."
+          }
+        }
+      }
+    },
+    "Valid password." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gültiges Passwort."
+          }
+        }
+      }
+    },
+    "Valid username." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gültiger Nutzername."
           }
         }
       }

@@ -56,7 +56,7 @@ struct IconPickerOverlay: View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
-            Text("Pick an icon:")
+            Text("Pick an icon")
                 .font(.system(size: 16, weight: .bold))
                 .foregroundColor(currentScheme.font)
                 .padding(.top)

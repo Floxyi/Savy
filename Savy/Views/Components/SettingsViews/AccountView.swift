@@ -61,7 +61,7 @@ struct AccountView: View {
                     }
                 }
                 .padding(8)
-                .frame(width: 110)
+                .frame(width: 130)
                 .background(currentScheme.background)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding(.trailing, 4)
@@ -71,9 +71,10 @@ struct AccountView: View {
                 HStack {
                     NavigationLink(destination: RegisterScreen(isSignedIn: $isSignedIn)) {
                         Text("Register")
+                            .font(.system(size: 17))
                             .fontWeight(.bold)
                             .foregroundStyle(currentScheme.font)
-                            .frame(width: 80)
+                            .frame(width: 100)
                             .padding(12)
                             .background(currentScheme.background)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -89,9 +90,10 @@ struct AccountView: View {
 
                     NavigationLink(destination: LoginScreen(isSignedIn: $isSignedIn)) {
                         Text("Login")
+                            .font(.system(size: 17))
                             .fontWeight(.bold)
                             .foregroundStyle(currentScheme.font)
-                            .frame(width: 80)
+                            .frame(width: 100)
                             .padding(12)
                             .background(currentScheme.background)
                             .clipShape(RoundedRectangle(cornerRadius: 12))

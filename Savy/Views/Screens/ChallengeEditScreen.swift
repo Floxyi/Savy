@@ -34,7 +34,7 @@ struct ChallengeEditScreen: View {
                         .textInputAutocapitalization(.never)
                         .textFieldStyle(CustomTextFieldStyle())
                         .onChange(of: vm.name) { _, newValue in
-                            if newValue.count > 12 {
+                            if newValue.count > 15 {
                                 vm.name = String(newValue.prefix(12))
                             }
                         }
@@ -84,7 +84,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
 
-                        Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(vm.calculateCycleAmount())$")
+                        Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): $\(vm.calculateCycleAmount())")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font)
                             .padding()
@@ -146,15 +146,11 @@ struct ChallengeEditScreen: View {
                     VStack {
                         CustomDatePickerOverlay(
                             date: $vm.endDate,
-                            startDate: Calendar.current.date(
-                                byAdding: vm.strategy == .Weekly ? .weekOfYear : .month,
-                                value: 1,
-                                to: Date()
-                            ) ?? Date()
+                            startDate: Calendar.current.date(byAdding: vm.strategy.calendarComponent, value: vm.strategy.increment, to: Date()) ?? Date()
                         )
 
                         HStack {
-                            Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(vm.calculateCycleAmount())$")
+                            Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): $\(vm.calculateCycleAmount())")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentScheme.font)
                                 .padding(8)

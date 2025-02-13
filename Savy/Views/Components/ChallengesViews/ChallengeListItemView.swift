@@ -133,7 +133,7 @@ private struct NextSavingView: View {
 
     var body: some View {
         VStack {
-            Text("\(saving.amount.formatted())$")
+            Text("$\(NumberFormatterHelper.shared.format(saving.amount))")
                 .font(.system(size: 14, weight: .bold))
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
                 .font(.system(size: 12))
@@ -225,11 +225,11 @@ private struct AmountView: View {
             )
 
             HStack(alignment: .bottom, spacing: -4) {
-                Text("\(challenge.currentSavedAmount())$")
+                Text("$\(NumberFormatterHelper.shared.format(challenge.currentSavedAmount()))")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
                     .padding(.trailing, 7)
-                Text("/ \(challenge.challengeConfiguration.amount)$")
+                Text("/ $\(NumberFormatterHelper.shared.format(challenge.challengeConfiguration.amount))")
                     .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
                     .offset(y: -3)

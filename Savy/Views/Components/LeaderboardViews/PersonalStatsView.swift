@@ -31,7 +31,7 @@ struct PersonalStatsView: View {
         let challengesStartedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_started }) != nil
         let challengesCompletedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_completed }) != nil
 
-        HeaderView(title: String(localized: "Personal Stats"))
+        HeaderView(title: String(localized: "Statistics"))
 
         if !moneySavedStatsEntries && !challengesStartedStatsEntries && !challengesCompletedStatsEntries {
             VStack {
@@ -60,6 +60,7 @@ struct PersonalStatsView: View {
                                 .foregroundStyle(currentScheme.font)
                                 .fontWeight(.bold)
                                 .font(.system(size: 24))
+                                .padding(.bottom, 2)
                             Spacer()
                             Text("\(statsService.entries.first?.date.formatted(.dateTime.year().month().day()) ?? "")")
                                 .foregroundStyle(currentScheme.font)
@@ -77,7 +78,7 @@ struct PersonalStatsView: View {
                                     Text("Total money saved:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(statsService.totalMoneySaved())$")
+                                    Text("$\(statsService.totalMoneySaved())")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
@@ -181,11 +182,12 @@ struct PersonalStatsView: View {
 
                                     Spacer()
                                 }
+                                .padding(.bottom, 2)
                                 HStack {
                                     Text("Money saved:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(statsService.timeRangeMoneySaved(startDate: startDate, endDate: endDate))$")
+                                    Text("$\(statsService.timeRangeMoneySaved(startDate: startDate, endDate: endDate))")
                                         .foregroundStyle(currentScheme.font)
                                 }
 

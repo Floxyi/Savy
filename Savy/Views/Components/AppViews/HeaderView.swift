@@ -10,7 +10,8 @@ import SwiftUI
 
 struct HeaderView: View {
     var title: String
-    var size: CGFloat = 44
+    var size: CGFloat = 34
+    var iconSize: CGFloat = 24
     var dismiss: (() -> Void)? = nil
     var actionView: AnyView? = nil
 
@@ -33,7 +34,7 @@ struct HeaderView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.backward")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.system(size: iconSize, weight: .bold))
                             .foregroundColor(currentScheme.font)
                     }
                     .padding(.leading, 16)

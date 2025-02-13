@@ -44,7 +44,7 @@ struct RegisterScreen: View {
                         placeholder: String(localized: "username"),
                         isSecure: false,
                         validationFunction: vm.validateUsername,
-                        popupText: vm.isUsernameValid ? "Valid username." : vm.usernameError ? "Please provide a 5 character username." : "This is not 5 characters long.",
+                        popupText: vm.isUsernameValid ? String(localized: "Valid username.") : vm.usernameError ? String(localized: "Please provide a 3 to 10 character long username.") : String(localized: "This username is not at least 3 characters long."),
                         keyboardType: .default,
                         contentType: .username
                     )
@@ -57,7 +57,7 @@ struct RegisterScreen: View {
                         placeholder: String(localized: "someone@example.com"),
                         isSecure: false,
                         validationFunction: vm.validateEmail,
-                        popupText: vm.isEmailValid ? "Valid email address." : vm.emailError ? "Please provide a valid email address." : "This is not a valid email address.",
+                        popupText: vm.isEmailValid ? String(localized: "Valid email address.") : vm.emailError ? String(localized: "Please provide a valid email address.") : String(localized: "This is not a valid email address."),
                         keyboardType: .emailAddress,
                         contentType: .emailAddress
                     )
@@ -70,7 +70,7 @@ struct RegisterScreen: View {
                         placeholder: String(localized: "password"),
                         isSecure: true,
                         validationFunction: vm.validatePassword,
-                        popupText: vm.isPasswordValid ? "Valid password." : vm.passwordError ? "Please provide a 8 character password." : "This password is not 8 characters long.",
+                        popupText: vm.isPasswordValid ? String(localized: "Valid password.") : vm.passwordError ? String(localized: "Please provide a minimum 8 characters long password.") : String(localized: "This password is not at least 8 characters long."),
                         keyboardType: .default,
                         contentType: .password
                     )
@@ -87,18 +87,19 @@ struct RegisterScreen: View {
                                         .frame(width: 20, height: 20)
                                 } else {
                                     Text("Register")
-                                        .font(.system(size: 26))
+                                        .font(.system(size: 20))
                                         .fontWeight(.bold)
                                     Image(systemName: "arrow.right")
                                         .fontWeight(.bold)
                                         .font(.system(size: 20))
                                 }
-                            },
+                            }
+                            .frame(width: 200),
                             isEnabled: vm.isUsernameValid && vm.isEmailValid && vm.isPasswordValid && !vm.isLoading,
                             action: { vm.showConfirmationDialog = true }
                         )
                         .padding(.top, 72)
-                        .confirmationDialog("If you proceed, you will lose all your personal stats.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
+                        .confirmationDialog("If you proceed, you will lose all your personal statistics.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
                             Button("Confirm", role: .destructive) {
                                 withAnimation {
                                     vm.signUpButtonPressed()
@@ -117,13 +118,14 @@ struct RegisterScreen: View {
                                         .frame(width: 20, height: 20)
                                 } else {
                                     Text("Register")
-                                        .font(.system(size: 26))
+                                        .font(.system(size: 20))
                                         .fontWeight(.bold)
                                     Image(systemName: "arrow.right")
                                         .fontWeight(.bold)
                                         .font(.system(size: 20))
                                 }
-                            },
+                            }
+                            .frame(width: 200),
                             isEnabled: vm.isUsernameValid && vm.isEmailValid && vm.isPasswordValid && !vm.isLoading,
                             action: vm.signUpButtonPressed
                         )

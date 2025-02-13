@@ -64,13 +64,14 @@ struct LoginScreen: View {
                                         .frame(width: 20, height: 20)
                                 } else {
                                     Text("Login")
-                                        .font(.system(size: 26))
+                                        .font(.system(size: 20))
                                         .fontWeight(.bold)
                                     Image(systemName: "arrow.right")
                                         .fontWeight(.bold)
                                         .font(.system(size: 20))
                                 }
-                            },
+                            }
+                            .frame(width: 200),
                             isEnabled: !vm.email.isEmpty && !vm.password.isEmpty && !vm.isLoading,
                             action: { vm.onShowConfirmationDialogChanged() }
                         )
@@ -94,13 +95,14 @@ struct LoginScreen: View {
                                         .frame(width: 20, height: 20)
                                 } else {
                                     Text("Login")
-                                        .font(.system(size: 26))
+                                        .font(.system(size: 20))
                                         .fontWeight(.bold)
                                     Image(systemName: "arrow.right")
                                         .fontWeight(.bold)
                                         .font(.system(size: 20))
                                 }
-                            },
+                            }
+                            .frame(width: 200),
                             isEnabled: !vm.email.isEmpty && !vm.password.isEmpty && !vm.isLoading,
                             action: vm.signInButtonPressed
                         )

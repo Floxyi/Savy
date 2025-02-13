@@ -43,7 +43,8 @@ struct ChallengeDetailScreen: View {
     private var headerSection: some View {
         HeaderView(
             title: vm.challengeName,
-            size: 32,
+            size: 20,
+            iconSize: 20,
             dismiss: {
                 dismiss()
                 vm.onDismiss()
@@ -51,7 +52,8 @@ struct ChallengeDetailScreen: View {
             actionView: AnyView(
                 ChallengeActionMenu(
                     editChallenge: vm.editChallenge,
-                    removeChallenge: { vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService) }
+                    removeChallenge: { vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService) },
+                    iconSize: 20
                 )
             )
         )
