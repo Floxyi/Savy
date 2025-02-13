@@ -6,6 +6,15 @@
 //
 
 enum SavingCalculation: String, Codable {
-    case Date = "Until Date"
-    case Amount = "With Amount"
+    case Date
+    case Amount
+
+    var localizedString: String {
+        switch self {
+        case .Date:
+            String(localized: "Until Date")
+        case .Amount:
+            String(localized: "With Amount")
+        }
+    }
 }

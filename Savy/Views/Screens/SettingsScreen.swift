@@ -19,19 +19,19 @@ struct SettingsScreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                HeaderView(title: "Settings")
+                HeaderView(title: String(localized: "Settings"))
 
                 ScrollView(.vertical, showsIndicators: false) {
-                    SettingsTileView(image: "person.fill", text: "Account") {
+                    SettingsTileView(image: "person.fill", text: String(localized: "Account")) {
                         AccountView()
                     }
 
-                    SettingsTileView(image: "paintbrush.fill", text: "Design") {
-                        SettingsBarView(text: "Theme", toggle: $vm.toggledDarkMode)
+                    SettingsTileView(image: "paintbrush.fill", text: String(localized: "Design")) {
+                        SettingsBarView(text: String(localized: "Dark Mode"), toggle: $vm.toggledDarkMode)
                             .onChange(of: vm.toggledDarkMode) { _, _ in
                                 vm.onToggleModeChanged()
                             }
-                        SettingsBarView(text: "Color Mode", toggle: $vm.toggledColorMode) {
+                        SettingsBarView(text: String(localized: "Color Mode"), toggle: $vm.toggledColorMode) {
                             if vm.toggledColorMode {
                                 GradientSliderView(value: Binding(
                                     get: { colorServiceVM.colorService.hue },

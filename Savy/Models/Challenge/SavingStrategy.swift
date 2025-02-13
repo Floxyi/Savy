@@ -36,4 +36,21 @@ enum SavingStrategy: String, CaseIterable, Codable {
         case .Annualy: 1
         }
     }
+
+    var localizedString: String {
+        switch self {
+        case .Daily:
+            String(localized: "Daily")
+        case .Weekly:
+            String(localized: "Weekly")
+        case .Monthly:
+            String(localized: "Monthly")
+        case .Quaterly:
+            String(localized: "Quaterly")
+        case .Biannually:
+            String(localized: "Biannually")
+        case .Annualy:
+            String(localized: "Annualy")
+        }
+    }
 }

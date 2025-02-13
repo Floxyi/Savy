@@ -31,7 +31,7 @@ struct PersonalStatsView: View {
         let challengesStartedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_started }) != nil
         let challengesCompletedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_completed }) != nil
 
-        HeaderView(title: "Personal Stats")
+        HeaderView(title: String(localized: "Personal Stats"))
 
         if !moneySavedStatsEntries && !challengesStartedStatsEntries && !challengesCompletedStatsEntries {
             VStack {
@@ -77,7 +77,7 @@ struct PersonalStatsView: View {
                                     Text("Total money saved:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(statsService.totalMoneySaved()) €")
+                                    Text("\(statsService.totalMoneySaved())$")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
@@ -185,7 +185,7 @@ struct PersonalStatsView: View {
                                     Text("Money saved:")
                                         .foregroundStyle(currentScheme.font)
                                         .fontWeight(.bold)
-                                    Text("\(statsService.timeRangeMoneySaved(startDate: startDate, endDate: endDate)) €")
+                                    Text("\(statsService.timeRangeMoneySaved(startDate: startDate, endDate: endDate))$")
                                         .foregroundStyle(currentScheme.font)
                                 }
 
@@ -222,7 +222,7 @@ struct PersonalStatsView: View {
                                         .fontWeight(.bold)
                                     Text(String(format: "%.2f", statsService.averageSavedTimeRange(startDate: startDate, endDate: endDate)))
                                         .foregroundStyle(currentScheme.font)
-                                    Text("€")
+                                    Text("$")
                                         .foregroundStyle(currentScheme.font)
                                         .padding(.leading, -4)
                                 }

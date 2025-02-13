@@ -48,13 +48,13 @@ struct ChallengeProgressBarView: View {
 
                     Spacer()
 
-                    Text("\(challenge.currentSavedAmount())€")
+                    Text("\(challenge.currentSavedAmount())$")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundStyle(currentScheme.accent2)
 
                     Spacer()
 
-                    Text("\(challenge.challengeConfiguration.amount)€")
+                    Text("\(challenge.challengeConfiguration.amount)$")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(currentScheme.accent2)
                 }

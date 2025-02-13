@@ -14,7 +14,7 @@ struct ChallengesScreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                HeaderView(title: "Challenges")
+                HeaderView(title: String(localized: "Challenges"))
                 ChallengesListView()
                 HStack {
                     Spacer()

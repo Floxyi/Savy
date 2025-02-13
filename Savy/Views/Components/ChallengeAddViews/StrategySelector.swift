@@ -22,12 +22,12 @@ struct StrategySelector: View {
                     selectedStrategy = strategy
                     onChangeAction()
                 }) {
-                    Text(strategy.rawValue)
+                    Text(strategy.localizedString)
                 }
             }
         } label: {
             HStack {
-                Text(selectedStrategy.rawValue)
+                Text(selectedStrategy.localizedString)
                     .font(.system(size: 16))
                     .foregroundColor(currentScheme.font)
                 Image(systemName: "chevron.down")

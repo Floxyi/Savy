@@ -23,7 +23,7 @@ struct LoginScreen: View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
-            HeaderView(title: "Login", dismiss: {
+            HeaderView(title: String(localized: "Login"), dismiss: {
                 dismiss()
                 TabBarManager.shared.show()
             })
@@ -37,7 +37,7 @@ struct LoginScreen: View {
                 VStack {
                     LoginTextFieldView(
                         text: $vm.email,
-                        placeholder: "someone@example.com",
+                        placeholder: String(localized: "someone@example.com"),
                         isSecure: false,
                         keyboardType: .emailAddress,
                         contentType: .emailAddress
@@ -45,7 +45,7 @@ struct LoginScreen: View {
 
                     LoginTextFieldView(
                         text: $vm.password,
-                        placeholder: "password",
+                        placeholder: String(localized: "password"),
                         isSecure: true,
                         keyboardType: .default,
                         contentType: .password
@@ -76,12 +76,12 @@ struct LoginScreen: View {
                         )
                         .padding(.top, 72)
                         .confirmationDialog("If you proceed, you will lose all your data when logging in to a new account.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
-                            Button("Bestätigen", role: .destructive) {
+                            Button("Confirm", role: .destructive) {
                                 withAnimation {
                                     vm.signInButtonPressed()
                                 }
                             }
-                            Button("Abbrechen", role: .cancel) {}
+                            Button("Cancel", role: .cancel) {}
                         }
                     }
 

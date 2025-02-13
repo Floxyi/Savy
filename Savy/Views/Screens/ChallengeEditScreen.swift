@@ -28,7 +28,7 @@ struct ChallengeEditScreen: View {
                 VStack {
                     IconPicker(selectedIcon: $vm.icon, isIconPickerVisible: $vm.isIconPickerVisible)
 
-                    TextField("", text: $vm.name, prompt: Text(verbatim: "Name")
+                    TextField("", text: $vm.name, prompt: Text(verbatim: String(localized: "Name"))
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(currentScheme.font.opacity(0.4)))
                         .textInputAutocapitalization(.never)
@@ -40,19 +40,19 @@ struct ChallengeEditScreen: View {
                         }
 
                     HStack {
-                        TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: "Amount")
+                        TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: String(localized: "Amount"))
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font.opacity(0.4)))
                             .textFieldStyle(CustomTextFieldStyle())
                             .keyboardType(.numberPad)
-                        Text("€")
+                        Text("$")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundStyle(currentScheme.font)
                             .padding(.trailing, 32)
                     }
 
                     HStack {
-                        Text("Strategy")
+                        Text(String(localized: "Strategy"))
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font.opacity(0.4))
                             .padding(.leading, 8)
@@ -75,7 +75,7 @@ struct ChallengeEditScreen: View {
                                 selection: $vm.endDate,
                                 displayedComponents: [.date]
                             )
-                            .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: "End date:", isDatePickerVisible: $vm.isDatePickerVisible))
+                            .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: String(localized: "End date"), isDatePickerVisible: $vm.isDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -84,7 +84,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 24)
 
-                        Text("\(vm.strategy) Amount: \(vm.calculateCycleAmount()) €")
+                        Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(vm.calculateCycleAmount())$")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font)
                             .padding()
@@ -98,7 +98,7 @@ struct ChallengeEditScreen: View {
                                     .foregroundColor(currentScheme.font.opacity(0.4)))
                                     .textFieldStyle(CustomTextFieldStyle())
                                     .keyboardType(.numberPad)
-                                Text("€")
+                                Text("$")
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundStyle(currentScheme.font)
                                     .padding(.trailing, 32)
@@ -108,7 +108,7 @@ struct ChallengeEditScreen: View {
                         .padding(.top, 8)
                         .padding(.horizontal, 8)
 
-                        Text("End Date: \(vm.calculateEndDateByAmount())")
+                        Text("\(String(localized: "End date")): \(vm.calculateEndDateByAmount())")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font)
                             .padding()
@@ -125,7 +125,7 @@ struct ChallengeEditScreen: View {
                     ToolbarItem(placement: .confirmationAction) {
                         ToolbarDoneButton(
                             showPopover: $showPopover,
-                            title: "Done",
+                            title: String(localized: "Done"),
                             isValid: { vm.isValid() },
                             onDoneAction: {
                                 dismiss()
@@ -154,7 +154,7 @@ struct ChallengeEditScreen: View {
                         )
 
                         HStack {
-                            Text("\(vm.strategy) Amount: \(vm.calculateCycleAmount()) €")
+                            Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(vm.calculateCycleAmount())$")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentScheme.font)
                                 .padding(8)
