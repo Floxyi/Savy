@@ -30,8 +30,9 @@ struct SavingItemView: View {
                 .padding(.bottom, -6)
 
             Text("$\(NumberFormatterHelper.shared.format(saving.amount))")
-                .font(.system(size: 26, weight: .bold))
+                .font(.system(size: 23, weight: .bold))
                 .foregroundStyle(currentScheme.font)
+                .padding(.top, 4)
         }
         .frame(width: 80, height: 80)
         .background(currentScheme.bar)
@@ -42,6 +43,7 @@ struct SavingItemView: View {
         }
         .confirmationDialog(!saving.done ? "Are you sure you want to mark this saving item ($\(saving.amount)) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day())) as done?" : "Are you sure you want to revert this saving item ($\(saving.amount)) from the \(saving.date.formatted(.dateTime.month(.twoDigits).day()))?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
             Button("Confirm", role: .destructive) {
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                 withAnimation {
                     saving.toggleDone(statsService: statsServiceVM.statsService)
                 }
@@ -67,7 +69,7 @@ struct SavingItemView: View {
         startDate: Date(),
         strategy: .Monthly,
         calculation: .Amount,
-        cycleAmount: 1000
+        cycleAmount: 100
     )
     challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsServiceViewModel.statsService)
     let challenge = challengeServiceViewModel.challengeService.challenges.first!

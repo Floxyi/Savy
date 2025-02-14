@@ -21,13 +21,26 @@ struct LeaderboardView: View {
             HeaderView(title: String(localized: "Leaderboard"))
 
             if isLoading {
-                ProgressView()
+                HStack {
+                    Spacer()
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    Spacer()
+                }
             } else {
                 if profiles.isEmpty {
                     emptyStateView(currentSchema: currentScheme)
                 } else {
-                    topProfilesView(currentSchema: currentScheme)
-                    remainingProfilesView(currentSchema: currentScheme)
+                    VStack {
+                        topProfilesView(currentSchema: currentScheme)
+                        remainingProfilesView(currentSchema: currentScheme)
+                    }
+                    .refreshable {
+                        await fetchData()
+                    }
                 }
             }
         }
@@ -39,6 +52,14 @@ struct LeaderboardView: View {
             } catch {}
             isLoading = false
         }
+    }
+
+    private func fetchData() async {
+        do {
+            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+            let fetchedProfiles = try await ProfileService.shared.getAllProfilesWithSavings()
+            profiles = fetchedProfiles.sorted { $0.savings.amount > $1.savings.amount }
+        } catch {}
     }
 
     private func emptyStateView(currentSchema: ColorScheme) -> some View {

@@ -11,40 +11,18 @@ import SwiftUI
 private let buttonDimen: CGFloat = 55
 
 struct BottomTabBarView: View {
+    @StateObject private var tabBarManager = TabBarManager.shared
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
-    @Binding var currentTab: Tab
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
         HStack {
-            TabBarButton(imageName: Tab.challenges.rawValue, active: currentTab == Tab.challenges)
-                .frame(width: buttonDimen, height: buttonDimen)
-                .onTapGesture {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    currentTab = .challenges
-                }
-                .padding(.horizontal, 16)
-
+            TabBarButton(tab: Tab.challenges, active: tabBarManager.selectedTab == Tab.challenges)
             Spacer()
-
-            TabBarButton(imageName: Tab.leaderboard.rawValue, active: currentTab == Tab.leaderboard)
-                .frame(width: buttonDimen, height: buttonDimen)
-                .onTapGesture {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    currentTab = .leaderboard
-                }
-                .padding(.horizontal, 16)
-
+            TabBarButton(tab: Tab.leaderboard, active: tabBarManager.selectedTab == Tab.leaderboard)
             Spacer()
-
-            TabBarButton(imageName: Tab.settings.rawValue, active: currentTab == Tab.settings)
-                .frame(width: buttonDimen, height: buttonDimen)
-                .onTapGesture {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    currentTab = .settings
-                }
-                .padding(.horizontal, 16)
+            TabBarButton(tab: Tab.settings, active: tabBarManager.selectedTab == Tab.settings)
         }
         .frame(width: 300, height: 70)
         .tint(Color.black)
@@ -56,25 +34,35 @@ struct BottomTabBarView: View {
 }
 
 private struct TabBarButton: View {
-    let imageName: String
+    let tab: Tab
     let active: Bool
 
+    @StateObject private var tabBarManager = TabBarManager.shared
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
-        Image(systemName: imageName)
+        Image(systemName: tab.rawValue)
             .renderingMode(.template)
             .foregroundStyle(active ? currentScheme.font : currentScheme.barIcons)
             .fontWeight(.bold)
             .font(.system(size: active ? 40 : 24))
-            .animation(.easeInOut, value: active)
+            .animation(.easeOut, value: active)
+            .frame(width: buttonDimen, height: buttonDimen)
+            .onTapGesture { tabBarManager.switchTab(tab: tab) }
+            .padding(.horizontal, 16)
     }
 }
 
 #Preview {
-    @Previewable @State var selectedTab = Tab.challenges
-    return BottomTabBarView(currentTab: $selectedTab)
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
+    let schema = Schema([ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+
+    return BottomTabBarView()
+        .modelContainer(container)
+        .environmentObject(colorServiceViewModel)
 }

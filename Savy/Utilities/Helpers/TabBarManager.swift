@@ -22,6 +22,7 @@ class TabBarManager: ObservableObject {
     }
 
     func switchTab(tab: Tab) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         selectedTab = tab
     }
 }

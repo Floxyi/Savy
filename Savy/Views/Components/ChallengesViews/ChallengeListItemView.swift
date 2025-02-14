@@ -20,7 +20,7 @@ struct ChallengeListItemView: View {
             }
             .padding(16)
             .background(colorServiceVM.colorService.currentScheme.bar)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
         }
         .listRowBackground(Color(.secondarySystemBackground))
         .padding(.horizontal)
@@ -82,8 +82,12 @@ private struct ProgressView: View {
                 FinishedView()
             }
             Spacer()
-            AmountView(challenge: challenge)
+            VStack {
+                Spacer()
+                AmountView(challenge: challenge)
+            }
         }
+        .frame(height: 50)
     }
 }
 
@@ -211,7 +215,7 @@ private struct AmountView: View {
 
         ZStack {
             ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 15)
+                RoundedRectangle(cornerRadius: 12)
                     .fill(colorServiceVM.colorService.currentScheme.accent1)
                     .frame(width: calculatedWidth, height: 30)
 
@@ -220,7 +224,7 @@ private struct AmountView: View {
                     .frame(width: calculatedWidth * progress, height: 30)
             }
             .mask(
-                RoundedRectangle(cornerRadius: 15)
+                RoundedRectangle(cornerRadius: 12)
                     .frame(width: calculatedWidth, height: 30)
             )
 

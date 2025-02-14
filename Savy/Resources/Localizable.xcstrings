@@ -175,6 +175,9 @@
         }
       }
     },
+    "❤️" : {
+
+    },
     "$" : {
       "localizations" : {
         "de" : {
@@ -598,6 +601,9 @@
         }
       }
     },
+    "Made with love" : {
+
+    },
     "Money saved" : {
       "localizations" : {
         "de" : {
@@ -967,6 +973,9 @@
           }
         }
       }
+    },
+    "Version 1.0" : {
+
     },
     "View all" : {
       "localizations" : {

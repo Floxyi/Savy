@@ -16,7 +16,6 @@ class ChallengeEditViewModel: ObservableObject {
     @Published var calculation: SavingCalculation = .Date
     @Published var cycleAmount: Int?
     @Published var endDate: Date = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date()) ?? Date()
-
     @Published var isDatePickerVisible = false
     @Published var isIconPickerVisible = false
 

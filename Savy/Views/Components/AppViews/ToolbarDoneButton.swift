@@ -5,6 +5,7 @@
 //  Created by Florian Winkler on 26.09.24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ToolbarDoneButton: View {
@@ -31,4 +32,37 @@ struct ToolbarDoneButton: View {
         }
         .disabled(!isValid())
     }
+}
+
+#Preview {
+    @Previewable @State var showPopover = true
+
+    let schema = Schema([ChallengeService.self, ColorService.self, StatsService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
+
+    return VStack {
+        ToolbarDoneButton(
+            showPopover: $showPopover,
+            title: "Done",
+            isValid: { true },
+            onDoneAction: {
+                print("Done tapped!")
+            }
+        )
+
+        ToolbarDoneButton(
+            showPopover: $showPopover,
+            title: "Done",
+            isValid: { false },
+            onDoneAction: {
+                print("Should not trigger")
+            }
+        )
+    }
+    .padding()
+    .modelContainer(container)
+    .environmentObject(colorServiceViewModel)
 }

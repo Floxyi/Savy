@@ -30,7 +30,7 @@ struct AppView: View {
             }
 
             if tabBarManager.isShown {
-                BottomTabBarView(currentTab: $tabBarManager.selectedTab)
+                BottomTabBarView()
                     .padding(.bottom)
             }
         }

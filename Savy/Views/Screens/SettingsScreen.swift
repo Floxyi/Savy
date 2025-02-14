@@ -46,8 +46,19 @@ struct SettingsScreen: View {
                             vm.onToggleModeChanged()
                         }
                     }
-                }
 
+                    VStack {
+                        HStack {
+                            Text("Made with love")
+                                .foregroundStyle(colorServiceVM.colorService.currentScheme.accent1)
+                            Text("❤️")
+                                .opacity(0.5)
+                        }
+                        Text("Version 1.0")
+                            .foregroundStyle(colorServiceVM.colorService.currentScheme.accent1)
+                    }
+                    .padding(.bottom, 12)
+                }
                 Spacer()
             }
             .padding()
