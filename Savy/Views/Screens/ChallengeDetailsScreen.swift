@@ -35,6 +35,17 @@ struct ChallengeDetailScreen: View {
         .background(currentScheme.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
+        .gesture(
+            DragGesture()
+                .onEnded { value in
+                    if value.translation.width > 100 {
+                        dismiss()
+                        vm.onDismiss()
+                    } else if value.translation.height < -100 {
+                        vm.showDetailsPopover.toggle()
+                    }
+                }
+        )
         .popover(isPresented: $vm.showEditPopover) {
             ChallengeEditScreen(challenge: vm.challenge, showPopover: $vm.showEditPopover)
         }
