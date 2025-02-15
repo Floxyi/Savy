@@ -265,6 +265,16 @@
         }
       }
     },
+    "Are you sure that you want to delete this challenge?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bist du dir sicher, dass du diese Herausforderung löschen möchtest?"
+          }
+        }
+      }
+    },
     "Are you sure you want to log out?" : {
       "localizations" : {
         "de" : {
