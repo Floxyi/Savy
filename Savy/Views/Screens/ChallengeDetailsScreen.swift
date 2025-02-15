@@ -14,6 +14,8 @@ struct ChallengeDetailScreen: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
     @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
+    @State private var showConfirmationDialog = false
+
     init(challenge: Challenge) {
         _vm = StateObject(wrappedValue: ChallengeDetailsViewModel(challenge: challenge))
     }
@@ -39,13 +41,19 @@ struct ChallengeDetailScreen: View {
             DragGesture()
                 .onEnded { value in
                     if value.translation.width > 100 {
-                        dismiss()
-                        vm.onDismiss()
+                        vm.onDismiss(dismiss: dismiss)
                     } else if value.translation.height < -100 {
                         vm.showDetailsPopover.toggle()
                     }
                 }
         )
+        .confirmationDialog("Are you sure that you want to delete this challenge?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+            Button("Confirm", role: .destructive) {
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService)
+            }
+            Button("Cancel", role: .cancel) {}
+        }
         .popover(isPresented: $vm.showEditPopover) {
             ChallengeEditScreen(challenge: vm.challenge, showPopover: $vm.showEditPopover)
         }
@@ -55,14 +63,11 @@ struct ChallengeDetailScreen: View {
         HeaderView(
             title: vm.challengeName,
             iconSize: 20,
-            dismiss: {
-                dismiss()
-                vm.onDismiss()
-            },
+            dismiss: { vm.onDismiss(dismiss: dismiss) },
             actionView: AnyView(
                 ChallengeActionMenu(
                     editChallenge: vm.editChallenge,
-                    removeChallenge: { vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService) },
+                    removeChallenge: { showConfirmationDialog = true },
                     iconSize: 20
                 )
             )
@@ -79,11 +84,9 @@ struct ChallengeDetailScreen: View {
     private func mainContent() -> some View {
         VStack {
             if vm.hasRemainingAmount {
-                SavingsGridView(
-                    savings: vm.savings, columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4)
-                )
+                SavingsGridView(savings: vm.savings, columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4))
             } else {
-                CompletionView(removeChallenge: { vm.removeChallenge(dismiss: dismiss, challengeService: challengeServiceVM.challengeService) })
+                CompletionView(removeChallenge: { showConfirmationDialog = true })
             }
             Spacer()
             detailsButton
@@ -98,10 +101,7 @@ struct ChallengeDetailScreen: View {
         )
         .padding(.bottom, 24)
         .popover(isPresented: $vm.showDetailsPopover) {
-            ChallengeDetailsListScreen(
-                challenge: vm.challenge,
-                showPopover: $vm.showDetailsPopover
-            )
+            ChallengeDetailsListScreen(challenge: vm.challenge, showPopover: $vm.showDetailsPopover)
         }
     }
 }

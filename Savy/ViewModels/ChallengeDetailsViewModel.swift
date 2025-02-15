@@ -44,7 +44,8 @@ class ChallengeDetailsViewModel: ObservableObject {
         TabBarManager.shared.hide()
     }
 
-    func onDismiss() {
+    func onDismiss(dismiss: DismissAction) {
+        dismiss()
         TabBarManager.shared.show()
     }
 }
