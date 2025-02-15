@@ -116,7 +116,14 @@
       }
     },
     "%@x" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@x"
+          }
+        }
+      }
     },
     "%lld" : {
       "localizations" : {
@@ -143,7 +150,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld übrig"
+            "value" : "%lld Ersparnisse übrig"
           }
         }
       }
@@ -164,17 +171,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld. %@"
-          }
-        }
-      }
-    },
-    "%lldx" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lldx"
           }
         }
       }
@@ -428,6 +424,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Herzlichen Glückwunsch! \nDu hast dein Ziel erreicht!"
+          }
+        }
+      }
+    },
+    "Current Streak: %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktuelle Serie: %lld"
           }
         }
       }

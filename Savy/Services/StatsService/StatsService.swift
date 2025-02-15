@@ -178,4 +178,30 @@ class StatsService: ObservableObject {
             } catch {}
         }
     }
+
+    func getCurrentStreak(challengeId: UUID, challengeService: ChallengeService) -> Int {
+        let allSavings = entries.filter { $0.type == .money_saved && getChallengeIdFromSavingId(savingId: $0.savingStats!.savingId, challengeService: challengeService) == challengeId }
+        if allSavings.isEmpty { return 0 }
+
+        var streak = 0
+
+        for entry in allSavings.reversed() {
+            if let savingStats = entry.savingStats, entry.date <= savingStats.expectedDate {
+                streak += 1
+            } else {
+                break
+            }
+        }
+
+        return streak
+    }
+
+    private func getChallengeIdFromSavingId(savingId: UUID, challengeService: ChallengeService) -> UUID? {
+        for challenge in challengeService.getAllChallenges() {
+            if let _ = challenge.savings.first(where: { $0.id == savingId }) {
+                return challenge.id
+            }
+        }
+        return nil
+    }
 }

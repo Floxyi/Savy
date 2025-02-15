@@ -15,6 +15,10 @@ class ChallengeService: ObservableObject {
 
     init() {}
 
+    func getAllChallenges() -> [Challenge] {
+        challenges
+    }
+
     func getChallengeById(id: UUID) -> Challenge? {
         challenges.first { $0.id == id }
     }
