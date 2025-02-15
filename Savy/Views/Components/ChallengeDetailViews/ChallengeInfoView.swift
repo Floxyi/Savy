@@ -12,9 +12,13 @@ struct ChallengeInfoView: View {
     let challenge: Challenge
 
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
+    @EnvironmentObject private var statsServiceViewModel: StatsServiceViewModel
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
+        let challengeService = challengeServiceVM.challengeService
+        let statsService = statsServiceViewModel.statsService
 
         VStack {
             VStack {
@@ -37,11 +41,21 @@ struct ChallengeInfoView: View {
                 ChallengeProgressBarView(challenge: challenge)
 
                 HStack {
+                    HStack(alignment: .center) {
+                        Image(systemName: "flame")
+                            .font(.system(size: 10))
+                            .foregroundStyle(currentScheme.font)
+                        Text("Current Streak: \(statsService.getCurrentStreak(challengeId: challenge.id, challengeService: challengeService))")
+                            .font(.system(size: 12))
+                            .foregroundStyle(currentScheme.font)
+                            .padding(.leading, -4)
+                    }
                     Spacer()
                     Text("\(challenge.remainingSavings()) savings left")
                         .font(.system(size: 12))
                         .foregroundStyle(currentScheme.font)
                 }
+                .padding(.top, 2)
             }
             .padding(16)
             .background(currentScheme.bar)
