@@ -43,7 +43,6 @@ struct ChallengeDetailScreen: View {
     private var headerSection: some View {
         HeaderView(
             title: vm.challengeName,
-            size: 20,
             iconSize: 20,
             dismiss: {
                 dismiss()

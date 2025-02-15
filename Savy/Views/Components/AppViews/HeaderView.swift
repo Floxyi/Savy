@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HeaderView: View {
     var title: String
-    var size: CGFloat = 34
+    var fontSize: CGFloat = 34
     var iconSize: CGFloat = 24
     var dismiss: (() -> Void)? = nil
     var actionView: AnyView? = nil
@@ -20,38 +20,31 @@ struct HeaderView: View {
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
-        ZStack {
-            HStack {
-                Text(title)
-                    .fontWeight(.bold)
-                    .font(.custom("Shrikhand-Regular", size: size))
-                    .foregroundStyle(currentScheme.font)
-            }
-
+        HStack(alignment: .center) {
             if let dismiss {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .font(.system(size: iconSize, weight: .bold))
-                            .foregroundColor(currentScheme.font)
-                    }
-                    .padding(.leading, 16)
-                    .padding(.bottom, 4)
-                    Spacer()
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: iconSize, weight: .bold))
+                        .foregroundColor(currentScheme.font)
                 }
             }
+
+            Spacer()
+            Text(title)
+                .font(.custom("Shrikhand-Regular", size: fontSize))
+                .foregroundStyle(currentScheme.font)
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
+                .padding(.horizontal, 10)
+            Spacer()
 
             if let actionView {
-                HStack {
-                    Spacer()
-                    actionView
-                        .padding(.trailing, 16)
-                        .padding(.bottom, 4)
-                }
+                actionView
             }
         }
+        .padding(.horizontal, 10)
     }
 }
 

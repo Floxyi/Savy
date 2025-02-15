@@ -115,6 +115,9 @@
         }
       }
     },
+    "%@x" : {
+
+    },
     "%lld" : {
       "localizations" : {
         "de" : {
@@ -166,6 +169,7 @@
       }
     },
     "%lldx" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -176,7 +180,14 @@
       }
     },
     "❤️" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "❤️"
+          }
+        }
+      }
     },
     "$" : {
       "localizations" : {
@@ -601,8 +612,15 @@
         }
       }
     },
-    "Made with love" : {
-
+    "Made with" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erstellt mit"
+          }
+        }
+      }
     },
     "Money saved" : {
       "localizations" : {
@@ -639,7 +657,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mehr"
+            "value" : "weitere"
           }
         }
       }
@@ -975,7 +993,14 @@
       }
     },
     "Version 1.0" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version 1.0"
+          }
+        }
+      }
     },
     "View all" : {
       "localizations" : {

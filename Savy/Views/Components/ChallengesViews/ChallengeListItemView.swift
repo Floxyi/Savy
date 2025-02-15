@@ -51,6 +51,8 @@ private struct IconAndNameView: View {
                 .fontWeight(.bold)
             Text(challenge.challengeConfiguration.name)
                 .fontWeight(.bold)
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
         }
         .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
     }
@@ -63,7 +65,7 @@ private struct DateView: View {
     var body: some View {
         HStack {
             Text(date.formatted(.dateTime.month(.twoDigits).day().year()))
-            Image(systemName: "calendar")
+            Image(systemName: "calendar.badge.checkmark")
         }
         .font(.system(size: 13, weight: .bold))
         .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
@@ -137,7 +139,7 @@ private struct NextSavingView: View {
 
     var body: some View {
         VStack {
-            Text("$\(NumberFormatterHelper.shared.format(saving.amount))")
+            Text("$\(NumberFormatterHelper.shared.formatCurrency(saving.amount))")
                 .font(.system(size: 14, weight: .bold))
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
                 .font(.system(size: 12))
@@ -169,7 +171,9 @@ private struct RemainingView: View {
     var body: some View {
         VStack {
             if remainingSavings > 2 {
-                Text("\(remainingSavings - 2)x")
+                Text("\((remainingSavings - 2).description)x")
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
                 Text("left")
             } else {
                 Image(systemName: "flag.2.crossed")
@@ -178,7 +182,7 @@ private struct RemainingView: View {
         }
         .font(.system(size: 14))
         .frame(width: 42, height: 42)
-        .padding(4)
+        .padding(6)
         .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .overlay(
@@ -229,11 +233,11 @@ private struct AmountView: View {
             )
 
             HStack(alignment: .bottom, spacing: -4) {
-                Text("$\(NumberFormatterHelper.shared.format(challenge.currentSavedAmount()))")
+                Text("$\(NumberFormatterHelper.shared.formatCurrency(challenge.currentSavedAmount()))")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
                     .padding(.trailing, 7)
-                Text("/ $\(NumberFormatterHelper.shared.format(challenge.challengeConfiguration.amount))")
+                Text("/ $\(NumberFormatterHelper.shared.formatCurrency(challenge.challengeConfiguration.amount))")
                     .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
                     .offset(y: -3)
