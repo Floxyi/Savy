@@ -20,7 +20,7 @@ struct SavingItemView: View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
         VStack {
-            Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
+            Text(saving.date.formatted(.dateTime.month(.twoDigits).day(.twoDigits)))
                 .font(.system(size: 14, weight: .bold))
                 .foregroundStyle(currentScheme.font)
                 .frame(width: 50)
@@ -29,7 +29,7 @@ struct SavingItemView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.bottom, -6)
 
-            Text("$\(NumberFormatterHelper.shared.format(saving.amount))")
+            Text("$\(NumberFormatterHelper.shared.formatCurrency(saving.amount))")
                 .font(.system(size: 23, weight: .bold))
                 .foregroundStyle(currentScheme.font)
                 .padding(.top, 4)

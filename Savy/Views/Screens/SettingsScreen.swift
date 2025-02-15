@@ -49,7 +49,7 @@ struct SettingsScreen: View {
 
                     VStack {
                         HStack {
-                            Text("Made with love")
+                            Text("Made with")
                                 .foregroundStyle(colorServiceVM.colorService.currentScheme.accent1)
                             Text("❤️")
                                 .opacity(0.5)

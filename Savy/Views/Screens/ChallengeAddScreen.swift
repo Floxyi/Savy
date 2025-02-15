@@ -35,7 +35,7 @@ struct ChallengeAddScreen: View {
                         .textInputAutocapitalization(.never)
                         .textFieldStyle(CustomTextFieldStyle())
                         .onChange(of: vm.name) { _, newValue in
-                            if newValue.count > 15 {
+                            if newValue.count > 35 {
                                 vm.name = String(newValue.prefix(12))
                             }
                         }

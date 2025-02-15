@@ -19,7 +19,7 @@ struct NumberFormatterHelper {
         formatter.usesGroupingSeparator = true
     }
 
-    func format(_ number: Int) -> String {
+    func formatCurrency(_ number: Int) -> String {
         let absNumber = abs(number)
 
         switch absNumber {

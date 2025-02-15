@@ -27,7 +27,7 @@ struct ChallengeDetailsListScreen: View {
                     .padding(.top, -36)
                     .padding(.bottom, 4)
 
-                HeaderView(title: String(localized: "Savings Overview"), size: 38)
+                HeaderView(title: String(localized: "Savings Overview"), fontSize: 38)
                     .padding(.bottom, -1)
 
                 HStack {

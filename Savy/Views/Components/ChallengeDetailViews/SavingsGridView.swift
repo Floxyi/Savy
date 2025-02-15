@@ -25,13 +25,16 @@ struct SavingsGridView: View {
             }
             if sortedSavings.count - 15 > 1 {
                 VStack {
-                    Text("\(sortedSavings.count - 15)")
+                    Text("\((sortedSavings.count - 15).description)")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(currentScheme.barIcons)
                     Text("more")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundStyle(currentScheme.barIcons)
                 }
+                .padding(6)
                 .frame(width: 80, height: 80)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)

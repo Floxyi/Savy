@@ -14,6 +14,11 @@ struct LeaderboardView: View {
     @State private var profiles: [ProfileWithSavings] = []
     @State private var isLoading = true
 
+    init(profiles: [ProfileWithSavings] = [], isLoading: Bool = false) {
+        _profiles = State(initialValue: profiles)
+        _isLoading = State(initialValue: isLoading)
+    }
+
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
 
@@ -32,7 +37,11 @@ struct LeaderboardView: View {
                 }
             } else {
                 if profiles.isEmpty {
-                    emptyStateView(currentSchema: currentScheme)
+                    HStack {
+                        Spacer()
+                        emptyStateView(currentSchema: currentScheme)
+                        Spacer()
+                    }
                 } else {
                     VStack {
                         topProfilesView(currentSchema: currentScheme)
@@ -105,7 +114,7 @@ struct LeaderboardView: View {
                                     .foregroundColor(currentSchema.font)
                             }
                             Spacer()
-                            Text("$\(NumberFormatterHelper.shared.format(profile.savings.amount))")
+                            Text("$\(NumberFormatterHelper.shared.formatCurrency(profile.savings.amount))")
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(currentSchema.font)
                         }
@@ -126,7 +135,7 @@ struct LeaderboardView: View {
         let isCurrentUser = profile.id == profileId
 
         return VStack {
-            Text("$\(NumberFormatterHelper.shared.format(profile.savings.amount))")
+            Text("$\(NumberFormatterHelper.shared.formatCurrency(profile.savings.amount))")
                 .font(.system(size: 16, weight: .black))
                 .foregroundColor(currentSchema.font)
                 .padding(1)
@@ -156,7 +165,7 @@ struct LeaderboardView: View {
                 .font(.system(size: 26, weight: .bold))
                 .foregroundColor(currentSchema.font)
             VStack {
-                Text("$\(NumberFormatterHelper.shared.format(profile.savings.amount))")
+                Text("$\(NumberFormatterHelper.shared.formatCurrency(profile.savings.amount))")
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(currentSchema.font)
                     .padding(.top, 2)
@@ -181,7 +190,31 @@ struct LeaderboardView: View {
     }
 }
 
-#Preview {
-    LeaderboardView()
-        .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
+#Preview("Empty Leaderboard") {
+    let schema = Schema([ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    return LeaderboardView(profiles: [], isLoading: false)
+        .modelContainer(container)
+        .environmentObject(ColorServiceViewModel(modelContext: context))
+}
+
+#Preview("Filled Leaderboard") {
+    let schema = Schema([ColorService.self])
+    let container = try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let context = container.mainContext
+
+    let mockProfiles = [
+        ProfileWithSavings(id: UUID(), username: "Alice", savings: Savings(profileId: UUID(), amount: 1500)),
+        ProfileWithSavings(id: UUID(), username: "Bob", savings: Savings(profileId: UUID(), amount: 300)),
+        ProfileWithSavings(id: UUID(), username: "Charlie", savings: Savings(profileId: UUID(), amount: 200)),
+        ProfileWithSavings(id: UUID(), username: "Anderson", savings: Savings(profileId: UUID(), amount: 100)),
+        ProfileWithSavings(id: UUID(), username: "Alice", savings: Savings(profileId: UUID(), amount: 100)),
+        ProfileWithSavings(id: UUID(), username: "Ken", savings: Savings(profileId: UUID(), amount: 100)),
+    ]
+
+    return LeaderboardView(profiles: mockProfiles, isLoading: false)
+        .modelContainer(container)
+        .environmentObject(ColorServiceViewModel(modelContext: context))
 }
