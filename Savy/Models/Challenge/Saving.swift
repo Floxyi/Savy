@@ -21,8 +21,15 @@ final class Saving {
         id = UUID()
         self.challenge = challenge
         self.amount = amount
-        self.date = date
+        self.date = Saving.getStandardDate(date: date)
         done = false
+    }
+
+    private static func getStandardDate(date: Date) -> Date {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        return calendar.date(bySettingHour: 12, minute: 0, second: 0, of: calendar.date(from: components)!)!
     }
 
     func toggleDone(statsService: StatsService) {
@@ -35,6 +42,18 @@ final class Saving {
         if challenge.remainingAmount() == 0 {
             statsService.addChallengeCompletedStatsEntry(challengeId: challenge.id)
         }
+
+        NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString)
+
+        let nextSaving = challenge.getNextSaving(at: 1)
+        if let nextSavingDate = nextSaving?.date {
+            NotificationService.shared.scheduleNotification(
+                challengeId: challenge.id.uuidString,
+                title: String(localized: "Time to save money!"),
+                body: String(localized: "The next saving for your challenge '\(challenge.challengeConfiguration.name)' is due today."),
+                timeInterval: nextSavingDate.timeIntervalSinceNow
+            )
+        }
     }
 
     private func markNotCompleted(statsService: StatsService) {
@@ -42,5 +61,14 @@ final class Saving {
         if statsService.isChallengeCompleted(challengeId: challenge.id) {
             statsService.deleteStatsEntry(challengeId: challenge.id, statsType: StatsType.challenge_completed)
         }
+
+        NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString)
+
+        NotificationService.shared.scheduleNotification(
+            challengeId: challenge.id.uuidString,
+            title: String(localized: "Time to save money!"),
+            body: String(localized: "The next saving for your challenge '\(challenge.challengeConfiguration.name)' is due today."),
+            timeInterval: date.timeIntervalSinceNow
+        )
     }
 }

@@ -98,17 +98,19 @@ private struct SavingsProgressView: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     var body: some View {
+        let next1Saving = challenge.getNextSaving(at: 1) ?? challenge.getLastSaving()
+        let next2Saving = challenge.getNextSaving(at: 2) ?? challenge.getLastSaving()
+        let next3Saving = challenge.getNextSaving(at: 3) ?? challenge.getLastSaving()
+
         HStack(spacing: -8) {
-            NextSavingView(saving: challenge.getNextSaving(at: 1), isNext: true)
+            NextSavingView(saving: next1Saving, isNext: true)
 
             if challenge.remainingSavings() >= 2 {
                 Divider()
                     .frame(width: 16, height: 2)
                     .background(colorServiceVM.colorService.currentScheme.font)
                     .padding(.horizontal, 8)
-                NextSavingView(
-                    saving: challenge.getNextSaving(at: 2), isNext: false
-                )
+                NextSavingView(saving: next2Saving, isNext: false)
             }
 
             if challenge.remainingSavings() == 3 {
@@ -116,9 +118,7 @@ private struct SavingsProgressView: View {
                     .frame(width: 16, height: 2)
                     .background(colorServiceVM.colorService.currentScheme.font)
                     .padding(.horizontal, 8)
-                NextSavingView(
-                    saving: challenge.getNextSaving(at: 3), isNext: false
-                )
+                NextSavingView(saving: next3Saving, isNext: false)
             }
 
             if challenge.remainingSavings() != 3 {
@@ -215,7 +215,7 @@ private struct AmountView: View {
 
     var body: some View {
         let progress = CGFloat(challenge.progressPercentage())
-        let calculatedWidth = min(textWidth + 10, 140)
+        let calculatedWidth = min(textWidth + 20, 140)
 
         ZStack {
             ZStack(alignment: .leading) {

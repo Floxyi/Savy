@@ -26,6 +26,12 @@ class ChallengeService: ObservableObject {
     func addChallenge(challengeConfiguration: ChallengeConfiguration, statsService: StatsService) {
         let challenge = Challenge(challengeConfiguration: challengeConfiguration)
         statsService.addChallengeStartedStatsEntry(challengeId: challenge.id)
+        NotificationService.shared.scheduleNotification(
+            challengeId: challenge.id.uuidString,
+            title: String(localized: "Time to save money!"),
+            body: String(localized: "The next saving for your challenge '\(challengeConfiguration.name)' is due today."),
+            timeInterval: 60 * 60
+        )
         challenges.append(challenge)
     }
 
@@ -48,8 +54,8 @@ class ChallengeService: ObservableObject {
         let calendar = Calendar.current
 
         let sortedChallenges = challenges.sorted { (challenge1: Challenge, challenge2: Challenge) -> Bool in
-            let nextSaving1 = challenge1.getNextSaving(at: 1)
-            let nextSaving2 = challenge2.getNextSaving(at: 1)
+            let nextSaving1 = challenge1.getNextSaving(at: 1) ?? challenge1.getLastSaving()
+            let nextSaving2 = challenge2.getNextSaving(at: 1) ?? challenge2.getLastSaving()
 
             let dateComponents1 = DateComponents(
                 year: calendar.component(.year, from: nextSaving1.date),

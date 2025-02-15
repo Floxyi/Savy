@@ -878,6 +878,16 @@
         }
       }
     },
+    "The next saving for your challenge '%@' is due today." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das nächste Ersparnis für deine ‚%@‘ Herausforderung ist heute fällig."
+          }
+        }
+      }
+    },
     "There are no stats yet! \nStart saving money to see your progress." : {
       "localizations" : {
         "de" : {
@@ -934,6 +944,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Der Nutzername ist nicht mindestens 3 Zeichen lang."
+          }
+        }
+      }
+    },
+    "Time to save money!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit Geld zu sparen!"
           }
         }
       }

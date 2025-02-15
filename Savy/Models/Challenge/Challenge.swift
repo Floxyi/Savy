@@ -57,8 +57,12 @@ class Challenge {
         savings.filter { !$0.done }.count
     }
 
-    func getNextSaving(at n: Int) -> Saving {
+    func getNextSaving(at n: Int) -> Saving? {
         let undoneSavings = savings.sorted { $0.date < $1.date }.filter { !$0.done }
-        return undoneSavings.count >= n ? undoneSavings[n - 1] : savings.first!
+        return undoneSavings.count >= n ? undoneSavings[n - 1] : nil
+    }
+
+    func getLastSaving() -> Saving {
+        savings.sorted { $0.date < $1.date }.last!
     }
 }
