@@ -12,6 +12,10 @@ struct SettingsScreen: View {
     @StateObject private var vm: SettingsViewModel
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
+    @StateObject private var notificationService = NotificationService.shared
+
+    @State var showNotificationDisableAlert: Bool = false
+
     init() {
         _vm = StateObject(wrappedValue: SettingsViewModel())
     }
@@ -47,6 +51,17 @@ struct SettingsScreen: View {
                         }
                     }
 
+                    SettingsTileView(image: "bell.fill", text: "Notifications") {
+                        SettingsBarView(text: "Enable Notifications", toggle: $notificationService.notificationAllowed)
+                            .onChange(of: notificationService.notificationAllowed) { _, newValue in
+                                if newValue {
+                                    notificationService.requestPermission()
+                                } else {
+                                    showNotificationDisableAlert = true
+                                }
+                            }
+                    }
+
                     VStack {
                         HStack {
                             Text("Made with")
@@ -67,6 +82,27 @@ struct SettingsScreen: View {
             .onAppear {
                 TabBarManager.shared.show()
                 vm.setColorService(colorServiceVM)
+                notificationService.checkPermissionStatus()
+            }
+            .alert("Notifications Disabled", isPresented: $notificationService.showSettingsAlert) {
+                Button("Cancel", role: .cancel) {
+                    notificationService.notificationAllowed = false
+                }
+                Button("Open Settings") {
+                    notificationService.openSettings()
+                }
+            } message: {
+                Text("To receive notifications, enable them in Settings.")
+            }
+            .alert("Notifications Enabled", isPresented: $showNotificationDisableAlert) {
+                Button("Cancel", role: .cancel) {
+                    notificationService.notificationAllowed = true
+                }
+                Button("Open Settings") {
+                    notificationService.openSettings()
+                }
+            } message: {
+                Text("To stop reciving notifications, disable them in Settings.")
             }
         }
     }

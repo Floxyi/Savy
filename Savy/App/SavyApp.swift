@@ -34,7 +34,7 @@ struct SavyApp: App {
                 .environmentObject(statsServiceViewModel)
                 .environmentObject(challengeRouter)
                 .onAppear {
-                    notificationService.requestPermission()
+                    notificationService.requestStartPermission()
                     NotificationService.shared.observeNotificationTap { challengeId in
                         challengeRouter.navigateToChallenge(with: challengeId)
                     }

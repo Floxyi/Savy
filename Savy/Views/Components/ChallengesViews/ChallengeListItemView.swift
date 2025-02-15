@@ -211,25 +211,22 @@ private struct AmountView: View {
     let challenge: Challenge
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
-    @State private var textWidth: CGFloat = 0
-
     var body: some View {
         let progress = CGFloat(challenge.progressPercentage())
-        let calculatedWidth = min(textWidth + 20, 140)
 
         ZStack {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(colorServiceVM.colorService.currentScheme.accent1)
-                    .frame(width: calculatedWidth, height: 30)
+                    .frame(width: 110, height: 30)
 
                 Rectangle()
                     .fill(colorServiceVM.colorService.currentScheme.barIcons)
-                    .frame(width: calculatedWidth * progress, height: 30)
+                    .frame(width: 110 * progress, height: 30)
             }
             .mask(
                 RoundedRectangle(cornerRadius: 12)
-                    .frame(width: calculatedWidth, height: 30)
+                    .frame(width: 110, height: 30)
             )
 
             HStack(alignment: .bottom, spacing: -4) {
@@ -237,21 +234,16 @@ private struct AmountView: View {
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.font)
                     .padding(.trailing, 7)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
                 Text("/ $\(NumberFormatterHelper.shared.formatCurrency(challenge.challengeConfiguration.amount))")
                     .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(colorServiceVM.colorService.currentScheme.accent2)
                     .offset(y: -3)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
             }
-            .padding(8)
             .clipShape(RoundedRectangle(cornerRadius: 25))
-            .background(
-                GeometryReader { geometry in
-                    Color.clear
-                        .onAppear {
-                            textWidth = geometry.size.width
-                        }
-                }
-            )
         }
         .frame(height: 30)
     }

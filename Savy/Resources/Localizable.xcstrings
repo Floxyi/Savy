@@ -698,6 +698,15 @@
         }
       }
     },
+    "Notifications Disabled" : {
+
+    },
+    "Notifications Enabled" : {
+
+    },
+    "Open Settings" : {
+
+    },
     "or" : {
       "localizations" : {
         "de" : {
@@ -967,6 +976,12 @@
           }
         }
       }
+    },
+    "To receive notifications, enable them in Settings." : {
+
+    },
+    "To stop reciving notifications, disable them in Settings." : {
+
     },
     "Total money saved:" : {
       "localizations" : {

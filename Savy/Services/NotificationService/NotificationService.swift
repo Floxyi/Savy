@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 import UserNotifications
 
 class NotificationService: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
@@ -14,13 +15,55 @@ class NotificationService: NSObject, ObservableObject, UNUserNotificationCenterD
     @Published var tappedChallengeId: String?
     private var cancellable: AnyCancellable?
 
+    @Published var notificationAllowed = false
+    @Published var showSettingsAlert = false
+
     override private init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
+        checkPermissionStatus()
+    }
+
+    func checkPermissionStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                self.notificationAllowed = settings.authorizationStatus == .authorized
+            }
+        }
+    }
+
+    func requestStartPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
     }
 
     func requestPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                switch settings.authorizationStatus {
+                case .notDetermined:
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
+                        DispatchQueue.main.async {
+                            self.notificationAllowed = granted
+                            if !granted {
+                                self.showSettingsAlert = true
+                            }
+                        }
+                    }
+                case .denied:
+                    self.showSettingsAlert = true
+                case .authorized, .provisional, .ephemeral:
+                    self.notificationAllowed = true
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+
+    func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+        }
     }
 
     func scheduleNotification(challengeId: String, title: String, body: String, timeInterval: TimeInterval) {
