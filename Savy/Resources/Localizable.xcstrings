@@ -77,23 +77,7 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@: %3$lld$"
-          }
-        }
-      }
-    },
-    "%@ %@: $%lld" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@ %2$@: %3$lld €"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "%1$@ %2$@: $%3$lld"
           }
         }
@@ -699,13 +683,34 @@
       }
     },
     "Notifications Disabled" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen deaktiviert"
+          }
+        }
+      }
     },
     "Notifications Enabled" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen aktiviert"
+          }
+        }
+      }
     },
     "Open Settings" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen öffnen"
+          }
+        }
+      }
     },
     "or" : {
       "localizations" : {
@@ -847,6 +852,16 @@
         }
       }
     },
+    "Start date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Startdatum"
+          }
+        }
+      }
+    },
     "Start:" : {
       "localizations" : {
         "de" : {
@@ -978,10 +993,24 @@
       }
     },
     "To receive notifications, enable them in Settings." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um Benachrichtigungen zu erhalten, müssen diese in den Einstellungen aktiviert werden."
+          }
+        }
+      }
     },
     "To stop reciving notifications, disable them in Settings." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um keine Benachrichtigungen zu erhalten, müssen diese in den Einstellungen deaktiviert werden."
+          }
+        }
+      }
     },
     "Total money saved:" : {
       "localizations" : {

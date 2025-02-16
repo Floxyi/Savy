@@ -15,18 +15,21 @@ class ChallengeAddViewModel: ObservableObject {
     @Published var strategy: SavingStrategy = .Weekly
     @Published var calculation: SavingCalculation = .Date
     @Published var cycleAmount: Int?
+    @Published var startDate: Date { didSet { updateEndDate() } }
     @Published var endDate: Date
-    @Published var isDatePickerVisible = false
+
+    @Published var isStartDatePickerVisible = false
+    @Published var isEndDatePickerVisible = false
     @Published var isIconPickerVisible = false
 
     init() {
+        startDate = Date()
         endDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date()) ?? Date()
     }
 
     func updateEndDate() {
-        let timespan = strategy == .Weekly ? Calendar.Component.weekOfYear : Calendar.Component.month
-        let newEndDate = Calendar.current.date(byAdding: timespan, value: 1, to: Date()) ?? Date()
-        endDate = newEndDate > endDate ? newEndDate : endDate
+        let minEndDate = Calendar.current.date(byAdding: strategy.calendarComponent, value: strategy.increment, to: startDate) ?? startDate
+        endDate = endDate.compare(minEndDate) == .orderedAscending ? minEndDate : endDate
     }
 
     func isValid() -> Bool {
@@ -38,6 +41,7 @@ class ChallengeAddViewModel: ObservableObject {
             icon: icon ?? "square.dashed",
             name: name,
             amount: amount ?? 0,
+            startDate: startDate,
             endDate: endDate,
             strategy: strategy,
             calculation: calculation,

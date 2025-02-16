@@ -10,11 +10,8 @@ import SwiftUI
 
 struct SettingsScreen: View {
     @StateObject private var vm: SettingsViewModel
-    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
-
     @StateObject private var notificationService = NotificationService.shared
-
-    @State var showNotificationDisableAlert: Bool = false
+    @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 
     init() {
         _vm = StateObject(wrappedValue: SettingsViewModel())
@@ -57,7 +54,7 @@ struct SettingsScreen: View {
                                 if newValue {
                                     notificationService.requestPermission()
                                 } else {
-                                    showNotificationDisableAlert = true
+                                    vm.showNotificationDisableAlert = true
                                 }
                             }
                     }
@@ -94,7 +91,7 @@ struct SettingsScreen: View {
             } message: {
                 Text("To receive notifications, enable them in Settings.")
             }
-            .alert("Notifications Enabled", isPresented: $showNotificationDisableAlert) {
+            .alert("Notifications Enabled", isPresented: $vm.showNotificationDisableAlert) {
                 Button("Cancel", role: .cancel) {
                     notificationService.notificationAllowed = true
                 }

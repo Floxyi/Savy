@@ -55,10 +55,8 @@ class ChallengeConfiguration {
 
     func regenerateSavings(challenge: Challenge) {
         challenge.savings.filter { !$0.done }.forEach { saving in challenge.removeSaving(saving: saving) }
-
         let lastDate = challenge.savings.count > 0 ? challenge.savings.last!.date : startDate
-        let nextDate = nextDate(from: lastDate, strategy: strategy, calendar: Calendar.current)!
-
+        let nextDate = challenge.savings.count > 0 ? nextDate(from: lastDate, strategy: strategy, calendar: Calendar.current)! : lastDate
         let finishedSavings = challenge.savings.filter(\.done)
         let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
         generateSavings(challenge: challenge, amount: amount - preSavedAmount, startDate: nextDate, presaved: preSavedAmount)
@@ -66,12 +64,8 @@ class ChallengeConfiguration {
 
     func generateSavingsByDate(challenge: Challenge, amount: Int, startDate: Date, presaved: Int) {
         let numberOfCycles = numberOfCycles(startDate: startDate)
-        var amountPerSaving = amount / numberOfCycles
+        let amountPerSaving = amount / numberOfCycles
         let isComplete = numberOfCycles * amountPerSaving == amount
-
-        if !isComplete {
-            amountPerSaving += 1
-        }
 
         var currentDate = startDate
         for _ in 0 ..< numberOfCycles {
@@ -124,48 +118,12 @@ class ChallengeConfiguration {
         calendar.date(byAdding: strategy.calendarComponent, value: strategy.increment, to: date)
     }
 
-    private func numberOfMonths(startDate: Date) -> Int {
-        let calendar = Calendar.current
-
-        let startComponents = calendar.dateComponents([.year, .month], from: startDate)
-        let startYear = startComponents.year ?? 0
-        let startMonth = startComponents.month ?? 0
-
-        let endComponents = calendar.dateComponents([.year, .month], from: endDate)
-        let endYear = endComponents.year ?? 0
-        let endMonth = endComponents.month ?? 0
-
-        let yearDifference = (endYear - startYear) * 12
-        let monthDifference = endMonth - startMonth
-
-        return yearDifference + monthDifference
-    }
-
-    private func numberOfWeeks(startDate: Date) -> Int {
-        let calendar = Calendar.current
-
-        let startComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: startDate)
-        let startYearForWeek = startComponents.yearForWeekOfYear ?? 0
-        let startWeek = startComponents.weekOfYear ?? 0
-
-        let endComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: endDate)
-        let endYearForWeek = endComponents.yearForWeekOfYear ?? 0
-        let endWeek = endComponents.weekOfYear ?? 0
-
-        let yearDifference = (endYearForWeek - startYearForWeek) * 52
-        let weekDifference = endWeek - startWeek
-
-        return yearDifference + weekDifference
-    }
-
     func calculateEndDateByAmount(challenge: Challenge? = nil, startDate: Date) -> Date {
         var targetAmount = amount
 
         if challenge != nil {
             let finishedSavings = challenge!.savings.filter(\.done)
-            let preSavedAmount = finishedSavings.reduce(0) {
-                $0 + $1.amount
-            }
+            let preSavedAmount = finishedSavings.reduce(0) { $0 + $1.amount }
             targetAmount -= preSavedAmount
         }
 
@@ -173,37 +131,53 @@ class ChallengeConfiguration {
             return startDate
         }
 
-        let numberOfCycles = targetAmount / cycleAmount!
-
-        let endDate = Calendar.current.date(
-            byAdding: strategy == .Monthly ? .month : .weekOfYear,
-            value: numberOfCycles * cycleAmount! == targetAmount ? numberOfCycles : numberOfCycles + 1,
-            to: startDate
-        ) ?? startDate
-
+        let numberOfCycles = targetAmount / cycleAmount! - 1
+        let endDate = Calendar.current.date(byAdding: strategy.calendarComponent, value: strategy.increment * numberOfCycles, to: startDate) ?? startDate
         return endDate
     }
 
     func calculateCycleAmount(amount: Int, startDate: Date) -> Int {
-        if amount <= 0 {
-            return amount
-        }
-        let numberOfCycles = numberOfCycles(startDate: startDate)
-        var amountPerSaving = amount / numberOfCycles
-        let isComplete = numberOfCycles * amountPerSaving == amount
-
-        if !isComplete {
-            amountPerSaving += 1
-        }
+        let numberOfCycles = max(1, numberOfCycles(startDate: startDate))
+        let amountPerSaving = amount / numberOfCycles
         return amountPerSaving
     }
 
     private func numberOfCycles(startDate: Date) -> Int {
-        let numberOfCycles: Int = if strategy == .Weekly {
-            numberOfWeeks(startDate: startDate)
-        } else {
-            numberOfMonths(startDate: startDate)
-        }
-        return numberOfCycles
+        var cycles = 1
+        if strategy == .Daily { cycles = numberOfDays(startDate: startDate, endDate: endDate) + 1 }
+        if strategy == .Weekly { cycles = numberOfWeeks(startDate: startDate, endDate: endDate) + 1 }
+        if strategy == .Monthly { cycles = numberOfMonths(startDate: startDate, endDate: endDate) + 1 }
+        if strategy == .Quaterly { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 3 }
+        if strategy == .Biannually { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 6 }
+        if strategy == .Annualy { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 12 }
+        return cycles
+    }
+
+    private func numberOfDays(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+        let startOfDayStart = calendar.startOfDay(for: startDate)
+        let startOfDayEnd = calendar.startOfDay(for: endDate)
+        let components = calendar.dateComponents([.day], from: startOfDayStart, to: startOfDayEnd)
+        let days = components.day ?? 0
+        return days
+    }
+
+    private func numberOfWeeks(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+        let startOfDayStart = calendar.startOfDay(for: startDate)
+        let startOfDayEnd = calendar.startOfDay(for: endDate)
+        let components = calendar.dateComponents([.day], from: startOfDayStart, to: startOfDayEnd)
+        let days = components.day ?? 0
+        let fullWeeks = days / 7
+        return fullWeeks
+    }
+
+    private func numberOfMonths(startDate: Date, endDate: Date) -> Int {
+        let calendar = Calendar.current
+        let startOfDayStart = calendar.startOfDay(for: startDate)
+        let startOfDayEnd = calendar.startOfDay(for: endDate)
+        let components = calendar.dateComponents([.month], from: startOfDayStart, to: startOfDayEnd)
+        let months = components.month ?? 0
+        return months
     }
 }

@@ -40,7 +40,7 @@ struct CustomDatePickerStyle: DatePickerStyle {
 
 struct CustomDatePickerOverlay: View {
     @Binding var date: Date
-    var startDate: Date
+    @Binding var startDate: Date
 
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
 

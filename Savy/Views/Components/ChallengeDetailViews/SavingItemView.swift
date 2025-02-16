@@ -21,18 +21,24 @@ struct SavingItemView: View {
 
         VStack {
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day(.twoDigits)))
-                .font(.system(size: 14, weight: .bold))
+                .font(.system(size: 12, weight: .bold))
                 .foregroundStyle(currentScheme.font)
                 .frame(width: 50)
                 .padding(4)
                 .background(currentScheme.background)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
-                .padding(.bottom, -6)
+                .padding(.top, 12)
 
-            Text("$\(NumberFormatterHelper.shared.formatCurrency(saving.amount))")
-                .font(.system(size: 23, weight: .bold))
+            Spacer()
+            Text("$\(NumberFormatterHelper.shared.formatVisibleCurrency(saving.amount))")
+                .font(.system(size: 30, weight: .bold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
                 .foregroundStyle(currentScheme.font)
-                .padding(.top, 4)
+                .padding(.horizontal, 10)
+                .padding(.bottom, 2)
+                .padding(.top, -6)
+            Spacer()
         }
         .frame(width: 80, height: 80)
         .background(currentScheme.bar)
@@ -65,11 +71,11 @@ struct SavingItemView: View {
     let challengeConfiguration = ChallengeConfiguration(
         icon: "homepod",
         name: "HomePod",
-        amount: 3000,
+        amount: 500_000,
         startDate: Date(),
         strategy: .Monthly,
         calculation: .Amount,
-        cycleAmount: 100
+        cycleAmount: 250_100
     )
     challengeServiceViewModel.challengeService.addChallenge(challengeConfiguration: challengeConfiguration, statsService: statsServiceViewModel.statsService)
     let challenge = challengeServiceViewModel.challengeService.challenges.first!

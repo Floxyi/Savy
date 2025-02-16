@@ -11,12 +11,15 @@ import SwiftUI
 class ChallengeEditViewModel: ObservableObject {
     @Published var icon: String?
     @Published var name: String = ""
-    @Published var amount: Int?
+    @Published var amount: Int = 0
     @Published var strategy: SavingStrategy = .Weekly
     @Published var calculation: SavingCalculation = .Date
     @Published var cycleAmount: Int?
-    @Published var endDate: Date = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: Date()) ?? Date()
-    @Published var isDatePickerVisible = false
+    @Published var startDate: Date = .init() { didSet { updateEndDate() } }
+    @Published var endDate: Date = .init()
+
+    @Published var isStartDatePickerVisible = false
+    @Published var isEndDatePickerVisible = false
     @Published var isIconPickerVisible = false
 
     var challenge: Challenge
@@ -30,6 +33,7 @@ class ChallengeEditViewModel: ObservableObject {
         icon = challenge.challengeConfiguration.icon
         name = challenge.challengeConfiguration.name
         amount = challenge.challengeConfiguration.amount
+        startDate = challenge.challengeConfiguration.startDate
         endDate = challenge.challengeConfiguration.endDate
         strategy = challenge.challengeConfiguration.strategy
         calculation = challenge.challengeConfiguration.calculation
@@ -37,21 +41,12 @@ class ChallengeEditViewModel: ObservableObject {
     }
 
     func updateEndDate() {
-        let newEndDate = Calendar.current.date(
-            byAdding: strategy == .Weekly ? .weekOfYear : .month,
-            value: 1,
-            to: Date()
-        ) ?? Date()
-
-        endDate = newEndDate > endDate ? newEndDate : endDate
+        let minEndDate = Calendar.current.date(byAdding: strategy.calendarComponent, value: strategy.increment, to: startDate) ?? startDate
+        endDate = endDate.compare(minEndDate) == .orderedAscending ? minEndDate : endDate
     }
 
     func isValid() -> Bool {
-        icon != nil && name != "" && amount != nil && (calculation == .Amount ? cycleAmount != nil : true)
-    }
-
-    func calculateCycleAmount() -> Int {
-        challenge.challengeConfiguration.calculateCycleAmount(amount: amount ?? 0, startDate: challenge.challengeConfiguration.startDate)
+        name != "" && amount != 0 && (calculation == .Amount ? cycleAmount != nil : true)
     }
 
     func calculateEndDateByAmount() -> String {
@@ -59,13 +54,22 @@ class ChallengeEditViewModel: ObservableObject {
         return calculatedDate.formatted(.dateTime.day().month().year())
     }
 
-    func getUpdatedChallengeConfiguration() -> ChallengeConfiguration {
-        ChallengeConfiguration(icon: icon!, name: name, amount: amount!, endDate: endDate, strategy: strategy, calculation: calculation, cycleAmount: cycleAmount ?? 0)
+    func getChallengeConfiguration() -> ChallengeConfiguration {
+        ChallengeConfiguration(
+            icon: icon ?? "square.dashed",
+            name: name,
+            amount: amount,
+            startDate: startDate,
+            endDate: endDate,
+            strategy: strategy,
+            calculation: calculation,
+            cycleAmount: cycleAmount
+        )
     }
 
     func updateChallenge(challengeService: ChallengeService) {
         let id = challenge.id
-        let challengeConfiguration = getUpdatedChallengeConfiguration()
+        let challengeConfiguration = getChallengeConfiguration()
         challengeService.updateChallenge(id: id, challengeConfiguration: challengeConfiguration)
     }
 }

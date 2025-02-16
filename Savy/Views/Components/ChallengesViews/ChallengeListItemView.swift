@@ -36,7 +36,7 @@ private struct HeadlineView: View {
         HStack {
             IconAndNameView(challenge: challenge)
             Spacer()
-            DateView(date: challenge.savings.last!.date)
+            DateView(date: challenge.challengeConfiguration.endDate)
         }
     }
 }
@@ -140,7 +140,9 @@ private struct NextSavingView: View {
     var body: some View {
         VStack {
             Text("$\(NumberFormatterHelper.shared.formatCurrency(saving.amount))")
-                .font(.system(size: 14, weight: .bold))
+                .font(.system(size: 16, weight: .bold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
             Text(saving.date.formatted(.dateTime.month(.twoDigits).day()))
                 .font(.system(size: 12))
         }

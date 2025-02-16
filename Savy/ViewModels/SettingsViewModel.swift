@@ -13,6 +13,7 @@ class SettingsViewModel: ObservableObject {
     @Published var toggledDarkMode: Bool = false
     @Published var toggledColorMode: Bool = false
     @Published private(set) var currentScheme: ColorScheme
+    @Published var showNotificationDisableAlert: Bool = false
 
     private var colorServiceVM: ColorServiceViewModel?
 
