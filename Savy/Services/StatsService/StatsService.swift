@@ -179,6 +179,13 @@ class StatsService: ObservableObject {
         }
     }
 
+    func isSavingLate(saving: Saving) -> Bool {
+        let calendar = Calendar.current
+        let savingDay = calendar.startOfDay(for: saving.date)
+        let today = calendar.startOfDay(for: Date())
+        return savingDay < today
+    }
+
     func getCurrentStreak(challengeId: UUID, challengeService: ChallengeService) -> Int {
         let allSavings = entries.filter { $0.type == .money_saved && getChallengeIdFromSavingId(savingId: $0.savingStats!.savingId, challengeService: challengeService) == challengeId }
         if allSavings.isEmpty { return 0 }

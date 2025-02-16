@@ -78,7 +78,7 @@ struct ChallengeDetailScreen: View {
     private var challengeInfoSection: some View {
         ChallengeInfoView(challenge: vm.challenge)
             .padding(.top, -18)
-            .padding(.bottom, 48)
+            .padding(.bottom, 36)
     }
 
     private func mainContent() -> some View {
