@@ -67,16 +67,23 @@ struct ChallengeAddScreen: View {
                     .cornerRadius(8)
                     .padding(.horizontal, 16)
 
+                    HStack {
+                        DatePicker("", selection: $vm.startDate, displayedComponents: [.date])
+                            .datePickerStyle(CustomDatePickerStyle(date: vm.startDate, text: String(localized: "Start date"), isDatePickerVisible: $vm.isStartDatePickerVisible))
+                    }
+                    .padding(.horizontal, 8)
+                    .frame(height: 38)
+                    .background(currentScheme.bar)
+                    .cornerRadius(8)
+                    .padding(.top, 8)
+                    .padding(.horizontal, 16)
+
                     CalculationSelector(selectedCalculation: $vm.calculation)
 
                     if vm.calculation == .Date {
                         HStack {
-                            DatePicker(
-                                "",
-                                selection: $vm.endDate,
-                                displayedComponents: [.date]
-                            )
-                            .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: String(localized: "End date"), isDatePickerVisible: $vm.isDatePickerVisible))
+                            DatePicker("", selection: $vm.endDate, displayedComponents: [.date])
+                                .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: String(localized: "End date"), isDatePickerVisible: $vm.isEndDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
@@ -128,7 +135,9 @@ struct ChallengeAddScreen: View {
                             showPopover: $showPopover,
                             title: String(localized: "Done"),
                             isValid: { vm.isValid() },
-                            onDoneAction: { vm.addChallenge(challengeService: challengeServiceVM.challengeService, statsService: statsServiceVM.statsService) }
+                            onDoneAction: {
+                                vm.addChallenge(challengeService: challengeServiceVM.challengeService, statsService: statsServiceVM.statsService)
+                            }
                         )
                     }
                     ToolbarItem(placement: .cancellationAction) {
@@ -136,26 +145,27 @@ struct ChallengeAddScreen: View {
                     }
                 }
 
-                if vm.isDatePickerVisible || vm.isIconPickerVisible {
-                    DismissableOverlay(bindings: [$vm.isDatePickerVisible, $vm.isIconPickerVisible])
+                if vm.isStartDatePickerVisible || vm.isEndDatePickerVisible || vm.isIconPickerVisible {
+                    DismissableOverlay(bindings: [$vm.isStartDatePickerVisible, $vm.isEndDatePickerVisible, $vm.isIconPickerVisible])
                 }
 
-                if vm.isDatePickerVisible {
+                if vm.isStartDatePickerVisible {
+                    CustomDatePickerOverlay(date: $vm.startDate, startDate: .constant(Date()))
+                }
+
+                if vm.isEndDatePickerVisible {
                     VStack {
-                        CustomDatePickerOverlay(
-                            date: $vm.endDate,
-                            startDate: Calendar.current.date(byAdding: vm.strategy.calendarComponent, value: vm.strategy.increment, to: Date()) ?? Date()
-                        )
+                        CustomDatePickerOverlay(date: $vm.endDate, startDate: $vm.startDate)
 
                         HStack {
-                            Text("\(vm.strategy) \(String(localized: "Amount")): \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate))$")
+                            Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate))$")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(currentScheme.font)
-                                .padding(8)
+                                .padding(10)
                         }
                         .background(currentScheme.background)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .padding(.top, 22)
+                        .padding(.top, 12)
                     }
                 }
 
