@@ -17,6 +17,7 @@ struct CalculationSelector: View {
 
         HStack(spacing: 0) {
             Button(action: {
+                hideKeyboard()
                 selectedCalculation = .Date
             }) {
                 Text(SavingCalculation.Date.localizedString)
@@ -30,6 +31,7 @@ struct CalculationSelector: View {
             }
 
             Button(action: {
+                hideKeyboard()
                 selectedCalculation = .Amount
             }) {
                 Text(SavingCalculation.Amount.localizedString)
@@ -47,5 +49,8 @@ struct CalculationSelector: View {
         .cornerRadius(20)
         .padding(.horizontal, 16)
         .padding(.top, 38)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }

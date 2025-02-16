@@ -11,7 +11,7 @@ public let iconPickerList = [
     "refrigerator", "oven", "microwave", "washer", "lamp.desk", "lightbulb",
 
     // Vehicles & Transportation
-    "car", "car.side", "bus", "bus.doubledecker", "tram", "bicycle", "scooter",
+    "car", "bus", "bus.doubledecker", "tram", "bicycle", "scooter",
     "airplane", "train.side.front.car", "ferry", "sailboat",
     "fuelpump", "bolt.car",
 

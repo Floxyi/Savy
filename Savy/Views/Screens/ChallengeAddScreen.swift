@@ -27,104 +27,109 @@ struct ChallengeAddScreen: View {
         NavigationStack {
             ZStack {
                 VStack {
-                    IconPicker(selectedIcon: $vm.icon, isIconPickerVisible: $vm.isIconPickerVisible)
+                    ScrollView {
+                        IconPicker(selectedIcon: $vm.icon, isIconPickerVisible: $vm.isIconPickerVisible)
 
-                    TextField("", text: $vm.name, prompt: Text(verbatim: String(localized: "Name"))
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(currentScheme.font.opacity(0.4)))
-                        .textInputAutocapitalization(.never)
-                        .textFieldStyle(CustomTextFieldStyle())
-                        .onChange(of: vm.name) { _, newValue in
-                            if newValue.count > 35 {
-                                vm.name = String(newValue.prefix(12))
-                            }
-                        }
-
-                    HStack {
-                        TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: String(localized: "Amount"))
+                        TextField("", text: $vm.name, prompt: Text(verbatim: String(localized: "Name"))
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(currentScheme.font.opacity(0.4)))
+                            .textInputAutocapitalization(.never)
                             .textFieldStyle(CustomTextFieldStyle())
-                            .keyboardType(.numberPad)
-                        Text("$")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundStyle(currentScheme.font)
-                            .padding(.trailing, 32)
-                    }
+                            .onChange(of: vm.name) { _, newValue in
+                                if newValue.count > 35 {
+                                    vm.name = String(newValue.prefix(12))
+                                }
+                            }
 
-                    HStack {
-                        Text(String(localized: "Strategy"))
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentScheme.font.opacity(0.4))
-                            .padding(.leading, 8)
-
-                        Spacer()
-
-                        StrategySelector(selectedStrategy: $vm.strategy, onChangeAction: { vm.updateEndDate() })
-                    }
-                    .frame(height: 38)
-                    .background(currentScheme.bar)
-                    .cornerRadius(8)
-                    .padding(.horizontal, 16)
-
-                    HStack {
-                        DatePicker("", selection: $vm.startDate, displayedComponents: [.date])
-                            .datePickerStyle(CustomDatePickerStyle(date: vm.startDate, text: String(localized: "Start date"), isDatePickerVisible: $vm.isStartDatePickerVisible))
-                    }
-                    .padding(.horizontal, 8)
-                    .frame(height: 38)
-                    .background(currentScheme.bar)
-                    .cornerRadius(8)
-                    .padding(.top, 8)
-                    .padding(.horizontal, 16)
-
-                    CalculationSelector(selectedCalculation: $vm.calculation)
-
-                    if vm.calculation == .Date {
                         HStack {
-                            DatePicker("", selection: $vm.endDate, displayedComponents: [.date])
-                                .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: String(localized: "End date"), isDatePickerVisible: $vm.isEndDatePickerVisible))
+                            TextField("", value: $vm.amount, format: .number, prompt: Text(verbatim: String(localized: "Amount"))
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(currentScheme.font.opacity(0.4)))
+                                .textFieldStyle(CustomTextFieldStyle())
+                                .keyboardType(.numberPad)
+                            Text("$")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundStyle(currentScheme.font)
+                                .padding(.trailing, 32)
+                        }
+
+                        HStack {
+                            Text(String(localized: "Strategy"))
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(currentScheme.font.opacity(0.4))
+                                .padding(.leading, 8)
+
+                            Spacer()
+
+                            StrategySelector(selectedStrategy: $vm.strategy, onChangeAction: { vm.updateEndDate() })
+                        }
+                        .frame(height: 38)
+                        .background(currentScheme.bar)
+                        .cornerRadius(8)
+                        .padding(.horizontal, 16)
+
+                        HStack {
+                            DatePicker("", selection: $vm.startDate, displayedComponents: [.date])
+                                .datePickerStyle(CustomDatePickerStyle(date: vm.startDate, text: String(localized: "Start date"), isDatePickerVisible: $vm.isStartDatePickerVisible))
                         }
                         .padding(.horizontal, 8)
                         .frame(height: 38)
                         .background(currentScheme.bar)
                         .cornerRadius(8)
                         .padding(.top, 8)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, 16)
 
-                        Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate))$")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentScheme.font)
-                            .padding()
-                    }
+                        CalculationSelector(selectedCalculation: $vm.calculation)
 
-                    if vm.calculation == .Amount {
-                        VStack {
+                        if vm.calculation == .Date {
                             HStack {
-                                TextField("", value: $vm.cycleAmount, format: .number, prompt: Text("\(vm.strategy.localizedString) \(String(localized: "Amount"))")
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(currentScheme.font.opacity(0.4)))
-                                    .textFieldStyle(CustomTextFieldStyle())
-                                    .keyboardType(.numberPad)
-                                Text("$")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundStyle(currentScheme.font)
-                                    .padding(.trailing, 32)
+                                DatePicker("", selection: $vm.endDate, displayedComponents: [.date])
+                                    .datePickerStyle(CustomDatePickerStyle(date: vm.endDate, text: String(localized: "End date"), isDatePickerVisible: $vm.isEndDatePickerVisible))
                             }
+                            .padding(.horizontal, 8)
+                            .frame(height: 38)
+                            .background(currentScheme.bar)
+                            .cornerRadius(8)
+                            .padding(.top, 8)
+                            .padding(.horizontal, 24)
+
+                            Text("\(vm.strategy.localizedString) \(String(localized: "Amount")): \(challengeConfiguration.calculateCycleAmount(amount: challengeConfiguration.amount, startDate: challengeConfiguration.startDate))$")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(currentScheme.font)
+                                .padding()
                         }
-                        .frame(height: 38)
-                        .padding(.top, 8)
-                        .padding(.horizontal, 8)
 
-                        Text("End date: \(challengeConfiguration.calculateEndDateByAmount(startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(currentScheme.font)
-                            .padding()
-                    }
+                        if vm.calculation == .Amount {
+                            VStack {
+                                HStack {
+                                    TextField("", value: $vm.cycleAmount, format: .number, prompt: Text("\(vm.strategy.localizedString) \(String(localized: "Amount"))")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(currentScheme.font.opacity(0.4)))
+                                        .textFieldStyle(CustomTextFieldStyle())
+                                        .keyboardType(.numberPad)
+                                    Text("$")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .foregroundStyle(currentScheme.font)
+                                        .padding(.trailing, 32)
+                                }
+                            }
+                            .frame(height: 38)
+                            .padding(.top, 8)
+                            .padding(.horizontal, 8)
 
-                    Spacer()
-                    HStack {
+                            Text("End date: \(challengeConfiguration.calculateEndDateByAmount(startDate: challengeConfiguration.startDate).formatted(.dateTime.day().month().year()))")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(currentScheme.font)
+                                .padding()
+                        }
+
                         Spacer()
+                        HStack {
+                            Spacer()
+                        }
+                    }
+                    .onTapGesture {
+                        hideKeyboard()
                     }
                 }
                 .padding()

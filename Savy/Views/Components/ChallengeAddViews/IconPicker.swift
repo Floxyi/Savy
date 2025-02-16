@@ -32,6 +32,7 @@ struct IconPicker: View {
             }
         }
         .onTapGesture {
+            hideKeyboard()
             isIconPickerVisible = true
         }
         .frame(width: 75, height: 75)

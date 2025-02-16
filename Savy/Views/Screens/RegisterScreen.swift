@@ -143,6 +143,9 @@ struct RegisterScreen: View {
         .background(currentScheme.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
+        .onTapGesture {
+            hideKeyboard()
+        }
         .onAppear {
             TabBarManager.shared.hide()
         }

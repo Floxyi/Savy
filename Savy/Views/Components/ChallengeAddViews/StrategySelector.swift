@@ -19,6 +19,7 @@ struct StrategySelector: View {
         Menu {
             ForEach(SavingStrategy.allCases, id: \.self) { strategy in
                 Button(action: {
+                    hideKeyboard()
                     selectedStrategy = strategy
                     onChangeAction()
                 }) {

@@ -27,7 +27,7 @@ struct ToolbarDoneButton: View {
             }
         }) {
             Text(title)
-                .foregroundColor(!isValid() ? currentScheme.barIcons.opacity(0.4) : currentScheme.barIcons)
+                .foregroundColor(!isValid() ? currentScheme.barIcons.opacity(0.4) : currentScheme.font)
                 .font(.system(size: 16, weight: !isValid() ? .regular : .bold))
         }
         .disabled(!isValid())

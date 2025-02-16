@@ -121,6 +121,9 @@ struct LoginScreen: View {
         .background(currentScheme.background)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("")
+        .onTapGesture {
+            hideKeyboard()
+        }
         .onAppear(perform: {
             TabBarManager.shared.hide()
         })

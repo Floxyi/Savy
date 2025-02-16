@@ -49,6 +49,7 @@ struct CustomDatePickerOverlay: View {
 
         DatePicker("", selection: $date, in: startDate..., displayedComponents: .date)
             .datePickerStyle(.graphical)
+            .colorScheme(currentScheme.mode == .dark ? .dark : .light)
             .accentColor(currentScheme.accent2)
             .labelsHidden()
             .padding(.horizontal)
@@ -59,6 +60,9 @@ struct CustomDatePickerOverlay: View {
             .shadow(radius: 10)
             .frame(width: 300)
             .frame(maxWidth: .infinity)
+            .onAppear {
+                hideKeyboard()
+            }
     }
 }
 
