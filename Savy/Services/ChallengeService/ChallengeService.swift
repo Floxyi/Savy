@@ -26,26 +26,33 @@ class ChallengeService: ObservableObject {
     func addChallenge(challengeConfiguration: ChallengeConfiguration, statsService: StatsService) {
         let challenge = Challenge(challengeConfiguration: challengeConfiguration)
         statsService.addChallengeStartedStatsEntry(challengeId: challenge.id)
-        NotificationService.shared.scheduleNotification(
-            challengeId: challenge.id.uuidString,
-            title: String(localized: "Time to save money!"),
-            body: String(localized: "The next saving for your challenge '\(challengeConfiguration.name)' is due today."),
-            timeInterval: 60 * 60
-        )
+        createNotification(challenge: challenge)
         challenges.append(challenge)
     }
 
     func removeChallenge(id: UUID) {
+        challenges.forEach { challenge in NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString) }
         challenges.removeAll(where: { $0.id == id })
     }
 
     func removeAllChallenges() {
-        challenges.removeAll()
+        challenges.forEach { challenge in removeChallenge(id: challenge.id) }
     }
 
     func updateChallenge(id: UUID, challengeConfiguration: ChallengeConfiguration) {
         let challenge = challenges.first(where: { $0.id == id })!
+        NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString)
         challenge.updateConfiguration(challengeConfiguration: challengeConfiguration)
+        createNotification(challenge: challenge)
+    }
+
+    private func createNotification(challenge: Challenge) {
+        NotificationService.shared.scheduleNotification(
+            challengeId: challenge.id.uuidString,
+            title: String(localized: "Time to save money!"),
+            body: String(localized: "The next saving for your challenge '\(challenge.challengeConfiguration.name)' is due today."),
+            timeInterval: 60 * 60
+        )
     }
 
     func sortChallenges() -> [Challenge] {
