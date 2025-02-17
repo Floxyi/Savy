@@ -13,16 +13,34 @@ import SwiftUI
 class ChallengeService: ObservableObject {
     @Relationship(deleteRule: .cascade) var challenges = [Challenge]()
 
+    /// Initializes a new `ChallengeService` instance.
+    ///
+    /// This initializer is used to create an instance of `ChallengeService`, which manages challenges in the app.
     init() {}
 
+    /// Retrieves all challenges in the service.
+    ///
+    /// This method returns an array of all `Challenge` objects currently managed by the service.
+    /// - Returns: An array of `Challenge` objects.
     func getAllChallenges() -> [Challenge] {
         challenges
     }
 
+    /// Retrieves a challenge by its unique identifier.
+    ///
+    /// This method searches for and returns the `Challenge` object that matches the provided ID.
+    /// - Parameter id: The unique identifier of the challenge to retrieve.
+    /// - Returns: The `Challenge` object with the specified ID, or `nil` if not found.
     func getChallengeById(id: UUID) -> Challenge? {
         challenges.first { $0.id == id }
     }
 
+    /// Adds a new challenge to the service.
+    ///
+    /// This method creates a new `Challenge` object using the provided configuration and adds it to the `challenges` array. It also logs the start of the challenge and schedules a notification.
+    /// - Parameters:
+    ///   - challengeConfiguration: The configuration that defines the parameters of the challenge.
+    ///   - statsService: The `StatsService` used to record the start of the challenge.
     func addChallenge(challengeConfiguration: ChallengeConfiguration, statsService: StatsService) {
         let challenge = Challenge(challengeConfiguration: challengeConfiguration)
         statsService.addChallengeStartedStatsEntry(challengeId: challenge.id)
@@ -30,15 +48,28 @@ class ChallengeService: ObservableObject {
         challenges.append(challenge)
     }
 
+    /// Removes a challenge by its unique identifier.
+    ///
+    /// This method cancels the notification associated with the challenge and removes the challenge from the service.
+    /// - Parameter id: The unique identifier of the challenge to remove.
     func removeChallenge(id: UUID) {
         challenges.forEach { challenge in NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString) }
         challenges.removeAll(where: { $0.id == id })
     }
 
+    /// Removes all challenges from the service.
+    ///
+    /// This method iterates through all challenges, cancels their notifications, and removes them from the `challenges` array.
     func removeAllChallenges() {
         challenges.forEach { challenge in removeChallenge(id: challenge.id) }
     }
 
+    /// Updates the configuration of an existing challenge.
+    ///
+    /// This method updates the configuration of the challenge with the specified ID, cancels the current notification, and schedules a new one based on the updated configuration.
+    /// - Parameters:
+    ///   - id: The unique identifier of the challenge to update.
+    ///   - challengeConfiguration: The new configuration to apply to the challenge.
     func updateChallenge(id: UUID, challengeConfiguration: ChallengeConfiguration) {
         let challenge = challenges.first(where: { $0.id == id })!
         NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString)
@@ -46,6 +77,10 @@ class ChallengeService: ObservableObject {
         createNotification(challenge: challenge)
     }
 
+    /// Schedules a notification for a challenge.
+    ///
+    /// This method schedules a notification for the challenge, alerting the user that the next saving for the challenge is due today.
+    /// - Parameter challenge: The challenge for which to schedule the notification.
     private func createNotification(challenge: Challenge) {
         NotificationService.shared.scheduleNotification(
             challengeId: challenge.id.uuidString,
@@ -55,6 +90,10 @@ class ChallengeService: ObservableObject {
         )
     }
 
+    /// Sorts the challenges by their next saving date.
+    ///
+    /// This method sorts the challenges based on the date of their next saving. If a challenge is completed, it is sorted later than ongoing challenges. In case of ties, challenges are sorted by the end date or the saving amount.
+    /// - Returns: A sorted array of `Challenge` objects.
     func sortChallenges() -> [Challenge] {
         let calendar = Calendar.current
 

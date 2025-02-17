@@ -17,6 +17,12 @@ final class Saving {
     var date: Date
     var done: Bool
 
+    /// Initializes a new `Saving` object for the given challenge, amount, and date.
+    ///
+    /// - Parameters:
+    ///   - challenge: The `Challenge` to which this saving belongs.
+    ///   - amount: The amount of money for this saving.
+    ///   - date: The date of the saving.
     init(challenge: Challenge, amount: Int, date: Date) {
         id = UUID()
         self.challenge = challenge
@@ -25,6 +31,10 @@ final class Saving {
         done = false
     }
 
+    /// Returns a standardized date with the time set to 12:00 PM.
+    ///
+    /// - Parameter date: The original date to standardize.
+    /// - Returns: The standardized date with the time set to 12:00 PM.
     private static func getStandardDate(date: Date) -> Date {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone.current
@@ -32,11 +42,17 @@ final class Saving {
         return calendar.date(bySettingHour: 12, minute: 0, second: 0, of: calendar.date(from: components)!)!
     }
 
+    /// Toggles the `done` state of the saving and updates the stats accordingly.
+    ///
+    /// - Parameter statsService: The `StatsService` to update the statistics.
     func toggleDone(statsService: StatsService) {
         done.toggle()
         done ? markCompleted(statsService: statsService) : markNotCompleted(statsService: statsService)
     }
 
+    /// Marks the saving as completed and updates stats and notifications.
+    ///
+    /// - Parameter statsService: The `StatsService` to update the statistics with the completed saving.
     private func markCompleted(statsService: StatsService) {
         statsService.addMoneySavedStatsEntry(savingId: id, amount: amount, date: date)
         if challenge.remainingAmount() == 0 {
@@ -56,6 +72,9 @@ final class Saving {
         }
     }
 
+    /// Marks the saving as not completed and updates stats and notifications.
+    ///
+    /// - Parameter statsService: The `StatsService` to update the statistics with the removed saving.
     private func markNotCompleted(statsService: StatsService) {
         statsService.deleteStatsEntry(savingId: id)
         if statsService.isChallengeCompleted(challengeId: challenge.id) {

@@ -17,7 +17,7 @@ struct SavyApp: App {
     @StateObject private var statsServiceViewModel: StatsServiceViewModel
 
     @StateObject private var notificationService = NotificationService.shared
-    @StateObject private var challengeRouter = ChallengeRouter()
+    @StateObject private var challengeRouterService = ChallengeRouterService.shared
 
     init() {
         let context = Self.sharedModelContainer.mainContext
@@ -32,11 +32,10 @@ struct SavyApp: App {
                 .environmentObject(colorServiceViewModel)
                 .environmentObject(challengeServiceViewModel)
                 .environmentObject(statsServiceViewModel)
-                .environmentObject(challengeRouter)
                 .onAppear {
                     notificationService.requestStartPermission()
                     NotificationService.shared.observeNotificationTap { challengeId in
-                        challengeRouter.navigateToChallenge(with: challengeId)
+                        ChallengeRouterService.shared.navigateToChallenge(with: challengeId)
                     }
                 }
         }

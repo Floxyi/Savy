@@ -14,6 +14,10 @@ class ColorService {
     public var hue: Double
     public var currentSchemeData: Data
 
+    /// The current color scheme, decoded from `currentSchemeData`.
+    ///
+    /// This computed property decodes the `currentSchemeData` into a `ColorScheme`. If decoding fails, it returns the default light mode color scheme.
+    /// - Returns: The current `ColorScheme` object.
     public var currentScheme: ColorScheme {
         get {
             do {
@@ -31,6 +35,12 @@ class ColorService {
         }
     }
 
+    /// Initializes a new `ColorService` instance with a specified hue and color scheme.
+    ///
+    /// This initializer takes a hue and a `ColorScheme`, and attempts to encode the `ColorScheme` into `currentSchemeData`.
+    /// - Parameters:
+    ///   - hue: The hue value for the color scheme.
+    ///   - currentScheme: The initial `ColorScheme` object to be encoded.
     public init(hue: Double, currentScheme: ColorScheme) {
         self.hue = hue
         do {
@@ -41,6 +51,10 @@ class ColorService {
         }
     }
 
+    /// Updates the current color scheme with the provided `ColorScheme`.
+    ///
+    /// This method updates the `currentScheme` property by encoding the provided `ColorScheme` into `currentSchemeData`.
+    /// - Parameter schema: The new `ColorScheme` to be set.
     func updateScheme(schema: ColorScheme) {
         currentScheme = schema
     }

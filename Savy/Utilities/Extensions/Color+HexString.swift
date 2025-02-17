@@ -7,7 +7,17 @@
 
 import SwiftUI
 
+/// An extension to the `Color` struct that provides functionality for creating colors from hex strings and converting them back to hex strings.
 extension Color {
+    /// Initializes a `Color` from a hex string representation.
+    ///
+    /// The hex string can be in one of the following formats:
+    /// - RGB (12-bit) format: `#RGB`
+    /// - RGB (24-bit) format: `#RRGGBB`
+    /// - ARGB (32-bit) format: `#AARRGGBB`
+    ///
+    /// - Parameter hexString: A string representing the color in hex format (e.g., "#FF5733" or "#FF5733FF").
+    /// - Returns: A `Color` if the hex string is valid, otherwise `nil`.
     init?(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
@@ -32,6 +42,11 @@ extension Color {
         )
     }
 
+    /// Converts a `Color` to its hexadecimal string representation.
+    ///
+    /// The resulting string will be in RGB (24-bit) format (e.g., "#RRGGBB").
+    ///
+    /// - Returns: A hex string representation of the color (e.g., "#FF5733").
     var hexString: String {
         let components = cgColor?.components ?? [0, 0, 0, 1]
         let r = Float(components[0])

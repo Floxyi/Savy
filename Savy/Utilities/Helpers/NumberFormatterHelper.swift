@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// A helper class for formatting numbers, especially for displaying currency and large numbers in a readable format.
 struct NumberFormatterHelper {
+    /// A shared instance of the `NumberFormatterHelper` to be used across the app.
     static let shared = NumberFormatterHelper()
 
     private let formatter: NumberFormatter
 
+    /// Initializes the helper with a preconfigured `NumberFormatter` for formatting currency and large numbers.
     private init() {
         formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -19,6 +22,10 @@ struct NumberFormatterHelper {
         formatter.usesGroupingSeparator = true
     }
 
+    /// Formats a number to a human-readable format for visible display, adding suffixes like "k" for thousands or "M" for millions.
+    ///
+    /// - Parameter number: The integer value to format.
+    /// - Returns: A formatted string representation of the number with appropriate suffix.
     func formatVisibleCurrency(_ number: Int) -> String {
         let absNumber = abs(number)
 
@@ -35,6 +42,10 @@ struct NumberFormatterHelper {
         return "\(number)"
     }
 
+    /// Formats a number into a currency format with appropriate suffixes (e.g., "k" for thousands, "M" for millions).
+    ///
+    /// - Parameter number: The integer value to format as currency.
+    /// - Returns: A formatted string representation of the number with appropriate suffix.
     func formatCurrency(_ number: Int) -> String {
         let absNumber = abs(number)
 

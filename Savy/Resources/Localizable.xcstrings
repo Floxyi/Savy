@@ -242,7 +242,11 @@
         }
       }
     },
+    "Annually" : {
+
+    },
     "Annualy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -334,7 +338,14 @@
         }
       }
     },
+    "Challenge completed" : {
+
+    },
+    "Challenge started" : {
+
+    },
     "Challenged completed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -345,6 +356,7 @@
       }
     },
     "Challenged started" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -785,7 +797,11 @@
         }
       }
     },
+    "Quarterly" : {
+
+    },
     "Quaterly" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
