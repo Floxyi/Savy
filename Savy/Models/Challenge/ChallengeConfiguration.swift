@@ -210,7 +210,7 @@ class ChallengeConfiguration {
         if strategy == .Monthly { cycles = numberOfMonths(startDate: startDate, endDate: endDate) + 1 }
         if strategy == .Quaterly { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 3 }
         if strategy == .Biannually { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 6 }
-        if strategy == .Annualy { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 12 }
+        if strategy == .Annually { cycles = (numberOfMonths(startDate: startDate, endDate: endDate) + 1) / 12 }
         return cycles
     }
 

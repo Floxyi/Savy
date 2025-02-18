@@ -22,7 +22,7 @@ enum SavingStrategy: String, CaseIterable, Codable {
     case Monthly
     case Quaterly
     case Biannually
-    case Annualy
+    case Annually
 
     /// Provides the corresponding calendar component for the strategy.
     ///
@@ -34,7 +34,7 @@ enum SavingStrategy: String, CaseIterable, Codable {
         case .Monthly: .month
         case .Quaterly: .month
         case .Biannually: .month
-        case .Annualy: .year
+        case .Annually: .year
         }
     }
 
@@ -48,7 +48,7 @@ enum SavingStrategy: String, CaseIterable, Codable {
         case .Monthly: 1
         case .Quaterly: 3
         case .Biannually: 6
-        case .Annualy: 1
+        case .Annually: 1
         }
     }
 
@@ -67,7 +67,7 @@ enum SavingStrategy: String, CaseIterable, Codable {
             String(localized: "Quarterly")
         case .Biannually:
             String(localized: "Biannually")
-        case .Annualy:
+        case .Annually:
             String(localized: "Annually")
         }
     }
