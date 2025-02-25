@@ -13,6 +13,7 @@ struct RegisterScreen: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
     @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
     @Binding var isSignedIn: Bool
 
     init(isSignedIn: Binding<Bool>) {
@@ -22,6 +23,8 @@ struct RegisterScreen: View {
 
     var body: some View {
         let currentScheme = colorServiceVM.colorService.currentScheme
+        let challengeService = challengeServiceVM.challengeService
+        let statsService = statsServiceVM.statsService
 
         VStack {
             HeaderView(title: String(localized: "Register"), dismiss: {
@@ -102,7 +105,7 @@ struct RegisterScreen: View {
                         .confirmationDialog("If you proceed, you will lose all your personal statistics.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
                             Button("Confirm", role: .destructive) {
                                 withAnimation {
-                                    vm.signUpButtonPressed()
+                                    vm.signUpButtonPressed(statsService: statsService, challengeService: challengeService)
                                 }
                             }
                             Button("Cancel", role: .cancel) {}
@@ -127,7 +130,7 @@ struct RegisterScreen: View {
                             }
                             .frame(width: 200),
                             isEnabled: vm.isUsernameValid && vm.isEmailValid && vm.isPasswordValid && !vm.isLoading,
-                            action: vm.signUpButtonPressed
+                            action: { vm.signUpButtonPressed(statsService: statsService, challengeService: challengeService) }
                         )
                     }
                 }
@@ -164,4 +167,5 @@ struct RegisterScreen: View {
     return PreviewWrapper()
         .environmentObject(ColorServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ColorService.self))))
         .environmentObject(StatsServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: StatsService.self))))
+        .environmentObject(ChallengeServiceViewModel(modelContext: ModelContext(try! ModelContainer(for: ChallengeService.self))))
 }

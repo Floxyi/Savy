@@ -12,6 +12,7 @@ struct SettingsScreen: View {
     @StateObject private var vm: SettingsViewModel
     @StateObject private var notificationService = NotificationService.shared
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     init() {
         _vm = StateObject(wrappedValue: SettingsViewModel())

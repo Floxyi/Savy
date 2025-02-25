@@ -10,12 +10,6 @@ import SwiftUI
 
 /// ViewModel for managing the registration process and user input validation.
 class RegisterViewModel: ObservableObject {
-    /// The `StatsServiceViewModel` injected into the environment.
-    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
-
-    /// The `ChallengeServiceViewModel` injected into the environment.
-    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
-
     /// The username entered by the user.
     @Published var username = ""
 
@@ -93,11 +87,11 @@ class RegisterViewModel: ObservableObject {
     }
 
     /// Handles the sign-up button press, validates the input, and performs registration.
-    func signUpButtonPressed() {
+    func signUpButtonPressed(statsService: StatsService, challengeService: ChallengeService) {
         isLoading = true
         Task {
             defer { isLoading = false }
-            do { isSignedIn.wrappedValue = try await register() } catch { authError = true }
+            do { isSignedIn.wrappedValue = try await register(statsService: statsService, challengeService: challengeService) } catch { authError = true }
         }
     }
 
@@ -105,13 +99,7 @@ class RegisterViewModel: ObservableObject {
     ///
     /// - Returns: A boolean indicating whether the registration was successful.
     /// - Throws: An error if registration fails.
-    private func register() async throws -> Bool {
-        try await AuthService.shared.registerWithEmail(
-            username: username,
-            email: email,
-            password: password,
-            statsService: statsServiceVM.statsService,
-            challengeService: challengeServiceVM.challengeService
-        )
+    private func register(statsService: StatsService, challengeService: ChallengeService) async throws -> Bool {
+        try await AuthService.shared.registerWithEmail(username: username, email: email, password: password, statsService: statsService, challengeService: challengeService)
     }
 }

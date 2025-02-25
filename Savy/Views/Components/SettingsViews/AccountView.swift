@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
 
     @State private var showConfirmationDialog = false
     @State private var isLoading = false
