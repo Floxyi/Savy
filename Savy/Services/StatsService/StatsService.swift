@@ -299,7 +299,7 @@ class StatsService: ObservableObject {
         let calendar = Calendar.current
         let savingDay = calendar.startOfDay(for: saving.date)
         let today = calendar.startOfDay(for: Date())
-        return savingDay < today
+        return savingDay < today && !saving.done
     }
 
     /// Calculates the current streak for a specific challenge.
