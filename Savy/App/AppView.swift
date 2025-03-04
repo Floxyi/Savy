@@ -24,6 +24,9 @@ struct AppView: View {
 
                 SettingsScreen()
                     .tag(Tab.settings)
+
+                StatsScreen()
+                    .tag(Tab.stats)
             }
             .onAppear {
                 hideTabBar()

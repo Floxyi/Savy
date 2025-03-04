@@ -22,13 +22,16 @@ struct BottomTabBarView: View {
             Spacer()
             TabBarButton(tab: Tab.leaderboard, active: tabBarManager.selectedTab == Tab.leaderboard)
             Spacer()
+            TabBarButton(tab: Tab.stats, active: tabBarManager.selectedTab == Tab.stats)
+            Spacer()
             TabBarButton(tab: Tab.settings, active: tabBarManager.selectedTab == Tab.settings)
         }
-        .frame(width: 300, height: 70)
+        .frame(width: 320, height: 50)
         .tint(Color.black)
         .padding(.vertical, 2.5)
+        .padding(.horizontal, 16)
         .background(currentScheme.bar)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .clipShape(RoundedRectangle(cornerRadius: 36))
         .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
 }
@@ -47,11 +50,10 @@ private struct TabBarButton: View {
             .renderingMode(.template)
             .foregroundStyle(active ? currentScheme.font : currentScheme.barIcons)
             .fontWeight(.bold)
-            .font(.system(size: active ? 40 : 24))
+            .font(.system(size: active ? 32 : 24))
             .animation(.easeOut, value: active)
             .frame(width: buttonDimen, height: buttonDimen)
             .onTapGesture { tabBarManager.switchTab(tab: tab) }
-            .padding(.horizontal, 16)
     }
 }
 

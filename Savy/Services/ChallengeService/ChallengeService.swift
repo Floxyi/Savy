@@ -52,8 +52,10 @@ class ChallengeService: ObservableObject {
     ///
     /// This method cancels the notification associated with the challenge and removes the challenge from the service.
     /// - Parameter id: The unique identifier of the challenge to remove.
-    func removeChallenge(id: UUID) {
+    /// - statsService: The `StatsService` used to record the start of the challenge.
+    func removeChallenge(id: UUID, statsService: StatsService) {
         challenges.forEach { challenge in NotificationService.shared.cancelNotification(challengeId: challenge.id.uuidString) }
+        statsService.addChallengeDeletedStatsEntry()
         challenges.removeAll(where: { $0.id == id })
     }
 
@@ -61,7 +63,7 @@ class ChallengeService: ObservableObject {
     ///
     /// This method iterates through all challenges, cancels their notifications, and removes them from the `challenges` array.
     func removeAllChallenges() {
-        challenges.forEach { challenge in removeChallenge(id: challenge.id) }
+        challenges.forEach { challenge in removeChallenge(id: challenge.id, statsService: StatsService()) }
     }
 
     /// Updates the configuration of an existing challenge.

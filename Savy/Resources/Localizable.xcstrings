@@ -162,6 +162,9 @@
         }
       }
     },
+    "%lld%%" : {
+
+    },
     "❤️" : {
       "localizations" : {
         "de" : {
@@ -318,6 +321,9 @@
         }
       }
     },
+    "Average Saved Per Day:" : {
+
+    },
     "Biannually" : {
       "localizations" : {
         "de" : {
@@ -355,6 +361,9 @@
         }
       }
     },
+    "Challenged deleted" : {
+
+    },
     "Challenged started" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -386,6 +395,12 @@
           }
         }
       }
+    },
+    "Challenges created:" : {
+
+    },
+    "Challenges deleted:" : {
+
     },
     "Challenges started:" : {
       "localizations" : {
@@ -557,6 +572,9 @@
         }
       }
     },
+    "Fourth View" : {
+
+    },
     "Hide" : {
       "localizations" : {
         "de" : {
@@ -586,6 +604,18 @@
           }
         }
       }
+    },
+    "Last Month" : {
+
+    },
+    "Last Week" : {
+
+    },
+    "Last Year" : {
+
+    },
+    "Late savings:" : {
+
     },
     "Leaderboard" : {
       "localizations" : {
@@ -636,6 +666,9 @@
           }
         }
       }
+    },
+    "Money" : {
+
     },
     "Money saved" : {
       "localizations" : {
@@ -821,6 +854,12 @@
         }
       }
     },
+    "Reliability" : {
+
+    },
+    "Reliability:" : {
+
+    },
     "Saving count:" : {
       "localizations" : {
         "de" : {
@@ -941,6 +980,9 @@
         }
       }
     },
+    "There are no stats yet! \nStart creating challenges to see your progress." : {
+
+    },
     "There are no stats yet! \nStart saving money to see your progress." : {
       "localizations" : {
         "de" : {
@@ -1031,6 +1073,9 @@
         }
       }
     },
+    "Total challenges completed:" : {
+
+    },
     "Total money saved:" : {
       "localizations" : {
         "de" : {
@@ -1040,6 +1085,9 @@
           }
         }
       }
+    },
+    "Total reliability:" : {
+
     },
     "Until Date" : {
       "localizations" : {

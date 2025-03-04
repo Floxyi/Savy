@@ -93,6 +93,12 @@ class StatsService: ObservableObject {
         addStatsEntry(entry: entry)
     }
 
+    /// Adds a `StatsEntry` for when a challenge got deleted.
+    func addChallengeDeletedStatsEntry() {
+        let entry = StatsEntry(type: StatsType.challenge_deleted, date: Date())
+        addStatsEntry(entry: entry)
+    }
+
     /// Calculates the total money saved.
     ///
     /// This method calculates the total amount of money saved by summing the amounts from all entries of type `.money_saved`.
@@ -132,6 +138,15 @@ class StatsService: ObservableObject {
             .count
     }
 
+    /// Calculates the total number of challenges deleted. 
+    func totalChallengesDeleted() -> Int {
+        entries
+            .filter {
+                $0.type == StatsType.challenge_deleted
+            }
+            .count
+    }
+
     /// Calculates the all-time punctuality as a percentage.
     ///
     /// This method calculates the percentage of punctual savings (entries where the saving date is on or before the expected date) out of all savings entries.
@@ -150,7 +165,7 @@ class StatsService: ObservableObject {
         if punctualSavings.isEmpty {
             return nil
         }
-        return Int(Double(punctualSavings.count) / Double(allSavings.count) * 100.rounded())
+        return Int(Double(punctualSavings.count) / Double(allSavings.count) * 100)
     }
 
     /// Calculates the average amount saved per day since the first saving entry.
@@ -228,6 +243,17 @@ class StatsService: ObservableObject {
         timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: StatsType.challenge_started).count
     }
 
+    /// Calculates the total number of challenges deleted within a specific date range.
+    ///
+    /// This method counts the number of challenges deleted (entries of type `.challenge_deleted`) within a specific date range.
+    /// - Parameters:
+    ///   - startDate: The starting date of the range.
+    ///   - endDate: The ending date of the range.
+    /// - Returns: The total number of challenges deleted within the date range.
+    func timeRangeChallengesDeleted(startDate: Date, endDate: Date) -> Int {
+        timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: StatsType.challenge_deleted).count
+    }
+
     /// Calculates the punctuality within a specific date range.
     ///
     /// This method calculates the punctuality as the ratio of punctual savings to all savings within a specified date range.
@@ -235,7 +261,7 @@ class StatsService: ObservableObject {
     ///   - startDate: The starting date of the range.
     ///   - endDate: The ending date of the range.
     /// - Returns: The punctuality ratio as a `Double`, or `nil` if no savings entries exist within the range.
-    func timeRangePunctuality(startDate: Date, endDate: Date) -> Double? {
+    func timeRangePunctuality(startDate: Date, endDate: Date) -> Int? {
         let allSavings = timeRangeCalculation(startDate: startDate, endDate: endDate, statsType: .money_saved)
         if allSavings.isEmpty {
             return nil
@@ -244,7 +270,7 @@ class StatsService: ObservableObject {
         let punctualSavings = allSavings.filter {
             $0.date <= $0.savingStats!.expectedDate
         }
-        return Double(punctualSavings.count) / Double(allSavings.count)
+        return Int((Double(punctualSavings.count) / Double(allSavings.count)) * 100)
     }
 
     /// Calculates the average saved amount per day within a specific date range.
@@ -254,7 +280,7 @@ class StatsService: ObservableObject {
     ///   - startDate: The starting date of the range.
     ///   - endDate: The ending date of the range.
     /// - Returns: The average saved amount per day within the date range.
-    func averageSavedTimeRange(startDate: Date, endDate: Date) -> Double {
+    func averageSavedTimeRange(startDate: Date, endDate: Date) -> Int {
         let totalAmount = timeRangeMoneySaved(startDate: startDate, endDate: endDate)
         let numberOfDays = Calendar.current.dateComponents([.day], from: startDate, to: endDate).day ?? 0
         let allSaving = entries.filter { $0.type == .money_saved }
@@ -268,14 +294,37 @@ class StatsService: ObservableObject {
                     $0.savingStats?.amount
                 }
                 .reduce(0, +)
-            return Double(savingsForDate)
+            return Int(savingsForDate)
         }
 
         if numberOfDays == 0, !allSaving.isEmpty {
-            return Double(totalMoneySaved())
+            return Int(totalMoneySaved())
         }
 
-        return numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0
+        return Int(numberOfDays > 0 ? Double(totalAmount) / Double(numberOfDays) : 0.0)
+    }
+
+    func lateSavingsCountTimeRange(startDate: Date, endDate: Date, challengeService: ChallengeService) -> Int {
+        var lateSavingsCount = 0
+        let allSavingStatsEntries = entries.filter {
+            $0.type == .money_saved
+        }
+
+        for challenge in challengeService.challenges {
+            for saving in challenge.savings {
+                if isSavingLate(saving: saving), saving.date >= startDate, saving.date <= endDate {
+                    lateSavingsCount += 1
+                }
+            }
+        }
+
+        let lateSavings = allSavingStatsEntries.filter {
+            $0.date > $0.savingStats!.expectedDate
+        }
+
+        lateSavingsCount += lateSavings.count
+
+        return lateSavingsCount
     }
 
     /// Updates the saving amount in the database for the current profile.
@@ -340,5 +389,20 @@ class StatsService: ObservableObject {
             }
         }
         return nil
+    }
+
+    func calculateStartDateOfWeek() -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+    }
+
+    func calculateStartDateOfMonth() -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(byAdding: .month, value: -1, to: Date()) ?? Date()
+    }
+
+    func calculateStartDateOfYear() -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(byAdding: .year, value: -1, to: Date()) ?? Date()
     }
 }

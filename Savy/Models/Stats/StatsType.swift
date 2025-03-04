@@ -25,6 +25,7 @@ enum StatsType: String, CaseIterable, Codable {
 
     /// Tracks when a challenge has been completed.
     case challenge_completed
+    case challenge_deleted
 
     /// A computed property that returns a localized string for the stats type.
     ///
@@ -37,6 +38,8 @@ enum StatsType: String, CaseIterable, Codable {
             String(localized: "Challenge started")
         case .challenge_completed:
             String(localized: "Challenge completed")
+        case .challenge_deleted:
+            String(localized: "Challenge deleted")
         }
     }
 }

@@ -52,7 +52,7 @@ class ChallengeDetailsViewModel: ObservableObject {
     ///   - dismiss: A closure to dismiss the view after the challenge is removed.
     ///   - challengeService: The `ChallengeService` used to remove the challenge.
     func removeChallenge(dismiss: DismissAction, challengeService: ChallengeService) {
-        challengeService.removeChallenge(id: challenge.id)
+        challengeService.removeChallenge(id: challenge.id, statsService: StatsService())
         dismiss()
         TabBarManager.shared.show()
     }

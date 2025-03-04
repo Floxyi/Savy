@@ -42,4 +42,5 @@ enum Tab: String, Hashable, CaseIterable {
     case challenges = "calendar"
     case leaderboard = "trophy"
     case settings = "gear"
+    case stats = "chart.line.uptrend.xyaxis"
 }
