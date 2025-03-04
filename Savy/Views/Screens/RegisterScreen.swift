@@ -80,6 +80,8 @@ struct RegisterScreen: View {
 
                     Text("This email address is already registered.")
                         .foregroundStyle(vm.authError ? Color.red : currentScheme.background)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.1)
 
                     if AuthService.shared.accountUUID != nil {
                         ActionButton(

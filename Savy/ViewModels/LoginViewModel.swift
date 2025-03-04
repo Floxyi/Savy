@@ -10,12 +10,6 @@ import SwiftUI
 
 /// ViewModel for managing the login state and actions.
 class LoginViewModel: ObservableObject {
-    /// The `StatsServiceViewModel` injected into the environment.
-    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
-
-    /// The `ChallengeServiceViewModel` injected into the environment.
-    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
-
     /// The email entered by the user.
     @Published var email = ""
 
@@ -58,7 +52,7 @@ class LoginViewModel: ObservableObject {
     }
 
     /// Handles the sign-in button press and performs login validation and sign-in.
-    func signInButtonPressed() {
+    func signInButtonPressed(statsService: StatsService, challengeService: ChallengeService) {
         DispatchQueue.main.async {
             self.isLoading = true
         }
@@ -71,7 +65,7 @@ class LoginViewModel: ObservableObject {
 
             do {
                 if validateEmail(), validatePassword() {
-                    self.isSignedIn.wrappedValue = try await signIn()
+                    self.isSignedIn.wrappedValue = try await signIn(statsService: statsService, challengeService: challengeService)
                 } else {
                     self.authError = true
                 }
@@ -85,9 +79,9 @@ class LoginViewModel: ObservableObject {
     ///
     /// - Returns: A boolean indicating whether the sign-in was successful.
     /// - Throws: An error if sign-in fails.
-    private func signIn() async throws -> Bool {
-        let statsService = statsServiceVM.statsService
-        let challengeService = challengeServiceVM.challengeService
+    private func signIn(statsService: StatsService, challengeService: ChallengeService) async throws -> Bool {
+        let statsService = statsService
+        let challengeService = challengeService
         let authService = AuthService.shared
         let oldId = authService.accountUUID
         let isSameAccount = oldId == nil ? false : try await authService.signInAsNewAccount(

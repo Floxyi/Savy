@@ -13,6 +13,8 @@ struct LoginScreen: View {
     @StateObject private var vm: LoginViewModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var colorServiceVM: ColorServiceViewModel
+    @EnvironmentObject private var statsServiceVM: StatsServiceViewModel
+    @EnvironmentObject private var challengeServiceVM: ChallengeServiceViewModel
 
     init(isSignedIn: Binding<Bool>) {
         _vm = StateObject(wrappedValue: LoginViewModel(isSignedIn: isSignedIn))
@@ -54,6 +56,8 @@ struct LoginScreen: View {
                     Text("The account does not exist or the password is incorrect.")
                         .foregroundStyle(vm.authError ? Color.red : currentScheme.background)
                         .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.1)
 
                     if AuthService.shared.accountUUID != nil {
                         ActionButton(
@@ -79,7 +83,7 @@ struct LoginScreen: View {
                         .confirmationDialog("If you proceed, you will lose all your data when logging in to a new account.", isPresented: $vm.showConfirmationDialog, titleVisibility: .visible) {
                             Button("Confirm", role: .destructive) {
                                 withAnimation {
-                                    vm.signInButtonPressed()
+                                    vm.signInButtonPressed(statsService: statsServiceVM.statsService, challengeService: challengeServiceVM.challengeService)
                                 }
                             }
                             Button("Cancel", role: .cancel) {}
@@ -104,7 +108,7 @@ struct LoginScreen: View {
                             }
                             .frame(width: 200),
                             isEnabled: !vm.email.isEmpty && !vm.password.isEmpty && !vm.isLoading,
-                            action: vm.signInButtonPressed
+                            action: { vm.signInButtonPressed(statsService: statsServiceVM.statsService, challengeService: challengeServiceVM.challengeService) }
                         )
                         .padding(.top, 72)
                     }
