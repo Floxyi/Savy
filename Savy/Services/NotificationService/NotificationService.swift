@@ -90,6 +90,10 @@ class NotificationService: NSObject, ObservableObject, UNUserNotificationCenterD
     ///   - body: The body content of the notification.
     ///   - timeInterval: The time interval after which the notification will be triggered.
     func scheduleNotification(challengeId: String, title: String, body: String, timeInterval: TimeInterval) {
+        if timeInterval <= 0 {
+            return
+        }
+
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body

@@ -347,6 +347,9 @@
     "Challenge completed" : {
 
     },
+    "Challenge deleted" : {
+
+    },
     "Challenge started" : {
 
     },
@@ -360,9 +363,6 @@
           }
         }
       }
-    },
-    "Challenged deleted" : {
-
     },
     "Challenged started" : {
       "extractionState" : "stale",

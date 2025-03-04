@@ -64,6 +64,21 @@ class StatsService: ObservableObject {
         updateSavingAmountInDatabase()
     }
 
+    /// Adds a `StatsEntry` for money saved, associated with a specific saving ID.
+    ///
+    /// This method creates a new `StatsEntry` with the type `.money_saved` and adds it to the `entries` array. It also updates the saving amount in the database.
+    /// - Parameters:
+    ///   - savingId: The `UUID` of the saving entry to associate with.
+    ///   - amount: The amount of money saved.
+    ///   - date: The date of the saving.
+    ///   - date: The date of when the saving was done.
+    func addMoneySavedStatsEntry(savingId: UUID, amount: Int, date: Date, addedDate: Date) {
+        let savingStats = SavingStats(savingId: savingId, amount: amount, expectedDate: date)
+        let entry = StatsEntry(type: .money_saved, date: addedDate, savingStats: savingStats)
+        addStatsEntry(entry: entry)
+        updateSavingAmountInDatabase()
+    }
+
     /// Adds a `StatsEntry` for a completed challenge.
     ///
     /// This method creates a new `StatsEntry` with the type `.challenge_completed` and adds it to the `entries` array.
@@ -71,6 +86,17 @@ class StatsService: ObservableObject {
     func addChallengeCompletedStatsEntry(challengeId: UUID) {
         let challengeStats = ChallengeStats(challengeId: challengeId)
         let entry = StatsEntry(type: StatsType.challenge_completed, date: Date(), challengeStats: challengeStats)
+        addStatsEntry(entry: entry)
+    }
+
+    /// Adds a `StatsEntry` for a completed challenge.
+    ///
+    /// This method creates a new `StatsEntry` with the type `.challenge_completed` and adds it to the `entries` array.
+    /// - Parameter challengeId: The `UUID` of the completed challenge.
+    /// - Parameter date: The `Date` of the created stats entry.
+    func addChallengeCompletedStatsEntry(challengeId: UUID, date: Date) {
+        let challengeStats = ChallengeStats(challengeId: challengeId)
+        let entry = StatsEntry(type: StatsType.challenge_completed, date: date, challengeStats: challengeStats)
         addStatsEntry(entry: entry)
     }
 
@@ -93,9 +119,27 @@ class StatsService: ObservableObject {
         addStatsEntry(entry: entry)
     }
 
+    /// Adds a `StatsEntry` for a challenge started.
+    ///
+    /// This method creates a new `StatsEntry` with the type `.challenge_started` and adds it to the `entries` array.
+    /// - Parameter challengeId: The `UUID` of the challenge that was started.
+    /// - Parameter date: The `Date` of the created stats entry.
+    func addChallengeStartedStatsEntry(challengeId: UUID, date: Date) {
+        let challengeStats = ChallengeStats(challengeId: challengeId)
+        let entry = StatsEntry(type: StatsType.challenge_started, date: date, challengeStats: challengeStats)
+        addStatsEntry(entry: entry)
+    }
+
     /// Adds a `StatsEntry` for when a challenge got deleted.
     func addChallengeDeletedStatsEntry() {
         let entry = StatsEntry(type: StatsType.challenge_deleted, date: Date())
+        addStatsEntry(entry: entry)
+    }
+
+    /// Adds a `StatsEntry` for when a challenge got deleted.
+    /// - Parameter date: The `Date` of the created stats entry.
+    func addChallengeDeletedStatsEntry(date: Date) {
+        let entry = StatsEntry(type: StatsType.challenge_deleted, date: date)
         addStatsEntry(entry: entry)
     }
 
@@ -138,7 +182,7 @@ class StatsService: ObservableObject {
             .count
     }
 
-    /// Calculates the total number of challenges deleted. 
+    /// Calculates the total number of challenges deleted.
     func totalChallengesDeleted() -> Int {
         entries
             .filter {

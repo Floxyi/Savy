@@ -24,6 +24,11 @@ struct SavyApp: App {
         _colorServiceViewModel = StateObject(wrappedValue: ColorServiceViewModel(modelContext: context))
         _challengeServiceViewModel = StateObject(wrappedValue: ChallengeServiceViewModel(modelContext: context))
         _statsServiceViewModel = StateObject(wrappedValue: StatsServiceViewModel(modelContext: context))
+
+        if AppEnvironment.current == .development {
+            let dataHelper = DataHelper(challengeService: challengeServiceViewModel.challengeService, statsService: statsServiceViewModel.statsService)
+            dataHelper.loadData()
+        }
     }
 
     var body: some Scene {
