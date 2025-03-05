@@ -50,7 +50,7 @@ struct SettingsScreen: View {
                     }
 
                     SettingsTileView(image: "bell.fill", text: "Notifications") {
-                        SettingsBarView(text: "Enable Notifications", toggle: $notificationService.notificationAllowed)
+                        SettingsBarView(text: String(localized: "Enable Notifications"), toggle: $notificationService.notificationAllowed)
                             .onChange(of: notificationService.notificationAllowed) { _, newValue in
                                 if newValue {
                                     notificationService.requestPermission()

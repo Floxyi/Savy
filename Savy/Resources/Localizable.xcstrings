@@ -552,6 +552,16 @@
         }
       }
     },
+    "Enable Notifications" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiviere Benachrichtigungen"
+          }
+        }
+      }
+    },
     "End date" : {
       "localizations" : {
         "de" : {
