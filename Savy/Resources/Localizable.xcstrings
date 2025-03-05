@@ -22,7 +22,14 @@
       }
     },
     "!" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "!"
+          }
+        }
+      }
     },
     "(You)" : {
       "localizations" : {
@@ -163,7 +170,14 @@
       }
     },
     "%lld%%" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%%"
+          }
+        }
+      }
     },
     "❤️" : {
       "localizations" : {
@@ -246,10 +260,6 @@
       }
     },
     "Annually" : {
-
-    },
-    "Annualy" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -322,7 +332,14 @@
       }
     },
     "Average Saved Per Day:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durchschnittlich gespart pro Tag:"
+          }
+        }
+      }
     },
     "Biannually" : {
       "localizations" : {
@@ -345,27 +362,26 @@
       }
     },
     "Challenge completed" : {
-
-    },
-    "Challenge deleted" : {
-
-    },
-    "Challenge started" : {
-
-    },
-    "Challenged completed" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Herausforderungen erfüllt"
+            "value" : "Herausforderungen vervollständigt"
           }
         }
       }
     },
-    "Challenged started" : {
-      "extractionState" : "stale",
+    "Challenge deleted" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herausforderungen gelöscht"
+          }
+        }
+      }
+    },
+    "Challenge started" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -397,10 +413,24 @@
       }
     },
     "Challenges created:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herausforderungen gestartet:"
+          }
+        }
+      }
     },
     "Challenges deleted:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herausforderungen gelöscht:"
+          }
+        }
+      }
     },
     "Challenges started:" : {
       "localizations" : {
@@ -603,16 +633,44 @@
       }
     },
     "Last Month" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzter Monat"
+          }
+        }
+      }
     },
     "Last Week" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzte Woche"
+          }
+        }
+      }
     },
     "Last Year" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letztes Jahr"
+          }
+        }
+      }
     },
     "Late savings:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Späte Ersparnisse:"
+          }
+        }
+      }
     },
     "Leaderboard" : {
       "localizations" : {
@@ -665,7 +723,14 @@
       }
     },
     "Money" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geld"
+          }
+        }
+      }
     },
     "Money saved" : {
       "localizations" : {
@@ -828,15 +893,11 @@
       }
     },
     "Quarterly" : {
-
-    },
-    "Quaterly" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vierteljährlichen"
+            "value" : "Halbjährlich"
           }
         }
       }
@@ -852,10 +913,24 @@
       }
     },
     "Reliability" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pünktlichkeit"
+          }
+        }
+      }
     },
     "Reliability:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pünktlichkeit:"
+          }
+        }
+      }
     },
     "Saving count:" : {
       "localizations" : {
@@ -978,7 +1053,14 @@
       }
     },
     "There are no stats yet! \nStart creating challenges to see your progress." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es gibt noch keine Statistiken! Beginne eine neue Herausforderung, um deine Fortschritte zu sehen."
+          }
+        }
+      }
     },
     "There are no stats yet! \nStart saving money to see your progress." : {
       "localizations" : {
@@ -1071,7 +1153,14 @@
       }
     },
     "Total challenges completed:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamte Herausforderungen vervollständigt"
+          }
+        }
+      }
     },
     "Total money saved:" : {
       "localizations" : {
@@ -1084,7 +1173,14 @@
       }
     },
     "Total reliability:" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtpünktlichkeit:"
+          }
+        }
+      }
     },
     "Until Date" : {
       "localizations" : {
