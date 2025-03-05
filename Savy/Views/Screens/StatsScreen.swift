@@ -20,11 +20,10 @@ struct StatsScreen: View {
                 FirstView().tag(0)
                 SecondView().tag(1)
                 ThirdView().tag(2)
-                FourthView().tag(3)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
-            PageIndicatorView(numberOfPages: 4, currentPage: selectedPage)
+            PageIndicatorView(numberOfPages: 3, currentPage: selectedPage)
                 .environmentObject(colorServiceVM)
                 .padding(.bottom, 92)
         }

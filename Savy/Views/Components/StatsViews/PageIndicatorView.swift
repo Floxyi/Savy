@@ -35,7 +35,7 @@ struct PageIndicatorView: View {
 
     let colorServiceViewModel = ColorServiceViewModel(modelContext: context)
 
-    return PageIndicatorView(numberOfPages: 4, currentPage: 1)
+    return PageIndicatorView(numberOfPages: 3, currentPage: 1)
         .modelContainer(container)
         .environmentObject(colorServiceViewModel)
 }
