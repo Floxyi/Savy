@@ -58,6 +58,7 @@ struct SecondView: View {
                             ScrollView(.vertical, showsIndicators: false) {
                                 VStack {
                                     Text("Total challenges completed:")
+                                        .multilineTextAlignment(.center)
                                         .foregroundStyle(currentScheme.font)
                                         .font(.system(size: 20))
 
