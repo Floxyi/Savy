@@ -21,12 +21,16 @@ struct SavyApp: App {
 
     init() {
         let context = Self.sharedModelContainer.mainContext
-        _colorServiceViewModel = StateObject(wrappedValue: ColorServiceViewModel(modelContext: context))
-        _challengeServiceViewModel = StateObject(wrappedValue: ChallengeServiceViewModel(modelContext: context))
-        _statsServiceViewModel = StateObject(wrappedValue: StatsServiceViewModel(modelContext: context))
+        let colorServiceVM = ColorServiceViewModel(modelContext: context)
+        let challengeServiceVM = ChallengeServiceViewModel(modelContext: context)
+        let statsServiceVM = StatsServiceViewModel(modelContext: context)
+
+        _colorServiceViewModel = StateObject(wrappedValue: colorServiceVM)
+        _challengeServiceViewModel = StateObject(wrappedValue: challengeServiceVM)
+        _statsServiceViewModel = StateObject(wrappedValue: statsServiceVM)
 
         if AppEnvironment.current == .development {
-            let dataHelper = DataHelper(challengeService: challengeServiceViewModel.challengeService, statsService: statsServiceViewModel.statsService)
+            let dataHelper = DataHelper(challengeService: challengeServiceVM.challengeService, statsService: statsServiceVM.statsService)
             dataHelper.loadData()
         }
     }

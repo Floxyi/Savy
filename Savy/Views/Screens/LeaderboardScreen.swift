@@ -54,6 +54,7 @@ struct LeaderboardScreen: View {
                 }
             }
         }
+        .padding(.top)
         .background(currentScheme.background)
         .task {
             do {

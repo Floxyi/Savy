@@ -34,7 +34,7 @@ struct AppView: View {
 
             if tabBarManager.isShown {
                 BottomTabBarView()
-                    .padding(.bottom)
+                    .padding(.bottom, 2)
             }
         }
         .onAppear {

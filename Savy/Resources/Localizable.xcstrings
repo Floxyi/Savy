@@ -1062,7 +1062,14 @@
         }
       }
     },
+    "There are no stats yet! \nStart by creating challenges to see your progress." : {
+
+    },
+    "There are no stats yet! \nStart by saving money to see your progress." : {
+
+    },
     "There are no stats yet! \nStart creating challenges to see your progress." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

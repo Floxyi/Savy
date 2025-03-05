@@ -28,10 +28,10 @@ struct BottomTabBarView: View {
         }
         .frame(width: 320, height: 50)
         .tint(Color.black)
-        .padding(.vertical, 2.5)
-        .padding(.horizontal, 16)
+        .padding(.vertical, 4.5)
+        .padding(.horizontal, 8)
         .background(currentScheme.bar)
-        .clipShape(RoundedRectangle(cornerRadius: 36))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 4)
     }
 }

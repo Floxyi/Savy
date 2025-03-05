@@ -19,6 +19,8 @@ struct SettingsScreen: View {
     }
 
     var body: some View {
+        let currentScheme = colorServiceVM.colorService.currentScheme
+
         NavigationView {
             VStack {
                 HeaderView(title: String(localized: "Settings"))
@@ -63,12 +65,12 @@ struct SettingsScreen: View {
                     VStack {
                         HStack {
                             Text("Made with")
-                                .foregroundStyle(colorServiceVM.colorService.currentScheme.accent1)
+                                .foregroundStyle(currentScheme.font)
                             Text("❤️")
-                                .opacity(0.5)
+                                .opacity(0.8)
                         }
                         Text("Version 1.0")
-                            .foregroundStyle(colorServiceVM.colorService.currentScheme.accent1)
+                            .foregroundStyle(currentScheme.font)
                     }
                     .padding(.bottom, 12)
                 }

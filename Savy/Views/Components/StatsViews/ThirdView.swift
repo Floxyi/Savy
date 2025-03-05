@@ -33,15 +33,15 @@ struct ThirdView: View {
         let maxDate = Date()
 
         let currentScheme = colorServiceVM.colorService.currentScheme
-        let moneySavedStatsEntries: Bool = statsService.entries.first(where: { $0.type == StatsType.money_saved }) != nil
+        let hasPunctualityStats: Bool = statsService.entries.first(where: { $0.type == StatsType.challenge_started }) != nil
 
         ZStack {
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
                 HeaderView(title: String(localized: "Reliability"))
                 ScrollView(.vertical, showsIndicators: false) {
-                    if !moneySavedStatsEntries {
+                    if !hasPunctualityStats {
                         VStack {
-                            Text("There are no stats yet! \nStart saving money to see your progress.")
+                            Text("There are no stats yet! \nStart by creating challenges to see your progress.")
                                 .multilineTextAlignment(.center)
                                 .foregroundStyle(currentScheme.font)
                                 .fontWeight(.bold)
@@ -281,6 +281,7 @@ struct ThirdView: View {
                 }
                 .padding()
             }
+            .padding(.top)
 
             if showDatePicker || showSecondDatePicker {
                 DismissableStatsOverlay(bindings: [$showDatePicker, $showSecondDatePicker])
