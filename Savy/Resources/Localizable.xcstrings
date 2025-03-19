@@ -907,7 +907,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Halbjährlich"
+            "value" : "Vierteljährlich"
           }
         }
       }
@@ -1063,18 +1063,21 @@
       }
     },
     "There are no stats yet! \nStart by creating challenges to see your progress." : {
-
-    },
-    "There are no stats yet! \nStart by saving money to see your progress." : {
-
-    },
-    "There are no stats yet! \nStart creating challenges to see your progress." : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Es gibt noch keine Statistiken! Beginne eine neue Herausforderung, um deine Fortschritte zu sehen."
+            "value" : "Es gibt noch keine Statistiken! Beginne mit dem Erstellen neuer Herausforderungen, um deinen Fortschritt hier zu sehen."
+          }
+        }
+      }
+    },
+    "There are no stats yet! \nStart by saving money to see your progress." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es gibt noch keine Statistiken! Beginne mit dem Sparen von Geldbeträgen, um deinen Fortschritt hier zu sehen."
           }
         }
       }
